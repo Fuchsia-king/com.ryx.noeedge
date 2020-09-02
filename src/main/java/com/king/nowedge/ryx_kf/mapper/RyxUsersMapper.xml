@@ -1,0 +1,952 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.king.nowedge.ryx_kf.mapper.RyxUsersMapper">
+    <resultMap id="BaseResultMap" type="com.king.nowedge.ryx_kf.pojo.RyxUsers">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="CHAR" property="password"/>
+        <result column="email" jdbcType="CHAR" property="email"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="reg_time" jdbcType="INTEGER" property="regTime"/>
+        <result column="reg_ip" jdbcType="BIGINT" property="regIp"/>
+        <result column="last_login_time" jdbcType="INTEGER" property="lastLoginTime"/>
+        <result column="last_login_ip" jdbcType="BIGINT" property="lastLoginIp"/>
+        <result column="update_time" jdbcType="INTEGER" property="updateTime"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="path" jdbcType="VARCHAR" property="path"/>
+        <result column="login" jdbcType="INTEGER" property="login"/>
+        <result column="gender" jdbcType="TINYINT" property="gender"/>
+        <result column="integral" jdbcType="INTEGER" property="integral"/>
+        <result column="birthday" jdbcType="DATE" property="birthday"/>
+        <result column="sign" jdbcType="TINYINT" property="sign"/>
+        <result column="district1" jdbcType="INTEGER" property="district1"/>
+        <result column="district2" jdbcType="INTEGER" property="district2"/>
+        <result column="district3" jdbcType="INTEGER" property="district3"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="balance" jdbcType="DOUBLE" property="balance"/>
+        <result column="auth_type" jdbcType="TINYINT" property="authType"/>
+        <result column="validateCode" jdbcType="VARCHAR" property="validatecode"/>
+        <result column="qq_open_id" jdbcType="VARCHAR" property="qqOpenId"/>
+        <result column="flag" jdbcType="TINYINT" property="flag"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="industry" jdbcType="INTEGER" property="industry"/>
+        <result column="tcreate" jdbcType="TIMESTAMP" property="tcreate"/>
+        <result column="coupon" jdbcType="DOUBLE" property="coupon"/>
+        <result column="mid" jdbcType="BIGINT" property="mid"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="score" jdbcType="DOUBLE" property="score"/>
+        <result column="dcode" jdbcType="VARCHAR" property="dcode"/>
+        <result column="dpic1" jdbcType="VARCHAR" property="dpic1"/>
+        <result column="fname" jdbcType="VARCHAR" property="fname"/>
+        <result column="scale" jdbcType="INTEGER" property="scale"/>
+        <result column="otype" jdbcType="INTEGER" property="otype"/>
+        <result column="industry0" jdbcType="INTEGER" property="industry0"/>
+        <result column="dpic2" jdbcType="VARCHAR" property="dpic2"/>
+        <result column="sid" jdbcType="BIGINT" property="sid"/>
+        <result column="icode" jdbcType="VARCHAR" property="icode"/>
+        <result column="rfrom" jdbcType="INTEGER" property="rfrom"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.king.nowedge.ryx_kf.pojo.RyxUsers">
+        <result column="introduction" jdbcType="LONGVARCHAR" property="introduction"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    id, username, password, email, mobile, reg_time, reg_ip, last_login_time, last_login_ip, 
+    update_time, status, path, login, gender, integral, birthday, sign, district1, district2, 
+    district3, address, balance, auth_type, validateCode, qq_open_id, flag, province, 
+    industry, tcreate, coupon, mid, name, score, dcode, dpic1, fname, scale, otype, industry0, 
+    dpic2, sid, icode, rfrom
+  </sql>
+    <sql id="Blob_Column_List">
+    introduction
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.king.nowedge.ryx_kf.pojo.RyxUsersExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from ryx_users
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.king.nowedge.ryx_kf.pojo.RyxUsersExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from ryx_users
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from ryx_users
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ryx_users
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.king.nowedge.ryx_kf.pojo.RyxUsersExample">
+        delete from ryx_users
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.king.nowedge.ryx_kf.pojo.RyxUsers">
+        <selectKey keyProperty="id" resultType="java.lang.Integer" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into ryx_users (id, username, password,
+        email, mobile, reg_time,
+        reg_ip, last_login_time, last_login_ip,
+        update_time, status, path,
+        login, gender, integral,
+        birthday, sign, district1,
+        district2, district3, address,
+        balance, auth_type, validateCode,
+        qq_open_id, flag, province,
+        industry, tcreate, coupon,
+        mid, name, score, dcode,
+        dpic1, fname, scale,
+        otype, industry0, dpic2,
+        sid, icode, rfrom, introduction
+        )
+        values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=CHAR},
+        #{email,jdbcType=CHAR}, #{mobile,jdbcType=VARCHAR}, #{regTime,jdbcType=INTEGER},
+        #{regIp,jdbcType=BIGINT}, #{lastLoginTime,jdbcType=INTEGER}, #{lastLoginIp,jdbcType=BIGINT},
+        #{updateTime,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{path,jdbcType=VARCHAR},
+        #{login,jdbcType=INTEGER}, #{gender,jdbcType=TINYINT}, #{integral,jdbcType=INTEGER},
+        #{birthday,jdbcType=DATE}, #{sign,jdbcType=TINYINT}, #{district1,jdbcType=INTEGER},
+        #{district2,jdbcType=INTEGER}, #{district3,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR},
+        #{balance,jdbcType=DOUBLE}, #{authType,jdbcType=TINYINT}, #{validatecode,jdbcType=VARCHAR},
+        #{qqOpenId,jdbcType=VARCHAR}, #{flag,jdbcType=TINYINT}, #{province,jdbcType=VARCHAR},
+        #{industry,jdbcType=INTEGER}, #{tcreate,jdbcType=TIMESTAMP}, #{coupon,jdbcType=DOUBLE},
+        #{mid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{score,jdbcType=DOUBLE}, #{dcode,jdbcType=VARCHAR},
+        #{dpic1,jdbcType=VARCHAR}, #{fname,jdbcType=VARCHAR}, #{scale,jdbcType=INTEGER},
+        #{otype,jdbcType=INTEGER}, #{industry0,jdbcType=INTEGER}, #{dpic2,jdbcType=VARCHAR},
+        #{sid,jdbcType=BIGINT}, #{icode,jdbcType=VARCHAR}, #{rfrom,jdbcType=INTEGER},
+        #{introduction,jdbcType=LONGVARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.king.nowedge.ryx_kf.pojo.RyxUsers">
+        insert into ryx_users
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="regTime != null">
+                reg_time,
+            </if>
+            <if test="regIp != null">
+                reg_ip,
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time,
+            </if>
+            <if test="lastLoginIp != null">
+                last_login_ip,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="path != null">
+                path,
+            </if>
+            <if test="login != null">
+                login,
+            </if>
+            <if test="gender != null">
+                gender,
+            </if>
+            <if test="integral != null">
+                integral,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+            <if test="sign != null">
+                sign,
+            </if>
+            <if test="district1 != null">
+                district1,
+            </if>
+            <if test="district2 != null">
+                district2,
+            </if>
+            <if test="district3 != null">
+                district3,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="balance != null">
+                balance,
+            </if>
+            <if test="authType != null">
+                auth_type,
+            </if>
+            <if test="validatecode != null">
+                validateCode,
+            </if>
+            <if test="qqOpenId != null">
+                qq_open_id,
+            </if>
+            <if test="flag != null">
+                flag,
+            </if>
+            <if test="province != null">
+                province,
+            </if>
+            <if test="industry != null">
+                industry,
+            </if>
+            <if test="tcreate != null">
+                tcreate,
+            </if>
+            <if test="coupon != null">
+                coupon,
+            </if>
+            <if test="mid != null">
+                mid,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="dcode != null">
+                dcode,
+            </if>
+            <if test="dpic1 != null">
+                dpic1,
+            </if>
+            <if test="fname != null">
+                fname,
+            </if>
+            <if test="scale != null">
+                scale,
+            </if>
+            <if test="otype != null">
+                otype,
+            </if>
+            <if test="industry0 != null">
+                industry0,
+            </if>
+            <if test="dpic2 != null">
+                dpic2,
+            </if>
+            <if test="sid != null">
+                sid,
+            </if>
+            <if test="icode != null">
+                icode,
+            </if>
+            <if test="rfrom != null">
+                rfrom,
+            </if>
+            <if test="introduction != null">
+                introduction,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=CHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=CHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="regTime != null">
+                #{regTime,jdbcType=INTEGER},
+            </if>
+            <if test="regIp != null">
+                #{regIp,jdbcType=BIGINT},
+            </if>
+            <if test="lastLoginTime != null">
+                #{lastLoginTime,jdbcType=INTEGER},
+            </if>
+            <if test="lastLoginIp != null">
+                #{lastLoginIp,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="path != null">
+                #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="login != null">
+                #{login,jdbcType=INTEGER},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=TINYINT},
+            </if>
+            <if test="integral != null">
+                #{integral,jdbcType=INTEGER},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=DATE},
+            </if>
+            <if test="sign != null">
+                #{sign,jdbcType=TINYINT},
+            </if>
+            <if test="district1 != null">
+                #{district1,jdbcType=INTEGER},
+            </if>
+            <if test="district2 != null">
+                #{district2,jdbcType=INTEGER},
+            </if>
+            <if test="district3 != null">
+                #{district3,jdbcType=INTEGER},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="balance != null">
+                #{balance,jdbcType=DOUBLE},
+            </if>
+            <if test="authType != null">
+                #{authType,jdbcType=TINYINT},
+            </if>
+            <if test="validatecode != null">
+                #{validatecode,jdbcType=VARCHAR},
+            </if>
+            <if test="qqOpenId != null">
+                #{qqOpenId,jdbcType=VARCHAR},
+            </if>
+            <if test="flag != null">
+                #{flag,jdbcType=TINYINT},
+            </if>
+            <if test="province != null">
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="industry != null">
+                #{industry,jdbcType=INTEGER},
+            </if>
+            <if test="tcreate != null">
+                #{tcreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="coupon != null">
+                #{coupon,jdbcType=DOUBLE},
+            </if>
+            <if test="mid != null">
+                #{mid,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=DOUBLE},
+            </if>
+            <if test="dcode != null">
+                #{dcode,jdbcType=VARCHAR},
+            </if>
+            <if test="dpic1 != null">
+                #{dpic1,jdbcType=VARCHAR},
+            </if>
+            <if test="fname != null">
+                #{fname,jdbcType=VARCHAR},
+            </if>
+            <if test="scale != null">
+                #{scale,jdbcType=INTEGER},
+            </if>
+            <if test="otype != null">
+                #{otype,jdbcType=INTEGER},
+            </if>
+            <if test="industry0 != null">
+                #{industry0,jdbcType=INTEGER},
+            </if>
+            <if test="dpic2 != null">
+                #{dpic2,jdbcType=VARCHAR},
+            </if>
+            <if test="sid != null">
+                #{sid,jdbcType=BIGINT},
+            </if>
+            <if test="icode != null">
+                #{icode,jdbcType=VARCHAR},
+            </if>
+            <if test="rfrom != null">
+                #{rfrom,jdbcType=INTEGER},
+            </if>
+            <if test="introduction != null">
+                #{introduction,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.king.nowedge.ryx_kf.pojo.RyxUsersExample"
+            resultType="java.lang.Long">
+        select count(*) from ryx_users
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update ryx_users
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.username != null">
+                username = #{record.username,jdbcType=VARCHAR},
+            </if>
+            <if test="record.password != null">
+                password = #{record.password,jdbcType=CHAR},
+            </if>
+            <if test="record.email != null">
+                email = #{record.email,jdbcType=CHAR},
+            </if>
+            <if test="record.mobile != null">
+                mobile = #{record.mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="record.regTime != null">
+                reg_time = #{record.regTime,jdbcType=INTEGER},
+            </if>
+            <if test="record.regIp != null">
+                reg_ip = #{record.regIp,jdbcType=BIGINT},
+            </if>
+            <if test="record.lastLoginTime != null">
+                last_login_time = #{record.lastLoginTime,jdbcType=INTEGER},
+            </if>
+            <if test="record.lastLoginIp != null">
+                last_login_ip = #{record.lastLoginIp,jdbcType=BIGINT},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=INTEGER},
+            </if>
+            <if test="record.status != null">
+                status = #{record.status,jdbcType=TINYINT},
+            </if>
+            <if test="record.path != null">
+                path = #{record.path,jdbcType=VARCHAR},
+            </if>
+            <if test="record.login != null">
+                login = #{record.login,jdbcType=INTEGER},
+            </if>
+            <if test="record.gender != null">
+                gender = #{record.gender,jdbcType=TINYINT},
+            </if>
+            <if test="record.integral != null">
+                integral = #{record.integral,jdbcType=INTEGER},
+            </if>
+            <if test="record.birthday != null">
+                birthday = #{record.birthday,jdbcType=DATE},
+            </if>
+            <if test="record.sign != null">
+                sign = #{record.sign,jdbcType=TINYINT},
+            </if>
+            <if test="record.district1 != null">
+                district1 = #{record.district1,jdbcType=INTEGER},
+            </if>
+            <if test="record.district2 != null">
+                district2 = #{record.district2,jdbcType=INTEGER},
+            </if>
+            <if test="record.district3 != null">
+                district3 = #{record.district3,jdbcType=INTEGER},
+            </if>
+            <if test="record.address != null">
+                address = #{record.address,jdbcType=VARCHAR},
+            </if>
+            <if test="record.balance != null">
+                balance = #{record.balance,jdbcType=DOUBLE},
+            </if>
+            <if test="record.authType != null">
+                auth_type = #{record.authType,jdbcType=TINYINT},
+            </if>
+            <if test="record.validatecode != null">
+                validateCode = #{record.validatecode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.qqOpenId != null">
+                qq_open_id = #{record.qqOpenId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.flag != null">
+                flag = #{record.flag,jdbcType=TINYINT},
+            </if>
+            <if test="record.province != null">
+                province = #{record.province,jdbcType=VARCHAR},
+            </if>
+            <if test="record.industry != null">
+                industry = #{record.industry,jdbcType=INTEGER},
+            </if>
+            <if test="record.tcreate != null">
+                tcreate = #{record.tcreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.coupon != null">
+                coupon = #{record.coupon,jdbcType=DOUBLE},
+            </if>
+            <if test="record.mid != null">
+                mid = #{record.mid,jdbcType=BIGINT},
+            </if>
+            <if test="record.name != null">
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.score != null">
+                score = #{record.score,jdbcType=DOUBLE},
+            </if>
+            <if test="record.dcode != null">
+                dcode = #{record.dcode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.dpic1 != null">
+                dpic1 = #{record.dpic1,jdbcType=VARCHAR},
+            </if>
+            <if test="record.fname != null">
+                fname = #{record.fname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.scale != null">
+                scale = #{record.scale,jdbcType=INTEGER},
+            </if>
+            <if test="record.otype != null">
+                otype = #{record.otype,jdbcType=INTEGER},
+            </if>
+            <if test="record.industry0 != null">
+                industry0 = #{record.industry0,jdbcType=INTEGER},
+            </if>
+            <if test="record.dpic2 != null">
+                dpic2 = #{record.dpic2,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sid != null">
+                sid = #{record.sid,jdbcType=BIGINT},
+            </if>
+            <if test="record.icode != null">
+                icode = #{record.icode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.rfrom != null">
+                rfrom = #{record.rfrom,jdbcType=INTEGER},
+            </if>
+            <if test="record.introduction != null">
+                introduction = #{record.introduction,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update ryx_users
+        set id = #{record.id,jdbcType=INTEGER},
+        username = #{record.username,jdbcType=VARCHAR},
+        password = #{record.password,jdbcType=CHAR},
+        email = #{record.email,jdbcType=CHAR},
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+        reg_time = #{record.regTime,jdbcType=INTEGER},
+        reg_ip = #{record.regIp,jdbcType=BIGINT},
+        last_login_time = #{record.lastLoginTime,jdbcType=INTEGER},
+        last_login_ip = #{record.lastLoginIp,jdbcType=BIGINT},
+        update_time = #{record.updateTime,jdbcType=INTEGER},
+        status = #{record.status,jdbcType=TINYINT},
+        path = #{record.path,jdbcType=VARCHAR},
+        login = #{record.login,jdbcType=INTEGER},
+        gender = #{record.gender,jdbcType=TINYINT},
+        integral = #{record.integral,jdbcType=INTEGER},
+        birthday = #{record.birthday,jdbcType=DATE},
+        sign = #{record.sign,jdbcType=TINYINT},
+        district1 = #{record.district1,jdbcType=INTEGER},
+        district2 = #{record.district2,jdbcType=INTEGER},
+        district3 = #{record.district3,jdbcType=INTEGER},
+        address = #{record.address,jdbcType=VARCHAR},
+        balance = #{record.balance,jdbcType=DOUBLE},
+        auth_type = #{record.authType,jdbcType=TINYINT},
+        validateCode = #{record.validatecode,jdbcType=VARCHAR},
+        qq_open_id = #{record.qqOpenId,jdbcType=VARCHAR},
+        flag = #{record.flag,jdbcType=TINYINT},
+        province = #{record.province,jdbcType=VARCHAR},
+        industry = #{record.industry,jdbcType=INTEGER},
+        tcreate = #{record.tcreate,jdbcType=TIMESTAMP},
+        coupon = #{record.coupon,jdbcType=DOUBLE},
+        mid = #{record.mid,jdbcType=BIGINT},
+        name = #{record.name,jdbcType=VARCHAR},
+        score = #{record.score,jdbcType=DOUBLE},
+        dcode = #{record.dcode,jdbcType=VARCHAR},
+        dpic1 = #{record.dpic1,jdbcType=VARCHAR},
+        fname = #{record.fname,jdbcType=VARCHAR},
+        scale = #{record.scale,jdbcType=INTEGER},
+        otype = #{record.otype,jdbcType=INTEGER},
+        industry0 = #{record.industry0,jdbcType=INTEGER},
+        dpic2 = #{record.dpic2,jdbcType=VARCHAR},
+        sid = #{record.sid,jdbcType=BIGINT},
+        icode = #{record.icode,jdbcType=VARCHAR},
+        rfrom = #{record.rfrom,jdbcType=INTEGER},
+        introduction = #{record.introduction,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update ryx_users
+        set id = #{record.id,jdbcType=INTEGER},
+        username = #{record.username,jdbcType=VARCHAR},
+        password = #{record.password,jdbcType=CHAR},
+        email = #{record.email,jdbcType=CHAR},
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+        reg_time = #{record.regTime,jdbcType=INTEGER},
+        reg_ip = #{record.regIp,jdbcType=BIGINT},
+        last_login_time = #{record.lastLoginTime,jdbcType=INTEGER},
+        last_login_ip = #{record.lastLoginIp,jdbcType=BIGINT},
+        update_time = #{record.updateTime,jdbcType=INTEGER},
+        status = #{record.status,jdbcType=TINYINT},
+        path = #{record.path,jdbcType=VARCHAR},
+        login = #{record.login,jdbcType=INTEGER},
+        gender = #{record.gender,jdbcType=TINYINT},
+        integral = #{record.integral,jdbcType=INTEGER},
+        birthday = #{record.birthday,jdbcType=DATE},
+        sign = #{record.sign,jdbcType=TINYINT},
+        district1 = #{record.district1,jdbcType=INTEGER},
+        district2 = #{record.district2,jdbcType=INTEGER},
+        district3 = #{record.district3,jdbcType=INTEGER},
+        address = #{record.address,jdbcType=VARCHAR},
+        balance = #{record.balance,jdbcType=DOUBLE},
+        auth_type = #{record.authType,jdbcType=TINYINT},
+        validateCode = #{record.validatecode,jdbcType=VARCHAR},
+        qq_open_id = #{record.qqOpenId,jdbcType=VARCHAR},
+        flag = #{record.flag,jdbcType=TINYINT},
+        province = #{record.province,jdbcType=VARCHAR},
+        industry = #{record.industry,jdbcType=INTEGER},
+        tcreate = #{record.tcreate,jdbcType=TIMESTAMP},
+        coupon = #{record.coupon,jdbcType=DOUBLE},
+        mid = #{record.mid,jdbcType=BIGINT},
+        name = #{record.name,jdbcType=VARCHAR},
+        score = #{record.score,jdbcType=DOUBLE},
+        dcode = #{record.dcode,jdbcType=VARCHAR},
+        dpic1 = #{record.dpic1,jdbcType=VARCHAR},
+        fname = #{record.fname,jdbcType=VARCHAR},
+        scale = #{record.scale,jdbcType=INTEGER},
+        otype = #{record.otype,jdbcType=INTEGER},
+        industry0 = #{record.industry0,jdbcType=INTEGER},
+        dpic2 = #{record.dpic2,jdbcType=VARCHAR},
+        sid = #{record.sid,jdbcType=BIGINT},
+        icode = #{record.icode,jdbcType=VARCHAR},
+        rfrom = #{record.rfrom,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.king.nowedge.ryx_kf.pojo.RyxUsers">
+        update ryx_users
+        <set>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=CHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=CHAR},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="regTime != null">
+                reg_time = #{regTime,jdbcType=INTEGER},
+            </if>
+            <if test="regIp != null">
+                reg_ip = #{regIp,jdbcType=BIGINT},
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time = #{lastLoginTime,jdbcType=INTEGER},
+            </if>
+            <if test="lastLoginIp != null">
+                last_login_ip = #{lastLoginIp,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="path != null">
+                path = #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="login != null">
+                login = #{login,jdbcType=INTEGER},
+            </if>
+            <if test="gender != null">
+                gender = #{gender,jdbcType=TINYINT},
+            </if>
+            <if test="integral != null">
+                integral = #{integral,jdbcType=INTEGER},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=DATE},
+            </if>
+            <if test="sign != null">
+                sign = #{sign,jdbcType=TINYINT},
+            </if>
+            <if test="district1 != null">
+                district1 = #{district1,jdbcType=INTEGER},
+            </if>
+            <if test="district2 != null">
+                district2 = #{district2,jdbcType=INTEGER},
+            </if>
+            <if test="district3 != null">
+                district3 = #{district3,jdbcType=INTEGER},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="balance != null">
+                balance = #{balance,jdbcType=DOUBLE},
+            </if>
+            <if test="authType != null">
+                auth_type = #{authType,jdbcType=TINYINT},
+            </if>
+            <if test="validatecode != null">
+                validateCode = #{validatecode,jdbcType=VARCHAR},
+            </if>
+            <if test="qqOpenId != null">
+                qq_open_id = #{qqOpenId,jdbcType=VARCHAR},
+            </if>
+            <if test="flag != null">
+                flag = #{flag,jdbcType=TINYINT},
+            </if>
+            <if test="province != null">
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="industry != null">
+                industry = #{industry,jdbcType=INTEGER},
+            </if>
+            <if test="tcreate != null">
+                tcreate = #{tcreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="coupon != null">
+                coupon = #{coupon,jdbcType=DOUBLE},
+            </if>
+            <if test="mid != null">
+                mid = #{mid,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=DOUBLE},
+            </if>
+            <if test="dcode != null">
+                dcode = #{dcode,jdbcType=VARCHAR},
+            </if>
+            <if test="dpic1 != null">
+                dpic1 = #{dpic1,jdbcType=VARCHAR},
+            </if>
+            <if test="fname != null">
+                fname = #{fname,jdbcType=VARCHAR},
+            </if>
+            <if test="scale != null">
+                scale = #{scale,jdbcType=INTEGER},
+            </if>
+            <if test="otype != null">
+                otype = #{otype,jdbcType=INTEGER},
+            </if>
+            <if test="industry0 != null">
+                industry0 = #{industry0,jdbcType=INTEGER},
+            </if>
+            <if test="dpic2 != null">
+                dpic2 = #{dpic2,jdbcType=VARCHAR},
+            </if>
+            <if test="sid != null">
+                sid = #{sid,jdbcType=BIGINT},
+            </if>
+            <if test="icode != null">
+                icode = #{icode,jdbcType=VARCHAR},
+            </if>
+            <if test="rfrom != null">
+                rfrom = #{rfrom,jdbcType=INTEGER},
+            </if>
+            <if test="introduction != null">
+                introduction = #{introduction,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.king.nowedge.ryx_kf.pojo.RyxUsers">
+    update ryx_users
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=CHAR},
+      email = #{email,jdbcType=CHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      reg_time = #{regTime,jdbcType=INTEGER},
+      reg_ip = #{regIp,jdbcType=BIGINT},
+      last_login_time = #{lastLoginTime,jdbcType=INTEGER},
+      last_login_ip = #{lastLoginIp,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      path = #{path,jdbcType=VARCHAR},
+      login = #{login,jdbcType=INTEGER},
+      gender = #{gender,jdbcType=TINYINT},
+      integral = #{integral,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=DATE},
+      sign = #{sign,jdbcType=TINYINT},
+      district1 = #{district1,jdbcType=INTEGER},
+      district2 = #{district2,jdbcType=INTEGER},
+      district3 = #{district3,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=DOUBLE},
+      auth_type = #{authType,jdbcType=TINYINT},
+      validateCode = #{validatecode,jdbcType=VARCHAR},
+      qq_open_id = #{qqOpenId,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=TINYINT},
+      province = #{province,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=INTEGER},
+      tcreate = #{tcreate,jdbcType=TIMESTAMP},
+      coupon = #{coupon,jdbcType=DOUBLE},
+      mid = #{mid,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      score = #{score,jdbcType=DOUBLE},
+      dcode = #{dcode,jdbcType=VARCHAR},
+      dpic1 = #{dpic1,jdbcType=VARCHAR},
+      fname = #{fname,jdbcType=VARCHAR},
+      scale = #{scale,jdbcType=INTEGER},
+      otype = #{otype,jdbcType=INTEGER},
+      industry0 = #{industry0,jdbcType=INTEGER},
+      dpic2 = #{dpic2,jdbcType=VARCHAR},
+      sid = #{sid,jdbcType=BIGINT},
+      icode = #{icode,jdbcType=VARCHAR},
+      rfrom = #{rfrom,jdbcType=INTEGER},
+      introduction = #{introduction,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.king.nowedge.ryx_kf.pojo.RyxUsers">
+    update ryx_users
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=CHAR},
+      email = #{email,jdbcType=CHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      reg_time = #{regTime,jdbcType=INTEGER},
+      reg_ip = #{regIp,jdbcType=BIGINT},
+      last_login_time = #{lastLoginTime,jdbcType=INTEGER},
+      last_login_ip = #{lastLoginIp,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      path = #{path,jdbcType=VARCHAR},
+      login = #{login,jdbcType=INTEGER},
+      gender = #{gender,jdbcType=TINYINT},
+      integral = #{integral,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=DATE},
+      sign = #{sign,jdbcType=TINYINT},
+      district1 = #{district1,jdbcType=INTEGER},
+      district2 = #{district2,jdbcType=INTEGER},
+      district3 = #{district3,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=DOUBLE},
+      auth_type = #{authType,jdbcType=TINYINT},
+      validateCode = #{validatecode,jdbcType=VARCHAR},
+      qq_open_id = #{qqOpenId,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=TINYINT},
+      province = #{province,jdbcType=VARCHAR},
+      industry = #{industry,jdbcType=INTEGER},
+      tcreate = #{tcreate,jdbcType=TIMESTAMP},
+      coupon = #{coupon,jdbcType=DOUBLE},
+      mid = #{mid,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      score = #{score,jdbcType=DOUBLE},
+      dcode = #{dcode,jdbcType=VARCHAR},
+      dpic1 = #{dpic1,jdbcType=VARCHAR},
+      fname = #{fname,jdbcType=VARCHAR},
+      scale = #{scale,jdbcType=INTEGER},
+      otype = #{otype,jdbcType=INTEGER},
+      industry0 = #{industry0,jdbcType=INTEGER},
+      dpic2 = #{dpic2,jdbcType=VARCHAR},
+      sid = #{sid,jdbcType=BIGINT},
+      icode = #{icode,jdbcType=VARCHAR},
+      rfrom = #{rfrom,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

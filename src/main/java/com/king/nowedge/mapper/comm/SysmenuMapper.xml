@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.SysmenuMapper">  
+
+	<sql id="where">
+	    <where>
+	    
+			<if test="uid != null">
+				<![CDATA[ and uid  = #{uid} ]]>
+			</if>
+			
+			<if test="pid != null">
+				<![CDATA[ and pid  = #{pid} ]]>
+			</if>
+			
+			<if test="id != null">
+				<![CDATA[ and id  = #{id} ]]>
+			</if>
+			
+			<if test="ideleted != null">
+				<![CDATA[ and ideleted  = #{ideleted} ]]>
+			</if>
+			
+		</where>
+	</sql>
+	
+   
+    <insert id="create" parameterType="SysmenuDTO">
+      
+       INSERT INTO sysmenu
+		(
+			uid,
+			name,
+			title,
+			icon,
+			url,
+			pid,
+			target,
+			serial,
+			open,
+			creater,
+			tcreate,
+			tmodified
+		)
+		VALUES
+		(
+			#{uid},
+			#{name},
+			#{title},
+			#{icon},
+			#{url},
+			#{pid},
+			#{target},
+			#{serial},
+			#{open},
+			#{creater},
+			#{tcreate},
+			#{tmodified}
+		)
+    </insert>   
+      
+      
+     <select id="queryByUserId" resultType="SysmenuDTO" parameterType="java.lang.String">
+         
+        select distinct sysmenu.* from user_role,auth_role,sysmenu where 
+		user_role.role_id = auth_role.role_id
+   		and sysmenu.id = auth_role.sysmenu_id
+ 		and user_role.user_id = #{userId}	
+ 		and auth_role.ideleted =0
+ 		and sysmenu.ideleted = 0
+ 		and user_role.ideleted = 0
+ 		order by sysmenu.serial
+		
+    </select>
+    
+     <select id="countQueryByMenuUidUserId" resultType="java.lang.Integer" parameterType="SysmenuQuery" >
+         
+        select count(1) from user_role,auth_role,sysmenu where 
+		user_role.role_id = auth_role.role_id
+   		and sysmenu.id = auth_role.sysmenu_id   		
+ 		and auth_role.ideleted =0
+ 		and sysmenu.ideleted = 0
+ 		and user_role.ideleted = 0
+ 		and user_role.user_id = #{userId}	
+ 		and sysmenu.uid = #{uid}
+ 		limit 1;
+		
+    </select>
+    
+    <select id="queryByRoleId" resultType="SysmenuDTO" parameterType="java.lang.String">
+         
+        select sysmenu.* from auth_role,sysmenu where 
+   		sysmenu.id = auth_role.sysmenu_id
+ 		and auth_role.role_id = #{roleId}	
+ 		and auth_role.ideleted =0
+ 		and sysmenu.ideleted = 0
+ 		order by sysmenu.serial
+		
+    </select>
+    
+    <select id="queryAll" resultType="SysmenuDTO">
+    	 select * from sysmenu order by serial;
+    </select>
+    
+    <select id="query" resultType="SysmenuDTO" parameterType="SysmenuQuery">
+         
+        select * from sysmenu 
+        
+        <include refid="where"/>
+		
+		<choose>
+			<when test="orderBy != null and orderBy !=''">
+				order by ${orderBy}	
+				<if test="sooort != null and sooort !=''">
+					${sooort}
+				</if>	
+			</when>
+			<otherwise>
+				order by serial
+			</otherwise>
+		</choose>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="java.lang.Integer">   
+        select count(1) from sysmenu 
+        <include refid="where"/>
+    </select>
+    
+    <select id="queryById" resultType="SysmenuDTO" parameterType="java.lang.Long">   
+        select * from sysmenu where id = #{id}  limit 1;
+    </select>    
+    
+    <select id="queryByUid" resultType="SysmenuDTO" parameterType="java.lang.String">   
+        select * from sysmenu where uid = #{uid}  limit 1; 
+    </select>  
+    
+    
+    <update id="update" parameterType="SysmenuDTO">
+    
+        update sysmenu
+         
+        <set>	
+        
+        	<if test="pid != null">
+				<![CDATA[ pid = #{pid} ]]>,
+			</if>
+					
+			<if test="name != null">
+				<![CDATA[ name = #{name} ]]>,
+			</if>
+			<if test="title != null">
+				<![CDATA[ title = #{title} ]]>,
+			</if>
+			<if test="url != null">
+				<![CDATA[ url = #{url} ]]>,
+			</if>
+			
+			<if test="ideleted != null">
+				<![CDATA[ ideleted = #{ideleted} ]]>,
+			</if>
+			
+			<if test="serial != null">
+				<![CDATA[ serial = #{serial} ]]>,
+			</if>
+		 </set>
+		 
+		 where	uid = #{uid}
+		 	
+    </update> 
+    
+    
+    <delete id="delete" parameterType="java.lang.String">
+    
+        update sysmenu
+         
+        set ideleted = 1
+		 
+		where uid = #{uid}
+		 	
+    </delete> 
+    
+    
+    
+</mapper> 

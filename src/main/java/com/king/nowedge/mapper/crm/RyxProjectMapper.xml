@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.crm.RyxProjectMapper">    
+    
+    <sql id="select">
+		
+		id,
+		biz_type bizType,
+	    title,
+	    descr,
+	    creater,
+	    lcreate,
+	    lmodified,
+	    ideleted
+	    
+	</sql>
+
+	<sql id="where">
+	
+	    <where>
+			
+			<if test="bizType != null and bizType != '' ">
+				<![CDATA[ and biz_type = #{bizType} ]]>
+			</if>	
+			
+			<if test="keyword != null and keyword != '' ">
+				<![CDATA[and title like concat('%', #{keyword}, '%')  ]]>
+			</if>			
+			
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="RyxProjectDTO">   
+    
+       insert into ryx_project(
+       		
+       		biz_type,
+		    title,
+		    creater,
+		    lcreate,
+		    lmodified,
+		    ideleted,
+		  	descr
+    
+       ) 
+       values
+       (	
+       		#{bizType},
+       		#{title},
+			#{creater},
+			UNIX_TIMESTAMP(now()) ,
+			UNIX_TIMESTAMP(now()) ,
+			#{ideleted},
+			#{descr}
+       )        
+       <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+			select LAST_INSERT_ID() 
+		</selectKey>
+    </insert>
+      
+    
+    
+    <select id="queryUserId" resultType="java.lang.Long" parameterType="RyxProjectQuery">
+         
+        select id from ryx_project         
+        <include refid="where"/>		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+    
+    <select id="query" resultType="RyxProjectDTO" parameterType="RyxProjectQuery">
+         
+        select
+         
+        <include refid="select"/>
+        
+        from ryx_project 
+        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+    
+	
+	
+    
+    
+    
+    
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="RyxProjectQuery">   
+        select count(1) from ryx_project 
+        <include refid="where"/>  limit 1 ;
+    </select>
+    
+    
+    
+    <select id="getById" resultType="RyxProjectDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select"/>
+        from ryx_project where id = #{id}  limit 1;
+    </select>    
+    
+    
+     
+    
+    
+    <update id="update" parameterType="RyxProjectDTO">
+    
+        update ryx_project
+         
+        <set>	
+			<if test="bizType != null">
+				<![CDATA[ biz_type = #{bizType} ]]>,
+			</if>		
+			<if test="title != null">
+				<![CDATA[ title = #{title} ]]>,
+			</if>		
+			<if test="descr != null">
+				<![CDATA[ descr = #{descr} ]]>,
+			</if>
+			lmodified = UNIX_TIMESTAMP(now()) 
+		 </set>
+		 
+		 where	id = #{id}
+		 	
+    </update> 
+    
+   
+    <delete id="delete" parameterType="java.lang.String">    
+        update ryx_project set ideleted = 1 where id = #{id}		 	
+    </delete> 
+    
+  
+    
+    
+</mapper> 

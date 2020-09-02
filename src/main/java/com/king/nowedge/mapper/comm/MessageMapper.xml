@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.MessageMapper">  
+
+	<sql id="where">
+	
+	    <where>
+	    
+			<if test="descr != null">
+				<![CDATA[ and descr = #{descr} ]]>
+			</if>
+			
+			
+			<choose>
+				<when test="ideleted != null">
+					<![CDATA[ and ideleted = #{ideleted} ]]>
+				</when>
+				<otherwise>
+					<![CDATA[ and ideleted = 0 ]]>
+				</otherwise>
+			</choose>
+			
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="MessageDTO">   
+       insert into message(uid,descr,creater,tcreate,tmodified,ideleted) 
+       values
+       (#{uid},#{descr},#{creater},now(),now(),#{ideleted}) 
+    </insert>
+      
+    
+    <select id="query" resultType="MessageDTO" parameterType="MessageQuery">
+         
+        select * from message 
+        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="MessageQuery">   
+        select count(1) from message 
+        <include refid="where"/>
+    </select>
+    
+    <select id="queryById" resultType="MessageDTO" parameterType="java.lang.Long">   
+        select * from message where id = #{id}  limit 1;
+    </select>    
+    
+    <select id="queryByUid" resultType="MessageDTO" parameterType="java.lang.String">   
+        select * from message where uid = #{uid}  limit 1; 
+    </select>  
+    
+    <select id="queryByCode" resultType="MessageDTO" parameterType="java.lang.String">   
+        select * from message where code = #{code}  limit 1; 
+    </select> 
+    
+    
+    <update id="update" parameterType="MessageDTO">
+    
+        update message
+         
+        <set>	
+        	<if test="descr != null">
+				<![CDATA[ descr = #{descr} ]]>,
+			</if>
+		 </set>
+		 
+		 <![CDATA[ creater = #{creater} ]]>,
+		 
+		 <![CDATA[ tmodified = #{tmodified} ]]>,
+		 
+		 where	uid = #{uid}
+		 	
+    </update> 
+    
+    
+    <delete id="delete" parameterType="java.lang.String">
+    
+        update message
+         
+        set ideleted = 1
+		 
+		where uid = #{uid}
+		 	
+    </delete> 
+    
+    
+    
+</mapper> 

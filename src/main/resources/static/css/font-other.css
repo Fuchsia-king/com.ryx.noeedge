@@ -1,0 +1,153 @@
+@font-face {
+  font-family: 'PingFang-Medium';
+  src: url('../fonts/PingFang-Medium.eot');
+  src:
+    url('../fonts/PingFang-Medium.eot?#font-spider') format('embedded-opentype'),
+    url('../fonts/PingFang-Medium.woff') format('woff'),
+    url('../fonts/PingFang-Medium.ttf') format('truetype'),
+    url('../fonts/PingFang-Medium.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.pf {
+  font-family: 'PingFang-Medium';
+}
+
+@font-face {
+  font-family: 'PingFang-Regular';
+  src: url('../fonts/PingFang-Regular.eot');
+  src:
+    url('../fonts/PingFang-Regular.eot?#font-spider') format('embedded-opentype'),
+    url('../fonts/PingFang-Regular.woff') format('woff'),
+    url('../fonts/PingFang-Regular.ttf') format('truetype'),
+    url('../fonts/PingFang-Regular.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.pfre {
+  font-family: 'PingFang-Regular';
+}
+
+@font-face {
+  font-family: 'PingFangSC-Semibold';
+  src: url('../fonts/PingFangSC-Semibold.eot');
+  src:
+    url('../fonts/PingFangSC-Semibold.eot?#font-spider') format('embedded-opentype'),
+    url('../fonts/PingFangSC-Semibold.woff') format('woff'),
+    url('../fonts/PingFangSC-Semibold.ttf') format('truetype'),
+    url('../fonts/PingFangSC-Semibold.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.semibold {
+  /* font-family: 'PingFangSC-Semibold'; */
+  font-family:PingFang SC;
+  font-weight:600;
+}
+
+@font-face {
+  font-family: 'Helvetica-Bold';
+  src: url('../fonts/Helvetica-Bold.eot');
+  src:
+    url('../fonts/Helvetica-Bold.eot?#font-spider') format('embedded-opentype'),
+    url('../fonts/Helvetica-Bold.woff') format('woff'),
+    url('../fonts/Helvetica-Bold.ttf') format('truetype'),
+    url('../fonts/Helvetica-Bold.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.Helvbold {
+  font-family: 'Helvetica-Bold';
+}
+
+@font-face {
+  font-family: 'Helvetica';
+  src:url('../fonts/Helvetica.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.Hvtc {
+  font-family: 'Helvetica';
+}
+
+@font-face {
+  font-family: 'Futura-Medium';
+  src: url('../fonts/futura-medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.furme {
+  font-family: 'Futura-Medium';
+}
+
+@font-face {
+  font-family: 'FuturaBT-Medium';
+  src: url('../fonts/futurabt-medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.futurabt {
+  font-family: 'FuturaBT-Medium';
+}
+
+@font-face {
+  font-family: 'HYQiHei-HES';
+  src: url('../fonts/HYQiHei-HES.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.hyqihei {
+  font-family: 'HYQiHei-HES';
+}
+
+@font-face {
+  font-family: 'STXingkaiSC-Bold';
+  src: url('../fonts/STXingkaiSC-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.stxingkai {
+  font-family: 'STXingkaiSC-Bold';
+}
+
+@font-face {
+  font-family: 'FuturaBT-BoldItalic';
+  src: url('../fonts/FuturaBT-BoldItalic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.futurabt {
+  font-family: 'FuturaBT-BoldItalic';
+}
+
+@font-face {
+  font-family: 'SourceHanSansCN-Medium';
+  src: url('../fonts/SourceHanSansCN-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.syht {
+  font-family: 'SourceHanSansCN-Medium';
+}
+
+@font-face {
+  font-family: 'SourceHanSansCN-Heavy';
+  src: url('../fonts/SourceHanSansCN-Heavy.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.shsh {
+  font-family: 'SourceHanSansCN-Heavy';
+}

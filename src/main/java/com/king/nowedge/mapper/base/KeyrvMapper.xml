@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.base.KeyrvMapper">  
+	
+	<sql id="select">
+		k.id,
+		k.display,
+		k.key1,
+		k.rkey,
+		k.ideleted,
+		k.sort,
+		k.type,
+		k.rkey1,
+		k.value
+		
+	</sql>
+	<sql id="where">
+	
+	    <where>
+	    
+	    
+	    
+	    	<if test="id != null">
+				<![CDATA[ and k.id = #{id} ]]>
+			</if>
+			
+			<if test="key1 != null and key1 !='' ">
+				<![CDATA[ and k.key1 = #{key1} ]]>
+			</if>			
+			
+			<if test="rkey != null and rkey !='' ">
+				<![CDATA[ and k.rkey = #{rkey} ]]>
+			</if>
+			
+			<if test="type != null and type !='0' ">
+				<![CDATA[ and k.type = #{type} ]]>
+			</if>			
+			
+			<if test="display != null ">
+				<![CDATA[ and k.display = #{display} ]]>
+			</if>
+		
+			<if test="ideleted != null">
+				<![CDATA[ and k.ideleted = #{ideleted} ]]>
+			</if>
+			
+			
+			
+			 <if test="keys != null and keys" >
+	        	and k.key1 in
+		        <foreach item="key1" index="index" collection="keys" open="(" separator="," close=")">  
+				 	#{key1}  
+				</foreach>
+			</if>
+			
+		</where>
+	</sql>
+	
+	<sql id="where1">
+	
+	    <where>
+	    
+	    	
+			<![CDATA[k.rkey = u.id ]]>
+	    
+	    	<if test="keyword != null and keyword != '' ">
+				<![CDATA[and (u.username like concat('%', #{keyword}, '%') or u.mobile like concat('%', #{keyword}, '%') )  ]]>
+			</if>
+	    
+	    	<if test="id != null">
+				<![CDATA[ and k.id = #{id} ]]>
+			</if>
+			
+			<if test="key1 != null and key1 !='' ">
+				<![CDATA[ and k.key1 = #{key1} ]]>
+			</if>			
+			
+			<if test="rkey != null and rkey !='' ">
+				<![CDATA[ and k.rkey = #{rkey} ]]>
+			</if>
+			
+			<if test="type != null and type !='0' ">
+				<![CDATA[ and k.type = #{type} ]]>
+			</if>			
+			
+			<if test="display != null ">
+				<![CDATA[ and k.display = #{display} ]]>
+			</if>
+		
+			<if test="ideleted != null">
+				<![CDATA[ and k.ideleted = #{ideleted} ]]>
+			</if>
+			
+			
+			
+			 <if test="keys != null and keys" >
+	        	and k.key1 in
+		        <foreach item="key1" index="index" collection="keys" open="(" separator="," close=")">  
+				 	#{key1}  
+				</foreach>
+			</if>
+			
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="KeyrvDTO">   
+       insert into key_rv(key1,rkey,type,sort,display,ideleted,rkey1,value) 
+       values
+       (#{key1},#{rkey},#{type},#{sort},#{display},#{ideleted},#{rkey1},#{value})  
+    </insert>
+    
+    
+
+      
+    
+    <select id="query" resultType="KeyrvDTO" parameterType="KeyrvQuery">
+         
+        select 
+		<include refid="select"/>
+		from key_rv k       
+        <include refid="where"/>		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+    
+     <select id="querySubAccount" resultType="KeyrvDTO" parameterType="KeyrvQuery">
+         
+        select 
+		<include refid="select"/>   
+		from key_rv k ,ryx_users u    
+        <include refid="where1"/>	
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+     <select id="querySingle" resultType="KeyrvDTO" parameterType="KeyrvQuery">         
+        select 
+		<include refid="select"/>
+		from key_rv k        
+        <include refid="where"/> limit 1;
+    </select>
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="KeyrvQuery">   
+        select count(1) from key_rv k 
+        <include refid="where"/>
+    </select>
+    <select id="countQuerySubAccount" resultType="java.lang.Integer" parameterType="KeyrvQuery">   
+        select count(1) 
+		from key_rv k ,ryx_users u 
+        <include refid="where1"/>
+    </select>
+    
+      <select id="queryKeyrvByRkey" resultType="KeyrvDTO" parameterType="KeyrvQuery">   
+        select 
+        <include refid="select"/>
+		from key_rv k
+        <include refid="where"/>
+    </select>
+    
+    <select id="queryById" resultType="KeyrvDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select"/>
+        from key_rv k where id = #{id}  limit 1;
+    </select>    
+    
+    
+     
+    
+    
+    <update id="update" parameterType="KeyrvDTO">
+    
+        update key_rv
+         
+        <set>	
+					
+			<if test="display != null">
+				<![CDATA[ display = #{display} ]]>,
+			</if>
+			
+			<if test="sort != null">
+				<![CDATA[ sort = #{sort} ]]>,
+			</if>
+			
+			<if test="ideleted != null">
+				<![CDATA[ ideleted = #{ideleted} ]]>,
+			</if>
+			
+			<if test="key1 != null">
+				<![CDATA[ key1 = #{key1} ]]>,
+			</if>
+			
+			<if test="rkey != null">
+				<![CDATA[ rkey = #{rkey} ]]>,
+			</if>
+			
+			<if test="rkey1 != null">
+				<![CDATA[ rkey1 = #{rkey1} ]]>,
+			</if>
+			
+			<if test="value != null">
+				<![CDATA[ value = #{value} ]]>,
+			</if>
+			
+		 </set>
+		 
+		 where id = #{id}
+		 	
+    </update> 
+    
+    
+     <select id="countForCreateOrUpdate" resultType="java.lang.Integer" parameterType="KeyrvQuery">   
+        select count(1) from key_rv where key1 =  #{key1} and  rkey =  #{rkey} and  type =  #{type}
+    </select>
+    
+    <select id="countForCreateOrUpdate1" resultType="java.lang.Integer" parameterType="KeyrvQuery">   
+        select count(1) from key_rv where key1 =  #{key1} and  type =  #{type}
+    </select>
+    
+    
+    <update id="update1" parameterType="KeyrvDTO">
+    
+        update key_rv
+                 
+        <set>	
+        
+			<if test="rkey1 != null">
+				<![CDATA[ rkey1 = #{rkey1} ]]>,
+			</if>
+			
+			<if test="display != null">
+				<![CDATA[ display = #{display} ]]>,
+			</if>
+			
+			<if test="sort != null">
+				<![CDATA[ sort = #{sort} ]]>,
+			</if>
+			
+			<if test="value != null">
+				<![CDATA[ value = #{value} ]]>,
+			</if>
+			
+			<if test="ideleted != null">
+				<![CDATA[ ideleted = #{ideleted} ]]>,
+			</if>
+			
+			<if test="ideleted != null">
+				<![CDATA[ ideleted = #{ideleted} ]]>,
+			</if>
+			
+		 </set>
+		 		 
+		 where key1 =  #{key1} and  rkey = #{rkey} and  type =  #{type}
+		  
+    </update> 
+    
+    
+    <update id="update2" parameterType="KeyrvDTO">
+    
+        update key_rv
+                 
+        <set>	
+			
+			<if test="display != null">
+				<![CDATA[ display = #{display} ]]>,
+			</if>
+			
+			<if test="rkey != null">
+				<![CDATA[ rkey = #{rkey} ]]>,
+			</if>
+			
+			<if test="rkey1 != null">
+				<![CDATA[ rkey1 = #{rkey1} ]]>,
+			</if>
+			
+			<if test="value != null">
+				<![CDATA[ value = #{value} ]]>,
+			</if>
+			
+			<if test="sort != null">
+				<![CDATA[ sort = #{sort} ]]>,
+			</if>
+			
+			<if test="ideleted != null">
+				<![CDATA[ ideleted = #{ideleted} ]]>,
+			</if>
+			
+		 </set>
+		 		 
+		 where key1 =  #{key1} and type =  #{type}
+		  
+    </update>
+    
+    <delete id="deleteByDTO" parameterType="KeyrvDTO">    
+        delete from key_rv where key1 = #{key1} and rkey = #{rkey} and type = #{type}		 	
+    </delete> 
+    
+    
+    <delete id="deleteById" parameterType="java.lang.Long">    
+        update key_rv         
+        set ideleted = 1		 
+		where id = #{id}		 	
+    </delete> 
+    
+    
+    <delete id="deleteByUid" parameterType="java.lang.String">
+    
+        update key_rv         
+        set ideleted = 1		 
+		where id = #{id}
+		 	
+    </delete> 
+    
+</mapper> 

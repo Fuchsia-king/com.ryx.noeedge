@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=1920 initial-scale=1.0">
+
+  <!-- First use the latest version of IE and Chrome -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>融易学</title>
+  <!-- Keyword -->
+  <!-- <meta name="keywords" content=""> -->
+  <!-- describe -->
+  <meta name="description" content="">
+
+  <!-- 360 use Google Chrome Frame -->
+  <meta name="renderer" content="webkit">
+  <!-- Baidu prohibition of transcoding -->
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <!-- Definition of web search engine index -->
+  <meta name="robots" content="index,follow">
+  <!-- ios -->
+  <!-- The title that is added to the main screen -->
+  <meta name="apple-mobile-web-app-title" content="">
+  <!-- Whether WebApp full screen mode is enabled -->
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <!-- Setting the background color of the State Bar -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Android theme-color  Used to control the color of the tabs -->
+  <meta name="theme-color" content="#747474">
+  <meta name="mobile-web-app-capable" content="yes">
+  <!-- Turn off the translation plug-in under the Chrome browser -->
+  <meta name="google" value="notranslate" />
+  <!-- uc Forced vertical screen -->
+  <meta name="screen-orientation" content="portrait">
+  <!-- QQ Forced vertical screen -->
+  <meta name="x5-orientation" content="portrait">
+  <!-- UC Mandatory full screen -->
+  <meta name="full-screen" content="yes">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/css/swiper.min.css" rel="stylesheet" type="text/css" />
+  <link href="../static/css/public.css" rel="stylesheet">
+  <link href="../static/css/inStyle.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="../static/css/font-other.css" />
+</head>
+
+<body class="resetStyle black-bg">
+  <div class="video-middle">
+    <div class="flex-l">
+      <div class="video-modal">
+        <div class="get-back syht">
+          <a href="javascript:;">
+            <img class="whiteBck" src="../static/images/video/icon_back.png">
+            <img class="orgBck" src="../static/images/video/icon_backs.png">
+            <span>返回课程</span>
+          </a>
+        </div>
+        <div class="sidebar-icon" id="sidebar-icon">
+          <img src="../static/images/video/sidebar_l.png">
+        </div>
+        <!-- <div class="play-img"><img src="./images/video/play_img.png"></div> -->
+        <div class="null-login" id="video-end">
+          <div class="text syht">尊敬的用户本集试看已结束</div>
+          <a href="" class="buy-btn syht">立即购买</a>
+        </div>
+        <video id="my_video" src="../static/video/movie.mp4"></video>
+        <div class="operation-box">
+          <div class="full-box">
+            <div class="full-sound myflex" id="full-sound">
+              <div class="volume">
+                <img class="icon-mute" id="mute-click" src="../static/images/video/icon_voice.png">
+                <img class="icon-mutes" id="mute-clicks" src="../static/images/video/icon_voices.png">
+              </div>
+              <div class="volume-box">
+                <div class="video-box2">
+                  <div class="video-sound" id="video-sound">
+                    <div class="soundBar" id="soundBar"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="full-screen">
+              <img class="icon-full" id="showFulls" src="../static/images/video/icon_full.png">
+              <img class="icon-fulls" id="showFull" src="../static/images/video/icon_fulls.png">
+            </div>
+          </div>
+          <div class="progress-line" id="play-line">
+            <div class="bar" id="bar"></div>
+          </div>
+          <div class="operation-middle">
+            <div class="left">
+              <div class="icon active" id="player_btn">
+                <img class="icons-hides" src="../static/images/video/icon_play.png">
+                <img class="icons-shows" src="../static/images/video/icon_pause.png">
+              </div>
+              <div class="time-box"><span class="now" id="video-now">00:00</span> / <span class="total"
+                  id="video-total">00:00</span></div>
+            </div>
+            <div class="right">
+              <div class="instrument-box">
+                <div class="item syht play-speed" id="play-speed">
+                  倍数
+                  <div class="app-box">
+                    <ul>
+                      <li><a href="javascript:;"><span>0.5</span>X</a></li>
+                      <li class="active"><a href="javascript:;"><span>1.0</span>X</a></li>
+                      <li><a href="javascript:;"><span>1.25</span>X</a></li>
+                      <li><a href="javascript:;"><span>1.5</span>X</a></li>
+                      <li><a href="javascript:;"><span>2.0</span>X</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="item syht">
+                  <img class="icon-hides" src="../static/images/video/icon_phone.png">
+                  <img class="icon-shows" src="../static/images/video/icon_phones.png">
+                  手机观看
+                  <div class="app-box">
+                    <div class="app-text">下载融易学APP</div>
+                    <div class="img">
+                      <img src="../static/images/app_img.png">
+                    </div>
+                  </div>
+                </div>
+                <div class="item syht" data-toggle="modal" data-target="#mes-modal">
+                  <img class="icon-hides" src="../static/images/video/icon_query.png">
+                  <img class="icon-shows" src="../static/images/video/icon_querys.png">
+                  反馈问题
+                </div>
+
+                <!-- 收藏  item有active类名为收藏了-->
+                <div class="item syht save" id="saveVideo">
+                  <img class="icon-hides" src="../static/images/video/icon_collect.png">
+                  <img class="icon-shows" src="../static/images/video/icon_collect2.png">
+                  <img class="icon-shows2" src="../static/images/video/icon_collects.png">
+                  <span class="icon-hides">收藏</span>
+                  <span class="icon-shows">收藏</span>
+                  <span class="icon-shows2">已收藏</span>
+                </div>
+                <div class="item syht">
+                  <img class="icon-hides" src="../static/images/video/icon_share.png">
+                  <img class="icon-shows" src="../static/images/video/icon_shares.png">
+                  分享
+                  <div class="share-box">
+                    <div class="share-list">
+                      <div class="item">
+                        <a href="javacript:void(0);">
+                          <img class="icon-hide" src="../static/images/insidepage/icon_weixin.png">
+                          <img class="icon-show" src="../static/images/insidepage/bright_weixin.png">
+                        </a>
+                        <div class="img">
+                          <div class="pic"><img src="../static/images/ewm.png"></div>
+                        </div>
+                      </div>
+                      <div class="item">
+                        <a href="">
+                          <img class="icon-hide" src="../static/images/insidepage/icon_qq.png">
+                          <img class="icon-show" src="../static/images/insidepage/bright_qq.png">
+                        </a>
+                      </div>
+                      <div class="item">
+                        <a href="">
+                          <img class="icon-hide" src="../static/images/insidepage/icon_weibo.png">
+                          <img class="icon-show" src="../static/images/insidepage/bright_weibo.png">
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex-r" id="sidebar-main">
+      <div class="curriculum-tit syht">课程标题课程标题课程标题</div>
+      <div class="curriculum-list">
+        <div class="item">
+          <a href="">
+            <div class="flex-l">
+              <div class="progress-icon">
+                <!-- <div class="circle"></div> -->
+              </div>
+              <div class="numb pf">01</div>
+              <div class="tit syht">课程标题课程标题课...</div>
+            </div>
+            <div class="flex-r">
+              <div class="time syht">（00:00）</div>
+            </div>
+          </a>
+        </div>
+        <div class="item">
+          <a href="">
+            <div class="flex-l">
+              <div class="progress-icon">
+                <!-- 有half-circle类名为半圆 -->
+                <div class="circle half-circle"></div>
+              </div>
+              <div class="numb pf">01</div>
+              <div class="tit syht">课程标题课程标题课...</div>
+            </div>
+            <div class="flex-r">
+              <div class="time syht">（00:00）</div>
+            </div>
+          </a>
+        </div>
+        <div class="item">
+          <a href="">
+            <div class="flex-l">
+              <div class="progress-icon">
+                <div class="circle"></div>
+              </div>
+              <div class="numb pf">01</div>
+              <div class="tit syht">课程标题课程标题课...</div>
+            </div>
+            <div class="flex-r">
+              <div class="time syht">（00:00）</div>
+            </div>
+          </a>
+        </div>
+        <div class="item active">
+          <a href="">
+            <div class="flex-l">
+              <div class="progress-icon">
+                <div class="circle"></div>
+              </div>
+              <div class="numb pf">01</div>
+              <div class="tit syht">课程标题课程标题课...</div>
+            </div>
+            <div class="flex-r">
+              <div class="time syht">正在播放</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="toggle-list" id="video-toggle">
+        <div class="item active">
+          <div class="lable-box">
+            <div class="flex-l">
+              <div class="section-text">章节一</div>
+              <div class="section-tit">商业保理竞争分析竞...</div>
+            </div>
+            <div class="flex-r">
+              <img src="../static/images/video/icon_bottom.png">
+            </div>
+          </div>
+          <div class="curriculum-list">
+            <div class="item">
+              <a href="">
+                <div class="flex-l">
+                  <div class="progress-icon">
+                    <div class="circle"></div>
+                  </div>
+                  <div class="numb pf">01</div>
+                  <div class="tit syht">课程标题课程标题课...</div>
+                </div>
+                <div class="flex-r">
+                  <div class="time syht">（00:00）</div>
+                </div>
+              </a>
+            </div>
+            <div class="item">
+              <a href="">
+                <div class="flex-l">
+                  <div class="progress-icon">
+                    <div class="circle"></div>
+                  </div>
+                  <div class="numb pf">01</div>
+                  <div class="tit syht">课程标题课程标题课...</div>
+                </div>
+                <div class="flex-r">
+                  <div class="time syht">（00:00）</div>
+                </div>
+              </a>
+            </div>
+            <div class="item">
+              <a href="">
+                <div class="flex-l">
+                  <div class="progress-icon">
+                    <div class="circle"></div>
+                  </div>
+                  <div class="numb pf">01</div>
+                  <div class="tit syht">课程标题课程标题课...</div>
+                </div>
+                <div class="flex-r">
+                  <div class="time syht">（00:00）</div>
+                </div>
+              </a>
+            </div>
+            <div class="item active">
+              <a href="">
+                <div class="flex-l">
+                  <div class="progress-icon">
+                    <div class="circle"></div>
+                  </div>
+                  <div class="numb pf">01</div>
+                  <div class="tit syht">课程标题课程标题课...</div>
+                </div>
+                <div class="flex-r">
+                  <div class="time syht">正在播放</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="lable-box">
+            <div class="flex-l">
+              <div class="section-text">章节一</div>
+              <div class="section-tit">商业保理竞争分析竞...</div>
+            </div>
+            <div class="flex-r">
+              <img src="../static/images/video/icon_bottom.png">
+            </div>
+          </div>
+          <div class="curriculum-list">
+            <div class="item">
+              <a href="">
+                <div class="flex-l">
+                  <div class="progress-icon">
+                    <div class="circle"></div>
+                  </div>
+                  <div class="numb pf">01</div>
+                  <div class="tit syht">课程标题课程标题课...</div>
+                </div>
+                <div class="flex-r">
+                  <div class="time syht">（00:00）</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="mes-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="header-modal">
+            <div class="left">意见反馈</div>
+            <div class="right" data-dismiss="modal"><img src="../static/images/error.png"></div>
+          </div>
+          <div class="body-modal">
+            <div class="modal-item">
+              <div class="lable-l">姓名：</div>
+              <div class="lable-r">
+                <div class="input-box">
+                  <input type="text" placeholder="请输入内容">
+                </div>
+              </div>
+            </div>
+            <div class="modal-item">
+              <div class="lable-l">联系方式：</div>
+              <div class="lable-r">
+                <div class="input-box">
+                  <input type="text" placeholder="请输入内容">
+                </div>
+              </div>
+            </div>
+            <div class="modal-item">
+              <div class="lable-l">问题详情：</div>
+              <div class="lable-r">
+                <div class="textarea-box">
+                  <textarea placeholder="请输入内容"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="btn-modal">
+            <button type="submit">提 交</button>
+          </div>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+  <script src="../static/js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../static/js/bootstrap.min.js"></script>
+  <script src="../static/js/swiper.min.js"></script>
+  <!-- privatjs -->
+  <script type="text/javascript" src="../static/js/public.js"></script>
+  <script type="text/javascript" src="../static/js/inMain.js"></script>
+  <script type="text/javascript" src="../static/js/sound.js"></script>
+  <!--end-->
+</body>
+
+
+</html>

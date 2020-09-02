@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.NoticeReaderMapper">  
+
+	<sql id="where">
+	    <where>
+	    
+			<if test="userId != null">
+				<![CDATA[ and user_id = #{userId} ]]>
+			</if>
+			
+			<if test="noticeId != null">
+				<![CDATA[ and notice_id = #{noticeId} ]]>
+			</if>
+			
+			<choose>
+				<when test="ideleted != null">
+					<![CDATA[  and ideleted = #{ideleted} ]]>
+				</when>
+				<otherwise>
+					<![CDATA[  and ideleted = 0 ]]>
+				</otherwise>
+			</choose>
+			
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="NoticeReaderDTO">   
+       insert into notice_reader(user_id,notice_id) 
+       values
+       (#{userId},#{noticeId}) 
+    </insert>
+      
+    
+    <select id="query" resultType="NoticeReaderDTO" parameterType="NoticeReaderQuery">
+         
+        select * from notice_reader 
+        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="NoticeReaderQuery">   
+        select count(1) from notice_reader 
+        <include refid="where"/>
+    </select>
+    
+    <select id="queryById" resultType="NoticeReaderDTO" parameterType="java.lang.Long">   
+        select * from notice_reader where id = #{id}  limit 1;
+    </select>    
+    
+    <select id="queryByUid" resultType="NoticeReaderDTO" parameterType="java.lang.String">   
+        select * from notice_reader where uid = #{uid}  limit 1; 
+    </select>  
+    
+    <select id="queryByCode" resultType="NoticeReaderDTO" parameterType="java.lang.String">   
+        select * from notice_reader where code = #{code}  limit 1; 
+    </select> 
+    
+    
+    <update id="update" parameterType="NoticeReaderDTO">
+    
+        update notice_reader
+         
+        <set>	
+        	<if test="code != null">
+				<![CDATA[ code = #{code} ]]>,
+			</if>			
+					
+			<if test="name != null">
+				<![CDATA[ name = #{name} ]]>,
+			</if>
+			
+			<if test="email != null">
+				<![CDATA[ email = #{email} ]]>,
+			</if>
+			
+			<if test="mobile != null">
+				<![CDATA[ mobile = #{mobile} ]]>,
+			</if>
+			
+			<if test="qq != null">
+				<![CDATA[ qq = #{qq} ]]>,
+			</if>
+			
+			<if test="wangwang != null">
+				<![CDATA[ wangwang = #{wangwang} ]]>,
+			</if>
+			
+			<if test="weixin != null">
+				<![CDATA[ weixin = #{weixin} ]]>,
+			</if>
+
+			<if test="passd != null">
+				<![CDATA[ passd = #{passd} ]]>,
+			</if>
+			
+			
+		 </set>
+		 
+		 where	uid = #{uid}
+		 	
+    </update> 
+    
+    
+    <delete id="delete" parameterType="java.lang.String">
+    
+        update notice_reader
+         
+        set ideleted = 1
+		 
+		where uid = #{uid}
+		 	
+    </delete> 
+    
+    
+    
+</mapper> 

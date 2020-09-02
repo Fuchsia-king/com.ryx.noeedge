@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.ryx.RyxPresentMapper">  
+
+    
+    
+    <sql id="select">
+		
+		id,
+		createrId,
+		type,
+		value,
+	    tcreate,
+	    tmodified,
+	    ideleted
+	    
+	</sql>
+
+	<sql id="where">
+	    <where>
+			<if test="id != null">
+				<![CDATA[ and id = #{id} ]]>
+			</if>		
+			<if test="createrId != null">
+				<![CDATA[ and createrId = #{createrId} ]]>
+			</if>	
+			<if test="type != null">
+				<![CDATA[ and type = #{type} ]]>
+			</if>	
+			<if test="value != null">
+				<![CDATA[ and value = #{value} ]]>
+			</if>	
+			<if test="svalue != null">
+				<![CDATA[ and value > #{svalue} ]]>
+			</if>
+			<if test="ideleted != null">
+				<![CDATA[ and ideleted = #{ideleted} ]]>
+			</if>	
+		</where>
+	</sql>
+	<sql id="where1">
+	    <where>
+			<if test="id != null">
+				<![CDATA[ and id = #{id} ]]>
+			</if>		
+			<if test="createrId != null">
+				<![CDATA[ and createrId = #{createrId} ]]>
+			</if>	
+			<if test="type != null">
+				<![CDATA[ and type = #{type} ]]>
+			</if>	
+			<if test="value != null">
+				<![CDATA[ and value = #{value} ]]>
+			</if>	
+			
+			<if test="tcreate != null">
+				<![CDATA[ and tcreate = #{tcreate} ]]>
+			</if>	
+			<if test="tmodified != null">
+				<![CDATA[ and tmodified = #{tmodified} ]]>
+			</if>	
+			 and ideleted = 0
+		</where>
+	</sql>
+	
+	<sql id="orderby">	
+		<choose>
+			<when test="orderBy != null and orderBy !=''">
+				order by ${orderBy}	
+				<if test="sooort != null and sooort !=''">
+					${sooort}
+				</if>	
+			</when>	
+		</choose>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>	
+		
+	</sql>
+   
+    <insert id="create" parameterType="RyxPresentDTO">   
+       insert into ryx_present(
+			
+			id,
+			createrId,
+			type,
+			value,
+		    tcreate,
+		    tmodified,
+		    ideleted
+
+		) 
+       values
+       (
+			#{id},
+			#{createrId},
+			#{type},
+			#{value},
+			now(),
+			now(),
+			0
+			
+       ) 
+    </insert>
+      
+    
+    <select id="getPresent" resultType="RyxPresentDTO">
+         
+        select
+         
+        <include refid="select"/>
+        
+        from ryx_present 
+        
+        <include refid="where1"/>		
+		<include refid="orderby"/>	
+		
+    </select>
+    <select id="query" resultType="RyxPresentDTO" parameterType="RyxPresentQuery">
+         
+        select
+         
+        <include refid="select"/>
+        
+        from ryx_present 
+        
+        <include refid="where"/>		
+		<include refid="orderby"/>	
+		
+    </select>
+    
+     <select id="getPresentByType" resultType="RyxPresentDTO" parameterType="RyxPresentQuery">
+         
+        select
+         
+        <include refid="select"/>
+        
+        from ryx_present 
+        
+       <include refid="where"/>		
+		<include refid="orderby"/>	
+		
+    </select>
+     
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="RyxPresentQuery">   
+        select count(1) from ryx_present 
+        <include refid="where"/>
+    </select>
+    
+     
+    
+    
+    
+    <update id="update"  parameterType="RyxPresentDTO">
+    
+        update ryx_Present
+         
+        <set>		
+			<if test="createrId != null">
+				<![CDATA[ createrId = #{createrId} ]]>,
+			</if>	
+			<if test="type != null">
+				<![CDATA[type = #{type} ]]>,
+			</if>		
+			<if test="value != null">
+				<![CDATA[ value = #{value} ]]>,
+			</if>	
+			 tmodified = now() 
+			 
+		 </set>
+		 
+		 where	id = #{id} 
+		 	
+    </update> 
+    
+  
+    
+    <delete id="delete" parameterType="RyxPresentQuery">
+    
+        update ryx_present
+         
+        set ideleted = #{ideleted}
+		 
+		where id = #{id}
+		 	
+    </delete> 
+    
+</mapper> 

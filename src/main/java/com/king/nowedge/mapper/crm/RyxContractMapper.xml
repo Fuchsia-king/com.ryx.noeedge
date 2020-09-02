@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.crm.RyxContractMapper">    
+    
+    <sql id="select">
+		id,
+		cust_id custId,
+	    act_id actId,
+	    title,
+	    descr,
+	    creater,
+	    follower,
+	    lcreate,
+	    lmodified,
+	    attach,
+	    content,
+	    dept,
+	    type,
+	    biz_type bizType ,
+	    project,
+	    money money,
+	    paid_money paidMoney,
+	    unpaid_money unpaidMoney,
+	    manager,
+	    status,
+	    pay_type payType,
+	    stime
+	    
+	    	        
+	</sql>
+
+	<sql id="where">
+	
+	    <where>
+	    
+			<if test="keyword != null and keyword != '' ">
+				<![CDATA[and title like concat('%', #{keyword}, '%')]]>
+			</if>
+			
+			<if test="custId != null and custId != '' ">
+				<![CDATA[ and cust_id  = #{custId} ]]>
+			</if>
+			
+			<if test="actId != null and actId != '' ">
+				<![CDATA[ and act_id  = #{actId} ]]>
+			</if>
+			
+			<if test="creater != null and creater != '' ">
+				<![CDATA[ and creater = #{creater} ]]>
+			</if>
+			
+			<if test="follower != null and follower != '' ">
+				<![CDATA[ and follower = #{follower} ]]>
+			</if>
+			
+			
+			<if test="status != null and status != '' ">
+				<![CDATA[ and status = #{status} ]]>
+			</if>
+			
+			<if test="dept != null and dept != '' ">
+				<![CDATA[ and dept = #{dept} ]]>
+			</if>
+			
+			<if test="type != null and type != '' ">
+				<![CDATA[ and type = #{type} ]]>
+			</if>
+			
+			<if test="project != null and project != '' ">
+				<![CDATA[ and project = #{project} ]]>
+			</if>
+			
+			<if test="bizType != null and bizType != '' ">
+				<![CDATA[ and biz_type = #{bizType} ]]>
+			</if>
+			
+			<if test="manager != null and manager != '' ">
+				<![CDATA[ and manager = #{manager} ]]>
+			</if>
+			
+	
+			
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="RyxContractDTO">   
+    
+       insert into ryx_contract(   
+       		title,    
+		    cust_id,
+		    act_id,
+		    descr,
+		    creater,
+		    lcreate,
+		    lmodified,
+		    attach,
+		    content ,
+		    dept,
+		    type,
+		    money ,
+		    paid_money,
+		    unpaid_money,
+		    manager,
+		    status ,
+		    biz_type,
+		    project,
+		    stime,
+		    follower
+    
+       ) 
+       values
+       (
+       		#{title},
+       		#{custId},
+		    #{actId},
+		    #{descr},
+		    #{creater},
+		    UNIX_TIMESTAMP(now()),
+		    UNIX_TIMESTAMP(now()),
+		    #{attach},
+		    #{content},
+		    #{dept},
+		    #{type},
+		    #{money},
+		    #{paidMoney},
+		    #{money},
+		    #{manager},
+		    #{status} ,
+		    #{bizType},
+		    #{project} ,
+		    #{stime},
+		    #{follower}
+       )        
+       <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+			select LAST_INSERT_ID() 
+		</selectKey>
+    </insert>
+      
+    <update id="updatePaidMoney" parameterType="RyxContractDTO">
+     	  update ryx_contract set paid_money = paid_money + #{paidMoney},unpaid_money = unpaid_money - #{paidMoney} where id = #{id}       
+    </update>
+    
+    <select id="queryUserId" resultType="java.lang.Long" parameterType="RyxContractQuery">
+         
+        select id from ryx_contract         
+        <include refid="where"/>		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+    
+    <select id="query" resultType="RyxContractDTO" parameterType="RyxContractQuery">
+         
+        select
+         
+        <include refid="select"/>
+        
+        from ryx_contract 
+        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+	
+	
+    
+    
+    
+    
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="RyxContractQuery">   
+        select count(1) from ryx_contract 
+        <include refid="where"/>  limit 1 ;
+    </select>
+    
+    
+    
+    <select id="getById" resultType="RyxContractDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select"/>
+        from ryx_contract where id = #{id}  limit 1;
+    </select>    
+    
+    
+     
+    
+    
+    <update id="update" parameterType="RyxContractDTO">
+    
+        update ryx_contract
+         
+        <set>	
+					
+			<if test="custId != null">
+				<![CDATA[ cust_id = #{custId} ]]>,
+			</if>		
+			<if test="creater != null">
+				<![CDATA[ creater = #{creater} ]]>,
+			</if>
+			<if test="follower != null">
+				<![CDATA[ follower = #{follower} ]]>,
+			</if>		
+			<if test="descr != null">
+				<![CDATA[ descr = #{descr} ]]>,
+			</if>		
+			<if test="attach != null">
+				<![CDATA[ attach = #{attach} ]]>,
+			</if>
+			<if test="content != null">
+				<![CDATA[ content = #{content} ]]>,
+			</if>
+			<if test="title != null">
+				<![CDATA[ title = #{title} ]]>,
+			</if>
+			<if test="type != null">
+				<![CDATA[ type = #{type} ]]>,
+			</if>
+			
+			<if test="bizType != null">
+				<![CDATA[ biz_type = #{bizType} ]]>,
+			</if>
+			
+			<if test="project != null">
+				<![CDATA[ project = #{project} ]]>,
+			</if>
+			
+			<if test="status != null">
+				<![CDATA[ status = #{status} ]]>,
+			</if>
+			<if test="payType != null">
+				<![CDATA[ pay_type = #{payType} ]]>,
+			</if>
+			
+			<if test="money != null">
+				<![CDATA[ money = #{money} ]]>,
+			</if>
+				
+			<if test="paidMoney != null">
+				<![CDATA[ paid_money = #{paidMoney} ]]>,
+			</if>
+				
+			<if test="unpaidMoney != null">
+				<![CDATA[ unpaid_money = #{unpaidMoney} ]]>,
+			</if>
+			
+			<if test="dept != null">
+				<![CDATA[ dept = #{dept} ]]>,
+			</if>
+			
+			<if test="manager != null">
+				<![CDATA[ manager = #{manager} ]]>,
+			</if>
+			
+			<if test="stime != null">
+				<![CDATA[ stime = #{stime} ]]>,
+			</if>
+			
+			lmodified = UNIX_TIMESTAMP(now()) 
+		 </set>
+		 
+		 where	id = #{id}
+		 	
+    </update> 
+    
+   
+    <delete id="delete" parameterType="java.lang.String">    
+        update ryx_contract set ideleted = 1 where id = #{id}		 	
+    </delete> 
+    
+  
+    
+    
+</mapper> 

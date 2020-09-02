@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.EcologyMapper">   
+   
+      
+    
+    <insert id="insert" parameterType="EcologyDTO">
+    
+    	insert into ecology(
+			    uid,
+			    agree,
+			    dagree,
+			    visit,
+			    comment) 
+		       values
+		       (
+		       #{uid},#{agree},#{dagree},#{visit},#{comment}
+		       )   
+    
+    </insert>
+      
+   
+    
+    
+    <select id="queryByUid" resultType="EcologyDTO" parameterType="java.lang.String"> 
+      
+        select        
+        agree,
+	    dagree,
+	    visit,
+	    comment	    
+	    
+	    from ecology where uid = #{uid} limit 1
+	    
+    </select> 
+    
+    <select id="queryCntByUid" resultType="java.lang.Integer" parameterType="java.lang.String">   
+        select count(1)   
+	    from ecology where uid = #{uid} limit 1
+    </select>  
+    
+    
+    <update id="updateCnt" parameterType="EcologyDTO">   
+        update ecology  
+        <set>
+			<if test="agree != 0 and agree != null">
+				<![CDATA[ agree = agree + 1 ]]>,
+			</if>
+			
+			<if test="dagree != 0 and dagree != null">
+				<![CDATA[ dagree = dagree + 1 ]]>,
+			</if>
+			
+			<if test="visit != 0 and visit != null">
+				<![CDATA[ visit = visit + 1 ]]>,
+			</if>
+			
+			<if test="comment != 0 and comment != null">
+				<![CDATA[ comment = comment + 1 ]]>,
+			</if>
+		 </set>
+		 
+		 where	uid = #{uid}		
+    </update> 
+    
+    <update id="update" parameterType="EcologyDTO">   
+        update ecology  
+        <set>
+			<if test="agree != 0 and agree != null">
+				<![CDATA[ agree = agree + 1 ]]>,
+			</if>
+			
+			<if test="dagree != 0 and dagree != null">
+				<![CDATA[ dagree = dagree + 1 ]]>,
+			</if>
+			
+			<if test="visit != 0 and visit != null">
+				<![CDATA[ visit = visit + 1 ]]>,
+			</if>
+			
+			<if test="comment != 0 and comment != null">
+				<![CDATA[ comment = comment + 1 ]]>,
+			</if>
+		 </set>
+		 
+		 where	uid = #{uid}		
+    </update> 
+     
+    
+</mapper> 

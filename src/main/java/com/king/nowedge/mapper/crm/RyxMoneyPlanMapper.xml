@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.crm.RyxMoneyPlanMapper">    
+    
+    <sql id="select">
+		id,
+	    cust_id custId,
+	    creater,
+	    status,
+	    lcreate,
+	    lmodified,
+	    ideleted,
+	    contract,
+	    money,
+	    paid_money paidMoney,
+	    title,
+	    descr,
+	    unpaid_money unpaidMoney
+	        
+	</sql>
+
+	<sql id="where">
+	
+	    <where>
+			
+			<if test="custId != null and custId != '' ">
+				<![CDATA[ and cust_id  = #{custId} ]]>
+			</if>
+			
+			<if test="contract != null and contract != '' ">
+				<![CDATA[ and contract  = #{contract} ]]>
+			</if>
+			
+			<if test="creater != null and creater != '' ">
+				<![CDATA[ and creater = #{creater} ]]>
+			</if>
+			
+			<if test="status != null and status != '' ">
+				<![CDATA[ and status = #{status} ]]>
+			</if>
+			
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="RyxMoneyPlanDTO">   
+    
+       insert into ryx_money_plan(       
+		    cust_id,
+		    creater,
+		    status,
+		    lcreate,
+		    lmodified,
+		    ideleted,
+		    contract,
+		    money,
+		    paid_money,
+		    title,
+		    descr,
+		    unpaid_money    
+       ) 
+       values
+       (
+		    #{custId},
+		    #{creater},
+		    #{status},
+		    UNIX_TIMESTAMP(now()),
+		    UNIX_TIMESTAMP(now()),
+		    #{ideleted},
+		    #{contract},
+		    #{money},
+		    #{paidMoney},
+		    #{title},
+		    #{descr},
+		    #{money}
+       )        
+       <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+			select LAST_INSERT_ID() 
+		</selectKey>
+    </insert>
+      
+    
+    
+    <select id="queryUserId" resultType="java.lang.Long" parameterType="RyxMoneyPlanQuery">
+         
+        select id from ryx_money_plan         
+        <include refid="where"/>		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+    
+    <select id="query" resultType="RyxMoneyPlanDTO" parameterType="RyxMoneyPlanQuery">
+         
+        select
+         
+        <include refid="select"/>
+        
+        from ryx_money_plan 
+        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="RyxMoneyPlanQuery">   
+        select count(1) from ryx_money_plan 
+        <include refid="where"/>  limit 1 ;
+    </select>
+    
+    <select id="getById" resultType="RyxMoneyPlanDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select"/>
+        from ryx_money_plan where id = #{id}  limit 1;
+    </select>    
+    
+     <update id="updatePaidMoney" parameterType="RyxMoneyPlanDTO">
+     	  update ryx_money_plan set paid_money = paid_money + #{paidMoney},unpaid_money = unpaid_money - #{paidMoney} where id = #{id}       
+     </update>
+    
+    <update id="update" parameterType="RyxMoneyPlanDTO">
+    
+        update ryx_money_plan
+         
+        <set>	
+					
+			<if test="custId != null">
+				<![CDATA[ cust_id = #{custId} ]]>,
+			</if>	
+				
+			<if test="creater != null">
+				<![CDATA[ creater = #{creater} ]]>,
+			</if>	
+			
+			
+			<if test="contract != null">
+				<![CDATA[ contract = #{contract} ]]>,
+			</if>	
+			
+			<if test="custId != null">
+				<![CDATA[ cust_id = #{custId} ]]>,
+			</if>	
+			
+			<if test="status != null">
+				<![CDATA[ status = #{status} ]]>,
+			</if>
+			
+			<if test="money != null">
+				<![CDATA[ money = #{money} ]]>,
+			</if>
+			
+			
+			<if test="title != null">
+				<![CDATA[ title = #{title} ]]>,
+			</if>
+			
+			<if test="descr != null">
+				<![CDATA[ descr = #{descr} ]]>,
+			</if>
+			
+			
+			<if test="paidMoney != null">
+				<![CDATA[ paid_money = #{paidMoney} ]]>,
+			</if>
+			
+			<if test="unpaidMoney != null">
+				<![CDATA[ unpaid_money = #{unpaidMoney} ]]>,
+			</if>
+		
+			lmodified = UNIX_TIMESTAMP(now()) 
+		 </set>
+		 
+		 where	id = #{id}
+		 	
+    </update> 
+    
+   
+    <delete id="delete" parameterType="java.lang.String">    
+        update ryx_money_plan set ideleted = 1 where id = #{id}		 	
+    </delete> 
+    
+  
+    
+    
+</mapper> 

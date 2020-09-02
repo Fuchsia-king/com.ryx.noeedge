@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.ryx.RyxCategoryMapper">  
+
+    
+    
+    <sql id="select">
+		
+		id,
+	    name,
+	    title,
+	    pid,
+	    type,
+	    sort,
+	    display,
+	    meta_title metaTitle,
+	    keywords,
+	    description,
+	    template_index templateIndex,
+	    template_detail templateDetail,
+	    template_play templatePlay,
+	    template_type templateType,
+	    link,
+	    extend,
+	    create_time createTime,
+	    update_time updateTime,
+	    status,
+	    ideleted,
+	    tmodified,
+	    tcreate,
+	    cover_id coverId,
+	    image_url imageUrl,
+	    qq_group qqGroup,
+	    qq_group_link qqGroupLink
+	    
+	</sql>
+
+	<sql id="where">
+	
+	    <where>
+	    
+			<if test="name != null  and name !='' ">
+				<![CDATA[and name like concat('%', #{name}, '%')  ]]>
+			</if>
+			
+			<if test="type != null">
+				<![CDATA[ and type = #{type} ]]>
+			</if>
+			
+			<if test="title != null and title !='' ">
+				<![CDATA[and title like concat('%', #{title}, '%')  ]]>
+			</if>
+			
+			<if test="pid != null">
+				<![CDATA[ and pid = #{pid} ]]>
+			</if>
+			
+			<if test="code != null">
+				<![CDATA[ and name = #{code} ]]>
+			</if>			
+			
+			<if test="status != null">
+				<![CDATA[ and status = #{status} ]]>
+			</if>
+			
+			<if test="display != null">
+				<![CDATA[ and display = #{display} ]]>
+			</if>
+			
+			<if test="ideleted != null">
+				<![CDATA[ and ideleted = #{ideleted} ]]>
+			</if>
+			
+		
+			
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="RyxCategoryDTO">   
+       insert into ryx_category(
+       
+       		name,
+		    title,
+		    pid,
+		    type,
+		    sort,
+		    display,
+		    meta_title,
+		    keywords,
+		    description,
+		    template_index,
+		    template_detail,
+		    template_play,
+		    template_type,
+		    link,
+		    extend,
+		    create_time,
+		    update_time,
+		    status,
+		    cover_id,
+		    image_url,
+		    creater,
+		    qq_group,
+		    qq_group_link
+		    
+       ) 
+       values
+       (
+       
+       
+       		#{name},
+		    #{title},
+		    #{pid},
+		    #{type},
+		    #{sort},
+		    #{display},
+		    #{metaTitle},
+		    #{keywords},
+		    #{description},
+		    #{templateIndex},
+		    #{templateDetail},
+		    #{templatePlay},
+		    #{templateType},
+		    #{link},
+		    #{extend},
+		    #{createTime},
+		    #{updateTime},
+		    #{status},
+		    #{coverId},
+		    #{imageUrl},
+		    #{creater},
+		    #{qqGroup},
+		    #{qqGroupLink}
+    
+    
+       ) 
+    </insert>
+      
+    
+    <select id="query" resultType="RyxCategoryDTO" parameterType="RyxCategoryQuery">
+         
+        select
+         
+        <include refid="select"/>
+        
+        from ryx_category 
+        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+     
+    <select id="queryAll" resultType="RyxCategoryDTO">         
+        select code,name from ryx_category where ideleted = 0 order by name
+    </select>
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="RyxCategoryQuery">   
+        select count(1) from ryx_category 
+        <include refid="where"/>
+    </select>
+    
+    <select id="queryById" resultType="RyxCategoryDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select"/>
+        from ryx_category where id = #{id}  limit 1;
+    </select>    
+	
+    
+    <select id="queryByIdMember" resultType="RyxCategoryDTO" parameterType="RyxCategoryQuery">   
+        select 
+        <include refid="select"/>
+        from ryx_category where id = #{id} and member =#{member} limit 1;
+    </select>
+    
+    <select id="queryByUid" resultType="RyxCategoryDTO" parameterType="java.lang.String">   
+        select 
+        <include refid="select"/>
+        from ryx_category where uid = #{uid}  limit 1; 
+    </select>
+    
+     <select id="queryPassdByUid" resultType="java.lang.String" parameterType="java.lang.String">   
+        select passd from ryx_category where uid = #{uid}  limit 1; 
+    </select>    
+    
+    <select id="queryByCode" resultType="RyxCategoryDTO" parameterType="java.lang.String">   
+        select 
+        <include refid="select"/>
+        from ryx_category where name = #{code} limit 1; 
+    </select> 
+    
+    
+    <update id="update" parameterType="RyxCategoryDTO">
+    
+        update ryx_category
+         
+        <set>	
+					
+			<if test="name != null">
+				<![CDATA[ name = #{name} ]]>,
+			</if>
+			
+			<if test="title != null">
+				<![CDATA[ title = #{title} ]]>,
+			</if>
+			
+			<if test="type != null">
+				<![CDATA[ title = #{title} ]]>,
+			</if>
+			
+			<if test="pid != null">
+				<![CDATA[ pid = #{pid} ]]>,
+			</if>
+			
+			<if test="description != null">
+				<![CDATA[ description = #{description} ]]>,
+			</if>
+			
+			<if test="keywords != null">
+				<![CDATA[ keywords = #{keywords} ]]>,
+			</if>
+
+			<if test="sort != null">
+				<![CDATA[ sort = #{sort} ]]>,
+			</if>
+			
+			<if test="display != null">
+				<![CDATA[ display = #{display} ]]>,
+			</if>
+			
+			<if test="link != null">
+				<![CDATA[ link = #{link} ]]>,
+			</if>
+			
+			<if test="status != null">
+				<![CDATA[ status = #{status} ]]>,
+			</if>
+			
+			<if test="imageUrl != null">
+				<![CDATA[ image_url = #{imageUrl} ]]>,
+			</if>
+			
+			<if test="ideleted != null">
+				<![CDATA[ ideleted = #{ideleted} ]]>,
+			</if>
+			
+			<if test="coverId != null">
+				<![CDATA[ cover_id = #{coverId} ]]>,
+			</if>
+			
+			<if test="qqGroup != null">
+				<![CDATA[ qq_group = #{qqGroup} ]]>,
+			</if>
+			
+			<if test="qqGroupLink != null">
+				<![CDATA[ qq_group_link = #{qqGroupLink} ]]>,
+			</if>
+			
+			 creater = #{creater},
+			 tmodified = now() 
+			 
+		 </set>
+		 
+		 where	id = #{id}
+		 	
+    </update> 
+    
+    <update id="changePassd" parameterType="RyxCategoryDTO">
+    	 update ryx_category set passd = #{passd} where uid = #{uid}
+    </update>
+    
+    <delete id="delete" parameterType="java.lang.String">
+    
+        update ryx_category
+         
+        set ideleted = 1
+		 
+		where uid = #{uid}
+		 	
+    </delete> 
+    
+</mapper> 

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.LoreMapper">  
+
+
+	<sql id="where">
+	    <where>
+			<if test="title != null">
+				<![CDATA[and title like concat('%', #{title}, '%')  ]]>
+			</if>
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="LoreDTO">   
+       insert into lore(title,descr,creater,category,tcreate,tmodified,ideleted,uid) 
+       values
+       (#{title},#{descr},#{creater},#{category},now(),now(),#{ideleted},#{uid}) 
+    </insert>   
+      
+    <select id="query" resultType="LoreDTO" parameterType="LoreQuery">
+     
+        select * from lore 
+        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}			
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>  
+    
+    
+    <select id="search" resultType="LoreDTO" parameterType="LoreQuery">
+    
+        select count(1) as cnt ,lore.* from loret_related,lore
+        
+       	where 
+       	  
+       	tag in
+		<foreach item="item" index="index" collection="tags" open="(" separator="," close=")">  
+			#{item}  
+		</foreach>
+		
+		and lore.uid = loret_related.oid
+		
+		group by oid having cnt = #{cnt}
+       
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}			
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>
+		
+    </select>  
+    
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="LoreQuery">   
+        select count(1) from lore 
+        <include refid="where"/>
+    </select>   
+    
+    
+    <select id="countSearch" resultType="java.lang.Integer" parameterType="LoreQuery">   
+        
+        select count(1) from (
+        
+	        select count(1) as cnt from loret_related,lore   
+	       	
+	        where tag in
+	        
+			<foreach item="item" index="index" collection="tags" open="(" separator="," close=")">  
+				#{item}  
+			</foreach>
+			
+			and lore.uid = loret_related.oid
+			
+			group by oid having cnt = #{cnt}
+		
+		) t
+		
+    </select>   
+    
+    
+    
+    <select id="queryById" resultType="LoreDTO" parameterType="java.lang.Long">   
+        select * from lore where id = #{id}  limit 1;
+    </select>  
+    
+    
+    <select id="queryByUid" resultType="LoreDTO" parameterType="java.lang.String">   
+        select * from lore where uid = #{uid}  limit 1; 
+    </select>  
+    
+    
+    <update id="update" parameterType="LoreDTO">   
+        update lore  
+        <set>
+			
+			<if test="title != null">
+				<![CDATA[ title = #{title} ]]>,
+			</if>
+			
+			<if test="descr != null">
+				<![CDATA[ descr = #{descr} ]]>,
+			</if>
+			
+		 </set>
+		 
+		 where	uid = #{uid}		
+    </update> 
+    
+    
+    <update id="updateEcology" parameterType="LoreDTO">   
+        update lore  
+        <set>
+			<if test="agree != 0 and agree != null">
+				<![CDATA[ agree = agree + 1 ]]>,
+			</if>
+			
+			<if test="dagree != 0 and dagree != null">
+				<![CDATA[ dagree = dagree + 1 ]]>,
+			</if>
+			
+			<if test="visit != 0 and visit != null">
+				<![CDATA[ visit = visit + 1 ]]>,
+			</if>
+			
+			<if test="comment != 0 and comment != null">
+				<![CDATA[ comment = comment + 1 ]]>,
+			</if>
+			
+		 </set>
+		 
+		 where	uid = #{uid}		
+    </update> 
+    
+</mapper> 

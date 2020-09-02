@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="initial-scale=1.0">
+
+  <!-- First use the latest version of IE and Chrome -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>融易学</title>
+  <!-- Keyword -->
+  <!-- <meta name="keywords" content=""> -->
+  <!-- describe -->
+  <meta name="description" content="">
+
+  <!-- 360 use Google Chrome Frame -->
+  <meta name="renderer" content="webkit">
+  <!-- Baidu prohibition of transcoding -->
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <!-- Definition of web search engine index -->
+  <meta name="robots" content="index,follow">
+  <!-- ios -->
+  <!-- The title that is added to the main screen -->
+  <meta name="apple-mobile-web-app-title" content="">
+  <!-- Whether WebApp full screen mode is enabled -->
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <!-- Setting the background color of the State Bar -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Android theme-color  Used to control the color of the tabs -->
+  <meta name="theme-color" content="#747474">
+  <meta name="mobile-web-app-capable" content="yes">
+  <!-- Turn off the translation plug-in under the Chrome browser -->
+  <meta name="google" value="notranslate" />
+  <!-- uc Forced vertical screen -->
+  <meta name="screen-orientation" content="portrait">
+  <!-- QQ Forced vertical screen -->
+  <meta name="x5-orientation" content="portrait">
+  <!-- UC Mandatory full screen -->
+  <meta name="full-screen" content="yes">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/css/swiper.min.css" rel="stylesheet" type="text/css" />
+  <link href="../static/css/public.css" rel="stylesheet">
+  <link href="../static/css/inStyle.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="../static/css/font-other.css" />
+  <link href="../static/css/seriesCourse.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="resetStyle clearfix">
+  <div class="insside-header fixation">
+    <div class="container">
+      <div class="head-middle">
+        <div class="head-l">
+          <div class="logo"><a href="/"><img src="../static/images/enterprise/header_logo.png"></a></div>
+          <div class="nav-main">
+            <div class="nav-list">
+              <div class="item">
+                <a class="syht" href="#">首页</a>
+              </div>
+              <div class="item active">
+                <a href="/curriculumList.html">全部课程</a>
+                <i>
+                  <img class="down-hide" src="../static/images/enterprise/down_active.png">
+                  <img class="down-show" src="../static/images/enterprise/down_active.png">
+                </i>
+                <div class="down-content">
+                  <div class="main">
+                    <div class="left">
+                      <ul class="max-navlist">
+                        <li class="active"><a class="pf" href="javacript:void(0);">融资租赁</a></li>
+                        <li><a class="pf" href="javacript:void(0);">汽车金融</a></li>
+                        <li><a class="pf" href="javacript:void(0);">供应链金融</a></li>
+                        <li><a class="pf" href="javacript:void(0);">证券基金</a></li>
+                        <li><a class="pf" href="javacript:void(0);">金融科技</a></li>
+                        <li><a class="pf" href="javacript:void(0);">金融小动画</a></li>
+                        <li><a class="pf" href="javacript:void(0);">金融基础</a></li>
+                      </ul>
+                    </div>
+                    <div class="right">
+                      <div class="menus-list" id="menus-list">
+                        <div class="item active">
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">中小微租赁</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">厂商租赁</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">医疗大健康租赁</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">高端制造租赁</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">政府平台租赁</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">飞机租赁</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">飞机租赁</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="item">
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">汽车金融</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">汽车金融</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">汽车金融</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">汽车金融</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">汽车金融</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">汽车金融</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <a href="/offlineList.html">线下课程</a>
+              </div>
+              <div class="item">
+                <a href="/topteacherList.html">专家阵容</a>
+              </div>
+              <div class="item ">
+                <a class="syht" href="#">企业服务</a>
+                <i>
+                  <img class="down-hide" src="../static/images/enterprise/down_active.png">
+                  <img class="down-show" src="../static/images/enterprise/down_active.png">
+                </i>
+                <div class="down-content blackfont">
+                  <ul class="list">
+                    <li><a href="/customPage.html">企业内训</a></li>
+                    <li><a href="/collegePage.html">企业商学院</a> </li>
+                    <li><a href="/enterprisePage.html">企业大学</a></li>
+                    <li><a href="/annualPage.html">企业年卡</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="item">
+                <a href="/advisoryList.html">资讯</a>
+              </div>
+              <div class="item">
+                <a href="/booksList.html">书籍</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="head-r">
+          <div class="search-icon">
+            <div class="search-input"><input type="text" placeholder=""></div>
+            <button type="submit"><img src="../static/images/enterprise/icon_search.png"></button>
+          </div>
+          <div class="operation">
+            <span class="it"><a class="syht" href="#">登录</a></span>
+            <span class="it">I</span>
+            <span class="it"><a class="syht" href="#">注册</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="seriesCourseOne-page pfm">
+    <div class="page_box">
+      <div class="banner_box">
+        <div class="banner_content">
+          <h3 class="banner_title">融资租赁</h3>
+          <div class="finance_lease_text"><span>FINANCE</span><span>LEASE</span></div>
+          <div class="xl">系列专题课程</div>
+        </div>
+        <!-- 未购买情况 -->
+        <div class="sale_info">
+          <div class="price">
+            <div class="new_price"><span>仅售：</span><span class="price_text">&yen;1200</span></div>
+            <div class="old_price pfr"><span>&nbsp;&nbsp;原价：&yen;9600&nbsp;&nbsp;</span></div>
+          </div>
+          <div class="button-list clearfix">
+            <div class="to_buy active fl"><a href="javascript:;">立即购买</a></div>
+            <div class="to_consult fr"><a href="javascript:;">立即咨询</a></div>
+          </div>
+        </div>
+        <!-- 已购买情况（暂时隐藏） -->
+        <!-- <div class="sale_info isBuy">
+            <div class="button-list">
+              <div class="to_study active"><a href="javascript:;">立即学习</a></div>
+            </div>
+          </div> -->
+      </div>
+    </div>
+    <div class="highlights model_title">
+      <div class="title_box">
+        <div class="top_bck">
+          <div class="l_bck fl"></div>
+          <div class="r_bck fr"></div>
+        </div>
+        <div class="bottom_text">
+          <h4>专题亮点</h4>
+          <div class="bck_text">STRENGTHS</div>
+        </div>
+      </div>
+      <div class="lights_list">
+        <ul class="lights_list_ul clearfix">
+          <li>
+            <div class="num">
+              <span class="timer" data-to="6" data-speed="200">0</span>
+              <span>个月</span>
+            </div>
+            <div class="detail_text">
+              <p>6个月内容</p>
+              <p>精细打磨</p>
+            </div>
+          </li>
+          <li>
+            <div class="num">
+              <span class="timer" data-to="11" data-speed="200">0</span>
+              <span>位大咖</span>
+            </div>
+            <div class="detail_text">
+              <p>11位融资租赁行业</p>
+              <p>资深实操专家案例剖析</p>
+            </div>
+          </li>
+          <li>
+            <div class="num">
+              <span class="timer" data-to="12" data-speed="200">0</span>
+              <span>个模块</span>
+            </div>
+            <div class="detail_text">
+              <p>12大融资租赁</p>
+              <p>专业化知识模块精粹凝炼</p>
+            </div>
+          </li>
+          <li>
+            <div class="num">
+              <span class="timer" data-to="148" data-speed="200">0</span>
+              <span>节课程</span>
+            </div>
+            <div class="detail_text">
+              <p>148节体系化</p>
+              <p>线上视频课程拆解</p>
+            </div>
+          </li>
+          <li>
+            <div class="num">
+              <span class="timer" data-to="2280" data-speed="200">0</span>
+              <span>分钟</span>
+            </div>
+            <div class="detail_text">
+              <p>2280分钟的</p>
+              <p>超饱满课程内容</p>
+            </div>
+          </li>
+          <li>
+            <div class="num">
+              <span class="hasAdd timer" data-to="3000" data-speed="200">0</span>
+              <span>&nbsp;&nbsp;租赁精英</span>
+            </div>
+            <div class="detail_text">
+              <p>3000+租赁精英</p>
+              <p>的共同选择</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="introduce-model model_title clearfix">
+      <div class="width1200">
+        <div class="title_box">
+          <div class="top_bck">
+            <div class="l_bck fl"></div>
+            <div class="r_bck fr"></div>
+          </div>
+          <div class="bottom_text">
+            <h4>专题介绍</h4>
+            <div class="bck_text">STRENGTHS</div>
+          </div>
+        </div>
+        <div class="introduce-text">
+          <p class="hvtc">
+            随着中国融资租赁行业发展以及行业的监管政策的变化，对机构的合规经营以及业务开展产生重要影响，对于机构的人才有了更高的标准，同时也导致了融资租赁市场人才流动的不断加剧。融资租赁行业存在一定的人才准入门槛，专业性要求较高，使得融资租赁业内人员较多保持在本行业内流动。目前融资租赁行业面临的机遇与挑战，复合型人才对融资租赁机构的未来业务发展至关重要！
+          </p>
+        </div>
+        <div class="goodList clearfix">
+          <div class="teacher_img fl">
+            <img src="../static/images/series/orange/person.png" alt="专题介绍">
+          </div>
+          <ul class="ul_list fr">
+            <li>
+              <span>历时6个月</span>
+              <span>精心打磨的专业化体系课程</span>
+            </li>
+            <li>
+              <span>遴选案例</span>
+              <span>融资租赁业界实操专家，细致讲解每一个案例内容！</span>
+            </li>
+            <li>
+              <span>师资保障</span>
+              <span>专家讲师均来自于头部或典型的融资租赁企业的核心高管</span>
+            </li>
+            <li>
+              <span>解锁新技能</span>
+              <span>平均实战经验15年以上，让你轻松解锁新技能！</span>
+            </li>
+          </ul>
+        </div>
+        <div class="introduce-content">
+          <div class="lip1"></div>
+          <div class="lip2"></div>
+          <div class="lip3"></div>
+        </div>
+      </div>
+    </div>
+    <div class="introduce_list hvtc width1200">
+      <div class="introduce_twelev_box">
+        <div class="introduce_twelev fl">
+          <span>十二大专题</span>
+        </div>
+      </div>
+      <!-- ul_list 有三个ul class 在class加上hasTwoChild -->
+      <!-- <div class="ul_list hasTwoChild fl"> -->
+      <div class="ul_list fl">
+        <ul class="">
+          <li>监管合规</li>
+          <li>运营管理</li>
+          <li>业务营销</li>
+          <li>尽职调查</li>
+        </ul>
+        <ul class="">
+          <li>租后管理</li>
+          <li>会记实务</li>
+          <li>税务筹划</li>
+          <li>不良资产处置</li>
+        </ul>
+        <ul class="three_child">
+          <li>司法诉讼</li>
+          <li>融资渠道</li>
+          <li>租赁保理</li>
+          <li>人力资源管理</li>
+        </ul>
+      </div>
+    </div>
+    <div class="purpose hvtc">
+      <div class="purpose_text width1200">
+        <span>融易学金融学院结合自身服务过上千家融资租赁企业的经验与沟通反馈，
+          助力企业打造 </span>
+        <span class="bold_text">一支强有力的专业团队，这一套课程足矣！</span>
+      </div>
+    </div>
+    <div class="catalog model_title" id="catalog">
+      <div class="width1200">
+        <div class="title_box">
+          <div class="top_bck">
+            <div class="l_bck fl"></div>
+            <div class="r_bck fr"></div>
+          </div>
+          <div class="bottom_text">
+            <h4>专题大纲</h4>
+            <div class="bck_text">STRENGTHS</div>
+          </div>
+        </div>
+        <div class="catalog_list">
+          <div class="catalog_item">
+            <div class="module_title">
+              <div class="left_box">
+                <div class="tip"></div>
+                <div class="title">模块一：监管合规</div>
+              </div>
+              <div class="i_top"></div>
+            </div>
+            <div class="module_content">
+              <div class="module_title2">
+                <div class="tip"></div>
+                <div class="title"><span>第一章：</span><span>解读融资租赁监管变革顺应行业发展</span></div>
+              </div>
+              <ul class="list">
+                <li>
+                  <div class="left_flex">
+                    <span>第一节</span>
+                    <div class="i_video_span">
+                      <i class="i_video"></i>
+                      <span>统一监管的背景分析</span>
+                    </div>
+                  </div>
+                  <div class="right_flex">
+                    <div class="tryLook_button hvtc">试看</div>
+                    <span>41分52秒</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="left_flex">
+                    <span>第一节</span>
+                    <div class="i_video_span">
+                      <i class="i_video"></i>
+                      <span>统一监管的背景分析</span>
+                    </div>
+                  </div>
+                  <div class="right_flex">
+                    <!-- <div class="tryLook_button hvtc">试看</div> -->
+                    <span>41分52秒</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="left_flex">
+                    <span>第一节</span>
+                    <div class="i_video_span">
+                      <i class="i_video"></i>
+                      <span>统一监管的背景分析</span>
+                    </div>
+                  </div>
+                  <div class="right_flex">
+                    <!-- <div class="tryLook_button hvtc">试看</div> -->
+                    <span>41分52秒</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="left_flex">
+                    <span>第一节</span>
+                    <div class="i_video_span">
+                      <i class="i_video"></i>
+                      <span>统一监管的背景分析</span>
+                    </div>
+                  </div>
+                  <div class="right_flex">
+                    <!-- <div class="tryLook_button hvtc">试看</div> -->
+                    <span>41分52秒</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="catalog_item">
+            <div class="module_title">
+              <div class="left_box">
+                <div class="tip"></div>
+                <div class="title">模块一：监管合规</div>
+              </div>
+              <div class="i_top"></div>
+            </div>
+            <div class="module_content">
+              <div class="module_title2">
+                <div class="tip"></div>
+                <div class="title"><span>第一章：</span><span>解读融资租赁监管变革顺应行业发展</span></div>
+              </div>
+              <ul class="list">
+                <li>
+                  <div class="left_flex">
+                    <span>第一节</span>
+                    <div class="i_video_span">
+                      <i class="i_video"></i>
+                      <span>统一监管的背景分析</span>
+                    </div>
+                  </div>
+                  <div class="right_flex">
+                    <div class="tryLook_button hvtc">试看</div>
+                    <span>41分52秒</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="left_flex">
+                    <span>第一节</span>
+                    <div class="i_video_span">
+                      <i class="i_video"></i>
+                      <span>统一监管的背景分析</span>
+                    </div>
+                  </div>
+                  <div class="right_flex">
+                    <!-- <div class="tryLook_button hvtc">试看</div> -->
+                    <span>41分52秒</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="left_flex">
+                    <span>第一节</span>
+                    <div class="i_video_span">
+                      <i class="i_video"></i>
+                      <span>统一监管的背景分析</span>
+                    </div>
+                  </div>
+                  <div class="right_flex">
+                    <!-- <div class="tryLook_button hvtc">试看</div> -->
+                    <span>41分52秒</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="left_flex">
+                    <span>第一节</span>
+                    <div class="i_video_span">
+                      <i class="i_video"></i>
+                      <span>统一监管的背景分析</span>
+                    </div>
+                  </div>
+                  <div class="right_flex">
+                    <!-- <div class="tryLook_button hvtc">试看</div> -->
+                    <span>41分52秒</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="catalog_item">
+            <div class="module_title">
+              <div class="left_box">
+                <div class="tip"></div>
+                <div class="title">模块一：监管合规</div>
+              </div>
+              <div class="i_top"></div>
+            </div>
+            <div class="module_content">
+              <div class="module_title2">
+                <div class="tip"></div>
+                <div class="title"><span>第一章：</span><span>解读融资租赁监管变革顺应行业发展</span></div>
+              </div>
+              <ul class="list">
+                <li>
+                  <div class="left_flex">
+                    <span>第一节</span>
+                    <div class="i_video_span">
+                      <i class="i_video"></i>
+                      <span>统一监管的背景分析</span>
+                    </div>
+                  </div>
+                  <div class="right_flex">
+                    <div class="tryLook_button hvtc">试看</div>
+                    <span>41分52秒</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="left_flex">
+                    <span>第一节</span>
+                    <div class="i_video_span">
+                      <i class="i_video"></i>
+                      <span>统一监管的背景分析</span>
+                    </div>
+                  </div>
+                  <div class="right_flex">
+                    <!-- <div class="tryLook_button hvtc">试看</div> -->
+                    <span>41分52秒</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="left_flex">
+                    <span>第一节</span>
+                    <div class="i_video_span">
+                      <i class="i_video"></i>
+                      <span>统一监管的背景分析</span>
+                    </div>
+                  </div>
+                  <div class="right_flex">
+                    <!-- <div class="tryLook_button hvtc">试看</div> -->
+                    <span>41分52秒</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="left_flex">
+                    <span>第一节</span>
+                    <div class="i_video_span">
+                      <i class="i_video"></i>
+                      <span>统一监管的背景分析</span>
+                    </div>
+                  </div>
+                  <div class="right_flex">
+                    <!-- <div class="tryLook_button hvtc">试看</div> -->
+                    <span>41分52秒</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer-links">
+      <div class="container">
+        <div class="logo">
+          <a href="#"> <img src="../static/images/logo.png" alt="logo"></a>
+        </div>
+        <div class="skip-middle">
+          <div class="slide">
+            <div class="title">关于我们</div>
+            <ul class="link-ul">
+              <li class="link"><a href="#">公司简介</a></a></li>
+              <li class="link"><a href="#">联系我们</a></a></li>
+              <li class="link"> <a href="#">免责声明</a></a></li>
+              <li class="link"> <a href="#">APP下载</a></li>
+            </ul>
+          </div>
+          <div class="slide">
+            <div class="title">帮助中心</div>
+            <ul class="link-ul">
+              <li class="link"><a href="#">如何注册</a></a></li>
+              <li class="link"><a href="#">如何选课</a></a></li>
+              <li class="link"> <a href="#">如何选课</a></a></li>
+              <li class="link"> <a href="#">如何选课</a></li>
+            </ul>
+          </div>
+          <div class="slide">
+            <div class="title">商务合作</div>
+            <ul class="link-ul">
+              <li class="link"><a href="#">公司简介</a></a></li>
+              <li class="link"><a href="#">公司简介</a></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="contact">
+          <div class="icon">
+            <a href="">
+              <img class="icon-hidden" src="../static/images/people.png">
+              <img class="icon-show" src="../static/images/people_active.png">
+            </a>
+            <a href="javacript:void(0);">
+              <img class="icon-hidden" src="../static/images/wx.png">
+              <img class="icon-show" src="../static/images/wx_active.png">
+              <div class="serve-code">
+                <div class="pic">
+                  <img src="../static/images/app_img.png">
+                </div>
+                <div class="text">关注融易学服务号</div>
+              </div>
+            </a>
+            <a href="javacript:void(0);">
+              <img class="icon-hidden" src="../static/images/code.png">
+              <img class="icon-show" src="../static/images/code_active.png">
+              <div class="app-code">
+                <div class="pic">
+                  <img src="../static/images/ewm.png">
+                </div>
+                <div class="text">扫码下载APP</div>
+              </div>
+            </a>
+          </div>
+          <div class="time">
+            <img src="../static/images/phone.png" alt="phone"><span class="text">周一至周五9:00—18:00</span>
+          </div>
+          <div class="phone"><a href="tel:0755-2532-0861">0755-2532-0861</a></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-info">
+      <div class="organization">
+        <div class="container">
+          <div class="swiper-container" id="swiper-organization">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+              <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+              <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+              <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+              <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+              <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+              <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+        </div>
+      </div>
+      <div class="report">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="report-item">
+                Copyright©2015-2018********
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="report-item">
+                CP备：粤ICP备*********号
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="resetStyle black-bg video-full-box" id="video-full-box">
+    <div class="video-middle">
+      <div class="flex-l">
+        <div class="video-modal">
+          <div class="get-back syht">
+            <a href="javascript:;">
+              <span>课程名称</span>
+            </a>
+          </div>
+          <div class="close-video" id="close-video">
+            <img src="../static/images/close.png" alt="关闭">
+            <img src="../static/images/closes.png" alt="关闭">
+          </div>
+          <!-- <div class="play-img"><img src="./images/video/play_img.png"></div> -->
+          <div class="null-login" id="video-end">
+            <div class="text syht">尊敬的用户本集试看已结束</div>
+            <a href="" class="buy-btn syht">立即购买</a>
+          </div>
+          <video id="my_video" src="../static/video/movie.mp4"></video>
+          <div class="operation-box">
+            <div class="full-box">
+              <div class="full-sound myflex" id="full-sound">
+                <div class="volume">
+                  <img class="icon-mute" id="mute-click" src="../static/images/video/icon_voice.png">
+                  <img class="icon-mutes" id="mute-clicks" src="../static/images/video/icon_voices.png">
+                </div>
+                <div class="volume-box">
+                  <div class="video-box2">
+                    <div class="video-sound" id="video-sound">
+                      <div class="soundBar" id="soundBar"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="full-screen">
+                <img class="icon-full" id="showFulls" src="../static/images/video/icon_full.png">
+                <img class="icon-fulls cur" id="showFullvideo" src="../static/images/video/icon_fulls.png">
+              </div>
+            </div>
+            <div class="progress-line" id="play-line2">
+              <div class="bar" id="bar"></div>
+            </div>
+            <div class="operation-middle">
+              <div class="left">
+                <div class="icon active" id="player_btn">
+                  <img class="icons-hides" src="../static/images/video/icon_play.png">
+                  <img class="icons-shows" src="../static/images/video/icon_pause.png">
+                </div>
+                <div class="time-box"><span class="now" id="video-now">00:00</span> / <span class="total"
+                    id="video-total">00:00</span></div>
+              </div>
+              <div class="right">
+                <div class="instrument-box">
+                  <div class="item syht play-speed" id="play-speed">
+                    倍数
+                    <div class="app-box">
+                      <ul>
+                        <li><a href="javascript:;"><span>0.5</span>X</a></li>
+                        <li class="active"><a href="javascript:;"><span>1.0</span>X</a></li>
+                        <li><a href="javascript:;"><span>1.25</span>X</a></li>
+                        <li><a href="javascript:;"><span>1.5</span>X</a></li>
+                        <li><a href="javascript:;"><span>2.0</span>X</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="item syht">
+                    <img class="icon-hides" src="../static/images/video/icon_phone.png">
+                    <img class="icon-shows" src="../static/images/video/icon_phones.png">
+                    手机观看
+                    <div class="app-box">
+                      <div class="app-text">下载融易学APP</div>
+                      <div class="img">
+                        <img src="../static/images/app_img.png">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="item syht" data-toggle="modal" data-target="#mes-modal">
+                    <img class="icon-hides" src="../static/images/video/icon_query.png">
+                    <img class="icon-shows" src="../static/images/video/icon_querys.png">
+                    反馈问题
+                  </div>
+  
+                  <!-- 收藏  item有active类名为收藏了-->
+                  <div class="item syht save" id="saveVideo">
+                    <img class="icon-hides" src="../static/images/video/icon_collect.png">
+                    <img class="icon-shows" src="../static/images/video/icon_collect2.png">
+                    <img class="icon-shows2" src="../static/images/video/icon_collects.png">
+                    <span class="icon-hides">收藏</span>
+                    <span class="icon-shows">收藏</span>
+                    <span class="icon-shows2">已收藏</span>
+                  </div>
+                  <div class="item syht">
+                    <img class="icon-hides" src="../static/images/video/icon_share.png">
+                    <img class="icon-shows" src="../static/images/video/icon_shares.png">
+                    分享
+                    <div class="share-box">
+                      <div class="share-list">
+                        <div class="item">
+                          <a href="javacript:void(0);">
+                            <img class="icon-hide" src="../static/images/insidepage/icon_weixin.png">
+                            <img class="icon-show" src="../static/images/insidepage/bright_weixin.png">
+                          </a>
+                          <div class="img">
+                            <div class="pic"><img src="../static/images/ewm.png"></div>
+                          </div>
+                        </div>
+                        <div class="item">
+                          <a href="">
+                            <img class="icon-hide" src="../static/images/insidepage/icon_qq.png">
+                            <img class="icon-show" src="../static/images/insidepage/bright_qq.png">
+                          </a>
+                        </div>
+                        <div class="item">
+                          <a href="">
+                            <img class="icon-hide" src="../static/images/insidepage/icon_weibo.png">
+                            <img class="icon-show" src="../static/images/insidepage/bright_weibo.png">
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="modal fade" id="mes-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="header-modal">
+              <div class="left">意见反馈</div>
+              <div class="right" data-dismiss="modal"><img src="../static/images/error.png"></div>
+            </div>
+            <div class="body-modal">
+              <div class="modal-item">
+                <div class="lable-l">姓名：</div>
+                <div class="lable-r">
+                  <div class="input-box">
+                    <input type="text" placeholder="请输入内容">
+                  </div>
+                </div>
+              </div>
+              <div class="modal-item">
+                <div class="lable-l">联系方式：</div>
+                <div class="lable-r">
+                  <div class="input-box">
+                    <input type="text" placeholder="请输入内容">
+                  </div>
+                </div>
+              </div>
+              <div class="modal-item">
+                <div class="lable-l">问题详情：</div>
+                <div class="lable-r">
+                  <div class="textarea-box">
+                    <textarea placeholder="请输入内容"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="btn-modal">
+              <button type="submit">提 交</button>
+            </div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal -->
+    </div>
+    <!--end-->
+  </div>
+  <script src="../static/js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../static/js/bootstrap.min.js"></script>
+  <script src="../static/js/swiper.min.js"></script>
+  <script src="../static/js/jquery.num.js"></script>
+  <!-- privatjs -->
+  <script type="text/javascript" src="../static/js/public.js"></script>
+  <script type="text/javascript" src="../static/js/inMain.js"></script>
+  <script type="text/javascript" src="../static/js/seriesCourse.js"></script>
+  <!--end-->
+</body>
+
+
+</html>
