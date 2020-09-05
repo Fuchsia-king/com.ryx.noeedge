@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.ryx.RyxOrderDetailMapper">      
+    
+    <sql id="select">
+		
+		detail_id detailId,
+	    detail_name detailName,
+	    order_id orderId,
+	    obj_type objType,
+	    obj_id objId,
+	    price ,
+	    num,
+	    coupon,
+	    detail_type detailType,
+	    is_feedback isFeedback,
+	    avai_day avaiDay,
+	    limit_time limitTime,
+	    original_price originalPrice,
+	    real_price realPrice,
+	    partner_id partnerId,
+	    status,
+	    objer,
+	    orate,
+	    ouid ,
+	    pay_time payTime,
+	    oamount,
+	    user_id userId,
+	    orate1,
+	    oamount1
+	    
+	</sql>
+
+	<sql id="where">
+	
+	    <where>
+	    
+			<if test="detailId != null">
+				<![CDATA[ and detail_id = #{detailId} ]]>
+			</if>
+			
+			<if test="orderId != null">
+				<![CDATA[ and order_id = #{orderId} ]]>
+			</if>
+			
+			<if test="objType != null">
+				<![CDATA[ and obj_type = #{objType} ]]>
+			</if>
+			
+			<if test="isFeedback != null">
+				<![CDATA[ and is_feedback = #{isFeedback} ]]>
+			</if>
+			<if test="partnerId != null">
+				<![CDATA[ and partner_id = #{partnerId} ]]>
+			</if>
+			<if test="objer != null">
+				<![CDATA[ and objer = #{objer} ]]>
+			</if>
+			
+			<if test="realPrice != null">
+				<![CDATA[ and real_price > 0 ]]>
+			</if>
+			
+			<if test="oamount != null">
+				<![CDATA[ and oamount > 0 ]]>
+			</if>
+			
+			<if test="startTime != null and startTime != ''">
+				<![CDATA[and pay_time >= #{startTime} ]]>
+			</if>
+			<if test="endTime != null and endTime != ''">
+				<![CDATA[and pay_time <= #{endTime} ]]>
+			</if>
+			
+			<if test="ouid != null">
+				<![CDATA[ and ouid = #{ouid} ]]>
+			</if>
+			<if test="userId != null">
+				<![CDATA[ and user_id = #{userId} ]]>
+			</if>
+			<if test="status != null">
+				<![CDATA[ and status = #{status} ]]>
+			</if>
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="RyxOrderDetailDTO">   
+       insert into ryx_order_detail(
+       		detail_name,
+		    order_id,
+		    obj_type,
+		    obj_id,
+		    price,
+		    num,
+		    detail_type,
+		    is_feedback,
+		    avai_day,
+		    limit_time,
+		    original_price,
+		    partner_id,
+		    status,
+	    	objer,
+	    	orate,
+	    	ouid,
+	    	user_id
+       ) 
+       values
+       (
+		    #{detailName},
+		    #{orderId},
+		    #{objType},
+		    #{objId},
+		    #{price},
+		    #{num},
+		    #{detailType},
+		    #{isFeedback},
+		    #{avaiDay},
+		    #{limitTime},
+		    #{originalPrice},
+		    #{partnerId},
+		    #{status},
+	   		#{objer},
+	    	#{orate},
+	    	#{ouid},
+	    	#{userId}
+       ) 
+    </insert>
+ 
+    <select id="queryCourseBuy" resultType="RyxOrderDetailDTO" parameterType="RyxOrderDetailQuery">
+         
+        select obj_id objId, obj_type objType, status,count(*) buyCount 
+        from 
+        (select obj_id, obj_type, status from ryx_order_detail  where 1=1 
+        	<if test="startTime != null and startTime != ''">
+				<![CDATA[and pay_time >= #{startTime} ]]>
+			</if>
+			<if test="endTime != null and endTime != ''">
+				<![CDATA[and pay_time <= #{endTime} ]]>
+			</if>
+			<if test="objId != null and objId != ''">
+				<![CDATA[and  obj_id = #{objId} ]]>
+			</if>
+			<if test="objType != null and objType != ''">
+				<![CDATA[and obj_type = #{objType} ]]>
+			</if>
+			<if test="status != null and status != ''">
+				<![CDATA[and status = #{status} ]]>
+			</if>)t1
+        
+        group by obj_id , obj_type , status 
+        
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+    </select>
+    <select id="queryCourseBuyCount" resultType="java.lang.Integer" parameterType="RyxOrderDetailQuery">
+         
+        select  count(1)
+        from ryx_order_detail 
+        
+        where 1 =1
+	    	<if test="objId != null and objId != ''">
+				<![CDATA[and  obj_id = #{objId} ]]>
+			</if>
+			<if test="objType != null and objType != ''">
+				<![CDATA[and obj_type = #{objType} ]]>
+			</if>
+			<if test="status != null and status != ''">
+				<![CDATA[and status = #{status} ]]>
+			</if>
+    </select>
+    
+     <select id="queryOldOrderDetail" resultType="RyxOrderDetailDTO" parameterType="RyxOrderDetailQuery">         
+      	SELECT order_uid userId ,obj_id objId,max(limit_time) limitTime  FROM ryx_order_detail d ,ryx_order o
+	    where d.order_id = o.id and o.status = 2 and limit_time is not null
+	    group by order_uid,obj_id
+     </select>
+      
+    
+    <select id="query" resultType="RyxOrderDetailDTO" parameterType="RyxOrderDetailQuery">
+         
+        select         
+        <include refid="select"/>        
+        from ryx_order_detail 
+        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+     <select id="queryUnfeedbackOrderDetail" resultType="RyxOrderDetailDTO" parameterType="RyxOrderDetailQuery">         
+        select         
+        <include refid="select"/>
+        
+        from ryx_order_detail 
+        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+     
+    <select id="getOrderDetailByOrderId" resultType="RyxOrderDetailDTO" parameterType="java.lang.Long" >         
+        select 
+        <include refid="select"/>
+        from ryx_order_detail t where t.order_id=#{orderId} 		
+    </select>
+
+	<select id="getOrderDetailByOrderId1" resultType="RyxOrderDetailDTO" parameterType="java.lang.Long" >         
+        select d.* from ryx_order_detail d join ryx_course c on d.obj_id=c.id where order_id=#{orderId}		
+    </select>
+    
+    
+    <delete id="deleteByOrderId" parameterType="java.lang.Long">    
+        delete from ryx_order_detail where order_id = #{orderId}		 	
+    </delete> 
+    
+    
+     <update id="updateLimitTimeByOrderId" parameterType="RyxOrderDetailDTO">    
+        update ryx_order_detail t set t.limit_time= t.avai_day*24*3600 + #{tnow} where t.order_id= #{orderId}
+     </update>
+     
+     
+      <update id="updateByObjer" parameterType="RyxOrderDetailDTO">    
+        update ryx_order_detail t set t.orate= #{orate} where t.objer= #{objer} and pay_time >= #{payTime} and real_price > 0 and status = 2
+     </update>
+    
+     <update id="updateLimitTimeByOrderDetailId" parameterType="RyxOrderDetailDTO">    
+        update ryx_order_detail t 
+        set 
+        t.limit_time= t.avai_day*24*3600 + #{tnow},
+        t.real_price = #{realPrice},
+        t.coupon=#{coupon},
+        t.status = #{status},
+        t.pay_time = #{payTime},
+        t.oamount = #{oamount},
+        t.oamount1 = #{oamount1},
+        t.orate1 = #{orate1},
+        t.orate = #{orate}
+        where t.detail_id= #{detailId}
+     </update>
+
+	<update id="updateOrderDetailIfFeedback" parameterType="java.lang.Long">    
+       	update ryx_order_detail t set t.is_feedback=1 where t.detail_id=#{id}
+    </update>	
+	
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="RyxOrderDetailQuery">   
+        select count(1) from ryx_order_detail 
+        <include refid="where"/>
+    </select>
+    
+    <select id="sumOamount" resultType="java.lang.Double" parameterType="RyxOrderDetailQuery">   
+        select sum(oamount) from ryx_order_detail 
+        <include refid="where"/>
+    </select>
+    
+    <select id="getById" resultType="RyxOrderDetailDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select"/>
+        from ryx_order_detail where detail_id = #{detailId}  limit 1;
+    </select>    
+    
+    
+    
+    
+    <update id="update" parameterType="RyxOrderDetailDTO">
+    
+        update ryx_order_detail
+         
+        <set>	
+					
+			<if test="name != null">
+				<![CDATA[ name = #{name} ]]>,
+			</if>
+			
+			<if test="name1 != null">
+				<![CDATA[ name1 = #{name1} ]]>,
+			</if>
+			
+			<if test="ryx_order_detailType != null">
+				<![CDATA[ ryx_order_detail_type = #{ryx_order_detailType} ]]>,
+			</if>
+			
+			<if test="ryx_order_detailScale != null">
+				<![CDATA[ ryx_order_detail_scale = #{ryx_order_detailScale} ]]>,
+			</if>
+			
+			<if test="descr != null">
+				<![CDATA[ descr = #{descr} ]]>,
+			</if>
+			
+			<if test="member != null">
+				<![CDATA[ member = #{member} ]]>,
+			</if>
+
+			<if test="contact != null">
+				<![CDATA[ contact = #{contact} ]]>,
+			</if>
+			
+			<if test="mobile != null">
+				<![CDATA[ mobile = #{mobile} ]]>,
+			</if>
+			
+			<if test="qq != null">
+				<![CDATA[ qq = #{qq} ]]>,
+			</if>
+			
+			<if test="email != null">
+				<![CDATA[ email = #{email} ]]>,
+			</if>
+			
+			<if test="phone != null">
+				<![CDATA[ phone = #{phone} ]]>,
+			</if>
+			
+			<if test="website != null">
+				<![CDATA[ website = #{website} ]]>,
+			</if>
+			
+			<if test="industry != null">
+				<![CDATA[ industry = #{industry} ]]>,
+			</if>
+			
+			
+			 creater = #{creater},
+			 tmodified = now() 
+			 
+		 </set>
+		 
+		 where	id = #{id} 
+		 	
+    </update> 
+    
+    <update id="changePassd" parameterType="RyxOrderDetailDTO">
+    	 update ryx_order_detail set passd = #{passd} where uid = #{uid}
+    </update>
+    <update id="updateById" parameterType="RyxOrderDetailDTO">
+    	 update ryx_order_detail set status = #{status} where detail_id = #{detailId}
+    </update>
+    
+    <delete id="delete" parameterType="java.lang.String">    
+        update ryx_order_detail         
+        set ideleted = 1
+		where uid = #{uid}
+    </delete> 
+    
+     <delete id="cdelete" parameterType="java.lang.String">    
+        delete from ryx_order_detail where user_id = #{userId} and order_id = #{orderId} and status = 1		 	
+    </delete> 
+    
+</mapper> 

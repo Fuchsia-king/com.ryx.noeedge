@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.comm.EmployeeMapper">
+
+
+	
+	<sql id="select">
+		id,
+	    uid,
+	    code,
+	    name,
+	    email,
+	    tcreate,
+	    tmodified,
+	    ideleted,
+	    mobile,
+	    qq,
+	    wangwang,
+	    weixin,
+	    creater,
+	    itime,
+	    otime,
+	    estatus,
+	    superior,
+	    title,
+	    level,
+	    dept,
+	    iurl,
+	    iid
+	</sql>
+
+	<sql id="where">
+	
+	    <where>
+			
+			<if test="keyword != null">
+				<![CDATA[ and ( mobile like concat('%', #{keyword}, '%') or email like concat('%', #{keyword}, '%') or name like concat('%', #{keyword}, '%') or code like concat('%', #{keyword}, '%') ) ]]>
+			</if>
+			
+			<if test="dept != null">
+				<![CDATA[ and dept = #{dept} ]]>
+			</if>
+			
+			<if test="estatus != null">
+				<![CDATA[ and estatus = #{estatus} ]]>
+			</if>
+			
+			<if test="superior != null">
+				<![CDATA[ and superior = #{superior} ]]>
+			</if>
+			
+			<if test="level != null">
+				<![CDATA[ and level = #{level} ]]>
+			</if>
+			
+			<if test="ideleted != null">
+				<![CDATA[ and ideleted = #{ideleted} ]]>
+			</if>
+			
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="EmployeeDTO">   
+       insert into employee(
+       	uid,code,email,mobile,qq,wangwang,weixin,name,creater,tcreate,tmodified,ideleted,
+        itime,
+	    otime,
+	    estatus,
+	    superior,
+	    title,
+	    level,
+	    iid
+       ) 
+       values
+       (
+       	#{uid},#{code},#{email},#{mobile},#{qq},#{wangwang},#{weixin},#{name},#{creater},now(),now(),#{ideleted},
+       	#{itime},
+	    #{otime},
+	    #{estatus},
+	    #{superior},
+	    #{title},
+	    #{level},
+	    #{iid}
+	    
+       ) 
+    </insert>
+      
+    
+    <select id="query" resultType="EmployeeDTO" parameterType="EmployeeQuery">
+         
+        select 
+        <include refid="select"/>
+        from employee
+        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+     
+    <select id="queryAll" resultType="EmployeeDTO">
+         
+        select code,name from employee where ideleted = 0 order by name 
+		
+    </select>
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="EmployeeQuery">   
+        select count(1) from employee 
+        <include refid="where"/>
+    </select>
+    
+    <select id="queryById" resultType="EmployeeDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select"/>
+         from employee where id = #{id}  limit 1;
+    </select>    
+    
+    <select id="queryByUid" resultType="EmployeeDTO" parameterType="java.lang.String">   
+        select 
+        <include refid="select"/>
+         from employee where uid = #{uid}  limit 1; 
+    </select>
+    
+     <select id="queryPassdByUid" resultType="java.lang.String" parameterType="java.lang.String">   
+        select passd from employee where uid = #{uid}  limit 1; 
+    </select>    
+    
+    <select id="queryByCode" resultType="EmployeeDTO" parameterType="java.lang.String">   
+        select 
+        <include refid="select"/>
+        from employee where code = #{code} and ideleted =0 limit 1; 
+    </select> 
+    
+    
+    <update id="update" parameterType="EmployeeDTO">
+    
+        update employee
+         
+        <set>	
+					
+			<if test="name != null">
+				<![CDATA[ name = #{name} ]]>,
+			</if>
+			
+			<if test="email != null">
+				<![CDATA[ email = #{email} ]]>,
+			</if>
+			
+			<if test="mobile != null">
+				<![CDATA[ mobile = #{mobile} ]]>,
+			</if>
+			
+			<if test="qq != null">
+				<![CDATA[ qq = #{qq} ]]>,
+			</if>
+			
+			<if test="wangwang != null">
+				<![CDATA[ wangwang = #{wangwang} ]]>,
+			</if>
+			
+			<if test="weixin != null">
+				<![CDATA[ weixin = #{weixin} ]]>,
+			</if>
+
+			<if test="passd != null">
+				<![CDATA[ passd = #{passd} ]]>,
+			</if>
+			
+			<if test="iid != null">
+				<![CDATA[ iid = #{iid} ]]>,
+			</if>
+			
+			<if test="ideleted != null">
+				<![CDATA[ ideleted = #{ideleted} ]]>,
+			</if>
+			
+			
+		 </set>
+		 
+		 where	uid = #{uid}
+		 	
+    </update> 
+    
+    <update id="changePassd" parameterType="EmployeeDTO">
+    	 update employee set passd = #{passd} where uid = #{uid}
+    </update>
+    
+    <delete id="delete" parameterType="java.lang.String">
+    
+        update employee
+         
+        set ideleted = 1
+		 
+		where uid = #{uid}
+		 	
+    </delete> 
+    
+    
+    
+</mapper> 

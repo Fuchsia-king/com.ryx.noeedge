@@ -1,0 +1,2205 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=1920 initial-scale=1.0">
+
+  <!-- First use the latest version of IE and Chrome -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>融易学</title>
+  <!-- Keyword -->
+  <!-- <meta name="keywords" content=""> -->
+  <!-- describe -->
+  <meta name="description" content="">
+
+  <!-- 360 use Google Chrome Frame -->
+  <meta name="renderer" content="webkit">
+  <!-- Baidu prohibition of transcoding -->
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <!-- Definition of web search engine index -->
+  <meta name="robots" content="index,follow">
+  <!-- ios -->
+  <!-- The title that is added to the main screen -->
+  <meta name="apple-mobile-web-app-title" content="">
+  <!-- Whether WebApp full screen mode is enabled -->
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <!-- Setting the background color of the State Bar -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Android theme-color  Used to control the color of the tabs -->
+  <meta name="theme-color" content="#747474">
+  <meta name="mobile-web-app-capable" content="yes">
+  <!-- Turn off the translation plug-in under the Chrome browser -->
+  <meta name="google" value="notranslate" />
+  <!-- uc Forced vertical screen -->
+  <meta name="screen-orientation" content="portrait">
+  <!-- QQ Forced vertical screen -->
+  <meta name="x5-orientation" content="portrait">
+  <!-- UC Mandatory full screen -->
+  <meta name="full-screen" content="yes">
+
+  <!-- browser icon -->
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link href="css/swiper.min.css" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" type="text/css" href="css/font-other.css" />
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- public css -->
+  <link rel="stylesheet" type="text/css" href="/css/public.css">
+  <link rel="stylesheet" type="text/css" href="/css/onStyle.css" />
+  <!-- end -->
+
+  <!-- private css -->
+  <!-- <link href="css/font-other.css" type="text/css" /> -->
+  <!-- <link href="css/onStyle.css" type="text/css" /> -->
+
+  <!-- end -->
+</head>
+
+<body class="resetStyle">
+
+
+  <div class="header">
+    <div class="container">
+      <div class="head">
+        <div class="logo">
+          <a href="#">
+            <img src="images/logo2.png" alt="logo">
+          </a>
+        </div>
+        <div class="search-main">
+          <div class="head-search">
+            <div class="search-box">
+              <input type="text" class="input" placeholder="课程、直播、讲师、资讯" id="home-search">
+              <div class="icon"><button type="submit"></button></div>
+            </div>
+          </div>
+          <div class="history-box" id="history-box">
+            <div class="head-box">
+              <div class="flex-l">历史搜索</div>
+              <div class="flex-r"><img src="images/icon_delete.png">清空</div>
+            </div>
+            <div class="history-list">
+              <div class="item">金融入门</div>
+              <div class="item">前段高级开发，产品揭秘</div>
+              <div class="item">前段高级开发，产品揭秘</div>
+              <div class="item">前段高级开发，产品揭秘</div>
+              <div class="item">前段高级开发</div>
+            </div>
+          </div>
+        </div>
+        <div class="operation syht">
+          <span class="it"><a href="#" data-toggle="modal" data-target="#modal-middle" id="loginbut">登录</a></span>
+          <span class="it">I</span>
+          <span class="it"><a href="#" data-toggle="modal" data-target="#modal-middle" id="regbut">注册</a></span>
+        </div>
+        <div class="record">
+          <a class="syht" href="#"> 学习记录</a>
+        </div>
+      </div>
+      <div class="nav-main">
+        <div class="nav-list">
+          <div class="item active">
+            <a href="#">首页</a>
+          </div>
+          <div class="item">
+            <a href="/curriculumList.html">全部课程</a>
+            <i>
+              <img class="down-hide" src="images/down.png">
+              <img class="down-show" src="images/down_active.png">
+            </i>
+            <div class="down-content">
+              <div class="main">
+                <div class="left">
+                  <ul class="max-navlist">
+                    <li class="active"><a class="pf" href="javacript:void(0);">融资租赁</a></li>
+                    <li><a class="pf" href="javacript:void(0);">汽车金融</a></li>
+                    <li><a class="pf" href="javacript:void(0);">供应链金融</a></li>
+                    <li><a class="pf" href="javacript:void(0);">证券基金</a></li>
+                    <li><a class="pf" href="javacript:void(0);">金融科技</a></li>
+                    <li><a class="pf" href="javacript:void(0);">金融小动画</a></li>
+                    <li><a class="pf" href="javacript:void(0);">金融基础</a></li>
+                  </ul>
+                </div>
+                <div class="right">
+                  <div class="menus-list" id="menus-list">
+                    <div class="item active">
+                      <div class="screen">
+                        <div class="superclass">
+                          <a class="pfre" href="">中小微租赁</a>
+                        </div>
+                        <div class="subclass">
+                          <div class="sub-item"><a href="">业务模式</a></div>
+                          <div class="sub-item"><a href="">产品设计</a></div>
+                          <div class="sub-item"><a href="">尽职调查</a></div>
+                          <div class="sub-item"><a href="">租后管理</a></div>
+                          <div class="sub-item"><a href="">不良资产处置</a></div>
+                        </div>
+                      </div>
+                      <div class="screen">
+                        <div class="superclass">
+                          <a class="pfre" href="">厂商租赁</a>
+                        </div>
+                        <div class="subclass">
+                          <div class="sub-item"><a href="">业务模式</a></div>
+                          <div class="sub-item"><a href="">产品设计</a></div>
+                          <div class="sub-item"><a href="">尽职调查</a></div>
+                          <div class="sub-item"><a href="">租后管理</a></div>
+                          <div class="sub-item"><a href="">不良资产处置</a></div>
+                        </div>
+                      </div>
+                      <div class="screen">
+                        <div class="superclass">
+                          <a class="pfre" href="">医疗大健康租赁</a>
+                        </div>
+                        <div class="subclass">
+                          <div class="sub-item"><a href="">业务模式</a></div>
+                          <div class="sub-item"><a href="">产品设计</a></div>
+                          <div class="sub-item"><a href="">尽职调查</a></div>
+                          <div class="sub-item"><a href="">租后管理</a></div>
+                          <div class="sub-item"><a href="">不良资产处置</a></div>
+                        </div>
+                      </div>
+                      <div class="screen">
+                        <div class="superclass">
+                          <a class="pfre" href="">高端制造租赁</a>
+                        </div>
+                        <div class="subclass">
+                          <div class="sub-item"><a href="">业务模式</a></div>
+                          <div class="sub-item"><a href="">产品设计</a></div>
+                          <div class="sub-item"><a href="">尽职调查</a></div>
+                          <div class="sub-item"><a href="">租后管理</a></div>
+                          <div class="sub-item"><a href="">不良资产处置</a></div>
+                          <div class="sub-item"><a href="">业务模式</a></div>
+                          <div class="sub-item"><a href="">业务模式</a></div>
+                        </div>
+                      </div>
+                      <div class="screen">
+                        <div class="superclass">
+                          <a class="pfre" href="">政府平台租赁</a>
+                        </div>
+                        <div class="subclass">
+                          <div class="sub-item"><a href="">业务模式</a></div>
+                          <div class="sub-item"><a href="">产品设计</a></div>
+                          <div class="sub-item"><a href="">尽职调查</a></div>
+                          <div class="sub-item"><a href="">租后管理</a></div>
+                          <div class="sub-item"><a href="">不良资产处置</a></div>
+                        </div>
+                      </div>
+                      <div class="screen">
+                        <div class="superclass">
+                          <a class="pfre" href="">飞机租赁</a>
+                        </div>
+                        <div class="subclass">
+                          <div class="sub-item"><a href="">业务模式</a></div>
+                          <div class="sub-item"><a href="">产品设计</a></div>
+                          <div class="sub-item"><a href="">尽职调查</a></div>
+                          <div class="sub-item"><a href="">租后管理</a></div>
+                          <div class="sub-item"><a href="">不良资产处置</a></div>
+                        </div>
+                      </div>
+                      <div class="screen">
+                        <div class="superclass">
+                          <a class="pfre" href="">飞机租赁</a>
+                        </div>
+                        <div class="subclass">
+                          <div class="sub-item"><a href="">业务模式</a></div>
+                          <div class="sub-item"><a href="">产品设计</a></div>
+                          <div class="sub-item"><a href="">尽职调查</a></div>
+                          <div class="sub-item"><a href="">租后管理</a></div>
+                          <div class="sub-item"><a href="">不良资产处置</a></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item">
+                      <div class="screen">
+                        <div class="superclass">
+                          <a class="pfre" href="">汽车金融</a>
+                        </div>
+                        <div class="subclass">
+                          <div class="sub-item"><a href="">业务模式</a></div>
+                          <div class="sub-item"><a href="">产品设计</a></div>
+                          <div class="sub-item"><a href="">尽职调查</a></div>
+                          <div class="sub-item"><a href="">租后管理</a></div>
+                          <div class="sub-item"><a href="">不良资产处置</a></div>
+                        </div>
+                      </div>
+                      <div class="screen">
+                        <div class="superclass">
+                          <a class="pfre" href="">汽车金融</a>
+                        </div>
+                        <div class="subclass">
+                          <div class="sub-item"><a href="">业务模式</a></div>
+                          <div class="sub-item"><a href="">产品设计</a></div>
+                          <div class="sub-item"><a href="">尽职调查</a></div>
+                          <div class="sub-item"><a href="">租后管理</a></div>
+                          <div class="sub-item"><a href="">不良资产处置</a></div>
+                        </div>
+                      </div>
+                      <div class="screen">
+                        <div class="superclass">
+                          <a class="pfre" href="">汽车金融</a>
+                        </div>
+                        <div class="subclass">
+                          <div class="sub-item"><a href="">业务模式</a></div>
+                          <div class="sub-item"><a href="">产品设计</a></div>
+                          <div class="sub-item"><a href="">尽职调查</a></div>
+                          <div class="sub-item"><a href="">租后管理</a></div>
+                          <div class="sub-item"><a href="">不良资产处置</a></div>
+                        </div>
+                      </div>
+                      <div class="screen">
+                        <div class="superclass">
+                          <a class="pfre" href="">汽车金融</a>
+                        </div>
+                        <div class="subclass">
+                          <div class="sub-item"><a href="">业务模式</a></div>
+                          <div class="sub-item"><a href="">产品设计</a></div>
+                          <div class="sub-item"><a href="">尽职调查</a></div>
+                          <div class="sub-item"><a href="">租后管理</a></div>
+                          <div class="sub-item"><a href="">不良资产处置</a></div>
+                          <div class="sub-item"><a href="">业务模式</a></div>
+                          <div class="sub-item"><a href="">业务模式</a></div>
+                        </div>
+                      </div>
+                      <div class="screen">
+                        <div class="superclass">
+                          <a class="pfre" href="">汽车金融</a>
+                        </div>
+                        <div class="subclass">
+                          <div class="sub-item"><a href="">业务模式</a></div>
+                          <div class="sub-item"><a href="">产品设计</a></div>
+                          <div class="sub-item"><a href="">尽职调查</a></div>
+                          <div class="sub-item"><a href="">租后管理</a></div>
+                          <div class="sub-item"><a href="">不良资产处置</a></div>
+                        </div>
+                      </div>
+                      <div class="screen">
+                        <div class="superclass">
+                          <a class="pfre" href="">汽车金融</a>
+                        </div>
+                        <div class="subclass">
+                          <div class="sub-item"><a href="">业务模式</a></div>
+                          <div class="sub-item"><a href="">产品设计</a></div>
+                          <div class="sub-item"><a href="">尽职调查</a></div>
+                          <div class="sub-item"><a href="">租后管理</a></div>
+                          <div class="sub-item"><a href="">不良资产处置</a></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <a href="/offlineList.html">线下课程</a>
+          </div>
+          <div class="item">
+            <a href="/topteacherList.html">专家阵容</a>
+          </div>
+          <div class="item">
+            <a href="#">企业服务</a>
+            <i>
+              <img class="down-hide" src="images/down.png">
+              <img class="down-show" src="images/down_active.png">
+            </i>
+            <div class="down-content">
+              <ul class="list">
+                <li><a href="/customPage.html">企业内训</a></li>
+                <li><a href="/collegePage.html">企业商学院</a></li>
+                <li><a href="/enterprisePage.html">企业大学</a></li>
+                <li><a href="/annualPage.html">企业年卡</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="item">
+            <a href="/advisoryList.html">资讯</a>
+          </div>
+          <div class="item">
+            <a href="/booksList.html">书籍</a>
+          </div>
+        </div>
+        <div class="download">
+          <a class="syht" href="/appdownloadPage.html">下载APP</a>
+          <div class="down-content">
+            <div class="img">
+              <img src="images/ewm.png" alt="二维码">
+
+            </div>
+            <div class="appd">
+              <div class="text sync">
+                下载融易学APP
+              </div>
+              <div class="btnDown">
+                 <img src="images/pg.png" alt="苹果图标">&thinsp;APP STORE
+              </div>
+              <div class="btnDown">
+                <img src="images/az.png" alt="安卓图标">ANDROID
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="main-content">
+    <div class="banner">
+      <div class="swiper-banner" id="swiper-banner">
+        <div class="container">
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        </div>
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="images/home/banner.png" alt="banner"></div>
+          <div class="swiper-slide"><img src="images/home/banner.png" alt="banner"></div>
+          <div class="swiper-slide"><img src="images/home/banner.png" alt="banner"></div>
+          <div class="swiper-slide"><img src="images/home/banner.png" alt="banner"></div>
+        </div>
+
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+    <div class="statistics">
+      <div class="container">
+        <div class="statistics-list">
+          <div class="item one">
+          <div class="flex-l"><span class="timer product-num-nub count-title" id="count-number" data-to="13" data-speed="200">0</span><div class="plus"></div>
+          </div>
+          <div class="flex-r">
+            <div class="dt">课程板块</div>
+            <div class="dd">Course plate</div>
+          </div>
+          </div>
+          <div class="item two">
+          <div class="flex-l"><span class="timer product-num-nub count-title" id="count-number" data-to="800" data-speed="200">0</span><div class="plus"></div></div>
+          <div class="flex-r">
+            <div class="dt">服务企业</div>
+            <div class="dd">Service enterprises</div>
+          </div>
+          </div>
+          <div class="item three">
+          <div class="flex-l"><span class="timer product-num-nub count-title" id="count-number" data-to="3000" data-speed="200">0</span><div class="plus"></div></div>
+          <div class="flex-r">
+            <div class="dt">在线课程</div>
+            <div class="dd">Online courses</div>
+          </div>
+          </div>
+          <div class="item four">
+          <div class="flex-l"><span class="timer product-num-nub count-title" id="count-number" data-to="200000" data-speed="200">0</span><div class="plus"></div></div>
+          <div class="flex-r">
+            <div class="dt">用户数量</div>
+            <div class="dd">subscriber number</div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="exclusive-series">
+      <div class="home-title semibold">
+        专属系列课
+      </div>
+      <div class="small-title semibold">专属体系课程助力企业持续高效成长</div>
+      <div class="container">
+        <div class="swiper-exclusive" id="swiper-exclusive">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="exclusive-list">
+                <div class="item">
+                  <a href="#">
+                    <img src="images/home/e1.png" alt="专属系列课">
+                  </a>
+                </div>
+                <div class="item">
+                  <a href="#">
+                    <img src="images/home/e2.png" alt="专属系列课">
+                  </a>
+                </div>
+                <div class="item">
+                  <a href="#">
+                    <img src="images/home/e3.png" alt="专属系列课">
+                  </a>
+                </div>
+                <div class="item">
+                  <a href="#">
+                    <img src="images/home/e4.png" alt="专属系列课">
+                  </a>
+                </div>
+                <div class="item">
+                  <a href="#">
+                    <img src="images/home/e5.png" alt="专属系列课">
+                  </a>
+                </div>
+                <div class="item">
+                  <a href="#">
+                    <img src="images/home/e6.png" alt="专属系列课">
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="exclusive-list">
+                <div class="item">
+                  <a href="#">
+                    <img src="images/home/e1.png" alt="专属系列课">
+                  </a>
+                </div>
+                <div class="item">
+                  <a href="#">
+                    <img src="images/home/e2.png" alt="专属系列课">
+                  </a>
+                </div>
+                <div class="item">
+                  <a href="#">
+                    <img src="images/home/e2.png" alt="专属系列课">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="division-Posts">
+      <div class="container">
+        <div class="home-title semibold">岗位细分课</div>
+        <ul class="nav" id="division-nav">
+          <li class="item pf active">汽车金融</li>
+          <li class="item pf">供应链金融</li>
+          <li class="item pf">证券基金</li>
+          <li class="item pf">金融科技</li>
+          <li class="item pf">金融基础</li>
+          <li class="line"></li>
+        </ul>
+        <div class="swiper-container" id="swiper-item">
+          <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="station-list">
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp1.png" alt="岗位细分课"></div>
+                      <div class="tit">业务岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp2.png" alt="岗位细分课"></div>
+                      <div class="tit">融资岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                     </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp3.png" alt="岗位细分课"></div>
+                      <div class="tit">财务岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp4.png" alt="岗位细分课"></div>
+                      <div class="tit">人力资源岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp5.png" alt="岗位细分课"></div>
+                      <div class="tit">资产管理岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp6.png" alt="岗位细分课"></div>
+                      <div class="tit">风控岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                </div>
+                <div class="btn-row">
+                  <a href="../template/seriesList.html" class="btns">查看更多</a>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="station-list">
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp1.png" alt="岗位细分课"></div>
+                      <div class="tit">业务岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp2.png" alt="岗位细分课"></div>
+                      <div class="tit">融资岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                     </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp3.png" alt="岗位细分课"></div>
+                      <div class="tit">财务岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp4.png" alt="岗位细分课"></div>
+                      <div class="tit">人力资源岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp5.png" alt="岗位细分课"></div>
+                      <div class="tit">资产管理岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                </div>
+                <div class="btn-row">
+                  <a href="../template/seriesList.html" class="btns">查看更多</a>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="station-list">
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp1.png" alt="岗位细分课"></div>
+                      <div class="tit">业务岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp2.png" alt="岗位细分课"></div>
+                      <div class="tit">融资岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                     </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp3.png" alt="岗位细分课"></div>
+                      <div class="tit">财务岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp4.png" alt="岗位细分课"></div>
+                      <div class="tit">人力资源岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp5.png" alt="岗位细分课"></div>
+                      <div class="tit">资产管理岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp6.png" alt="岗位细分课"></div>
+                      <div class="tit">风控岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                </div>
+                <div class="btn-row">
+                  <a href="../template/seriesList.html" class="btns">查看更多</a>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="station-list">
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp1.png" alt="岗位细分课"></div>
+                      <div class="tit">业务岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp2.png" alt="岗位细分课"></div>
+                      <div class="tit">融资岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                     </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp3.png" alt="岗位细分课"></div>
+                      <div class="tit">财务岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp4.png" alt="岗位细分课"></div>
+                      <div class="tit">人力资源岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp5.png" alt="岗位细分课"></div>
+                      <div class="tit">资产管理岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                </div>
+                <div class="btn-row">
+                  <a href="../template/seriesList.html" class="btns">查看更多</a>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="station-list">
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp1.png" alt="岗位细分课"></div>
+                      <div class="tit">业务岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp2.png" alt="岗位细分课"></div>
+                      <div class="tit">融资岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                     </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp3.png" alt="岗位细分课"></div>
+                      <div class="tit">财务岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp4.png" alt="岗位细分课"></div>
+                      <div class="tit">人力资源岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp5.png" alt="岗位细分课"></div>
+                      <div class="tit">资产管理岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="">
+                      <div class="pic"><img src="images/home/dp6.png" alt="岗位细分课"></div>
+                      <div class="tit">风控岗</div>
+                      <div class="desc">融资岗融资岗融资 融资 融资岗融资岗融资岗融资岗融资岗融资岗融资岗融资岗岗融备份</div>
+                    </a>
+                  </div>
+                </div>
+                <div class="btn-row">
+                  <a href="../template/seriesList.html" class="btns">查看更多</a>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="live">
+      <!--线下课程-->
+      <div class="container">
+        <div class="home-title semibold">在线直播</div>
+        <div class="date-list">
+          <div class="item">
+            <div class="date">4月2日</div>
+            <div class="time">16:00 — 20:00</div>
+          </div>
+          <div class="item">
+            <div class="date">4月7日</div>
+            <div class="time">16:00 — 20:00</div>
+          </div>
+          <div class="item">
+            <div class="date">4月20日</div>
+            <div class="time">16:00 — 20:00</div>
+          </div>
+          <div class="item">
+            <div class="date">5月3日</div>
+            <div class="time">16:00 — 20:00</div>
+          </div>
+        </div>
+        <div class="line-list">
+          <div class="item active">
+            <div class="border"></div>
+            <div class="wire"></div>
+          </div>
+          <div class="item">
+            <div class="border"></div>
+            <div class="wire"></div>
+          </div>
+          <div class="item">
+            <div class="border"></div>
+            <div class="wire"></div>
+          </div>
+          <div class="item">
+            <div class="border"></div>
+            <div class="wire"></div>
+          </div>
+        </div>
+        <div class="live-list">
+          <div class="item active">
+            <a href="" class="main">
+              <div class="dt">
+                <div class="pic"><img src="images/home/live.png"></div>
+                <div class="liveTit">直播中</div>
+              </div>
+              <div class="dd">
+                <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                <div class="time-box">
+                  <div class="flex-l">免费</div>
+                  <div class="flex-r pf"><img src="images/home/time.png">04月01日 20:30</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="item">
+            <a href="" class="main">
+              <div class="dt">
+                <div class="pic"><img src="images/home/live.png"></div>
+                <div class="liveTit">未开始</div>
+              </div>
+              <div class="dd">
+                <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                <div class="time-box">
+                  <div class="flex-l">¥999.00</div>
+                  <div class="flex-r pf"><img src="images/home/time.png">04月01日 20:30</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="item">
+            <a href="" class="main">
+              <div class="dt">
+                <div class="pic"><img src="images/home/live.png"></div>
+                <div class="liveTit">未开始</div>
+              </div>
+              <div class="dd">
+                <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                <div class="time-box">
+                  <div class="flex-l">免费</div>
+                  <div class="flex-r pf">直播已结束</div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="item">
+            <a href="" class="main">
+              <div class="dt">
+                <div class="pic"><img src="images/home/live.png"></div>
+                <div class="liveTit">未开始</div>
+              </div>
+              <div class="dd">
+                <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                <div class="time-box">
+                  <div class="flex-l">免费</div>
+                  <div class="flex-r pf">直播已结束</div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class='btn-row '>
+          <a href="../template/onlineLive.html" class="btns">
+            查看更多
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <div class="recommend">
+      <!--最新推荐-->
+      <div class="container">
+        <div class="home-title semibold">最新推荐</div>
+        <ul class="tabs-nav"  id="recommend-nav">
+          <li class="item pf active">融资租赁</li>
+          <li class="item pf">汽车金融</li>
+          <li class="item pf">供应链金融</li>
+          <li class="item pf">证券基金</li>
+          <li class="item pf">金融科技</li>
+          <li class="item pf">金融基础</li>
+          <li class="item pf">金融小动画</li>
+          <li class="line"></li>
+        </ul>
+        <div class="swiper-container" id="swiper-recommend">
+          <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="recom-list">
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live.png"></div>
+                        <div class="liveTit">最新</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png"><span>32课时</span></div>
+                              <div class="right"><img src="images/home/browse.png"><span>999</span></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live2.png"></div>
+                        <div class="liveTit">最新</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png"><span>32课时</span></div>
+                              <div class="right"><img src="images/home/browse.png"><span>999</span></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live3.png"></div>
+                        <div class="liveTit">最新</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png"><span>32课时</span></div>
+                              <div class="right"><img src="images/home/browse.png"><span>999</span></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live4.png"></div>
+                        <div class="liveTit">最新</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png"><span>32课时</span></div>
+                              <div class="right"><img src="images/home/browse.png"><span>999</span></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live.png"></div>
+                        <div class="liveTit">最新</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png"><span>32课时</span></div>
+                              <div class="right"><img src="images/home/browse.png"><span>999</span></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live2.png"></div>
+                        <div class="liveTit red">热门</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png"><span>32课时</span></div>
+                              <div class="right"><img src="images/home/browse.png"><span>999</span></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live3.png"></div>
+                        <div class="liveTit red">热门</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png"><span>32课时</span></div>
+                              <div class="right"><img src="images/home/browse.png"><span>999</span></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live4.png"></div>
+                        <div class="liveTit red">热门</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png"><span>32课时</span></div>
+                              <div class="right"><img src="images/home/browse.png"><span>999</span></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="btn-row">
+                  <a href="../template/curriculumList.html" class="btns">查看更多</a>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="recom-list">
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live.png"></div>
+                        <div class="liveTit">最新</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live2.png"></div>
+                        <div class="liveTit">最新</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live3.png"></div>
+                        <div class="liveTit">最新</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live4.png"></div>
+                        <div class="liveTit">最新</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live.png"></div>
+                        <div class="liveTit">最新</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live2.png"></div>
+                        <div class="liveTit red">热门</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live3.png"></div>
+                        <div class="liveTit red">热门</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="btn-row">
+                  <a href="" class="btns">查看更多</a>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="recom-list">
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live.png"></div>
+                        <div class="liveTit">最新</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live2.png"></div>
+                        <div class="liveTit">最新</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live3.png"></div>
+                        <div class="liveTit">最新</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live4.png"></div>
+                        <div class="liveTit">最新</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live.png"></div>
+                        <div class="liveTit">最新</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live2.png"></div>
+                        <div class="liveTit red">热门</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live3.png"></div>
+                        <div class="liveTit red">热门</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live4.png"></div>
+                        <div class="liveTit red">热门</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="btn-row">
+                  <a href="" class="btns">查看更多</a>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="recom-list">
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live.png"></div>
+                        <div class="liveTit">最新</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live2.png"></div>
+                        <div class="liveTit">最新</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live3.png"></div>
+                        <div class="liveTit">最新</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live4.png"></div>
+                        <div class="liveTit">最新</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live.png"></div>
+                        <div class="liveTit">最新</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live2.png"></div>
+                        <div class="liveTit red">热门</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="item">
+                    <a href="" class="main">
+                      <div class="dt">
+                        <div class="pic"><img src="images/home/live3.png"></div>
+                        <div class="liveTit red">热门</div>
+                      </div>
+                      <div class="dd">
+                        <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                        <div class="time-box">
+                          <div class="flex-l">¥999.00</div>
+                          <div class="flex-r">
+                            <div class="hour-box pf">
+                              <div class="left"><img src="images/home/time.png">32课时</div>
+                              <div class="right"><img src="images/home/browse.png">999</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="btn-row">
+                  <a href="" class="btns">查看更多</a>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="discount">
+      <div class="container">
+        <div class="home-title semibold">限时特惠</div>
+        <div class="limit-list">
+          <div class="item">
+            <a href="">
+              <div class="dt">
+                <div class="pic"><img src="images/home/di1.png"></div>
+              </div>
+              <div class="dd">
+                <div class="tit">某大型能源融资租赁最新课程某</div>
+                <div class="time-box">
+                  <div class="flex-l">
+                    <span class="red">¥999</span>
+                    <span class="gray">¥1999.00</span>
+                  </div>
+                  <div class="flex-r">
+                    <div class="hour-box pf">
+                      <div class="left"><img src="images/home/time.png">32课时</div>
+                      <div class="right"><img src="images/home/browse.png">999</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="item">
+            <a href="">
+              <div class="dt">
+                <div class="pic"><img src="images/home/di2.png"></div>
+              </div>
+              <div class="dd">
+                <div class="tit">某大型能源融资租赁最新课程某</div>
+                <div class="time-box">
+                  <div class="flex-l">
+                    <span class="red">¥999</span>
+                    <span class="gray">¥1999.00</span>
+                  </div>
+                  <div class="flex-r">
+                    <div class="hour-box pf">
+                      <div class="left"><img src="images/home/time.png">32课时</div>
+                      <div class="right"><img src="images/home/browse.png">999</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="item">
+            <a href="">
+              <div class="dt">
+                <div class="pic"><img src="images/home/di3.png"></div>
+              </div>
+              <div class="dd">
+                <div class="tit">某大型能源融资租赁最新课程某</div>
+                <div class="time-box">
+                  <div class="flex-l">
+                    <span class="red">¥999</span>
+                    <span class="gray">¥1999.00</span>
+                  </div>
+                  <div class="flex-r">
+                    <div class="hour-box pf">
+                      <div class="left"><img src="images/home/time.png">32课时</div>
+                      <div class="right"><img src="images/home/browse.png">999</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="item">
+            <a href="">
+              <div class="dt">
+                <div class="pic"><img src="images/home/di4.png"></div>
+              </div>
+              <div class="dd">
+                <div class="tit">某大型能源融资租赁最新课程某</div>
+                <div class="time-box">
+                  <div class="flex-l">
+                    <span class="red">¥999</span>
+                    <span class="gray">¥1999.00</span>
+                  </div>
+                  <div class="flex-r">
+                    <div class="hour-box pf">
+                      <div class="left"><img src="images/home/time.png">32课时</div>
+                      <div class="right"><img src="images/home/browse.png">999</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="btn-row">
+          <a href="" class="btns">换一批</a>
+        </div>
+      </div>
+    </div>
+    <div class="teacher">
+      <div class="home-title semibold">名师中心</div>
+      <div class="container" style="position: relative;">
+        <div class="swiper-teacher" id="swiper-teacher">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <a href="" class="teacher-item">
+                <div class="ti-img">
+                  <img src="images/home/teacher.png" alt="名师中心">
+                </div>
+                <div class="bg">
+                  <div class="ti-text">
+                    <div class="title">杨万里</div>
+                    <div class="ti-desc"><p>中国汽车流通协会</p><p>汽车市场研究分会秘书长</p></div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="" class="teacher-item">
+                <div class="ti-img">
+                  <img src="images/home/teacher.png" alt="名师中心">
+                </div>
+                <div class="bg">
+                  <div class="ti-text">
+                    <div class="title">杨万里</div>
+                    <div class="ti-desc"><p>中国汽车流通协会</p><p>汽车市场研究分会秘书长</p></div>
+                  </div>
+                </div>
+
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="" class="teacher-item">
+                <div class="ti-img">
+                  <img src="images/home/teacher.png" alt="名师中心">
+                </div>
+                <div class="bg">
+                  <div class="ti-text">
+                    <div class="title">杨万里</div>
+                    <div class="ti-desc"><p>中国汽车流通协会</p><p>汽车市场研究分会秘书长</p></div>
+                  </div>
+                </div>
+
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="" class="teacher-item">
+                <div class="ti-img">
+                  <img src="images/home/teacher.png" alt="名师中心">
+                </div>
+                <div class="bg">
+                  <div class="ti-text">
+                    <div class="title">杨万里</div>
+                    <div class="ti-desc"><p>中国汽车流通协会</p><p>汽车市场研究分会秘书长</p></div>
+                  </div>
+                </div>
+
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="" class="teacher-item">
+                <div class="ti-img">
+                  <img src="images/home/teacher.png" alt="名师中心">
+                </div>
+                <div class="bg">
+                  <div class="ti-text">
+                    <div class="title">杨万里</div>
+                    <div class="ti-desc"><p>中国汽车流通协会</p><p>汽车市场研究分会秘书长</p></div>
+                  </div>
+                </div>
+
+              </a>
+            </div>
+            <div class="swiper-slide">
+              <a href="" class="teacher-item">
+                <div class="ti-img">
+                  <img src="images/home/teacher.png" alt="名师中心">
+                </div>
+                <div class="bg">
+                  <div class="ti-text">
+                    <div class="title">杨万里</div>
+                    <div class="ti-desc"><p>中国汽车流通协会</p><p>汽车市场研究分会秘书长</p></div>
+                  </div>
+                </div>
+
+              </a>
+            </div>
+          </div>
+          <div class="btn-row">
+            <a href="../template/topteacherList.html" class="btns">查看更多</a>
+          </div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+
+        </div>
+
+
+      </div>
+    </div>
+    <div class="offline-courses">
+      <!--线下课程-->
+      <div class="container">
+        <div class="home-title semibold">线下课程</div>
+        <div class="offline-list">
+          <div class="item">
+            <a href="">
+              <div class="dt">
+                <div class="pic"><img src="images/home/xxkc.png"></div>
+                <div class="liveTit">未开始</div>
+              </div>
+              <div class="dd">
+                <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                <div class="time-box pf">
+                  <div class="flex-l">时间：2019-04-28至04-29</div>
+                  <div class="flex-r">
+                    <img src="images/home/location.png">深圳
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="item">
+            <a href="">
+              <div class="dt">
+                <div class="pic"><img src="images/home/xxkc.png"></div>
+                <div class="liveTit">未开始</div>
+              </div>
+              <div class="dd">
+                <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                <div class="time-box pf">
+                  <div class="flex-l">时间：2019-04-28至04-29</div>
+                  <div class="flex-r">
+                    <img src="images/home/location.png">深圳
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="item">
+            <a href="">
+              <div class="dt">
+                <div class="pic"><img src="images/home/xxkc.png"></div>
+                <div class="liveTit">未开始</div>
+              </div>
+              <div class="dd">
+                <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                <div class="time-box pf">
+                  <div class="flex-l">时间：2019-04-28至04-29</div>
+                  <div class="flex-r">
+                    <img src="images/home/location.png">深圳
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="item">
+            <a href="">
+              <div class="dt">
+                <div class="pic"><img src="images/home/xxkc.png"></div>
+                <div class="liveTit">未开始</div>
+              </div>
+              <div class="dd">
+                <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                <div class="time-box pf">
+                  <div class="flex-l">时间：2019-04-28至04-29</div>
+                  <div class="flex-r">
+                    <img src="images/home/location.png">深圳
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="item">
+            <a href="">
+              <div class="dt">
+                <div class="pic"><img src="images/home/xxkc.png"></div>
+                <div class="liveTit">未开始</div>
+              </div>
+              <div class="dd">
+                <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                <div class="time-box pf">
+                  <div class="flex-l">时间：2019-04-28至04-29</div>
+                  <div class="flex-r">
+                    <img src="images/home/location.png">深圳
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="item">
+            <a href="">
+              <div class="dt">
+                <div class="pic"><img src="images/home/xxkc.png"></div>
+                <div class="liveTit">未开始</div>
+              </div>
+              <div class="dd">
+                <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                <div class="time-box pf">
+                  <div class="flex-l">时间：2019-04-28至04-29</div>
+                  <div class="flex-r">
+                    <img src="images/home/location.png">深圳
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="item">
+            <a href="">
+              <div class="dt">
+                <div class="pic"><img src="images/home/xxkc.png"></div>
+                <div class="liveTit black">已结束</div>
+              </div>
+              <div class="dd">
+                <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                <div class="time-box pf">
+                  <div class="flex-l">时间：2019-04-28至04-29</div>
+                  <div class="flex-r">
+                    <img src="images/home/location.png">深圳
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="item">
+            <a href="">
+              <div class="dt">
+                <div class="pic"><img src="images/home/xxkc.png"></div>
+                <div class="liveTit black">已结束</div>
+              </div>
+              <div class="dd">
+                <div class="tit">某大型能源融资租赁最新课程某大型能源融资租赁最新课程</div>
+                <div class="time-box pf">
+                  <div class="flex-l">时间：2019-04-28至04-29</div>
+                  <div class="flex-r">
+                    <img src="images/home/location.png">深圳
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="btn-row">
+          <a href="../template/offlineList.html" class="btns">查看更多</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="promote">
+      <!--您是否想提升某个团队或整个组织的技能？-->
+      <div class="container">
+        <div class="title-box">
+          <div class="tit-flex">
+            <p class="home-title semibold">您是否想提升某个团队或整个组织的技能？</p>
+            <p class="small-title pf">我们将为您提供全套的企业学习提升解决方案及一流的培训和发展计划</p>
+            <div class="btain">
+              <div class="tip pf">2000+企业已成为我们的客户>>></div>
+              <div class="more-btn"><a class="btn">立即获取方案</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="sponsor-list">
+          <div class="item"><img src="images/home/sponsor/p1.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p2.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p3.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p4.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p36.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p5.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p6.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p7.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p8.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p9.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p10.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p11.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p12.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p13.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p14.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p15.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p16.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p17.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p18.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p19.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p20.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p21.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p22.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p23.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p24.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p25.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p26.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p27.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p28.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p29.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p30.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p31.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p32.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p33.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p34.png" alt=""></div>
+          <div class="item"><img src="images/home/sponsor/p35.png" alt=""></div>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="feedback">
+      <div class="home-title semibold">用户反馈</div>
+      <div class="container">
+        <div class="user-box">
+          <div class="left">
+          <div class="pic"><img src="images/home/user1.png" id="note-pic">
+            <!-- <div class="hi">Hi~</div> -->
+          </div>
+          <div class="authorsNote">
+            <div class="name semibold" id="note-name">王德发</div>
+            <div class="position semibold" id="note-position">金融租赁研究室主任</div>
+            <div class="desc">
+              <img class="top" src="images/home/user_top.png">
+              <img class="bottom" src="images/home/user_bottom.png">
+              <span class="semibold" id="note-desc">中国复关及入世谈判的首席谈判代表，原国家外经贸部副部长; 原博鳌亚洲论坛理事、秘书长;曾任复旦大学国际关系与公共事务学院院长;现任全球CEO发展大会联合主席 、中国与全球化智库(CCG)主席。 曾在2018年《第一届中国融资租赁总经理高峰论坛》上发表《国际贸易形势下国内宏观经济机遇与挑战》的演讲。</span>
+            </div>
+          </div>
+          </div>
+          <div class="right">
+            <div class="feedback-list" id="feedback-list">
+              <div class="item" data-describe="中国复关及入世谈判的首席谈判代表，原国家外经贸部副部长; 原博鳌亚洲论坛理事、秘书长;曾任复旦大学国际关系与公共事务学院院长;现任全球CEO发展大会联合主席 、中国与全球化智库(CCG)主席。 曾在2018年《第一届中国融资租赁总经理高峰论坛》上发表《国际贸易形势下国内宏观经济机遇与挑战》的演讲。" data-img="./images/home/user1.png" data-name="王德发" data-position="金融租赁研究室主任"><img src="images/home/feedback_img.png"></div>
+              <div class="item" data-describe="中国复关及入世谈判的首席谈判代表,原国家外经贸部副部长; 原博鳌亚洲论坛理事、" data-img="./images/home/user1.png" data-name="王德发2" data-position="金融主任1"><img src="images/home/feedback_img.png"></div>
+              <div class="item" data-describe="中国复关及入世谈判的首席谈判代表,原国家外经贸部副部长; 原博鳌亚洲论坛理事、" data-img="./images/home/user1.png" data-name="王德发3" data-position="金融主任2"><img src="images/home/feedback_img.png"></div>
+              <div class="item" data-describe="中国复关及入世谈判的首席谈判代表,原国家外经贸部副部长; 原博鳌亚洲论坛理事、" data-img="./images/home/user1.png" data-name="王德发4" data-position="金融主任3"><img src="images/home/feedback_img.png"></div>
+              <div class="item" data-describe="中国复关及入世谈判的首席谈判代表,原国家外经贸部副部长; 原博鳌亚洲论坛理事、" data-img="#" data-name="王德发5" data-position="金融主任4"><img src="images/home/feedback_img.png"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="guide">
+      <!--底部引导页面-->
+      <div class="container">
+        <div class="guide-title">一句话引导一句话引导一句话引导一句话引导</div>
+        <div class="guide-smTitle">立即加入获取完整提升方案</div>
+        <a href="" class="guide-btn">免费加入</a>
+
+      </div>
+
+    </div>
+    <div class="footer">
+      <div class="footer-links">
+        <div class="container">
+          <div class="logo">
+            <a href="#"> <img src="images/logo.png" alt="logo"></a>
+          </div>
+          <div class="skip-middle">
+            <div class="slide">
+              <div class="title Helvbold">关于我们</div>
+              <ul class="link-ul">
+                <li class="link"><a class="Helvbold" href="../template/info_aboutus.html">融易学简介</a></a></li>
+                <li class="link"><a class="Helvbold" href="../template/info_contactus.html">联系我们</a></a></li>
+                <li class="link"><a class="Helvbold" href="../template/info_statement.html">免责声明</a></a></li>
+              </ul>
+            </div>
+            <div class="slide">
+              <div class="title Helvbold">帮助中心</div>
+              <ul class="link-ul">
+                <li class="link"><a class="Helvbold" href="../template/info_register.html">如何注册</a></a></li>
+                <li class="link"><a class="Helvbold" href="../template/info_choosecourse.html">如何选课</a></a></li>
+                <li class="link"><a class="Helvbold" href="../template/info_opencourse.html">如何开课</a></li>
+                <li class="link"><a class="Helvbold" href="../template/info_avai.html">课程有效期</a></li>
+              </ul>
+            </div>
+            <div class="slide">
+              <div class="title Helvbold">商务合作</div>
+              <ul class="link-ul">
+                <li class="link"><a class="Helvbold" href="../template/info_cooperation.html">合作方式</a></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="contact">
+            <div class="icon">
+              <a href="">
+                <img class="icon-hidden" src="images/people.png">
+                <img class="icon-show" src="images/people_active.png">
+              </a>
+              <a href="javacript:void(0);">
+                <img class="icon-hidden" src="images/wx.png">
+                <img class="icon-show" src="images/wx_active.png">
+                <div class="serve-code">
+                  <div class="pic">
+                    <img src="images/app_img.png">
+                  </div>
+                  <div class="text">关注融易学服务号</div>
+                </div>
+              </a>
+              <a href="javacript:void(0);">
+                <img class="icon-hidden" src="images/code.png">
+                <img class="icon-show" src="images/code_active.png">
+                <div class="app-code">
+                  <div class="pic">
+                    <img src="images/ewm.png">
+                  </div>
+                  <div class="text">扫码下载APP</div>
+                </div>
+              </a>
+            </div>
+            <div class="time">
+              <img src="images/phone.png" alt="phone"><span class="text">周一至周五9:00—18:00</span>
+            </div>
+            <div class="phone"><a href="tel:0755-2532-0861">0755-2532-0861</a></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-info">
+        <div class="organization">
+          <div class="container">
+            <div class="swiper-container" id="swiper-organization">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+            </div>
+          </div>
+        </div>
+        <div class="report">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="report-item">
+                  Copyright©2015-2018********
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="report-item">
+                  CP备：粤ICP备*********号
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="report-item">
+                  CP备：粤ICP备*********号
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+    <div class="sidebar-box" id="backtop">
+      <ul class="sidebar-ul">
+        <li class="item" id="goTop">
+          <div class="border"></div>
+          <div class="img"><img src="images/top.png" ></div>
+          <div class="active-img"><img src="images/top_active.png"></div>
+        </li>
+        <li class="item">
+          <a href="">
+            <div class="img"><img src="images/icon_register.png" ></div>
+            <div class="active-text">注册<br>有礼</div>
+            <div class="register-actvie">注册即享神秘大礼</div>
+          </a>
+        </li>
+        <li class="item">
+          <div class="img"><img src="images/icon_service.png" ></div>
+          <div class="active-text">联系<br>客服</div>
+        </li>
+        <li class="item">
+          <div class="img"><img src="images/icon_weixin.png" ></div>
+          <div class="active-text">关注<br>公众号</div>
+          <div class="weixin-img">
+            <div class="pic"><img src="images/ewm.png"></div>
+            <div class="text">微信扫码关注</div>
+          </div>
+        </li>
+        <li class="item" data-toggle="modal" data-target="#mes-modal">
+          <div class="img"><img src="images/icon_feedback.png" ></div>
+          <div class="active-text">意见<br>反馈</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="modal fade" id="mes-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+              <div class="header-modal">
+                <div class="left">意见反馈</div>
+                <div class="right" data-dismiss="modal"><img src="images/error.png"></div>
+              </div>
+              <div class="body-modal">
+                <div class="modal-item">
+                  <div class="lable-l">姓名：</div>
+                  <div class="lable-r">
+                    <div class="input-box">
+                      <input type="text"  placeholder="请输入内容">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-item">
+                  <div class="lable-l">联系方式：</div>
+                  <div class="lable-r">
+                    <div class="input-box">
+                      <input type="text"  placeholder="请输入内容">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-item">
+                  <div class="lable-l">问题详情：</div>
+                  <div class="lable-r">
+                    <div class="textarea-box">
+                      <textarea placeholder="请输入内容"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="btn-modal">
+                <button type="submit">提 交</button>
+              </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+ </div>
+
+<div class="modal modal-main" id="modal-middle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-middle">
+    <div class="login-box">
+      <div class="tab-list" id="toggle-list">
+        <div class="item Hvtc">登录</div>
+        <div class="item active Hvtc">注册</div>
+      </div>
+      <div class="toggle-list" id="modal-list">
+        <div class="item">
+          <div class="phone-number">
+            <input id="login_phone" type="text" placeholder="请输入手机号码">
+          </div>
+          <div class="password-number">
+            <input id="login_psw" type="password" placeholder="请输入密码">
+          </div>
+          <div class="forget-pass"><span class="Helvbold" id="forgetful-btn">找回密码</span></div>
+          <button type="submit" id="index_login" class="login-btn Helvbold">登录</button>
+          <div class="rests-box">
+            <div class="line"></div>
+            <div class="text Helvbold">其他登录方式</div>
+            <div class="line"></div>
+          </div>
+          <div class="wechat-box">
+            <img src="images/share/weixin_active.png" id="weixin-btn">
+          </div>
+        </div>
+        <div class="item active">
+          <div class="register-main" id="register-box">
+            <div class="common-input"><input type="text" placeholder="请输入手机号码"></div>
+            <div class="conmon-code">
+              <div class="conmon-l"><input type="text" placeholder="请输入验证码"></div>
+              <div class="conmon-r"><img src="http://gss0.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D450%2C600/sign=0c6c13fb203fb80e0c8469d303e10318/54fbb2fb43166d2242cf0a5e472309f79152d2bb.jpg" ></div>
+            </div>
+            <div class="conmon-notecode">
+              <div class="conmon-l"><input type="text" placeholder="请输入短信验证码"></div>
+              <div class="conmon-r"><button class="Helvbold" type="submit">获取验证码</button></div>
+            </div>
+            <div class="common-input"><input type="password" placeholder="请输入密码"></div>
+            <div class="common-input"><input type="password" placeholder="请确认密码"></div>
+            <div class="protocol-text Helvbold">
+              <label><input name="已阅读" id="register_read" type="checkbox" value="已阅读" checked /></label>
+              我已阅读<a href="">【用户服务协议及隐私政策】</a></div>
+            <button type="submit" id="index_register" class="login-btn Helvbold">注册</button>
+            <div class="rests-box">
+              <div class="line"></div>
+              <div class="text Helvbold">其他登录方式</div>
+              <div class="line"></div>
+            </div>
+            <div class="wechat-box">
+              <img src="images/share/weixin_active.png" id="weixin-btn">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="forgetmodal-middle" id="forgetmodal">
+  <div class="forgetmodal-box">
+    <div class="err-box" id="forgetmodal-btn"><img src="images/modal/icon_err.png"></div>
+    <div class="err-title Helvbold">找回密码</div>
+    <div class="public-wrap" id="forgetPsw-btn">
+      <div class="public-box"><input type="text" placeholder="请输入手机号码"></div>
+      <div class="conmon-notecode">
+        <div class="conmon-l"><input type="text" placeholder="请输入短信验证码"></div>
+        <div class="conmon-r"><button class="Helvbold" type="submit">获取验证码</button></div>
+      </div>
+      <div class="public-box"><input type="password" placeholder="请输入新密码"></div>
+      <div class="public-box"><input type="password" placeholder="请确认密码"></div>
+    </div>
+    <div class="affirm-btn">
+      <button class="Helvbold" id="index_submit_psw" type="submit">确认</button>
+    </div>
+  </div>
+</div>
+<div class="weixinmodal-middle" id="weixinmodal">
+  <div class="weixinmodal-box">
+    <div class="err-box" id="weixinmodal-btn"><img src="images/modal/icon_err.png"></div>
+    <div class="err-title Helvbold">微信扫码登录</div>
+    <div class="img"><img src="images/weixinmodal-img.jpg"></div>
+    <div class="desc Helvbold">请使用微信扫描二维码登录<br>“融易学金融学院”</div>
+  </div>
+</div>
+
+  <script src="js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/swiper.min.js"></script>
+  <script src="js/jquery.num.js"></script>
+  <script src="js/public.js"></script>
+  <script type="text/javascript" src="js/onMain.js"></script>
+  <script type="text/javascript" src="js/login_register.js"></script>
+</body>
+</html>

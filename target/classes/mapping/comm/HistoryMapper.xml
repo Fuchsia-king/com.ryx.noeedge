@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.comm.HistoryMapper">
+
+	<sql id="where">
+	
+	    <where>
+	    
+			<if test="creater != null">
+				<![CDATA[ and creater = #{creater} ]]>
+			</if>
+			
+			<if test="rip != null">
+				<![CDATA[ and rip like concat('%', #{rip}, '%')  ]]>
+			</if>
+			
+			<if test="rhost != null">
+				<![CDATA[ and rhost like concat('%', #{rhost}, '%')  ]]>
+			</if>
+			
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="HistoryDTO">   
+       insert into history(rip,rhost,url,creater,tcreate,descr) 
+       values
+       (#{rip},#{rhost},#{url},#{creater},now(),#{descr}) 
+    </insert>
+      
+    
+    <select id="query" resultType="HistoryDTO" parameterType="HistoryQuery">
+         
+        select * from history 
+        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="HistoryQuery">   
+        select count(1) from history 
+        <include refid="where"/>
+    </select>
+    
+    <select id="queryById" resultType="HistoryDTO" parameterType="java.lang.Long">   
+        select * from history where id = #{id} limit 1;
+    </select>    
+    
+    <select id="queryByUid" resultType="HistoryDTO" parameterType="java.lang.String">   
+        select * from history where uid = #{uid} limit 1; 
+    </select>  
+    
+    <select id="queryByCode" resultType="HistoryDTO" parameterType="java.lang.String">   
+        select * from history where code = #{code} limit 1; 
+    </select>
+    
+</mapper> 

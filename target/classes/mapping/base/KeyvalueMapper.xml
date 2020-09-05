@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.base.KeyvalueMapper">  
+
+	<sql id="where">
+	
+	    <where>
+	    
+	    	<if test="id != null">
+				<![CDATA[ and id = #{id} ]]>
+			</if>
+			
+			<if test="key1 != null and key1 !='' ">
+				<![CDATA[ and key1 = #{key1} ]]>
+			</if>			
+			
+			<if test="value != null  and value !='' ">
+				<![CDATA[and value like concat('%', #{value}, '%')  ]]>
+			</if>
+			
+			<if test="uid != null and uid !='' ">
+				<![CDATA[ and uid = #{uid} ]]>
+			</if>
+			
+			
+			<if test="type != null ">
+				<![CDATA[ and type = #{type} ]]>
+			</if>
+			
+			
+			<if test="pid != null and pid !='' ">
+				<![CDATA[ and pid = #{pid} ]]>
+			</if>
+			
+			
+			<if test="pid1 != null and pid1 !='' ">
+				<![CDATA[ and pid1 = #{pid1} ]]>
+			</if>
+			
+			
+			<if test="pid2 != null and pid2 !='' ">
+				<![CDATA[ and pid2 = #{pid2} ]]>
+			</if>
+			
+			
+			<choose>
+				<when test="ideleted != null">
+					<![CDATA[  and ideleted = #{ideleted} ]]>
+				</when>
+				<otherwise>
+					<![CDATA[  and ideleted = 0 ]]>
+				</otherwise>
+			</choose>
+			
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="KeyvalueDTO">   
+       insert into key_value(uid,key1,value,value1,value2,value3,value4,pid,pid1,pid2,type,creater,tcreate,tmodified,ideleted) 
+       values
+       (#{uid},#{key1},#{value},#{value1},#{value2},#{value3},#{value4},#{pid},#{pid1},#{pid2},#{type},#{creater},now(),now(),#{ideleted})  
+    </insert>
+    
+    
+
+      
+    
+    <select id="query" resultType="KeyvalueDTO" parameterType="KeyvalueQuery">
+         
+        select * from key_value 
+        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+     
+    <select id="queryAll" resultType="KeyvalueDTO">
+         
+        select code,name from key_value where ideleted = 0 order by name 
+		
+    </select>
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="KeyvalueQuery">   
+        select count(1) from key_value 
+        <include refid="where"/>
+    </select>
+    
+    <select id="queryById" resultType="KeyvalueDTO" parameterType="java.lang.Long">   
+        select * from key_value where id = #{id}  limit 1;
+    </select>    
+    
+    <select id="queryByUid" resultType="KeyvalueDTO" parameterType="java.lang.String">   
+        select * from key_value where uid = #{uid}  limit 1; 
+    </select>
+    
+    <select id="queryByKey1" resultType="KeyvalueDTO" parameterType="java.lang.String">   
+        select * from key_value where key1 = #{key1}  limit 1; 
+    </select>
+    
+     <select id="queryPassdByUid" resultType="java.lang.String" parameterType="java.lang.String">   
+        select passd from key_value where uid = #{uid}  limit 1; 
+    </select>    
+    
+    <select id="queryByCode" resultType="KeyvalueDTO" parameterType="java.lang.String">   
+        select * from key_value where code = #{code} and ideleted =0 limit 1; 
+    </select> 
+    
+    
+    <update id="update" parameterType="KeyvalueDTO">
+    
+        update key_value
+         
+        <set>	
+					
+			<if test="key1 != null">
+				<![CDATA[ key1 = #{key1} ]]>,
+			</if>
+			
+			<if test="value != null">
+				<![CDATA[ value = #{value} ]]>,
+			</if>
+			
+			
+			<if test="value1 != null">
+				<![CDATA[ value1 = #{value1} ]]>,
+			</if>
+			
+			<if test="value2 != null">
+				<![CDATA[ value2 = #{value2} ]]>,
+			</if>
+			
+			
+			<if test="pid != null">
+				<![CDATA[ pid = #{pid} ]]>,
+			</if>
+			
+			<if test="pid1 != null">
+				<![CDATA[ pid1 = #{pid1} ]]>,
+			</if>
+			
+			<if test="pid2 != null">
+				<![CDATA[ pid2 = #{pid2} ]]>,
+			</if>
+			
+			<if test="type != null">
+				<![CDATA[ type = #{type} ]]>,
+			</if>
+			
+			tmodified = now(),
+			creater = #{creater}
+			
+		 </set>
+		 
+		 where uid = #{uid}
+		 
+		 
+		<if test="type != null">
+			<![CDATA[ and type = #{type} ]]>
+		</if>
+		 	
+    </update> 
+    
+    
+     <select id="countForCreateOrUpdate" resultType="java.lang.Integer" parameterType="KeyvalueQuery">   
+        select count(1) from key_value where key1= #{key1} and type = #{type}
+    </select>
+    
+    
+    <update id="update1" parameterType="KeyvalueDTO">
+    
+        update key_value
+         
+        <set>	
+			
+			<if test="value != null">
+				<![CDATA[ value = #{value} ]]>,
+			</if>
+			
+			<if test="uid != null">
+				<![CDATA[ uid = #{uid} ]]>,
+			</if>
+			
+			<if test="value1 != null">
+				<![CDATA[ value1 = #{value1} ]]>,
+			</if>
+			
+			<if test="value2 != null">
+				<![CDATA[ value2 = #{value2} ]]>,
+			</if>
+			
+			
+			<if test="pid != null">
+				<![CDATA[ pid = #{pid} ]]>,
+			</if>
+			
+			<if test="pid1 != null">
+				<![CDATA[ pid1 = #{pid1} ]]>,
+			</if>
+			
+			<if test="pid2 != null">
+				<![CDATA[ pid2 = #{pid2} ]]>,
+			</if>
+			
+			<if test="ideleted != null">
+				<![CDATA[ ideleted = #{ideleted} ]]>,
+			</if>
+			
+			tmodified = now(),
+			creater = #{creater}
+						
+		 </set>
+		 
+		 where key1= #{key1}   and type = #{type} 
+    </update> 
+    
+    
+    <update id="changePassd" parameterType="KeyvalueDTO">
+    	 update key_value set passd = #{passd} where uid = #{uid}
+    </update>
+    
+    <delete id="deleteById" parameterType="java.lang.Long">
+        update key_value set ideleted = 1 where id = #{id}
+    </delete> 
+    
+    
+    <delete id="deleteByUid" parameterType="java.lang.String">
+    
+        update key_value
+         
+        set ideleted = 1
+		 
+		where uid = #{uid}
+		 	
+    </delete> 
+    
+</mapper> 

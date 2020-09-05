@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.ryx.RyxNewsMapper">  
+
+    
+    
+    <sql id="select">
+		
+		id,
+	    category,
+	    title,
+	    code,
+	    cover_id coverId,
+	    content,
+	    up,
+	    down,
+	    hits,
+	    update_time,
+	    create_time,
+	    status,
+	    position,
+	    display,
+	    tzurl
+	    
+	</sql>
+
+	<sql id="where">
+	
+	    <where>
+	    
+			<if test="id != null">
+				<![CDATA[ and id = #{id} ]]>
+			</if>
+			
+			<if test="category != null">
+				<![CDATA[ and category = #{category} ]]>
+			</if>
+			
+			
+			<if test="coverId != null">
+				<![CDATA[ and cover_id = #{coverId} ]]>
+			</if>
+			
+			<if test="code != null and code !=''">
+				<![CDATA[ and code = #{code} ]]>
+			</if>
+			
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="RyxNewsDTO">   
+       insert into ryx_news(
+       		code,
+		    category,
+		    title,
+		    cover_id,
+		    content,
+		    up,
+		    down,
+		    hits,
+		    update_time,
+		    create_time,
+		    status,
+		    position,
+		    display,
+		    tzurl
+
+		) 
+       values
+       (	
+       		#{code},
+		    #{category},
+		    #{title},
+		    #{coverId},
+		    #{content},
+		    #{up},
+		    #{down},
+		    #{hits},
+		    UNIX_TIMESTAMP(now()),
+		  	UNIX_TIMESTAMP(now()),
+		    #{status},
+		    #{position},
+		    #{display},
+		    #{tzurl}
+       ) 
+    </insert>
+      
+    
+    <select id="query" resultType="RyxNewsDTO" parameterType="RyxNewsQuery">
+         
+        select
+         
+        <include refid="select"/>
+        
+        from ryx_news 
+        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+     
+    <select id="queryAll" resultType="RyxNewsDTO">
+         
+        select code,name from ryx_news where ideleted = 0 order by name 
+		
+    </select>
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="RyxNewsQuery">   
+        select count(1) from ryx_news 
+        <include refid="where"/>
+    </select>
+    
+    <select id="getById" resultType="RyxNewsDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select"/>
+        from ryx_news where id = #{id}  limit 1;
+    </select>    
+    
+     <select id="getByTitle" resultType="RyxNewsDTO" parameterType="java.lang.String">   
+        select 
+        <include refid="select"/>
+        from ryx_news where title = #{title}  limit 1;
+    </select>
+    
+    
+    <update id="update" parameterType="RyxNewsDTO">
+    
+        update ryx_news
+         
+        <set>	
+					
+			<if test="code != null">
+				<![CDATA[ code = #{code} ]]>,
+			</if>
+			
+			<if test="title != null">
+				<![CDATA[ title = #{title} ]]>,
+			</if>
+			
+			<if test="content != null">
+				<![CDATA[ content = #{content} ]]>,
+			</if>
+			
+			<if test="status != null">
+				<![CDATA[ status = #{status} ]]>,
+			</if>
+			
+			<if test="display != null">
+				<![CDATA[ display = #{display} ]]>,
+			</if>
+			
+			<if test="tzurl != null">
+				<![CDATA[ tzurl = #{tzurl} ]]>,
+			</if>
+
+			<if test="coverId != null">
+				<![CDATA[ cover_id = #{coverId} ]]>,
+			</if>
+			
+			update_time = UNIX_TIMESTAMP(now())
+			 
+		 </set>
+		 
+		 where	id = #{id} 
+		 	
+    </update> 
+    
+    
+    
+   <delete id="updateVisitCount" parameterType="java.lang.Long">    
+        update ryx_news set hits = hits + 1 where id = #{id}		 	
+    </delete> 
+    
+    <delete id="delete" parameterType="java.lang.Long">
+    
+        delete from ryx_news where id = #{id}
+		 	
+    </delete> 
+    
+</mapper> 

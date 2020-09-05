@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.ryx.RyxApplyMapper">
+    
+    <sql id="select">		
+		id,
+	    user_id userId,
+	    oid oid,
+	    otype otype,
+	    lcreate,
+	    lmodified,
+	    nbr,
+	    ideleted,
+	    mobile,
+	    contact,
+	    email,
+	    addr,
+	    status,
+	    order_id orderId,
+	    objer,
+	    iattent,
+	    phone,
+	    position,
+	    amount       
+	</sql>
+	
+	
+	 <sql id="select1">		
+		a.id,
+	    a.user_id userId,
+	    a.oid oid,
+	    a.otype otype,
+	    a.lcreate,
+	    a.lmodified,
+	    a.nbr,
+	    a.ideleted,
+	    a.mobile,
+	    a.contact,
+	    a.email,
+	    a.addr,
+	    a.status,
+	    a.order_id orderId,
+	    a.objer,
+	    a.iattent,
+	    a.amount	       
+	</sql>
+	
+
+	<sql id="where">
+	
+	    <where>
+	    
+			<if test="userId != null">
+				<![CDATA[ and user_id = #{userId} ]]>
+			</if>
+			
+			<if test="oid != null">
+				<![CDATA[ and oid = #{oid} ]]>
+			</if>		
+			
+			<if test="otype != null">
+				<![CDATA[ and otype = #{otype} ]]>
+			</if>
+			
+			<if test="objer != null">
+				<![CDATA[ and objer = #{objer} ]]>
+			</if>
+			
+			<if test="status != null">
+				<![CDATA[ and status = #{status} ]]>
+			</if>
+			
+		</where>
+	</sql>
+	
+	<sql id="where1">
+	
+	    <where>	    
+			<if test="userId != null">
+				<![CDATA[ and a.user_id = #{userId} ]]>
+			</if>			
+			<if test="oid != null">
+				<![CDATA[ and a.oid = #{oid} ]]>
+			</if>
+			<if test="otype != null">
+				<![CDATA[ and a.otype = #{otype} ]]>
+			</if>
+			<if test="status != null">
+				<![CDATA[ and a.status = #{status} ]]>
+			</if>
+			<if test="ttstart != null">
+				<![CDATA[ and c.tstart >= #{ttstart} ]]>
+			</if>
+			
+			<if test="etstart != null">
+				<![CDATA[ and c.tstart < #{etstart} ]]>
+			</if>
+			
+			<if test="mstart != null">
+				<![CDATA[ and a.lmodified >= #{mstart} ]]>
+			</if>
+			
+			<if test="mend != null">
+				<![CDATA[ and a.lmodified < #{mend} ]]>
+			</if>
+			<if test="objer != null">
+				<![CDATA[ and a.objer = #{objer} ]]>
+			</if>
+			
+			<if test="category != null">
+				<![CDATA[ and c.category = #{category} ]]>
+			</if>
+			<if test="ttend != null">
+				<![CDATA[ and c.tend >= #{ttend} ]]>
+			</if>
+			
+			<if test="etend != null">
+				<![CDATA[ and c.tend < #{etend} ]]>
+			</if>
+			<if test="iattent != null ">
+				<![CDATA[ and a.iattent = #{iattent} ]]>
+			</if>
+			
+			<if test="statuss != null and statuss.size()>0" >
+        	and a.status in
+	        <foreach item="st" index="index" collection="statuss" open="(" separator="," close=")">  
+			 	#{st}  
+			</foreach>
+		</if>
+			
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="RyxApplyDTO">   
+       insert into ryx_apply(       
+		    user_id,
+		    contact,
+		    oid,
+		    otype,
+		    mobile,
+		    email,
+		    phone,
+		    position,
+		    addr,
+		    lcreate,   
+		    lmodified,
+		    nbr,
+		    status,
+		    objer,
+		    iattent,
+		    amount,
+		    order_id  
+		      
+       ) 
+       values
+       (
+		    #{userId},
+		    #{contact},
+		    #{oid},
+		    #{otype},
+		    #{mobile},
+		    #{email},
+		    #{phone},
+		    #{position},
+		    #{addr},
+		    UNIX_TIMESTAMP(now()),
+		    UNIX_TIMESTAMP(now()),
+		    #{nbr},
+		    #{status},
+		    #{objer},
+		    #{iattent},
+		    #{amount},
+		    #{orderId}
+       ) 
+       <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+			select LAST_INSERT_ID() 
+		</selectKey>
+    </insert>
+      
+    
+    <select id="query" resultType="RyxApplyDTO" parameterType="RyxApplyQuery">         
+        select 
+        <include refid="select1"/>
+        from ryx_apply a        
+        join ryx_course c on a.oid = c.id                
+        <include refid="where1"/>		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+    
+    <select id="queryWithdraw" resultType="RyxApplyDTO" parameterType="RyxApplyQuery">         
+        select 
+        <include refid="select"/>
+        from ryx_apply a                      
+        <include refid="where"/>		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="RyxApplyQuery">   
+        select count(1) from ryx_apply a        
+        join  ryx_course c on a.oid = c.id
+        <include refid="where1"/>
+    </select>
+    
+    
+    <select id="countQueryWithdraw" resultType="java.lang.Integer" parameterType="RyxApplyQuery">   
+        select count(1) from ryx_apply a 
+        <include refid="where1"/>
+    </select>
+    
+    
+    <select id="countApplyNbr" resultType="java.lang.Integer" parameterType="RyxApplyQuery">   
+        select sum(nbr) from ryx_apply a        
+        join  ryx_course c on a.oid = c.id 
+        <include refid="where1"/>
+    </select>
+    
+    
+    <select id="queryById" resultType="RyxApplyDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select"/>
+        from ryx_apply where id = #{id}  limit 1;
+    </select>    
+    
+   
+   
+    <update id="updateByOrderId" parameterType="RyxApplyDTO">
+    
+        update ryx_apply         
+        <set>						
+			<if test="status != null">
+				<![CDATA[ status = #{status} ]]>,
+			</if>		
+			<if test="iattent != null">
+				<![CDATA[ iattent = #{iattent} ]]>,
+			</if>			
+			lmodified = UNIX_TIMESTAMP(now())
+		 </set>		 
+		 where	order_id = #{orderId} 	
+    </update> 
+    
+    <update id="update" parameterType="RyxApplyDTO">
+    
+        update ryx_apply         
+        <set>						
+			<if test="ideleted != null">
+				<![CDATA[ ideleted = #{ideleted} ]]>,
+			</if>
+			
+			<if test="oid != null">
+				<![CDATA[ oid = #{oid} ]]>,
+			</if>
+			
+			<if test="otype != null">
+				<![CDATA[ otype = #{otype} ]]>,
+			</if>	
+			
+			<if test="otype != null">
+				<![CDATA[ otype = #{otype} ]]>,
+			</if>	
+			
+			<if test="orderId != null">
+				<![CDATA[ order_id = #{orderId} ]]>,
+			</if>	
+			<if test="iattent != null">
+				<![CDATA[ iattent = #{iattent} ]]>,
+			</if>	
+			<if test="status != null">
+				<![CDATA[ status = #{status} ]]>,
+			</if>		
+			<if test="amount != null">
+				<![CDATA[ amount = #{amount} ]]>,
+			</if>			
+			lmodified = UNIX_TIMESTAMP(now())
+		 </set>		 
+		 where	id = #{id}	
+		 <if test="userId != null">
+			<![CDATA[ and user_id = #{userId} ]]>
+		</if>	 	
+    </update> 
+    
+  	
+    
+    <delete id="delete" parameterType="RyxApplyDTO">    
+        update ryx_apply         
+        set ideleted = 1		 
+		where id = #{id}	
+		<if test="userId != null">
+			<![CDATA[ and user_id = #{userId} ]]>
+		</if>	
+		<if test="orderId != null">
+			<![CDATA[ and order_id = #{orderId} ]]>
+		</if> 	
+    </delete> 
+    
+    <delete id="cdelete" parameterType="RyxApplyDTO">    
+        delete from  ryx_apply 	 
+		where 1 = 1
+		
+		<if test="id == null and userId == null and orderId == null">
+			and id = 0 
+		</if>
+		
+		<if test="id != null">
+			and id = #{id}	
+		</if>	
+		<if test="userId != null">
+			<![CDATA[ and user_id = #{userId} ]]>
+		</if>	
+		<if test="orderId != null">
+			<![CDATA[ and order_id = #{orderId} ]]>
+		</if> 	
+    </delete> 
+    
+</mapper> 

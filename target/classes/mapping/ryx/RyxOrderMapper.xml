@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.ryx.RyxOrderMapper">  
+
+    
+    
+    <sql id="select">
+		
+		id,
+		uid,
+	    order_name orderName,
+	    order_time orderTime,
+	    order_amount orderAmount,
+	    order_status orderStatus,
+	    order_body orderBody,
+	    order_uid orderUid,
+	    order_username orderUsername,
+	    return_order_id returnOrderId,
+	    seller_uid sellerUid,
+	    seller_username sellerUsername,
+	    to_seller_message toSellerMessage,
+	    status,
+	    course_id courseId,
+	    avai_time avaiTime,
+	    ifFeedback,
+	    use_balance useBalance,
+	    pay_type payType,
+	    tpay,
+	    tcreate,
+	    creater,
+	    discount1,
+	    discount2,
+	    original_price originalPrice,
+	    partner_id partnerId,
+	    real_price realPrice,
+	    coupon,
+	    order_type orderType,
+	    remark,
+	    source
+	    
+	    
+	</sql>
+
+	<sql id="where">
+	
+	    <where>
+	    
+			<if test="orderUid != null">
+				<![CDATA[ and order_uid = #{orderUid} ]]>
+			</if>
+			
+			<if test="sellerUid != null">
+				<![CDATA[ and seller_uid = #{sellerUid} ]]>
+			</if>
+			
+			<if test="courseId != null">
+				<![CDATA[ and course_id = #{courseId} ]]>
+			</if>	
+			
+			<if test="uid != null">
+				<![CDATA[ and uid = #{uid} ]]>
+			</if>	
+			
+			<if test="status != null">
+				<![CDATA[ and status = #{status} ]]>
+			</if>	
+			<if test="ifFeedback != null">
+				<![CDATA[ and iffeedback = #{ifFeedback} ]]>
+			</if>	
+			<if test="partnerId != null">
+				<![CDATA[ and partner_id = #{partnerId} ]]>
+			</if>	
+			<if test="orderType != null">
+				<![CDATA[ and order_type = #{orderType} ]]>
+			</if>		
+			<if test="payType != null">
+				<![CDATA[ and pay_type = #{payType} ]]>
+			</if>
+			<if test="source != null">
+				<![CDATA[ and source = #{source} ]]>
+			</if>		
+			
+			<if test="dstartTime != null and dstartTime !='' ">
+				<![CDATA[and  tcreate >= #{dstartTime} ]]>
+			</if>
+			<if test="dendTime != null and dendTime !='' ">
+				<![CDATA[and  tcreate <= #{dendTime} ]]>
+			</if>
+			
+		</where>
+		
+	</sql>
+   
+    <insert id="create" parameterType="RyxOrderDTO">   
+       insert into ryx_order(
+       		uid,
+		    order_name,
+		    order_time,
+		    order_amount,
+		    order_status,
+		    order_body,
+		    order_uid,
+		    order_username,
+		    return_order_id,
+		    seller_uid,
+		    seller_username,
+		    to_seller_message,
+		    status,
+		    course_id,
+		    avai_time,
+		    ifFeedback,
+		    use_balance,
+		    discount1,
+		    discount2,
+		    original_price,
+		    partner_id,
+		    order_type,
+		    creater,
+		    remark,
+		    source
+       ) 
+       values
+       (    
+       		#{uid},   
+		    #{orderName},
+		    #{orderTime},
+		    #{orderAmount},
+		    #{orderStatus},
+		    #{orderBody},
+		    #{orderUid},
+		    #{orderUsername},
+		    #{returnOrderId},
+		    #{sellerUid},
+		    #{sellerUsername},
+		    #{toSellerMessage},
+		    #{status},
+		    #{courseId},
+		    #{avaiTime},
+		    #{ifFeedback},
+		    #{useBalance},
+		    #{discount1},
+		    #{discount2},
+		    #{originalPrice},
+		    #{partnerId},
+		    #{orderType},
+		    #{creater},
+		    #{remark},
+		    #{source}		    
+       ) 
+       
+        <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+			select LAST_INSERT_ID() 
+		</selectKey>
+    </insert>
+      
+    
+    <select id="query" resultType="RyxOrderDTO" parameterType="RyxOrderQuery">
+         
+        select
+         
+        <include refid="select"/>
+        
+        from ryx_order 
+        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+	 <select id="countQuery" resultType="java.lang.Integer" parameterType="RyxOrderQuery">   
+        select count(1) from ryx_order 
+        <include refid="where"/>
+    </select>
+
+	<update id="updateUseBalance" parameterType="RyxOrderDTO">
+    	 update ryx_order t set t.use_balance= #{useBalance} where t.id= #{id}
+    </update>
+    
+    
+    <update id="updateOrderUid" parameterType="RyxOrderDTO">
+    	 update ryx_order t set t.uid= #{uid} where t.id= #{id}
+    </update>
+     
+    <select id="getByIdUserId" resultType="RyxOrderDTO"  parameterType="RyxOrderQuery">         
+        select 
+        <include refid="select"/>
+        from ryx_order t where t.id = #{id} and t.order_uid =  #{orderUid} 
+		
+    </select>
+    
+    
+   <select id="getByUidUserId" resultType="RyxOrderDTO"  parameterType="RyxOrderQuery">         
+        select 
+        <include refid="select"/>
+        from ryx_order t where t.uid = #{uid} and t.order_uid =  #{orderUid} 
+		
+    </select> 
+    
+    
+    <select id="getById" resultType="RyxOrderDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select"/>
+        from ryx_order where id = #{id}  limit 1;
+    </select>  
+    
+    <select id="getByUid" resultType="RyxOrderDTO" parameterType="java.lang.String">   
+        select 
+        <include refid="select"/>
+        from ryx_order where uid = #{uid}  limit 1;
+    </select>  
+    
+    <select id="getByUserId" resultType="RyxOrderDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select"/>
+        from ryx_order where order_uid= #{orderUid} order by order_time desc
+    </select>     
+    
+    <select id="queryByIdMember" resultType="RyxOrderDTO" parameterType="RyxOrderQuery">   
+        select 
+        <include refid="select"/>
+        from ryx_order where id = #{id} and member =#{member} limit 1;
+    </select>
+    
+    <select id="queryByUid" resultType="RyxOrderDTO" parameterType="java.lang.String">   
+        select 
+        <include refid="select"/>
+        from ryx_order where uid = #{uid}  limit 1; 
+    </select>
+    
+     <select id="queryPassdByUid" resultType="java.lang.String" parameterType="java.lang.String">   
+        select passd from ryx_order where uid = #{uid}  limit 1; 
+    </select>    
+    
+    <select id="queryByCode" resultType="RyxOrderDTO" parameterType="java.lang.String">   
+        select 
+        <include refid="select"/>
+        from ryx_order where code = #{code} and ideleted =0 limit 1; 
+    </select> 
+    
+    
+    <select id="getOrderCountByUserIdAndCourseId" resultType="java.lang.Integer" parameterType="RyxOrderQuery">   
+        select count(1) from ryx_object_limit o 
+        join ryx_course c on o.oid=c.id
+        where <![CDATA[o.status <> 1 ]]> and o.limi > #{tnow} and c.id= #{courseId} and o.user_id = #{orderUid}
+    </select>
+    
+    
+    
+    <update id="update" parameterType="RyxOrderDTO">
+    
+        update ryx_order
+         
+        <set>	
+					
+			<if test="orderName != null">
+				<![CDATA[ order_name = #{orderName} ]]>,
+			</if>
+			
+			<if test="orderTime != null">
+				<![CDATA[ order_time = #{orderTime} ]]>,
+			</if>
+			
+			<if test="orderAmount != null">
+				<![CDATA[ order_amount = #{orderAmount} ]]>,
+			</if>
+			
+			<if test="orderStatus != null">
+				<![CDATA[ order_status = #{orderStatus} ]]>,
+			</if>
+			
+			<if test="orderBody != null">
+				<![CDATA[ order_body = #{orderBody} ]]>,
+			</if>
+			
+			<if test="orderUid != null">
+				<![CDATA[ order_uid = #{orderUid} ]]>,
+			</if>
+
+			<if test="orderUsername != null">
+				<![CDATA[ order_username = #{orderUsername} ]]>,
+			</if>
+			
+			<if test="returnOrderId != null">
+				<![CDATA[ return_order_id = #{returnOrderId} ]]>,
+			</if>
+			
+			<if test="sellerUid != null">
+				<![CDATA[ seller_uid = #{sellerUid} ]]>,
+			</if>
+			
+			<if test="sellerUsername != null">
+				<![CDATA[ seller_username = #{sellerUsername} ]]>,
+			</if>
+			
+			<if test="toSellerMessage != null">
+				<![CDATA[ to_seller_message = #{toSellerMessage} ]]>,
+			</if>
+			
+			<if test="status != null">
+				<![CDATA[ status = #{status} ]]>,
+			</if>
+			
+			<if test="courseId != null">
+				<![CDATA[ course_id = #{courseId} ]]>,
+			</if>
+			
+			<if test="payType != null">
+				<![CDATA[ pay_type = #{payType} ]]>,
+			</if>
+			
+			<if test="tpay != null">
+				<![CDATA[ tpay = #{tpay} ]]>,
+			</if>
+			
+			<if test="tcreate != null">
+				<![CDATA[ tcreate = #{tcreate} ]]>,
+			</if>
+			
+			<if test="coupon != null">
+				<![CDATA[ coupon = #{coupon} ]]>,
+			</if>
+			
+			<if test="realPrice != null">
+				<![CDATA[ real_price = #{realPrice} ]]>,
+			</if>
+			
+			<if test="discount1 != null">
+				<![CDATA[ discount1 = #{discount1} ]]>,
+			</if>
+			
+			<if test="useBalance != null">
+				<![CDATA[ use_balance = #{useBalance} ]]>,
+			</if>
+			
+			<if test="discount2 != null">
+				<![CDATA[ discount2 = #{discount2} ]]>,
+			</if>
+			
+			<if test="remark != null">
+				<![CDATA[ remark = #{remark} ]]>,
+			</if>
+			
+			<![CDATA[ creater = #{creater} ]]>
+			
+			
+		 </set>
+		 
+		 where	id = #{id} 
+		 	
+    </update> 
+    
+    
+    
+    <delete id="deleteById" parameterType="java.lang.String">    
+        delete from ryx_order where id = #{id} and status == 1 	
+    </delete> 
+    
+    <delete id="deleteByIdUserId" parameterType="RyxOrderDTO">    
+        delete from ryx_order where id= #{id} and order_uid = #{orderUid} and status = 1	
+    </delete> 
+    
+    <update id="updateOrderIfFeedback" parameterType="java.lang.Long">    
+       	update ryx_order t set t.ifFeedback=1 where t.id=#{id}
+    </update>	
+    
+</mapper> 

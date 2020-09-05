@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.ryx.RyxUserEcourseMapper"> 
+
+    <sql id="select">		
+		id,
+	    user_id userId,
+	    ecid,
+	    ecid1,
+	   	category,
+	   	status    
+	</sql>
+
+	<sql id="where">
+	
+	    <where>
+	    
+	    	<if test="id != null">
+				<![CDATA[ and id = #{id} ]]>
+			</if>
+			
+			<if test="userId != null">
+				<![CDATA[ and user_id = #{userId} ]]>
+			</if>
+			
+			<if test="ecid != null">
+				<![CDATA[ and ecid = #{ecid} ]]>
+			</if>
+			
+			<if test="ecid1 != null">
+				<![CDATA[ and ecid1 = #{ecid1} ]]>
+			</if>
+			
+			<if test="category != null">
+				<![CDATA[ and category = #{category} ]]>
+			</if>
+			
+			<if test="status != null">
+				<![CDATA[ and status = #{status} ]]>
+			</if>
+			
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="RyxUserEcourseDTO">   
+    
+       insert into ryx_user_ecourse(       
+			user_id,
+		    ecid,
+		    ecid1,
+		   	category,
+		   	status
+       ) 
+       values
+       (		
+		    #{userId},
+		    #{ecid},
+		    #{ecid1},
+		    #{category},
+		    #{status}
+       ) 
+       
+       <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+			select LAST_INSERT_ID() 
+		</selectKey>
+    </insert>
+      
+    
+    <update id="update" parameterType="RyxUsersDTO">
+        update ryx_user_ecourse
+        <set>	
+       	 	<if test="userId != ecid">
+				<![CDATA[ user_id = #{userId} ]]>,
+			</if>			
+			<if test="ecid != ecid">
+				<![CDATA[ ecid = #{ecid} ]]>,
+			</if>
+			<if test="ecid1 != null">
+				<![CDATA[ ecid1 = #{ecid1} ]]>,
+			</if>
+			<if test="category != null">
+				<![CDATA[ category = #{category} ]]>,
+			</if>
+			<if test="status != null">
+				<![CDATA[ status = #{status} ]]>,
+			</if>
+		 </set>
+		 where	id = #{id}
+    </update>
+    
+     <update id="update1" parameterType="RyxUsersDTO">
+        update ryx_user_ecourse
+        <set>
+			<if test="category != null">
+				<![CDATA[ category = #{category} ]]>,
+			</if>
+			<if test="status != null">
+				<![CDATA[ status = #{status} ]]>,
+			</if>
+		 </set>
+		 <include refid="where"/>
+    </update>
+    
+    
+    <select id="query" resultType="RyxUserEcourseDTO" parameterType="RyxUserEcourseQuery">
+         
+        select
+         
+        <include refid="select"/>
+        
+        from ryx_user_ecourse 
+        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+    
+    <select id="query1" resultType="java.lang.Long" parameterType="RyxUserEcourseQuery">        
+        select  ecid from (
+        select ecid from ryx_user_ecourse         
+        <include refid="where"/>
+        group by ecid
+        )t
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>
+    </select>
+    
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="RyxUserEcourseQuery">   
+        select count(1) from ryx_user_ecourse 
+        <include refid="where"/>
+    </select>
+        
+    
+    <select id="countQuery1" resultType="java.lang.Integer" parameterType="RyxUserEcourseQuery">   
+        select count(1) from (
+        select ecid from ryx_user_ecourse         
+        <include refid="where"/>
+        group by ecid
+        )t
+    </select>
+    
+    
+    <delete id="cdelete" parameterType="RyxUserEcourseDTO">   
+        delete from ryx_user_ecourse where 
+        user_id = #{userId} and status = #{status}
+    </delete>
+    
+    
+</mapper> 

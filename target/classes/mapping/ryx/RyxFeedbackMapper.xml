@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.ryx.RyxFeedbackMapper">  
+
+    
+    
+    <sql id="select">
+		
+		id,
+	    content,
+	    status,
+	    type,
+	    user_id userId,
+	    course_id courseId,
+	    feedback_time feedbackTime,
+	    order_id orderId,
+	    uname,
+	    remark,
+		mobile
+	    
+	</sql>
+
+	<sql id="where">
+	
+	    <where>
+	    
+			<if test="userId != null">
+				<![CDATA[ and user_id = #{userId} ]]>
+			</if>
+			
+		
+			
+			<if test="type != null">
+				<![CDATA[ and type = #{type} ]]>
+			</if>
+			
+			<if test="courseId != null">
+				<![CDATA[ and course_id = #{courseId} ]]>
+			</if>
+			
+			<if test="orderId != null">
+				<![CDATA[ and order_id = #{orderId} ]]>
+			</if>			
+			
+			<if test="status != null">
+				<![CDATA[ and status = #{status} ]]>
+			</if>
+			<if test="uname != null and uname != '' ">
+				<![CDATA[ and uname = #{uname} ]]>
+			</if>
+			<if test="mobile != null and mobile != '' ">
+				<![CDATA[ and mobile = #{mobile} ]]>
+			</if>
+			
+			
+			
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="RyxFeedbackDTO">   
+       insert into ryx_feedback(
+		    content,
+		    status,
+		    user_id,
+		    type,
+		    course_id,
+		    feedback_time,
+		    order_id,
+		    uname,
+		    mobile,
+		    remark
+       ) 
+       values
+       (
+		    #{content},
+		    #{status},
+		    #{userId},
+		    #{type},
+		    #{courseId},
+		    now(),
+		    #{orderId},
+		    #{uname},
+		    #{mobile},
+		    #{remark}
+       ) 
+    </insert>
+      
+    
+    <select id="query" resultType="RyxFeedbackDTO" parameterType="RyxFeedbackQuery">
+         
+        select
+         
+        <include refid="select"/>
+        
+        from ryx_feedback 
+        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+     
+    <select id="getFeedbackByCourseId" resultType="RyxFeedbackDTO" parameterType="java.lang.Long" >
+         
+        select         
+        <include refid="select"/>
+        from ryx_feedback t where t.status = 1 and t.course_id = #{courseId} order by feedbackTime desc 
+		
+    </select>
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="RyxFeedbackQuery">   
+        select count(1) from ryx_feedback 
+        <include refid="where"/>
+    </select>
+    
+    <select id="queryById" resultType="RyxFeedbackDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select"/>
+        from ryx_feedback where id = #{id}  limit 1;
+    </select>    
+    
+   
+    
+    <update id="update" parameterType="RyxFeedbackDTO">
+        update ryx_feedback
+        <set>	
+			<if test="remark != null">
+				<![CDATA[ remark = #{remark} ]]>,
+			</if>
+		 </set>
+		 where	id = #{id} 
+    </update> 
+    
+  
+    
+    <delete id="delete" parameterType="java.lang.String">
+    
+        update ryx_feedback
+         
+        set ideleted = 1
+		 
+		where uid = #{uid}
+		 	
+    </delete> 
+    
+</mapper> 

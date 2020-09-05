@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.ryx.RyxTeacherMapper">  
+
+    
+    
+    
+     <sql id="select">
+		
+		t.id,
+	    t.uid,
+	    t.nickname,
+	    t.nick,
+	    t.title,
+	    t.type,
+	    t.be_good_at beGoodAt,
+	    t.tags,
+	    t.rating,
+	    t.rating_count ratingCount,
+	    t.status,
+	    t.image_url imageUrl,
+	    t.flag,
+	    t.sort,
+	    t.creater,
+	    t.lcreate,
+	    t.display,
+	    t.ideleted,
+	    t.lmodified,
+	    t.scale,
+	    t.industry0,
+	    t.industry1,
+	    t.industry2,
+	    t.otype,
+	    t.dcode,
+	    t.dpic1,
+	    t.dpic2,
+	    t.fname,
+	    t.contact,
+	    t.mobile,
+	    t.email,
+	    t.phone
+	    
+	</sql>
+    
+    <sql id="select1">
+		
+		t.id,
+	    t.uid,
+	    t.nickname,
+	    t.nick,
+	    t.title,
+	    t.type,
+	    t.be_good_at beGoodAt,
+	    t.tags,
+	    t.rating,
+	    t.rating_count ratingCount,
+	    t.status,
+	    t.image_url imageUrl,
+	    t.flag,
+	    t.sort,
+	    t.creater,
+	    t.lcreate,
+	    t.display,
+	    t.ideleted,
+	    t.lmodified,
+	    t.scale,
+	    t.industry0,
+	    t.industry1,
+	    t.industry2,
+	    t.otype,
+	    t.dcode,
+	    t.dpic1,
+	    t.dpic2,
+	    t.fname,
+	    t.contact,
+	    t.mobile,
+	    t.email,
+	    t.phone,
+	    t.introduction	    
+	</sql>
+
+	<sql id="where">
+	
+	    <where>
+	    
+			<if test="id != null">
+				<![CDATA[ and id = #{id} ]]>
+			</if>
+			
+			<if test="uid != null">
+				<![CDATA[ and uid = #{uid} ]]>
+			</if>
+			
+			<if test="nickname != null and nickname!='' ">
+				<![CDATA[ and nickname = #{nickname} ]]>
+			</if>
+			
+			<if test="flag != null">
+				<![CDATA[ and flag = #{flag} ]]>
+			</if>
+			
+			<if test="status != null">
+				<![CDATA[ and status = #{status} ]]>
+			</if>
+			
+			<if test="ideleted != null">
+				<![CDATA[ and ideleted = #{ideleted} ]]>
+			</if>
+			
+			<if test="display != null">
+				<![CDATA[ and display = #{display} ]]>
+			</if>
+			
+			<if test="keyword != null and keyword !=''">
+				<![CDATA[ and (nickname like '%${keyword}%' or be_good_at  like '%${keyword}%' or  tags like '%${keyword}%' ) ]]>
+			</if>
+			
+		</where>
+		
+	</sql>
+	
+	<sql id="orderby">
+	
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>	
+		
+	</sql>
+	
+	
+	<sql id="where1">
+	
+	    <where>
+	    
+			<if test="id != null">
+				<![CDATA[ and t.id = #{id} ]]>
+			</if>
+			
+			<if test="uid != null">
+				<![CDATA[ and t.uid = #{uid} ]]>
+			</if>
+			
+			<if test="nickname != null">
+				<![CDATA[ and t.nickname = #{nickname} ]]>
+			</if>
+			
+			<if test="status != null">
+				<![CDATA[ and t.status = #{status} ]]>
+			</if>
+			
+			<if test="type != null">
+				<![CDATA[ and t.type = #{type} ]]>
+			</if>
+			
+			<if test="flag != null">
+				<![CDATA[ and t.flag = #{flag} ]]>
+			</if>
+			
+			<if test="category != null">
+				<![CDATA[ and c.category = #{category} ]]>
+			</if>
+			
+			<if test="userId != null">
+				<![CDATA[ and c.user_id = #{userId} ]]>
+			</if>
+			
+			<if test="ideleted != null">
+				<![CDATA[ and t.ideleted = #{ideleted} ]]>
+			</if>
+			
+			<if test="display != null">
+				<![CDATA[ and t.display = #{display} ]]>
+			</if>
+			
+			<if test="keyword != null and keyword !=''">
+				<![CDATA[ and (t.nickname like '%${keyword}%' or t.be_good_at  like '%${keyword}%' or  t.tags like '%${keyword}%' ) ]]>
+			</if>
+			
+		</where>
+		
+	</sql>
+   
+    <insert id="create" parameterType="RyxTeacherDTO">   
+       insert into ryx_teacher(       
+       		
+		    uid,
+		    nickname,
+		    nick,
+		    title,
+		    type,
+		    be_good_at,
+		    introduction,
+		    tags,
+		    rating,
+		    rating_count,
+		    status,
+		    image_url,
+		    price,
+		    flag,
+		    sort,
+		    creater,
+		    lcreate,
+		    lmodified,
+		    scale,
+		    industry0,
+		    industry1,
+		    industry2,
+		    otype,
+		    dcode,
+		    dpic1,
+		    dpic2,
+		    fname,
+		    contact,
+		    mobile,
+		    phone,
+		    email
+	    
+       ) 
+       values
+       (
+       
+		    #{uid}, 
+		    #{nickname},
+		    #{nick},
+		    #{title},  
+		    #{type}, 
+		    #{beGoodAt}, 
+		    #{introduction}, 
+		    #{tags}, 
+		    #{rating}, 
+		    #{ratingCount}, 
+		    #{status}, 
+		    #{imageUrl}, 
+		    #{price}, 
+		    #{flag}, 
+		    #{sort},
+		    #{creater},
+		    UNIX_TIMESTAMP(now()),
+		    UNIX_TIMESTAMP(now()),
+		    #{scale},
+		    #{industry0},
+		    #{industry1},
+		    #{industry2},
+		    #{otype},
+		    #{dcode},
+		    #{dpic1},
+		    #{dpic2},
+		    #{fname} ,
+		    #{contact},
+		    #{mobile},
+		    #{phone},
+		    #{email}
+		          ) 
+		    
+		  <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+			select LAST_INSERT_ID() 
+		</selectKey>
+    </insert>
+      
+      
+     
+
+
+	<select id="query1" resultType="java.lang.Long" parameterType="RyxTeacherQuery">
+         
+        select t.id
+        from ryx_teacher t
+		join ryx_course c
+		on t.id=c.tid
+        <include refid="where1"/>
+        group by t.id 
+		<if test="orderBy != null and orderBy !=''">
+			order by t.${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+    <select id="query" resultType="RyxTeacherDTO" parameterType="RyxTeacherQuery">
+         
+        select
+         
+        <include refid="select"/>
+        
+        from ryx_teacher t
+        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+     
+  
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="RyxTeacherQuery">   
+        select count(1) from ryx_teacher t 
+        <include refid="where"/>
+    </select>
+    
+    <select id="countForCreateOrUpdate" resultType="java.lang.Integer" parameterType="RyxTeacherDTO">   
+        select count(1) from ryx_teacher  where uid = #{uid}
+    </select>
+    
+    <select id="countQuery1" resultType="java.lang.Integer" parameterType="RyxTeacherQuery">   
+        
+        select count(1) from
+        (
+	        select t.id     
+	        from ryx_teacher t
+			join ryx_course c
+			on t.id=c.tid        
+	        <include refid="where1"/>		
+			group by t.id 
+		) a
+		
+    </select>
+    
+    <select id="getTeacherById" resultType="RyxTeacherDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select1"/>
+        from ryx_teacher t where id = #{id}  limit 1;
+    </select>    
+    
+    <select id="getTeacherByNick" resultType="RyxTeacherDTO" parameterType="java.lang.String">   
+        select 
+        <include refid="select1"/>
+        from ryx_teacher t where nick = #{nick}  limit 1;
+    </select>    
+    
+    
+     <select id="getTeacherByUserId" resultType="RyxTeacherDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select1"/>
+        from ryx_teacher t where uid = #{uid}  limit 1;
+    </select>  
+    
+    <select id="queryByIdMember" resultType="RyxTeacherDTO" parameterType="RyxTeacherQuery">   
+        select 
+        <include refid="select"/>
+        from ryx_teacher t where id = #{id} and member =#{member} limit 1;
+    </select>
+    
+    <select id="queryByUid" resultType="RyxTeacherDTO" parameterType="java.lang.String">   
+        select 
+        <include refid="select"/>
+        from ryx_teacher t where uid = #{uid}  limit 1; 
+    </select>
+    
+     <select id="queryPassdByUid" resultType="java.lang.String" parameterType="java.lang.String">   
+        select passd from ryx_teacher t where uid = #{uid}  limit 1; 
+    </select>    
+    
+    <select id="queryByCode" resultType="RyxTeacherDTO" parameterType="java.lang.String">   
+        select 
+        <include refid="select"/>
+        from ryx_teacher t where code = #{code} and ideleted =0 limit 1; 
+    </select> 
+    
+    
+    <update id="update" parameterType="RyxTeacherDTO">
+    
+        update ryx_teacher
+         
+        <set>	
+					
+			<if test="nickname != null">
+				<![CDATA[ nickname = #{nickname} ]]>,
+			</if>
+			
+			<if test="sort != null">
+				<![CDATA[ sort = #{sort} ]]>,
+			</if>
+			
+			<if test="title != null">
+				<![CDATA[ title = #{title} ]]>,
+			</if>
+			
+			<if test="flag != null">
+				<![CDATA[ flag = #{flag} ]]>,
+			</if>
+			
+			<if test="nick != null">
+				<![CDATA[ nick = #{nick} ]]>,
+			</if>
+			
+			<if test="status != null">
+				<![CDATA[ status = #{status} ]]>,
+			</if>
+			
+			<if test="introduction != null">
+				<![CDATA[ introduction = #{introduction} ]]>,
+			</if>
+			
+			<if test="beGoodAt != null">
+				<![CDATA[ be_good_at = #{beGoodAt} ]]>,
+			</if>
+
+			<if test="tags != null">
+				<![CDATA[ tags = #{tags} ]]>,
+			</if>
+			
+			<if test="imageUrl != null ">
+				<![CDATA[ image_url = #{imageUrl} ]]>,
+			</if>
+			
+			<if test="display != null">
+				<![CDATA[ display = #{display} ]]>,
+			</if>
+			
+			<if test="ideleted != null">
+				<![CDATA[ ideleted = #{ideleted} ]]>,
+			</if>
+			
+			<if test="scale != null">
+				<![CDATA[ scale = #{scale} ]]>,
+			</if>
+			
+			<if test="industry0 != null">
+				<![CDATA[ industry0 = #{industry0} ]]>,
+			</if>
+			<if test="industry1 != null">
+				<![CDATA[ industry1 = #{industry1} ]]>,
+			</if>
+			<if test="industry2 != null">
+				<![CDATA[ industry2 = #{industry2} ]]>,
+			</if>
+			<if test="otype != null">
+				<![CDATA[ otype = #{otype} ]]>,
+			</if>
+			<if test="dcode != null">
+				<![CDATA[ dcode = #{dcode} ]]>,
+			</if>
+			<if test="dpic1 != null">
+				<![CDATA[ dpic1 = #{dpic1} ]]>,
+			</if>
+			<if test="dpic2 != null">
+				<![CDATA[ dpic2 = #{dpic2} ]]>,
+			</if>
+			<if test="fname != null">
+				<![CDATA[ fname = #{fname} ]]>,
+			</if>
+			
+			<if test="contact != null">
+				<![CDATA[ contact = #{contact} ]]>,
+			</if>
+			
+			<if test="mobile != null">
+				<![CDATA[ mobile = #{mobile} ]]>,
+			</if>
+			
+			<if test="phone != null">
+				<![CDATA[ phone = #{phone} ]]>,
+			</if>
+			
+			<if test="email != null">
+				<![CDATA[ email = #{email} ]]>,
+			</if>
+			
+			 creater = #{creater},
+			 lmodified = UNIX_TIMESTAMP(now()) 
+			 
+		 </set>
+		 
+		 where	uid = #{uid}
+		 	
+    </update> 
+    
+    
+    <update id="createOrUpdate" parameterType="RyxTeacherDTO">
+    
+        update ryx_teacher
+         
+        <set>	
+					
+			<if test="nickname != null">
+				<![CDATA[ nickname = #{nickname} ]]>,
+			</if>
+			
+			<if test="title != null">
+				<![CDATA[ title = #{title} ]]>,
+			</if>
+			
+			<if test="flag != null">
+				<![CDATA[ flag = #{flag} ]]>,
+			</if>
+			
+			<if test="nick != null">
+				<![CDATA[ nick = #{nick} ]]>,
+			</if>
+			
+			<if test="status != null">
+				<![CDATA[ status = #{status} ]]>,
+			</if>
+			
+			<if test="introduction != null">
+				<![CDATA[ introduction = #{introduction} ]]>,
+			</if>
+			
+			<if test="beGoodAt != null">
+				<![CDATA[ be_good_at = #{beGoodAt} ]]>,
+			</if>
+
+			<if test="tags != null">
+				<![CDATA[ tags = #{tags} ]]>,
+			</if>
+			
+			<if test="imageUrl != null">
+				<![CDATA[ image_url = #{imageUrl} ]]>,
+			</if>
+			
+			<if test="display != null">
+				<![CDATA[ display = #{display} ]]>,
+			</if>
+			
+				<if test="scale != null">
+				<![CDATA[ scale = #{scale} ]]>,
+			</if>
+			
+			<if test="industry0 != null">
+				<![CDATA[ industry0 = #{industry0} ]]>,
+			</if>
+			<if test="industry1 != null">
+				<![CDATA[ industry1 = #{industry1} ]]>,
+			</if>
+			<if test="industry2 != null">
+				<![CDATA[ industry2 = #{industry2} ]]>,
+			</if>
+			<if test="otype != null">
+				<![CDATA[ otype = #{otype} ]]>,
+			</if>
+			<if test="dcode != null">
+				<![CDATA[ dcode = #{dcode} ]]>,
+			</if>
+			<if test="dpic1 != null">
+				<![CDATA[ dpic1 = #{dpic1} ]]>,
+			</if>
+			<if test="dpic2 != null">
+				<![CDATA[ dpic2 = #{dpic2} ]]>,
+			</if>
+			<if test="fname != null">
+				<![CDATA[ fname = #{fname} ]]>,
+			</if>			
+			<if test="contact != null">
+				<![CDATA[ contact = #{contact} ]]>,
+			</if>
+			
+			<if test="mobile != null">
+				<![CDATA[ mobile = #{mobile} ]]>,
+			</if>
+			
+			<if test="phone != null">
+				<![CDATA[ phone = #{phone} ]]>,
+			</if>
+			
+			<if test="email != null">
+				<![CDATA[ email = #{email} ]]>,
+			</if>
+			
+			<if test="flag != null">
+				<![CDATA[ flag = #{flag} ]]>,
+			</if>
+			
+			 creater = #{creater},
+			 lmodified = UNIX_TIMESTAMP(now())  
+			 
+		 </set>
+		 
+		 where	uid = #{uid}
+		 	
+    </update> 
+  
+  	 <select id="getMyFollowTeacher" resultType="RyxTeacherDTO" parameterType="RyxTeacherQuery">         
+        select 
+		<include refid="select"/>
+		from ryx_user_follow_teacher c
+        join ryx_teacher t on c.teacher_id=t.id 
+      
+		<include refid="where1"/>        
+        <include refid="orderby"/>
+        
+    </select>
+    
+    <select id="getMyFollowTeacherCount" resultType="java.lang.Integer" parameterType="RyxTeacherQuery">         
+        select count(1) from ryx_user_follow_teacher c
+        join ryx_teacher t on c.teacher_id=t.id       
+		<include refid="where1"/>        
+        limit 1;        
+    </select>
+    
+    <delete id="delete" parameterType="java.lang.String">
+    
+        update ryx_teacher
+         
+        set ideleted = 1
+		 
+		where uid = #{uid}
+		 	
+    </delete> 
+    
+</mapper> 

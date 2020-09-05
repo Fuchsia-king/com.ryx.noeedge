@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.ryx.RyxAdminMapper">  
+
+
+	 <sql id="select">
+		
+		id,
+	    user_id userId,
+	    username,
+	    email,
+	    mobile,
+	    tcreate,
+	    tmodified,
+	    ideleted,
+	    dept ,
+	    creater_id createrId
+	    
+	</sql>
+	
+
+	<sql id="where">
+	
+	    <where>
+	    
+	    	<if test="id != null">
+				<![CDATA[ and id = #{id} ]]>
+			</if>
+			
+			<if test="username != null and username != '' ">
+				<![CDATA[ and username = #{username} ]]>
+			</if>
+			
+			
+			<if test="mobile != null and mobile != '' ">
+				<![CDATA[ and mobile = #{mobile} ]]>
+			</if>
+			
+			
+			<if test="email != null and email != '' ">
+				<![CDATA[ and email = #{email} ]]>
+			</if>
+			
+			<if test="createrId != null ">
+				<![CDATA[ and creater_id = #{createrId} ]]>
+			</if>
+			
+			<if test="ideleted != null ">
+				<![CDATA[ and ideleted = #{ideleted} ]]>
+			</if>
+			
+			<if test="dept != null ">
+				<![CDATA[ and dept = #{dept} ]]>
+			</if>
+			
+			
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="RyxAdminDTO">   
+       insert into ryx_admin(user_id,mobile,email,username,tcreate,tmodified,ideleted,creater_id,dept) 
+       values
+       (#{userId},#{mobile},#{email},#{username},now(),now(),#{ideleted},#{createrId},#{dept})  
+       
+       <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+			select LAST_INSERT_ID() 
+		</selectKey>
+		
+    </insert>
+    
+    
+
+      
+    
+    <select id="query" resultType="RyxAdminDTO" parameterType="RyxAdminQuery">
+         
+        select
+         <include refid="select"/>
+        from ryx_admin 
+        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+     
+    <select id="queryAll" resultType="RyxAdminDTO">
+         
+        select code,name from ryx_admin where ideleted = 0 order by name 
+		
+    </select>
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="RyxAdminQuery">   
+        select count(1) from ryx_admin 
+        <include refid="where"/>
+    </select>
+    
+    <select id="queryById" resultType="RyxAdminDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select"/>
+        from ryx_admin where id = #{id}  limit 1;
+    </select>    
+    
+    <select id="queryByUserId" resultType="RyxAdminDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select"/>
+        from ryx_admin where user_id = #{userId}  limit 1;
+    </select>  
+    
+    <select id="queryByUid" resultType="RyxAdminDTO" parameterType="java.lang.String">   
+        select 
+        <include refid="select"/>
+        from ryx_admin where uid = #{uid}  limit 1; 
+    </select>
+    
+     <select id="queryPassdByUid" resultType="java.lang.String" parameterType="java.lang.String">   
+        select password from ryx_admin where uid = #{uid}  limit 1; 
+    </select>    
+    
+    <select id="queryByCode" resultType="RyxAdminDTO" parameterType="java.lang.String">   
+        select
+        <include refid="select"/>
+        from ryx_admin where code = #{code} and ideleted =0 limit 1; 
+    </select> 
+    
+    
+    <update id="update" parameterType="RyxAdminDTO">
+    
+        update ryx_admin
+         
+        <set>	
+					
+			<if test="username != null">
+				<![CDATA[ username = #{username} ]]>,
+			</if>
+			
+			<if test="mobile != null">
+				<![CDATA[ mobile = #{mobile} ]]>,
+			</if>
+			
+			
+			<if test="email != null">
+				<![CDATA[ email = #{email} ]]>,
+			</if>
+			
+			<if test="ideleted != null">
+				<![CDATA[ ideleted = #{ideleted} ]]>,
+			</if>
+			
+			<if test="dept != null">
+				<![CDATA[ dept = #{dept} ]]>,
+			</if>
+			
+			tmodified = now(),
+			creater_id = #{createrId}
+			
+		 </set>
+		 
+		where id = #{id}
+		 
+		 
+		 	
+    </update> 
+    
+    <update id="changePassword" parameterType="RyxAdminDTO">
+    	 update ryx_admin set password = #{password} where id = #{id}
+    </update>
+    
+    <delete id="delete" parameterType="java.lang.Long"> 
+        update ryx_admin set ideleted = 1 where id = #{id}		 	
+    </delete> 
+    
+    <delete id="delete1" parameterType="java.lang.Long"> 
+        delete from ryx_admin where id = #{id}
+    </delete> 
+    
+</mapper> 

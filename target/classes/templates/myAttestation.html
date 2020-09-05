@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920 initial-scale=1.0">
+  <!-- First use the latest version of IE and Chrome -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>融易学</title>
+  <!-- Keyword -->
+  <!-- <meta name="keywords" content=""> -->
+  <!-- describe -->
+  <meta name="description" content="">
+  <!-- 360 use Google Chrome Frame -->
+  <meta name="renderer" content="webkit">
+  <!-- Baidu prohibition of transcoding -->
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <!-- Definition of web search engine index -->
+  <meta name="robots" content="index,follow">
+  <!-- ios -->
+  <!-- The title that is added to the main screen -->
+  <meta name="apple-mobile-web-app-title" content="">
+  <!-- Whether WebApp full screen mode is enabled -->
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <!-- Setting the background color of the State Bar -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Android theme-color  Used to control the color of the tabs -->
+  <meta name="theme-color" content="#747474">
+  <meta name="mobile-web-app-capable" content="yes">
+  <!-- Turn off the translation plug-in under the Chrome browser -->
+  <meta name="google" value="notranslate" />
+  <!-- uc Forced vertical screen -->
+  <meta name="screen-orientation" content="portrait">
+  <!-- QQ Forced vertical screen -->
+  <meta name="x5-orientation" content="portrait">
+  <!-- UC Mandatory full screen -->
+  <meta name="full-screen" content="yes">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/css/swiper.min.css" rel="stylesheet" type="text/css" />
+  <link href="../static/css/public.css" rel="stylesheet">
+  <link href="../static/css/inStyle.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="../static/css/font-other.css" />
+</head>
+
+<body class="resetStyle">
+  <div class="insside-header">
+    <div class="container">
+      <div class="head-middle">
+        <div class="head-l">
+          <div class="logo"><a href="/"><img src="../static/images/logo2.png"></a></div>
+          <div class="nav-main">
+            <div class="nav-list">
+              <div class="item">
+                <a class="syht" href="#">首页</a>
+              </div>
+              <div class="item active">
+                <a href="/curriculumList.html">全部课程</a>
+                <i>
+                  <img class="down-hide" src="../static/images/down.png">
+                  <img class="down-show" src="../static/images/down_active.png">
+                </i>
+                <div class="down-content">
+                  <div class="main">
+                    <div class="left">
+                      <ul class="max-navlist">
+                        <li class="active"><a class="pf" href="javacript:void(0);">融资租赁</a></li>
+                        <li><a class="pf" href="javacript:void(0);">汽车金融</a></li>
+                        <li><a class="pf" href="javacript:void(0);">供应链金融</a></li>
+                        <li><a class="pf" href="javacript:void(0);">证券基金</a></li>
+                        <li><a class="pf" href="javacript:void(0);">金融科技</a></li>
+                        <li><a class="pf" href="javacript:void(0);">金融小动画</a></li>
+                        <li><a class="pf" href="javacript:void(0);">金融基础</a></li>
+                      </ul>
+                    </div>
+                    <div class="right">
+                      <div class="menus-list" id="menus-list">
+                        <div class="item active">
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">中小微租赁</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">厂商租赁</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">医疗大健康租赁</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">高端制造租赁</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">政府平台租赁</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">飞机租赁</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">飞机租赁</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="item">
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">汽车金融</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">汽车金融</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">汽车金融</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">汽车金融</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">汽车金融</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                          <div class="screen">
+                            <div class="superclass">
+                              <a class="pfre" href="">汽车金融</a>
+                            </div>
+                            <div class="subclass">
+                              <div class="sub-item"><a href="">业务模式</a></div>
+                              <div class="sub-item"><a href="">产品设计</a></div>
+                              <div class="sub-item"><a href="">尽职调查</a></div>
+                              <div class="sub-item"><a href="">租后管理</a></div>
+                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <a href="/offlineList.html">线下课程</a>
+              </div>
+              <div class="item">
+                <a href="/topteacherList.html">专家阵容</a>
+              </div>
+              <div class="item ">
+                <a class="syht" href="#">企业服务</a>
+                <i>
+                  <img class="down-hide" src="../static/images/down.png">
+                  <img class="down-show" src="../static/images/down_active.png">
+                </i>
+                <div class="down-content">
+                  <ul class="list">
+                    <li><a href="/customPage.html">企业内训</a></li>
+                    <li><a href="/collegePage.html">企业商学院</a> </li>
+                    <li><a href="/enterprisePage.html">企业大学</a></li>
+                    <li><a href="/annualPage.html">企业年卡</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="item">
+                <a href="/advisoryList.html">资讯</a>
+              </div>
+              <div class="item">
+                <a href="/booksList.html">书籍</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="head-r">
+          <div class="search-icon">
+            <div class="search-input"><input type="text" placeholder=""></div>
+            <button type="submit"><img src="../static/images/icon_search.png"></button>
+          </div>
+          <div class="operation">
+            <span class="it"><a class="syht" href="#">登录</a></span>
+            <span class="it">I</span>
+            <span class="it"><a class="syht" href="#">注册</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mycourses-main">
+    <div class="container">
+      <ul class="crumbs-list">
+        <li class="item"><a href="/">首页</a></li>
+        <li class="item"><img src="../static/images/insidepage/icon_crumbs.png"></li>
+        <li class="item"><a href="">个人中心</a></li>
+        <li class="item"><img src="../static/images/insidepage/icon_crumbs.png"></li>
+        <li class="item"><a href="">认证中心</a></li>
+      </ul>
+      <div class="mycourses-wrap">
+        <div class="flex-l">
+          <div class="user-info">
+            <div class="img">
+              <img src="../static/images/insidepage/user_img.png">
+            </div>
+            <div class="text">马伯煜</div>
+          </div>
+          <div class="mycourses-list">
+            <div class="item"><a href="/myCourses.html">我的课程</a></div>
+            <div class="item"><a href="/myOrder.html">订单中心</a></div>
+            <div class="item"><a href="/myMoney.html">账务中心</a></div>
+            <div class="item"><a href="/myBasicinfo.html">个人设置</a></div>
+            <div class="item"><a href="/myConcern.html">我的关注</a></div>
+            <div class="item active"><a href="/myAttestation.html">认证中心</a></div>
+            <div class="item"><a href="/myEnterprise.html">企业中心</a></div>
+            <div class="item"><a href="/myLecturer.html">讲师中心</a></div>
+          </div>
+        </div>
+        <div class="flex-r">
+          <div class="attestation-wrap">
+            <div class="tabs-list">
+              <div class="item active">认证中心</div>
+            </div>
+            <div class="attestation-middle">
+              <div class="tit">选择认证方式</div>
+              <div class="desc">说明：每个账户只允许认证一个类型。</div>
+              <div class="btn-box">
+                <div class="silde" id="enterprise-click">
+                  <input type="radio" name="radio" value="1" >
+                  <div class="img"><img src="../static/images/user/icon_firm.png"></div>
+                  <div class="line"></div>
+                  <div class="text">企业认证</div>
+                </div>
+                <div class="silde" id="lecturer-click">
+                  <input type="radio" name="radio" value="2">
+                  <div class="img"><img src="../static/images/user/icon_user.png"></div>
+                  <div class="line"></div>
+                  <div class="text">讲师认证</div>
+                </div>
+              </div>
+            </div>
+            <div class="certification-box">
+              <div class="get-back"><img src="../static/images/page_arrows.png">返回</div>
+              <div class="message">
+                <div class="item">
+                  <div class="lable-l">姓名：</div>
+                  <div class="lable-r"><input type="text" placeholder="请输入"></div>
+                </div>
+                <div class="item">
+                  <div class="lable-l">联系电话：</div>
+                  <div class="lable-r"><input type="text" placeholder="请输入"></div>
+                </div>
+                <div class="item">
+                  <div class="lable-l">职位：</div>
+                  <div class="lable-r"><input type="text" placeholder="请输入"></div>
+                </div>
+                <div class="item">
+                  <div class="lable-l">擅长领域：</div>
+                  <div class="lable-r"><input type="text" placeholder="请输入"></div>
+                </div>
+              </div>
+              <div class="submit-btn">
+                <button type="submit">提交</button>
+              </div>
+            </div>
+            <div class="lecturer-box">
+              <div class="lecturer-middle"> 
+                <div class="lecturer-head"><img src="../static/images/user/icon_pair.png">已认证</div>
+                <div class="lecturer-body">融易学合作讲师</div>
+              </div>
+            </div>
+            <div class="lecturer-box">
+              <div class="lecturer-middle" style="width: 510px;"> 
+                <div class="lecturer-head"><img src="../static/images/user/icon_pair.png">已认证</div>
+                <div class="lecturer-body">北京字节跳动网络技术科技有限公司</div>
+              </div>
+            </div> 
+            <div class="lecturer-box">
+              <div class="lecturer-middle" style="width: 510px;"> 
+                <div class="lecturer-head"><img src="../static/images/user/icon_time.png">正在审核中…</div>
+                <div class="lecturer-body">北京字节跳动网络技术科技有限公司</div>
+              </div>
+            </div> 
+            <div class="enterprise-box">
+              <div class="get-back"><img src="../static/images/page_arrows.png">返回</div>
+              <div class="enterprise-list">
+                <div class="item">
+                  <div class="lable-l">企业名称：</div>
+                  <div class="lable-r">
+                    <div class="input-box">
+                      <input type="text" placeholder="请输入">
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="lable-l">规模：</div>
+                  <div class="lable-r">
+                    <div class="radio-list">
+                      <div class="item">
+                        <div class="border"></div>
+                        <div class="text">50人以下</div>
+                        <input type="radio" name="scale" value="50">
+                      </div>
+                      <div class="item active">
+                        <div class="border"></div>
+                        <div class="text">50-100人</div>
+                        <input type="radio" name="scale" value="100" checked>
+                      </div>
+                      <div class="item">
+                        <div class="border"></div>
+                        <div class="text">100-500人</div>
+                        <input type="radio" name="scale" value="500">
+                      </div>
+                      <div class="item">
+                        <div class="border"></div>
+                        <div class="text">500-1000人</div>
+                        <input type="radio" name="scale" value="1000">
+                      </div>
+                      <div class="item">
+                        <div class="border"></div>
+                        <div class="text">2000人以上</div>
+                        <input type="radio" name="scale" value="2000">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="lable-l">企业性质：</div>
+                  <div class="lable-r">
+                    <div class="radio-list">
+                      <div class="item">
+                        <div class="border"></div>
+                        <div class="text">民营</div>
+                        <input type="radio" name="scale" value="民营">
+                      </div>
+                      <div class="item active">
+                        <div class="border"></div>
+                        <div class="text">国企</div>
+                        <input type="radio" name="scale" value="国企" checked>
+                      </div>
+                      <div class="item">
+                        <div class="border"></div>
+                        <div class="text">合资</div>
+                        <input type="radio" name="scale" value="合资">
+                      </div>
+                      <div class="item">
+                        <div class="border"></div>
+                        <div class="text">外商独资</div>
+                        <input type="radio" name="scale" value="外商独资">
+                      </div>
+                      <div class="item">
+                        <div class="border"></div>
+                        <div class="text">其他</div>
+                        <input type="radio" name="scale" value="其他">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="lable-l">营业执照：</div>
+                  <div class="lable-r">
+                    <div class="file-box">
+                      <img src="../static/images/user/icon_uploading.png">上传文件
+                      <input type="file">
+                    </div>
+                    <div class="des">支持扩展名：.rar .zip .doc .docx .pdf .jpg...</div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="lable-l"></div>
+                  <div class="lable-r">
+                    <label><input name="同意" type="checkbox" value="同意" checked />我同意<a href="" class="agreement">【认证协议】</a></label>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="submit-btn">
+                    <button type="submit">提交</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="footer">
+      <div class="footer-links">
+        <div class="container">
+          <div class="logo">
+            <a href="#"> <img src="../static/images/logo.png" alt="logo"></a>
+          </div>
+          <div class="skip-middle">
+            <div class="slide">
+              <div class="title Helvbold">关于我们</div>
+              <ul class="link-ul">
+                <li class="link"><a class="Helvbold" href="info_aboutus.html">融易学简介</a></a></li>
+                <li class="link"><a class="Helvbold" href="info_contactus.html">联系我们</a></a></li>
+                <li class="link"><a class="Helvbold" href="info_statement.html">免责声明</a></a></li>
+              </ul>
+            </div>
+            <div class="slide">
+              <div class="title Helvbold">帮助中心</div>
+              <ul class="link-ul">
+                <li class="link"><a class="Helvbold" href="info_register.html">如何注册</a></a></li>
+                <li class="link"><a class="Helvbold" href="info_choosecourse.html">如何选课</a></a></li>
+                <li class="link"><a class="Helvbold" href="info_opencourse.html">如何开课</a></li>
+                <li class="link"><a class="Helvbold" href="info_avai.html">课程有效期</a></li>
+              </ul>
+            </div>
+            <div class="slide">
+              <div class="title Helvbold">商务合作</div>
+              <ul class="link-ul">
+                <li class="link"><a class="Helvbold" href="info_cooperation.html">合作方式</a></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="contact">
+            <div class="icon">
+              <a href="">
+                <img class="icon-hidden" src="../static/images/people.png">
+                <img class="icon-show" src="../static/images/people_active.png">
+              </a>
+              <a href="javacript:void(0);">
+                <img class="icon-hidden" src="../static/images/wx.png">
+                <img class="icon-show" src="../static/images/wx_active.png">
+                <div class="serve-code">
+                  <div class="pic">
+                    <img src="../static/images/app_img.png">
+                  </div>
+                  <div class="text">关注融易学服务号</div>
+                </div>
+              </a>
+              <a href="javacript:void(0);">
+                <img class="icon-hidden" src="../static/images/code.png">
+                <img class="icon-show" src="../static/images/code_active.png">
+                <div class="app-code">
+                  <div class="pic">
+                    <img src="../static/images/ewm.png">
+                  </div>
+                  <div class="text">扫码下载APP</div>
+                </div>
+              </a>
+            </div>
+            <div class="time">
+              <img src="../static/images/phone.png" alt="phone"><span class="text">周一至周五9:00—18:00</span>
+            </div>
+            <div class="phone"><a href="tel:0755-2532-0861">0755-2532-0861</a></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-info">
+        <div class="organization">
+          <div class="container">
+            <div class="swiper-container" id="swiper-organization">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
+              </div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+            </div>
+          </div>
+        </div>
+        <div class="report">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="report-item">
+                  Copyright©2015-2018********
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="report-item">
+                  CP备：粤ICP备*********号
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="report-item">
+                  CP备：粤ICP备*********号
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+        </div>
+
+
+      </div>
+
+    </div>
+  <script src="../static/js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../static/js/bootstrap.min.js"></script>
+  <script src="../static/js/swiper.min.js"></script>
+  <!-- privatjs -->
+  <script type="text/javascript" src="../static/js/public.js"></script>
+  <script type="text/javascript" src="../static/js/inMain.js"></script>
+  <!--end-->
+</body>
+
+
+</html>
