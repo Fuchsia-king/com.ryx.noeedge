@@ -1,12 +1,12 @@
 package com.king.nowedge.mapper.base;
 
-import java.util.List;
-import java.util.Map;
-
 import com.king.nowedge.dto.base.KeyrvDTO;
 import com.king.nowedge.dto.query.base.KeyrvQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface KeyrvMapper {

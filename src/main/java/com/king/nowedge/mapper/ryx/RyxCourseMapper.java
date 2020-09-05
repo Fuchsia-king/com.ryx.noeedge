@@ -1,19 +1,16 @@
 package com.king.nowedge.mapper.ryx;
 
-import java.util.List;
-
 import com.king.nowedge.dto.ryx.RyxCourseDTO;
 import com.king.nowedge.dto.ryx.RyxObjectLimitDTO;
 import com.king.nowedge.dto.ryx.query.RyxCourseQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface RyxCourseMapper {
-	
-	
-	
-	
+
 	public Integer countQuery(RyxCourseQuery query) throws BaseDaoException;
 	
 	public List<RyxCourseDTO> query(RyxCourseQuery query)throws BaseDaoException;

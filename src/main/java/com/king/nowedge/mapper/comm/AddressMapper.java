@@ -1,16 +1,16 @@
 package com.king.nowedge.mapper.comm;
 
-import java.util.List;
-
-import com.king.nowedge.dto.AddressDTO;
+import com.king.nowedge.dto.comm.AddressDTO;
 import com.king.nowedge.dto.query.AddressQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface AddressMapper {
 	
-	public Boolean create(AddressDTO dto) throws BaseDaoException; 
+	public Boolean create(AddressDTO dto) throws BaseDaoException;
 
 	public List<AddressDTO> query(AddressQuery query) throws BaseDaoException;
 	

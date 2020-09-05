@@ -1,11 +1,11 @@
 package com.king.nowedge.mapper.base;
 
-import java.util.List;
-
 import com.king.nowedge.dto.base.KeyvalueDTO;
 import com.king.nowedge.dto.query.base.KeyvalueQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface KeyvalueMapper {

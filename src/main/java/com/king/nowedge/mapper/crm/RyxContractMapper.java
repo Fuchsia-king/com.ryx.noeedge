@@ -1,11 +1,11 @@
 package com.king.nowedge.mapper.crm;
 
-import java.util.List;
-
 import com.king.nowedge.dto.ryx.crm.RyxContractDTO;
 import com.king.nowedge.dto.ryx.query.crm.RyxContractQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface RyxContractMapper {

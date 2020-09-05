@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.comm.UserRoleMapper">
+
+
+	<sql id="select">
+		id,
+		user_id userId,
+		role_id roleId,
+		creater,
+		tcreate,
+		tmodified,
+		ideleted		
+	</sql>
+	
+	<sql id="where">
+	
+	    <where>
+	    
+			<if test="userId != null">
+				and user_id = #{userId}
+			</if>
+			
+			<if test="roleId != null">
+				and role_id = #{roleId}
+			</if>
+			
+			<if test="ideleted != null">
+				and ideleted = #{ideleted}
+			</if>
+			
+		</where>
+		
+	</sql>
+	
+	<sql id="update">
+		 <set>	
+					
+			<if test="userId != null">
+				<![CDATA[ user_id = #{userId} ]]>,
+			</if>
+			
+			
+			<if test="roleId != null">
+				<![CDATA[ role_id = #{roleId} ]]>,
+			</if>
+			
+			<if test="ideleted != null">
+				<![CDATA[ ideleted = #{ideleted} ]]>,
+			</if>
+			
+			
+			 creater = #{creater},
+			 tmodified = now()
+			 
+		 </set>
+	
+	</sql>
+   
+    <insert id="create" parameterType="UserRoleDTO">  
+       insert into user_role(user_id,creater,role_id,tcreate,tmodified,ideleted) 
+       values
+       (#{userId},#{creater},#{roleId},now(),now(),#{ideleted}) 
+    </insert>   
+    
+    
+    <insert id="auth" parameterType="java.util.List">
+             
+       	insert into user_role(user_id,creater,role_id,tcreate,tmodified,ideleted) 
+       	values
+       	    	
+       	<foreach collection="list" item="item" index="index" separator="," >  
+        	(#{item.userId},#{item.creater},#{item.roleId},now(),now(),#{item.ideleted})  
+    	</foreach>
+        
+    </insert>  
+    
+    <select id="query" resultType="UserRoleDTO" parameterType="RoleQuery">
+         
+        select 
+        <include refid="select"/>
+        from user_role
+        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+    
+    <select id="queryRoleByUserId" resultType="java.lang.String" parameterType="java.lang.String">         
+        select role_id from user_role where user_id = #{userId}		
+    </select>
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="RoleQuery">  
+        select count(1) from user_role 
+        <include refid="where"/>
+    </select>
+    
+    <select id="queryById" resultType="UserRoleDTO" parameterType="java.lang.Long">   
+        select * from user_role where id = #{id}  limit 1;
+    </select>    
+    
+    <select id="queryByUid" resultType="UserRoleDTO" parameterType="java.lang.String">   
+        select * from user_role where user_id = #{userId} and ideleted = 0 ;
+    </select>  
+    
+    
+    <update id="update" parameterType="UserRoleDTO">
+    
+        update user_role
+         
+       <include refid="update"/>
+		 
+		where user_id = #{userId}
+		 	
+    </update> 
+    
+    
+    <update id="updateByUserRole" parameterType="UserRoleDTO">
+    
+        update user_role
+         
+       <include refid="update"/>
+		 
+		where user_id = #{userId} and role_id = #{roleId}
+		 	
+    </update> 
+    
+     
+    <update id="deleteByUserId" parameterType="java.lang.String">    
+    	update user_role set ideleted = 1 where user_id = #{userId}		 	
+    </update>
+    
+    
+    
+    
+</mapper> 

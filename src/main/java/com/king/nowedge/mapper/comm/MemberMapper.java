@@ -1,11 +1,11 @@
 package com.king.nowedge.mapper.comm;
 
-import java.util.List;
-
-import com.king.nowedge.dto.MemberDTO;
+import com.king.nowedge.dto.comm.MemberDTO;
 import com.king.nowedge.dto.query.MemberQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface MemberMapper {

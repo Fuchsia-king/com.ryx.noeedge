@@ -1,11 +1,11 @@
 package com.king.nowedge.mapper.ryx;
 
-import java.util.List;
-
 import com.king.nowedge.dto.ryx.RyxUserExtDTO;
 import com.king.nowedge.dto.ryx.query.RyxUserExtQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface RyxUserExtMapper {	
