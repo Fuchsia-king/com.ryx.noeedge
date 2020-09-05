@@ -5,7 +5,7 @@ package com.king.nowedge.dto.ryx2.query;import com.king.nowedge.dto.query.base.L
  * RyxMember entity. @author MyEclipse Persistence Tools
  */
 
-public class MemberQuery extends LoreBaseQuery implements java.io.Serializable {
+public class MemberQuery2 extends LoreBaseQuery implements java.io.Serializable {
 
 	// Fields
 
@@ -19,12 +19,12 @@ public class MemberQuery extends LoreBaseQuery implements java.io.Serializable {
 	// Constructors
 
 	/** default constructor */
-	public MemberQuery() {
+	public MemberQuery2() {
 	}
 
 	/** minimal constructor */
-	public MemberQuery(Integer login, Long lastLoginIp, Integer lastLoginTime,
-			Short status) {
+	public MemberQuery2(Integer login, Long lastLoginIp, Integer lastLoginTime,
+						Short status) {
 		this.login = login;
 		this.lastLoginIp = lastLoginIp;
 		this.lastLoginTime = lastLoginTime;
@@ -32,8 +32,8 @@ public class MemberQuery extends LoreBaseQuery implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public MemberQuery(String username, String password, Integer login,
-			Long lastLoginIp, Integer lastLoginTime, Short status) {
+	public MemberQuery2(String username, String password, Integer login,
+						Long lastLoginIp, Integer lastLoginTime, Short status) {
 		this.username = username;
 		this.password = password;
 		this.login = login;

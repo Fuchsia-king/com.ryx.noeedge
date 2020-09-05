@@ -2,7 +2,7 @@ package com.king.nowedge.dto.ryx2;
 
 import com.king.nowedge.dto.base.BaseDTO;
 
-public class AdminDTO extends BaseDTO implements java.io.Serializable {
+public class AdminDTO2 extends BaseDTO implements java.io.Serializable {
 	
 	private String password;
 	private String username;

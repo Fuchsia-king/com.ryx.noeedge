@@ -1,4 +1,4 @@
-package com.king.nowedge.dto;
+package com.king.nowedge.dto.comm;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;

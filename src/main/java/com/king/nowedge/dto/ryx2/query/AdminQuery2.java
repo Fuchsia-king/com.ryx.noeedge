@@ -5,7 +5,7 @@ package com.king.nowedge.dto.ryx2.query;import com.king.nowedge.dto.query.base.L
  * RyxUsers entity. @author MyEclipse Persistence Tools
  */
 
-public class AdminQuery extends LoreBaseQuery implements java.io.Serializable {
+public class AdminQuery2 extends LoreBaseQuery implements java.io.Serializable {
 
 	// Fields
 

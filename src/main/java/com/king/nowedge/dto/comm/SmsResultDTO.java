@@ -1,4 +1,4 @@
-package com.king.nowedge.dto;
+package com.king.nowedge.dto.comm;
 
 import com.king.nowedge.dto.base.BaseDTO;
 

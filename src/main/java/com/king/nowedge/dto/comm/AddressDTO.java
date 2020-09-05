@@ -1,12 +1,9 @@
-package com.king.nowedge.dto;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
+package com.king.nowedge.dto.comm;
 
 import com.king.nowedge.dto.base.BaseDTO;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotBlank;
 
 
 public class AddressDTO extends BaseDTO {

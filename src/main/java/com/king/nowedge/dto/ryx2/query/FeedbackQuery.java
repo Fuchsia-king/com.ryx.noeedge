@@ -25,7 +25,7 @@ public class FeedbackQuery extends LoreBaseQuery implements java.io.Serializable
 		this.uname = uname;
 	}
 
-	private OrderQuery ryxOrder;
+	private OrderQuery2 ryxOrder;
 	private Date feedbackTime;
 	private Long courseId;
 	private Long userId; 
@@ -101,11 +101,11 @@ public class FeedbackQuery extends LoreBaseQuery implements java.io.Serializable
 		this.ryxUsers = ryxUsers;
 	}
 
-	public OrderQuery getRyxOrder() {
+	public OrderQuery2 getRyxOrder() {
 		return ryxOrder;
 	}
 
-	public void setRyxOrder(OrderQuery ryxOrder) {
+	public void setRyxOrder(OrderQuery2 ryxOrder) {
 		this.ryxOrder = ryxOrder;
 	}
 

@@ -10,7 +10,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * RyxUsers entity. @author MyEclipse Persistence Tools
  */
 
-public class RegisterDTO implements java.io.Serializable {
+public class RegisterDTO2 implements java.io.Serializable {
 
 	// Fields
 

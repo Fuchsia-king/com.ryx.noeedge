@@ -11,7 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author MyEclipse Persistence Tools
  */
 
-public class OrderQuery extends LoreBaseQuery implements java.io.Serializable {
+public class OrderQuery2 extends LoreBaseQuery implements java.io.Serializable {
 
 	// Fields
 
@@ -57,7 +57,7 @@ public class OrderQuery extends LoreBaseQuery implements java.io.Serializable {
 	}
 
 	/** default constructor */
-	public OrderQuery() {
+	public OrderQuery2() {
 	}
 	
 	
