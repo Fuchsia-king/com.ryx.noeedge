@@ -2,7 +2,7 @@ package com.king.nowedge.ryx_kf.service.interfaces;
 
 import com.king.nowedge.ryx_kf.pojo.KfUserInfoModel;
 import com.king.nowedge.service.SystemService;
-import com.king.nowedge.service.ryx2.RyxUserService;
+import com.king.nowedge.service.ryx.RyxUserService;
 
 import java.util.List;
 

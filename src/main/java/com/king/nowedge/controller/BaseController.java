@@ -22,7 +22,7 @@ import com.king.nowedge.dto.ryx.query.RyxTeacherQuery;
 import com.king.nowedge.dto.ryx2.validate.OnlineDTO;
 import com.king.nowedge.helper.*;
 import com.king.nowedge.service.*;
-import com.king.nowedge.service.ryx2.*;
+import com.king.nowedge.service.ryx.*;
 import com.king.nowedge.utils.StringExUtils;
 import com.king.nowedge.wxpay.*;
 import net.sf.json.JSONObject;

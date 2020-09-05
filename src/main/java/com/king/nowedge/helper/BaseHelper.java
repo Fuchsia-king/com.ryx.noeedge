@@ -3,7 +3,7 @@ package com.king.nowedge.helper;
 import com.king.nowedge.service.SystemService;
 import com.king.nowedge.service.TaskService;
 import com.king.nowedge.service.UserService;
-import com.king.nowedge.service.ryx2.*;
+import com.king.nowedge.service.ryx.*;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Ehcache;
 import org.springframework.beans.factory.annotation.Autowired;

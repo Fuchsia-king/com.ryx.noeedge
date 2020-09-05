@@ -6,7 +6,7 @@ import com.king.nowedge.ryx_kf.pojo.KfUserInfoModel;
 import com.king.nowedge.ryx_kf.service.interfaces.SyncKfUserService;
 import com.king.nowedge.ryx_kf.utils.*;
 import com.king.nowedge.service.SystemService;
-import com.king.nowedge.service.ryx2.RyxUserService;
+import com.king.nowedge.service.ryx.RyxUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
