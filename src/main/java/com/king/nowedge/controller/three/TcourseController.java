@@ -121,12 +121,12 @@ public class TcourseController  extends BaseController {
 	@RequestMapping("/curriculumDetails")
 	public ModelAndView currentCourseDetail(
 			RyxEvaluQuery query,
-			HttpServletRequest request, HttpServletResponse response)
+							   HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		//@PathVariable
 		String courseId = "1";
 		RedirectAttributes rt = null;
-		//		RyxEvaluQuery query = new RyxEvaluQuery();
+//		RyxEvaluQuery query = new RyxEvaluQuery();
 		String from = "";
 		RyxUsersDTO users = getRyxUser();
 		errList = new ArrayList<String>();
@@ -250,25 +250,25 @@ public class TcourseController  extends BaseController {
 	@RequestMapping("/list_gangwei.html")
 	public ModelAndView listGangwei(HttpServletRequest request, HttpServletResponse response, RedirectAttributes rt)
 			throws UnsupportedEncodingException {
-
+		
 
 		errList = new ArrayList<String>();
 		RyxUsersDTO users = getRyxUser();
-
+		
 
 		ModelAndView mav = new ModelAndView("/3/listGangwei");
-
+		
 		return mav;
-
+		
 	}
-
-
-
+	
+	
+	
 	@RequestMapping("/list_video3.html")
 	public ModelAndView listVideoCourse(HttpServletRequest request, RyxCourseQuery courseQuery, HttpServletResponse response, RedirectAttributes rt)
 			throws UnsupportedEncodingException {
-
-
+		
+		
 		if(StringHelper.isMoblie(request)){
 			if(ConstHelper.isPreEnvironment()){
 				return new ModelAndView("redirect:http://pm.ryx365.com/m/list_video.html");
@@ -283,11 +283,11 @@ public class TcourseController  extends BaseController {
 
 		errList = new ArrayList<String>();
 		RyxUsersDTO users = getRyxUser();
-
+		
 
 		ModelAndView mav = new ModelAndView("/3/listVideo3");
-
-
+		
+		
 		if(EnumVideoStatus.AFTER_LIVING.getCode() == courseQuery.getInterval()){ // 已经结束
 			courseQuery.setEtend(System.currentTimeMillis()/1000);
 		}
@@ -306,9 +306,9 @@ public class TcourseController  extends BaseController {
 			mav.addObject("unendVideo",MetaHelper.getInstance().getUnendVideo(Integer.MAX_VALUE));
 			courseQuery.setEtend(System.currentTimeMillis()/1000);
 		}
-
-
-		courseQuery.setPageSize(18);
+		
+		
+		courseQuery.setPageSize(18);		
 		courseQuery.setStatus(EnumAuditStatus.APPROVED.getCode());
 		courseQuery.setIdeleted(0);
 		courseQuery.setObjType(EnumObjectType.VIDEO_MODULE.getCode());
@@ -323,7 +323,7 @@ public class TcourseController  extends BaseController {
 
 		mav.addObject("categorys",MetaHelper.getInstance().getOnlineCategory());
 
-
+	
 
 		ResultDTO<List<RyxAdDTO>> courseHigtResult = MetaHelper.getInstance().queryAdCache(137);
 		errList = addList(errList, courseHigtResult.getErrorMsg());
@@ -337,14 +337,14 @@ public class TcourseController  extends BaseController {
 		return mav;
 
 	}
-
-
+	
+	
 	@RequestMapping("/list_offline3.html")
-	public ModelAndView listOffline(HttpServletRequest request, RyxCourseQuery courseQuery,
-									HttpServletResponse response, RedirectAttributes rt)
+	public ModelAndView listOffline(HttpServletRequest request, RyxCourseQuery courseQuery, 
+			HttpServletResponse response, RedirectAttributes rt)
 			throws UnsupportedEncodingException, ParseException {
-
-
+		
+		
 		if(StringHelper.isMoblie(request)){
 			if(ConstHelper.isPreEnvironment()){
 				return new ModelAndView("redirect:http://pm.ryx365.com/m/list_offline3.html");
@@ -361,10 +361,10 @@ public class TcourseController  extends BaseController {
 		RyxUsersDTO users = getRyxUser();
 
 		ModelAndView mav = new ModelAndView("/3/listOffline3");
-
+		
 
 		//courseQuery.setTtstart(System.currentTimeMillis()/1000);
-
+		
 		/**
 		 * 时间 > 全部 明天 本周 本周末 本月
 		 */
@@ -390,17 +390,17 @@ public class TcourseController  extends BaseController {
 		}
 		else if(EnumIntervalType.TODAY_BEFORE.getCode() == courseQuery.getInterval()){
 			courseQuery.setEtstart(DateHelper.getTodayLongSecond());
-		}
+		}	
 		else if(EnumIntervalType.THREE_MONTH_INNER.getCode() == courseQuery.getInterval()){
 			courseQuery.setTtstart(DateHelper.getTodayLongSecond());
 			courseQuery.setEtstart(DateHelper.getMonthendLongSecond(90L));
 		}
-
-
+		
+		
 		Integer unendCount = 0 ;
 
 		if(null == courseQuery.getInterval()){
-
+			
 			/**
 			 * 第一页
 			 */
@@ -415,18 +415,18 @@ public class TcourseController  extends BaseController {
 			courseQuery.setEtstart(System.currentTimeMillis()/1000);
 			courseQuery.setOrderBy("tstart");
 			courseQuery.setSooort("desc");
-
+			
 		}
 		else{
-
-
+			
+			
 			courseQuery.setOrderBy("tstart");
 			courseQuery.setSooort("asc");
 		}
-
-
+		
+		
 		Integer ecount = 16 - unendCount ;
-
+		
 		courseQuery.setPageSize( ecount );
 		courseQuery.setStatus(EnumAuditStatus.APPROVED.getCode());
 		courseQuery.setObjType(EnumObjectType.OFFLINE_MODULE.getCode());
@@ -435,11 +435,11 @@ public class TcourseController  extends BaseController {
 		courseQuery = MetaHelper.getInstance().queryOfflineCourseCache(courseQuery);
 
 		List<RyxCategoryDTO> offlineCategoryResult = MetaHelper.getInstance().getOfflineCategory();
-
+		
 		mav.addObject("categorys", offlineCategoryResult);
 
 		List<KeyrvDTO> cityListResult = MetaHelper.getInstance().getOfflineCourseCityList();
-
+		
 		mav.addObject("citys", cityListResult);
 
 

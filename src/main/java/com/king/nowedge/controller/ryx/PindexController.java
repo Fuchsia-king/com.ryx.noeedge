@@ -67,6 +67,11 @@ public class PindexController extends BaseController {
 //        this.sessionRegistry = sessionRegistry;
 //    }
 
+	@GetMapping("/")
+	public String toIndex(){
+		return "index";
+	}
+
 	@RequestMapping("/my/mtest.html")
 	public ModelAndView test1(HttpServletRequest request, HttpServletResponse response, RedirectAttributes rt) throws IOException {
 		ModelAndView mav = new ModelAndView("/ryx/m/test");

@@ -1,8 +1,11 @@
 package com.king.nowedge.ryx_kf.pojo;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class RyxUserExtExample {
     protected String orderByClause;
 

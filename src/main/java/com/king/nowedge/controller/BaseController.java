@@ -56,7 +56,7 @@ public class BaseController {
 	protected static Integer DEFAULT_PAGE_SIZE = 12 ;
 	
 	protected static Integer DEFAULT_PAGE_SIZE1 = 22 ;
-	
+
 	/**
 	 * 最大可用购物券
 	 */

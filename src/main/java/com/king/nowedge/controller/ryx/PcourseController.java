@@ -1,11 +1,11 @@
 package com.king.nowedge.controller.ryx;
 
 import com.king.nowedge.controller.BaseController;
-import com.king.nowedge.dto.AddressDTO;
 import com.king.nowedge.dto.ResumeDTO;
 import com.king.nowedge.dto.base.KeyrvDTO;
 import com.king.nowedge.dto.base.KeyvalueDTO;
 import com.king.nowedge.dto.base.ResultDTO;
+import com.king.nowedge.dto.comm.AddressDTO;
 import com.king.nowedge.dto.enums.*;
 import com.king.nowedge.dto.query.base.KeyrvQuery;
 import com.king.nowedge.dto.query.base.KeyvQuery;
@@ -2735,11 +2735,11 @@ public class PcourseController extends BaseController{
 			String from,
 			HttpServletRequest request, HttpServletResponse response, RedirectAttributes rt)
 			throws Exception {
-		
-		
-		
-		
-		
+
+
+
+
+
 		RyxUsersDTO users = getRyxUser();
 		errList = new ArrayList<String>();
 		ModelAndView mav = new ModelAndView("/ryx/pc/conline");

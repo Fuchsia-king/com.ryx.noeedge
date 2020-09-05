@@ -1,6 +1,9 @@
 package com.king.nowedge.helper;
 
-import com.king.nowedge.dto.*;
+import com.king.nowedge.dto.comm.AddressDTO;
+import com.king.nowedge.dto.DeptDTO;
+import com.king.nowedge.dto.RecruitmentDTO;
+import com.king.nowedge.dto.RoleDTO;
 import com.king.nowedge.dto.base.*;
 import com.king.nowedge.dto.enums.*;
 import com.king.nowedge.dto.query.DeptQuery;
@@ -352,7 +355,7 @@ public class MetaHelper extends BaseHelper {
 	}
 	
 	
-	public DeptDTO getDeptById(Integer id) {				
+	public DeptDTO getDeptById(Integer id) {
 		
 		String key = "_gdtbi_"+ id + "_";
 		Ehcache ehcache =  getCache("cacheMetadata");
@@ -458,7 +461,7 @@ public class MetaHelper extends BaseHelper {
 	}
 	
 	
-	public RecruitmentDTO getRecruitmentById(Long id) {				
+	public RecruitmentDTO getRecruitmentById(Long id) {
 		
 		String key = "_Recruitment_"+ id + "_";
 		Ehcache ehcache =  getCache("cacheMetadata");
@@ -4176,7 +4179,7 @@ public List<KeyvalueDTO> getPosition0(){
 	}
 
 
-	public ResultDTO<List<SysmenuDTO>> getMyMenu(Long userId) {
+	public ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>> getMyMenu(Long userId) {
 
 		String key = "_gmm_"+ userId +"_";		
 		Ehcache ehcache =  getCache("cacheMetadata");
@@ -4184,13 +4187,13 @@ public List<KeyvalueDTO> getPosition0(){
 		Element elem =ehcache.get(key);
 		if (elem == null) {		
 			
-			ResultDTO<List<SysmenuDTO>> result = metaHelper.userService.querySysmenuByUserId(userId.toString());
+			ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>> result = metaHelper.userService.querySysmenuByUserId(userId.toString());
 			elem = new Element(key,result);
 			elem.setTimeToLive(5*60);  // 五分钟有效时间
 			ehcache.put(elem);
 		}
 		
-		return (ResultDTO<List<SysmenuDTO>>) elem.getObjectValue();
+		return (ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>>) elem.getObjectValue();
 	}
 
 	public List<DeptDTO> getDept() {

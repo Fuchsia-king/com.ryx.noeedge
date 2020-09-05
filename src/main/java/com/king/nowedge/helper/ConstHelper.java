@@ -48,7 +48,7 @@ public class ConstHelper {
 	//public static final String  SHIDAI_APPSECRET_FORMAL = "57ABFD77CB7D437DBD456AB2DDA2DA3D";
 	
 	/**
-	 * 没邀请注册 20 个人，送优惠券
+	 * 每邀请注册 20 个人，送优惠券
 	 */
 	public static final Integer INVITE_REGIST_NBR_FOR_COUPON = 10 ;
 	

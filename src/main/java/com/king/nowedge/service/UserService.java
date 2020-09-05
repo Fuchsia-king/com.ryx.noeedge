@@ -1,8 +1,12 @@
 package com.king.nowedge.service;
 
-import com.king.nowedge.dto.*;
+import com.king.nowedge.dto.RoleDTO;
+import com.king.nowedge.dto.SysmenuDTO;
+import com.king.nowedge.dto.UserDTO;
+import com.king.nowedge.dto.UserRoleDTO;
 import com.king.nowedge.dto.base.CompanyDTO;
 import com.king.nowedge.dto.base.ResultDTO;
+import com.king.nowedge.dto.comm.AddressDTO;
 import com.king.nowedge.dto.query.*;
 import com.king.nowedge.dto.query.base.CompanyQuery;
 import com.king.nowedge.dto.ryx.RyxSearchDTO;
@@ -130,37 +134,37 @@ public interface UserService   {
 	 * auth role  授权角色 
 	 -----------------------------------------------* */
 
-	ResultDTO<Boolean> authRole(AuthRoleDTO authRoleDTO) ;
+	ResultDTO<Boolean> authRole(com.king.nowedge.dto.AuthRoleDTO authRoleDTO) ;
 	
-	ResultDTO<Boolean> createAuthRole(AuthRoleDTO authRoleDTO) ;
+	ResultDTO<Boolean> createAuthRole(com.king.nowedge.dto.AuthRoleDTO authRoleDTO) ;
 	
-	ResultDTO<List<AuthRoleDTO>> queryAuthRole(AuthRoleQuery roleQuery) ;
+	ResultDTO<List<com.king.nowedge.dto.AuthRoleDTO>> queryAuthRole(AuthRoleQuery roleQuery) ;
 	
 	ResultDTO<Integer> countQueryAuthRole(AuthRoleQuery roleQuery) ;	
 	
-	ResultDTO<AuthRoleDTO> queryAuthRoleById(Long id) ;
+	ResultDTO<com.king.nowedge.dto.AuthRoleDTO> queryAuthRoleById(Long id) ;
 	
-	ResultDTO<AuthRoleDTO> queryAuthRoleByUid(String oid) ;	
+	ResultDTO<com.king.nowedge.dto.AuthRoleDTO> queryAuthRoleByUid(String oid) ;
 	
-	ResultDTO<Boolean> updateAuthRole(AuthRoleDTO authRoleDTO) ;	
+	ResultDTO<Boolean> updateAuthRole(com.king.nowedge.dto.AuthRoleDTO authRoleDTO) ;
 
-	public  ResultDTO<Boolean> createOrUpdateAuthRole(AuthRoleDTO authRoleDTO);
+	public  ResultDTO<Boolean> createOrUpdateAuthRole(com.king.nowedge.dto.AuthRoleDTO authRoleDTO);
 	
 	
 	/**--------------------------------------------
 	 *    				安全问题、答案
 	--------------------------------------------**/
-	ResultDTO<List<UserSecqaDTO>> querySecQanswrByUser(String userId);
+	ResultDTO<List<com.king.nowedge.dto.UserSecqaDTO>> querySecQanswrByUser(String userId);
 	
-	ResultDTO<Boolean> createUserSecqa(UserSecqaDTO userSecqaDTO);
+	ResultDTO<Boolean> createUserSecqa(com.king.nowedge.dto.UserSecqaDTO userSecqaDTO);
 	
-	ResultDTO<Boolean> createUserSecqa(List<UserSecqaDTO> list,String user);
+	ResultDTO<Boolean> createUserSecqa(List<com.king.nowedge.dto.UserSecqaDTO> list, String user);
 	
-	ResultDTO<Boolean> updateUserSecqa(UserSecqaDTO userSecqaDTO);
+	ResultDTO<Boolean> updateUserSecqa(com.king.nowedge.dto.UserSecqaDTO userSecqaDTO);
 	
-	ResultDTO<UserSecqaDTO> queryUserSecqaByUid(String uid);
+	ResultDTO<com.king.nowedge.dto.UserSecqaDTO> queryUserSecqaByUid(String uid);
 	
-	ResultDTO<List<UserSecqaDTO>> queryUserSecqa(UserSecqaQuery userSecqaQuery);
+	ResultDTO<List<com.king.nowedge.dto.UserSecqaDTO>> queryUserSecqa(UserSecqaQuery userSecqaQuery);
 	
 	ResultDTO<Integer> countQueryUserSecqa(UserSecqaQuery userSecqaQuery);
 	
@@ -207,27 +211,27 @@ public interface UserService   {
 	/**
 	 *  招聘管理
 	 */
-	ResultDTO<Boolean> createRecruitment(RecruitmentDTO crecruitmentDTO);
+	ResultDTO<Boolean> createRecruitment(com.king.nowedge.dto.RecruitmentDTO crecruitmentDTO);
 	
-	ResultDTO<Boolean> updateRecruitment(RecruitmentDTO crecruitmentDTO);
-	
-	
-	ResultDTO<RecruitmentDTO> queryRecruitmentByUid(String uid);
+	ResultDTO<Boolean> updateRecruitment(com.king.nowedge.dto.RecruitmentDTO crecruitmentDTO);
 	
 	
-	ResultDTO<RecruitmentDTO> queryRecruitmentById(Long id);
+	ResultDTO<com.king.nowedge.dto.RecruitmentDTO> queryRecruitmentByUid(String uid);
 	
-	ResultDTO<RecruitmentDTO> queryRecruitmentById(RecruitmentQuery recruitmentQuery);	
 	
-	ResultDTO<RecruitmentDTO> queryRecruitmentByCode(String code);
+	ResultDTO<com.king.nowedge.dto.RecruitmentDTO> queryRecruitmentById(Long id);
 	
-	ResultDTO<List<RecruitmentDTO>> queryRecruitment(RecruitmentQuery crecruitmentQuery);
+	ResultDTO<com.king.nowedge.dto.RecruitmentDTO> queryRecruitmentById(RecruitmentQuery recruitmentQuery);
 	
-	ResultDTO<List<RecruitmentDTO>> queryRecruitmentAll();
+	ResultDTO<com.king.nowedge.dto.RecruitmentDTO> queryRecruitmentByCode(String code);
+	
+	ResultDTO<List<com.king.nowedge.dto.RecruitmentDTO>> queryRecruitment(RecruitmentQuery crecruitmentQuery);
+	
+	ResultDTO<List<com.king.nowedge.dto.RecruitmentDTO>> queryRecruitmentAll();
 	
 	ResultDTO<Integer> countQueryRecruitment(RecruitmentQuery crecruitmentQuery);
 	
-	ResultDTO<Boolean> deleteRecruitment(RecruitmentDTO dto) ;
+	ResultDTO<Boolean> deleteRecruitment(com.king.nowedge.dto.RecruitmentDTO dto) ;
 	
 	
 	
@@ -240,24 +244,24 @@ public interface UserService   {
 	 *   
 	 -------------------------------------------------------*/
 
-	ResultDTO<Boolean> createEducationExperience(EducationExperienceDTO educationExperienceDTO);
+	ResultDTO<Boolean> createEducationExperience(com.king.nowedge.dto.EducationExperienceDTO educationExperienceDTO);
 	
-	ResultDTO<Boolean> updateEducationExperience(EducationExperienceDTO educationExperienceDTO);
+	ResultDTO<Boolean> updateEducationExperience(com.king.nowedge.dto.EducationExperienceDTO educationExperienceDTO);
 	
 	
-	ResultDTO<EducationExperienceDTO> queryEducationExperienceByUid(String uid);
+	ResultDTO<com.king.nowedge.dto.EducationExperienceDTO> queryEducationExperienceByUid(String uid);
 	
 	/*
 	 * 
 	 */
-	ResultDTO<EducationExperienceDTO> queryEducationExperienceById(EducationExperienceQuery educationExperienceQuery);
+	ResultDTO<com.king.nowedge.dto.EducationExperienceDTO> queryEducationExperienceById(EducationExperienceQuery educationExperienceQuery);
 	
 	
-	ResultDTO<EducationExperienceDTO> queryEducationExperienceByCode(String code);
+	ResultDTO<com.king.nowedge.dto.EducationExperienceDTO> queryEducationExperienceByCode(String code);
 	
-	ResultDTO<List<EducationExperienceDTO>> queryEducationExperience(EducationExperienceQuery educationExperienceQuery);
+	ResultDTO<List<com.king.nowedge.dto.EducationExperienceDTO>> queryEducationExperience(EducationExperienceQuery educationExperienceQuery);
 	
-	ResultDTO<List<EducationExperienceDTO>> queryEducationExperienceAll();
+	ResultDTO<List<com.king.nowedge.dto.EducationExperienceDTO>> queryEducationExperienceAll();
 	
 	ResultDTO<Integer> countQueryEducationExperience(EducationExperienceQuery educationExperienceQuery);
 	
@@ -269,23 +273,23 @@ public interface UserService   {
 	 * 
 	 * 
 	 */
-	ResultDTO<Boolean> createRelevant(RelevantDTO relevantDTO);
+	ResultDTO<Boolean> createRelevant(com.king.nowedge.dto.RelevantDTO relevantDTO);
 	
-	ResultDTO<Boolean> updateRelevant(RelevantDTO relevantDTO);
+	ResultDTO<Boolean> updateRelevant(com.king.nowedge.dto.RelevantDTO relevantDTO);
 	
-	ResultDTO<Boolean> createOrUpdateRelevant(RelevantDTO relevantDTO);	
+	ResultDTO<Boolean> createOrUpdateRelevant(com.king.nowedge.dto.RelevantDTO relevantDTO);
 	
-	ResultDTO<RelevantDTO> queryRelevantByUid(String uid);	
+	ResultDTO<com.king.nowedge.dto.RelevantDTO> queryRelevantByUid(String uid);
 	
-	ResultDTO<RelevantDTO> queryRelevantById(Long id);
+	ResultDTO<com.king.nowedge.dto.RelevantDTO> queryRelevantById(Long id);
 	
-	ResultDTO<RelevantDTO> queryRelevantById(RelevantQuery relevantQuery);	
+	ResultDTO<com.king.nowedge.dto.RelevantDTO> queryRelevantById(RelevantQuery relevantQuery);
 	
-	ResultDTO<RelevantDTO> queryRelevantByCode(String code);
+	ResultDTO<com.king.nowedge.dto.RelevantDTO> queryRelevantByCode(String code);
 	
-	ResultDTO<List<RelevantDTO>> queryRelevant(RelevantQuery relevantQuery);
+	ResultDTO<List<com.king.nowedge.dto.RelevantDTO>> queryRelevant(RelevantQuery relevantQuery);
 	
-	ResultDTO<List<RelevantDTO>> queryRelevantAll();
+	ResultDTO<List<com.king.nowedge.dto.RelevantDTO>> queryRelevantAll();
 	
 	ResultDTO<Integer> countQueryRelevant(RelevantQuery relevantQuery);
 	
@@ -294,7 +298,7 @@ public interface UserService   {
 	
 	
 
-	ResultDTO<List<AuthRoleDTO>> queryAuthByRoleId(String roleId);
+	ResultDTO<List<com.king.nowedge.dto.AuthRoleDTO>> queryAuthByRoleId(String roleId);
 	
 	
 	/*------------------------
@@ -303,24 +307,24 @@ public interface UserService   {
 	 * 
 	 ---------------------------*/
 	
-	ResultDTO<Boolean> createContact(ContactDTO dto);
+	ResultDTO<Boolean> createContact(com.king.nowedge.dto.ContactDTO dto);
 	
-	ResultDTO<Boolean> updateContact(ContactDTO dto);
+	ResultDTO<Boolean> updateContact(com.king.nowedge.dto.ContactDTO dto);
 	
 	
-	ResultDTO<ContactDTO> queryContactByUid(String uid);	
+	ResultDTO<com.king.nowedge.dto.ContactDTO> queryContactByUid(String uid);
 	
-	ResultDTO<ContactDTO> queryContactByCode(String code);
+	ResultDTO<com.king.nowedge.dto.ContactDTO> queryContactByCode(String code);
 	
 	ResultDTO<ContactQuery> queryContact(ContactQuery query);
 	
-	ResultDTO<ContactDTO> queryContactById(Long id);
+	ResultDTO<com.king.nowedge.dto.ContactDTO> queryContactById(Long id);
 	
-	ResultDTO<List<ContactDTO>> queryContactAll();
+	ResultDTO<List<com.king.nowedge.dto.ContactDTO>> queryContactAll();
 	
 	ResultDTO<Integer> countQueryContact(ContactQuery query);
 	
-	ResultDTO<Boolean> deleteContact(ContactDTO contactDTO) ;
+	ResultDTO<Boolean> deleteContact(com.king.nowedge.dto.ContactDTO contactDTO) ;
 	
 	/*------------------------
 	 * 
@@ -333,7 +337,7 @@ public interface UserService   {
 	ResultDTO<Boolean> updateAddress(AddressDTO addressDTO);
 	
 	
-	ResultDTO<AddressDTO> queryAddressByUid(String uid);	
+	ResultDTO<AddressDTO> queryAddressByUid(String uid);
 	
 	ResultDTO<AddressDTO> queryAddressByCode(String code);
 	
@@ -356,30 +360,30 @@ public interface UserService   {
 	 * 
 	 ----------------------------------*/
 	
-	ResultDTO<Boolean> createWorkExperience(WorkExperienceDTO workExperienceDTO);
+	ResultDTO<Boolean> createWorkExperience(com.king.nowedge.dto.WorkExperienceDTO workExperienceDTO);
 	
-	ResultDTO<Boolean> updateWorkExperience(WorkExperienceDTO workExperienceDTO);
+	ResultDTO<Boolean> updateWorkExperience(com.king.nowedge.dto.WorkExperienceDTO workExperienceDTO);
 	
 	
-	ResultDTO<WorkExperienceDTO> queryWorkExperienceByUid(String uid);
+	ResultDTO<com.king.nowedge.dto.WorkExperienceDTO> queryWorkExperienceByUid(String uid);
 	
 	/*
 	 * 
 	 */
-	ResultDTO<WorkExperienceDTO> queryWorkExperienceById(Long id);
+	ResultDTO<com.king.nowedge.dto.WorkExperienceDTO> queryWorkExperienceById(Long id);
 	
 	
 	
 	
-	ResultDTO<WorkExperienceDTO> queryWorkExperienceByCode(String code);
+	ResultDTO<com.king.nowedge.dto.WorkExperienceDTO> queryWorkExperienceByCode(String code);
 	
-	ResultDTO<List<WorkExperienceDTO>> queryWorkExperience(WorkExperienceQuery workExperienceQuery);
+	ResultDTO<List<com.king.nowedge.dto.WorkExperienceDTO>> queryWorkExperience(WorkExperienceQuery workExperienceQuery);
 	
-	ResultDTO<List<WorkExperienceDTO>> queryWorkExperienceAll();
+	ResultDTO<List<com.king.nowedge.dto.WorkExperienceDTO>> queryWorkExperienceAll();
 	
 	ResultDTO<Integer> countQueryWorkExperience(WorkExperienceQuery workExperienceQuery);
 	
-	ResultDTO<Boolean> deleteWorkExperience(WorkExperienceDTO dto) ;
+	ResultDTO<Boolean> deleteWorkExperience(com.king.nowedge.dto.WorkExperienceDTO dto) ;
 	
 	
 	
@@ -387,24 +391,24 @@ public interface UserService   {
 	 * resume
 	 */
 	
-	ResultDTO<Boolean> createResume(ResumeDTO dto);
+	ResultDTO<Boolean> createResume(com.king.nowedge.dto.ResumeDTO dto);
 
-	ResultDTO<Boolean> createOrUpdateResume(ResumeDTO dto);
+	ResultDTO<Boolean> createOrUpdateResume(com.king.nowedge.dto.ResumeDTO dto);
 	
-	ResultDTO<Boolean> updateResume(ResumeDTO dto);
+	ResultDTO<Boolean> updateResume(com.king.nowedge.dto.ResumeDTO dto);
 	
 	
-	ResultDTO<ResumeDTO> queryResumeByUid(String uid);
+	ResultDTO<com.king.nowedge.dto.ResumeDTO> queryResumeByUid(String uid);
 	
-	ResultDTO<ResumeDTO> queryResumeByUserId(Long userId);
+	ResultDTO<com.king.nowedge.dto.ResumeDTO> queryResumeByUserId(Long userId);
 	
-	ResultDTO<ResumeDTO> queryResumeByCode(String code);
+	ResultDTO<com.king.nowedge.dto.ResumeDTO> queryResumeByCode(String code);
 	
 	ResultDTO<ResumeQuery> queryResume(ResumeQuery query);
 	
-	ResultDTO<ResumeDTO> queryResumeById(Long id);
+	ResultDTO<com.king.nowedge.dto.ResumeDTO> queryResumeById(Long id);
 	
-	ResultDTO<List<ResumeDTO>> queryResumeAll();
+	ResultDTO<List<com.king.nowedge.dto.ResumeDTO>> queryResumeAll();
 	
 	ResultDTO<Integer> countQueryResume(ResumeQuery query);
 	

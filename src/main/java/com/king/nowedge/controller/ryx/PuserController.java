@@ -1,7 +1,7 @@
 package com.king.nowedge.controller.ryx;
 
 import com.king.nowedge.controller.BaseController;
-import com.king.nowedge.dto.AddressDTO;
+import com.king.nowedge.dto.comm.AddressDTO;
 import com.king.nowedge.dto.AttrValueDTO;
 import com.king.nowedge.dto.ResumeDTO;
 import com.king.nowedge.dto.WorkExperienceDTO;

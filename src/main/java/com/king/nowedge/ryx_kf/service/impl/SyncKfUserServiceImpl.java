@@ -12,7 +12,7 @@ import com.king.nowedge.dto.ryx.query.RyxUserExtQuery;
 import com.king.nowedge.dto.ryx.query.RyxUsersQuery;
 import com.king.nowedge.helper.ConstHelper;
 import com.king.nowedge.mapper.ryx.RyxUserMapper;
-import com.king.nowedge.ryx_kf.mapper.RyxUserExtMapper;
+import com.king.nowedge.ryx_kf.mapper.KfRyxUserExtMapper;
 import com.king.nowedge.ryx_kf.mapper.RyxUsersMapper;
 import com.king.nowedge.ryx_kf.pojo.*;
 import com.king.nowedge.ryx_kf.service.interfaces.SyncKfUserService;
@@ -68,7 +68,7 @@ public class SyncKfUserServiceImpl implements SyncKfUserService {
     RyxUsersMapper ryxUsersMapper;
 
     @Autowired
-    RyxUserExtMapper ryxUserExtMapper;
+    KfRyxUserExtMapper kfRyxUserExtMapper;
 
     @Autowired
     RyxUserExtExample ryxUserExtExample;
@@ -240,7 +240,7 @@ public class SyncKfUserServiceImpl implements SyncKfUserService {
             RyxUserExtExample.Criteria criteria = ryxUserExtExample.createCriteria();
             criteria.andUidEqualTo(kfUserInfoModel.getNumber());
             criteria.andSourceEqualTo(KF_USER_CCS);
-            List<RyxUserExt> ryxUserExtList = ryxUserExtMapper.selectByExample(ryxUserExtExample);
+            List<RyxUserExt> ryxUserExtList = kfRyxUserExtMapper.selectByExample(ryxUserExtExample);
             if (ryxUserExtList.size() > 0) {
                 //如果有子账号 则判断是否离职 离职便删除
                 //kfUserStatusResult.equals("离职了！！！")
@@ -319,7 +319,7 @@ public class SyncKfUserServiceImpl implements SyncKfUserService {
             RyxUserExtExample.Criteria criteria = ryxUserExtExample.createCriteria();
             criteria.andSourceEqualTo(SD_USER_CCS);
             criteria.andUidEqualTo(userNum);
-            List<RyxUserExt> ryxUserExtDTOS = ryxUserExtMapper.selectByExample(ryxUserExtExample);
+            List<RyxUserExt> ryxUserExtDTOS = kfRyxUserExtMapper.selectByExample(ryxUserExtExample);
             //补全appKey 和 appSecret 将对应企业大学的账号状态改为冻结
             ryxUserExtDTOS.get(0).setAppKey(mainUserExtDTO.getAppKey());
             ryxUserExtDTOS.get(0).setAppSecret(mainUserExtDTO.getAppSecret());
@@ -328,7 +328,7 @@ public class SyncKfUserServiceImpl implements SyncKfUserService {
                 ryxUserExtExample = new RyxUserExtExample();
                 criteria = ryxUserExtExample.createCriteria();
                 criteria.andUidEqualTo(userNum);
-                ryxUserExtMapper.deleteByExample(ryxUserExtExample);
+                kfRyxUserExtMapper.deleteByExample(ryxUserExtExample);
 //                sqlSession.commit();
             } else {
                 ok = false;
@@ -369,7 +369,7 @@ public class SyncKfUserServiceImpl implements SyncKfUserService {
             RyxUserExtExample.Criteria criteria = ryxUserExtExample.createCriteria();
             criteria.andUidEqualTo(kfUserInfoModel.getNumber());
             criteria.andSourceEqualTo(KF_USER_CCS);
-            List<RyxUserExt> ryxUserExtList = ryxUserExtMapper.selectByExample(ryxUserExtExample);
+            List<RyxUserExt> ryxUserExtList = kfRyxUserExtMapper.selectByExample(ryxUserExtExample);
             if (ryxUserExtList.size() == 0) {
                 String uid = kfUserInfoModel.getNumber(); // 员工唯一ID
                 String username = KF_USER_SIGN + kfUserInfoModel.getLoginName();//登录名

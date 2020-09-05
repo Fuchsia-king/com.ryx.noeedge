@@ -1,7 +1,7 @@
 
 package com.king.nowedge.helper;
 
-import com.king.nowedge.dto.AddressDTO;
+import com.king.nowedge.dto.comm.AddressDTO;
 import com.king.nowedge.dto.ContactDTO;
 import com.king.nowedge.dto.ResumeDTO;
 import com.king.nowedge.dto.WorkExperienceDTO;

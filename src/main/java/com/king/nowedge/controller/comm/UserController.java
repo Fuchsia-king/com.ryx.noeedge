@@ -1,10 +1,14 @@
 package com.king.nowedge.controller.comm;
 
 import com.king.nowedge.controller.BaseController;
-import com.king.nowedge.dto.*;
+import com.king.nowedge.dto.PassdDTO;
+import com.king.nowedge.dto.RoleDTO;
+import com.king.nowedge.dto.SysmenuDTO;
+import com.king.nowedge.dto.UserDTO;
 import com.king.nowedge.dto.base.CompanyDTO;
 import com.king.nowedge.dto.base.KeyvalueDTO;
 import com.king.nowedge.dto.base.ResultDTO;
+import com.king.nowedge.dto.comm.AddressDTO;
 import com.king.nowedge.dto.enums.EnumKeyValueType;
 import com.king.nowedge.dto.query.*;
 import com.king.nowedge.dto.query.base.CompanyQuery;
@@ -71,7 +75,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("admin/do_create_user")
 	public ModelAndView doCreateUser(HttpServletRequest request,
-			@Valid @ModelAttribute("createUserDTO") UserDTO userDTO, BindingResult bindingResult, HttpServletResponse reponse)
+									 @Valid @ModelAttribute("createUserDTO") UserDTO userDTO, BindingResult bindingResult, HttpServletResponse reponse)
 			throws UnsupportedEncodingException {
 
 		ModelAndView mav = new ModelAndView("/admin/listUser") ; 
@@ -700,7 +704,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("admin/do_create_user_role")
 	public ModelAndView doCreateUserRole(HttpServletRequest request,
-			UserRoleDTO userRoleDTO, HttpServletResponse reponse)
+										 com.king.nowedge.dto.UserRoleDTO userRoleDTO, HttpServletResponse reponse)
 			throws UnsupportedEncodingException {
 
 		RyxUsersDTO user = getRyxUser();
@@ -785,7 +789,7 @@ public class UserController extends BaseController {
 	
 	@RequestMapping("admin/do_auth_user")
 	public ModelAndView doAuthUser(HttpServletRequest request,
-			UserRoleDTO userRoleDTO, HttpServletResponse reponse)
+								   com.king.nowedge.dto.UserRoleDTO userRoleDTO, HttpServletResponse reponse)
 			throws UnsupportedEncodingException {
 
 		RyxUsersDTO user = getRyxUser();
@@ -832,7 +836,7 @@ public class UserController extends BaseController {
 
 	@RequestMapping("admin/do_auth_role")
 	public ModelAndView doAuthRole(HttpServletRequest request,
-			AuthRoleDTO authRoleDTO, HttpServletResponse reponse)
+								   com.king.nowedge.dto.AuthRoleDTO authRoleDTO, HttpServletResponse reponse)
 			throws UnsupportedEncodingException {
 
 		ModelAndView mav = new ModelAndView("/admin/authRole") ; 
@@ -905,7 +909,7 @@ public class UserController extends BaseController {
 			mav.addObject("roleId", roleId);
 			
 			
-			ResultDTO<List<AuthRoleDTO>> authRoleResult =  userService.queryAuthByRoleId(roleId);
+			ResultDTO<List<com.king.nowedge.dto.AuthRoleDTO>> authRoleResult =  userService.queryAuthByRoleId(roleId);
 			addList(errList, authRoleResult.getErrorMsg());
 			mav.addObject("authRoleList", authRoleResult.getModule());
 			
@@ -931,7 +935,7 @@ public class UserController extends BaseController {
 			@RequestParam(value = "roleId") String roleId,
 			@RequestParam(value = "ideleted") Integer ideleted,
 			
-			AuthRoleDTO authRoleDTO,
+			com.king.nowedge.dto.AuthRoleDTO authRoleDTO,
 			
 			HttpServletRequest request, HttpServletResponse response)
 			throws UnsupportedEncodingException {
@@ -1055,7 +1059,7 @@ public class UserController extends BaseController {
 
 		try {
 
-			ResultDTO<UserRoleDTO> result = userService.queryUserRoleByUid(uid);
+			ResultDTO<com.king.nowedge.dto.UserRoleDTO> result = userService.queryUserRoleByUid(uid);
 
 			if (!result.isSuccess()) {
 				errList.add(result.getErrorMsg());
@@ -1074,8 +1078,8 @@ public class UserController extends BaseController {
 	}
 
 	@RequestMapping("admin/do_update_user_role")
-	public ModelAndView doUpdateUserRole(UserRoleDTO userRoleDTO,
-			HttpServletRequest request, HttpServletResponse reponse)
+	public ModelAndView doUpdateUserRole(com.king.nowedge.dto.UserRoleDTO userRoleDTO,
+										 HttpServletRequest request, HttpServletResponse reponse)
 			throws UnsupportedEncodingException {
 
 		ModelAndView mav = new ModelAndView("admin/userRole/listUserRole"); // new
@@ -1475,8 +1479,8 @@ public class UserController extends BaseController {
 	
 	
 	@RequestMapping("/admin/do_create_user_security_question")
-	public ModelAndView doCreateUserSecurityQuestion(@Valid @ModelAttribute("createDTO")UserSecurityQuestionDTO userSecurityQuestionDTO, BindingResult bindingResult,HttpServletRequest request,
-			 HttpServletResponse reponse)
+	public ModelAndView doCreateUserSecurityQuestion(@Valid @ModelAttribute("createDTO") com.king.nowedge.dto.UserSecurityQuestionDTO userSecurityQuestionDTO, BindingResult bindingResult, HttpServletRequest request,
+													 HttpServletResponse reponse)
 			throws UnsupportedEncodingException {
 		
 		RyxUsersDTO user = getRyxUser();
@@ -1500,24 +1504,24 @@ public class UserController extends BaseController {
 				
 				if(!bindingResult.hasErrors()){
 					
-					List<UserSecqaDTO> list = new ArrayList<UserSecqaDTO>();
+					List<com.king.nowedge.dto.UserSecqaDTO> list = new ArrayList<com.king.nowedge.dto.UserSecqaDTO>();
 					
 					
-					UserSecqaDTO userSecqaDTO = new UserSecqaDTO();
+					com.king.nowedge.dto.UserSecqaDTO userSecqaDTO = new com.king.nowedge.dto.UserSecqaDTO();
 					userSecqaDTO.setQuestion(userSecurityQuestionDTO.getQuestion1());
 					userSecqaDTO.setUser(user.getUid());
 					userSecqaDTO.setAnswer(SecurityExUtils.md5SysWideSalt(userSecurityQuestionDTO.getAnswer1(),user.getUid()));
 					list.add(userSecqaDTO);
 					
 					
-					userSecqaDTO = new UserSecqaDTO();
+					userSecqaDTO = new com.king.nowedge.dto.UserSecqaDTO();
 					userSecqaDTO.setQuestion(userSecurityQuestionDTO.getQuestion2());
 					userSecqaDTO.setUser(user.getUid());
 					userSecqaDTO.setAnswer(SecurityExUtils.md5SysWideSalt(userSecurityQuestionDTO.getAnswer2(),user.getUid()));
 					list.add(userSecqaDTO);
 						
 						
-					userSecqaDTO = new UserSecqaDTO();
+					userSecqaDTO = new com.king.nowedge.dto.UserSecqaDTO();
 					userSecqaDTO.setQuestion(userSecurityQuestionDTO.getQuestion3());
 					userSecqaDTO.setUser(user.getUid());
 					userSecqaDTO.setAnswer(SecurityExUtils.md5SysWideSalt(userSecurityQuestionDTO.getAnswer3(),user.getUid()));
@@ -1576,8 +1580,8 @@ public class UserController extends BaseController {
 	}
 	
 
-	private List<SecurityQuestionDTO>  getAllSecurityQuestion(){
-		ResultDTO<List<SecurityQuestionDTO>> qresult = systemService.queryAllSecurityQuestion();
+	private List<com.king.nowedge.dto.SecurityQuestionDTO>  getAllSecurityQuestion(){
+		ResultDTO<List<com.king.nowedge.dto.SecurityQuestionDTO>> qresult = systemService.queryAllSecurityQuestion();
 		if( qresult.isSuccess()){
 			return qresult.getModule() ; 
 		}
@@ -1588,9 +1592,9 @@ public class UserController extends BaseController {
 	}
 	
 	
-	private List<UserSecqaDTO> getSecqaByUser(){
+	private List<com.king.nowedge.dto.UserSecqaDTO> getSecqaByUser(){
 		RyxUsersDTO user = getRyxUser();
-		ResultDTO<List<UserSecqaDTO>> result = userService.querySecQanswrByUser(user.getUid());
+		ResultDTO<List<com.king.nowedge.dto.UserSecqaDTO>> result = userService.querySecQanswrByUser(user.getUid());
 		if( result.isSuccess()){
 			return result.getModule(); 
 		}
@@ -1953,7 +1957,7 @@ public class UserController extends BaseController {
 			UserDTO user = (UserDTO)session.getAttribute(__FORGET_PASSWORD_USER__);
 			mav.addObject("user", user);
 			
-			List<UserSecqaDTO> secqaList = (List<UserSecqaDTO>)session.getAttribute(__FORGET_PASSWORD_USER_QUESTION__);
+			List<com.king.nowedge.dto.UserSecqaDTO> secqaList = (List<com.king.nowedge.dto.UserSecqaDTO>)session.getAttribute(__FORGET_PASSWORD_USER_QUESTION__);
 			mav.addObject("secqaList", secqaList);
 			
 //			SystemCache systemCache = new SystemCache(systemService);
@@ -1999,7 +2003,7 @@ public class UserController extends BaseController {
 				}		
 				else{
 					 
-					ResultDTO<List<UserSecqaDTO>> result1 = userService.querySecQanswrByUser(user.getUid());
+					ResultDTO<List<com.king.nowedge.dto.UserSecqaDTO>> result1 = userService.querySecQanswrByUser(user.getUid());
 					if(result1.isSuccess()){
 						
 						HttpSession session = request.getSession();
@@ -2030,7 +2034,7 @@ public class UserController extends BaseController {
 	
 	@RequestMapping("/public/do_forget_password1")
 	public ModelAndView doForgetPassword1(
-			@Valid @ModelAttribute("createDTO")UserSecurityQuestionDTO userSecurityQuestionDTO,
+			@Valid @ModelAttribute("createDTO") com.king.nowedge.dto.UserSecurityQuestionDTO userSecurityQuestionDTO,
 			BindingResult bindingResult ,HttpServletRequest request,
 			 HttpServletResponse reponse)
 			throws UnsupportedEncodingException {
@@ -2049,7 +2053,7 @@ public class UserController extends BaseController {
 					UserDTO user = (UserDTO)session.getAttribute(__FORGET_PASSWORD_USER__);
 					mav.addObject("user", user);
 					
-					List<UserSecqaDTO> secqaList = (List<UserSecqaDTO>)session.getAttribute(__FORGET_PASSWORD_USER_QUESTION__);
+					List<com.king.nowedge.dto.UserSecqaDTO> secqaList = (List<com.king.nowedge.dto.UserSecqaDTO>)session.getAttribute(__FORGET_PASSWORD_USER_QUESTION__);
 					mav.addObject("secqaList", secqaList);
 					
 //					SystemCache systemCache = new SystemCache(systemService);
@@ -2383,7 +2387,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("/admin/do_create_recruitment")
 	public ModelAndView doCreateRecruitment(HttpServletRequest request,
-			@Valid @ModelAttribute("createRecruitmentDTO") RecruitmentDTO recruitmentDTO, BindingResult bindingResult, HttpServletResponse reponse)
+											@Valid @ModelAttribute("createRecruitmentDTO") com.king.nowedge.dto.RecruitmentDTO recruitmentDTO, BindingResult bindingResult, HttpServletResponse reponse)
 			throws UnsupportedEncodingException {
 
 		errList = new ArrayList<String>();
@@ -2445,7 +2449,7 @@ public class UserController extends BaseController {
 		mav.addObject("educationLevel", getAllEducationLevel());
 		mav.addObject("workingYears", getAllWorkingYears());
 		mav.addObject("wellfare", getAllWellfare());
-		mav.addObject("createRecruitmentDTO", new RecruitmentDTO());
+		mav.addObject("createRecruitmentDTO", new com.king.nowedge.dto.RecruitmentDTO());
 		
 		
 		

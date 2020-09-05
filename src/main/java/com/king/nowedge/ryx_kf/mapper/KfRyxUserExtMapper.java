@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
-public interface RyxUserExtMapper {
+public interface KfRyxUserExtMapper {
     long countByExample(RyxUserExtExample example);
 
     int deleteByExample(RyxUserExtExample example);
