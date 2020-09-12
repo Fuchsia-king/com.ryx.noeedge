@@ -1,7 +1,7 @@
 package com.king.nowedge.mapper.base;
 
 import com.king.nowedge.dto.base.SpecialtyDTO;
-import com.king.nowedge.dto.query.base.SpecialtyQuery;
+import com.king.nowedge.query.base.SpecialtyQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 

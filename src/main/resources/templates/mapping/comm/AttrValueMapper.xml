@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.comm.AttrValueMapper">
+
+	 <sql id="select">		
+		uid,
+	    oid,
+	    attr,
+	    value,
+	    value1,
+	    tcreate,
+	    tmodified
+	</sql> 
+
+	<sql id="where">
+	
+	    <where>
+	    
+			<if test="oid != null">
+				<![CDATA[ and oid = #{oid} ]]>
+			</if>
+			
+			<if test="attr != null">
+				<![CDATA[ and attr = #{attr} ]]>
+			</if>
+	
+			
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="AttrValueDTO">   
+       insert into attr_value(uid,oid,attr,value,value1) 
+       values
+       (#{uid},#{oid},#{attr},#{value},#{value1}) 
+    </insert>
+      
+    
+    
+    <select id="query" resultType="AttrValueDTO" parameterType="AttrValueQuery">
+         
+        select 
+        <include refid="select"/> 
+        from attr_value
+        <include refid="where"/>
+                		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="AttrValueQuery">   
+        select count(1) from attr_value 
+        <include refid="where"/>
+    </select>
+    
+     <select id="countByUid" resultType="java.lang.Integer" parameterType="java.lang.String">   
+        select count(1) from attr_value where uid = #{uid}
+    </select>
+    
+    <select id="queryById" resultType="AttrValueDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select"/>
+        from attr_value where id = #{id}  limit 1;
+    </select>    
+    
+   <select id="queryByUid" resultType="AttrValueDTO" parameterType="java.lang.String">   
+        select 
+        <include refid="select"/>
+        from attr_value where uid = #{uid}  limit 1;
+    </select>  
+    
+    
+    <update id="update" parameterType="AttrValueDTO">
+    
+        update attr_value
+         
+        <set>	
+        	<if test="oid != null">
+				<![CDATA[ oid = #{oid} ]]>,
+			</if>			
+					
+			<if test="attr != null">
+				<![CDATA[ attr = #{attr} ]]>,
+			</if>
+			
+			<if test="value != null">
+				<![CDATA[ value = #{value} ]]>,
+			</if>
+			
+			<if test="value1 != null">
+				<![CDATA[ value1 = #{value1} ]]>,
+			</if>
+					
+			<![CDATA[ tmodified = now() ]]>,
+			
+		 </set>
+		 
+		 where	id = #{id}
+		 	
+    </update> 
+    
+     <update id="update1" parameterType="AttrValueDTO">
+    
+        update attr_value
+         
+        <set>	
+			
+			<if test="value != null">
+				<![CDATA[ value = #{value} ]]>,
+			</if>
+			
+			<if test="value1 != null">
+				<![CDATA[ value1 = #{value1} ]]>,
+			</if>
+			
+		 </set>
+		 
+		 where	uid = #{uid} 
+		 	
+    </update> 
+    
+    
+    <delete id="delete" parameterType="java.lang.String">    
+        update attr_value         
+        set ideleted = 1
+		where id = #{id}
+    </delete> 
+    
+    
+    
+</mapper> 

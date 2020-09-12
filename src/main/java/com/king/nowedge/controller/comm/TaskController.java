@@ -3,7 +3,7 @@ package com.king.nowedge.controller.comm;
 import com.king.nowedge.controller.BaseController;
 import com.king.nowedge.dto.*;
 import com.king.nowedge.dto.base.ResultDTO;
-import com.king.nowedge.dto.query.*;
+import com.king.nowedge.query.*;
 import com.king.nowedge.dto.ryx.RyxUsersDTO;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;

@@ -1,17 +1,20 @@
 package com.king.nowedge.service;
 
-import com.king.nowedge.dto.*;
+import com.king.nowedge.dto.HistoryDTO;
+import com.king.nowedge.dto.RcityDTO;
+import com.king.nowedge.dto.SecurityQuestionDTO;
+import com.king.nowedge.dto.WarehouseDTO;
 import com.king.nowedge.dto.base.KeyrvDTO;
 import com.king.nowedge.dto.base.KeyvDTO;
 import com.king.nowedge.dto.base.KeyvalueDTO;
 import com.king.nowedge.dto.base.ResultDTO;
-import com.king.nowedge.dto.query.*;
-import com.king.nowedge.dto.query.base.KeyrvQuery;
-import com.king.nowedge.dto.query.base.KeyvQuery;
-import com.king.nowedge.dto.query.base.KeyvalueQuery;
 import com.king.nowedge.dto.ryx.RyxActivityDTO;
 import com.king.nowedge.dto.ryx.RyxActivitySeatDTO;
-import com.king.nowedge.dto.ryx.query.RyxActivitySeatQuery;
+import com.king.nowedge.query.*;
+import com.king.nowedge.query.base.KeyrvQuery;
+import com.king.nowedge.query.base.KeyvQuery;
+import com.king.nowedge.query.base.KeyvalueQuery;
+import com.king.nowedge.query.ryx.RyxActivitySeatQuery;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -111,11 +114,11 @@ public interface SystemService   {
 	 */
 	
 	
-	ResultDTO<Boolean> createDept(DeptDTO deptDTO);
+	ResultDTO<Boolean> createDept(com.king.nowedge.dto.DeptDTO deptDTO);
 	
-	ResultDTO<Boolean> updateDept(DeptDTO deptDTO);
+	ResultDTO<Boolean> updateDept(com.king.nowedge.dto.DeptDTO deptDTO);
 	
-	ResultDTO<DeptDTO> queryDeptByUid(String uid);
+	ResultDTO<com.king.nowedge.dto.DeptDTO> queryDeptByUid(String uid);
 	
 	ResultDTO<DeptQuery> queryDept(DeptQuery deptQuery);
 	
@@ -123,10 +126,10 @@ public interface SystemService   {
 	
 	ResultDTO<Boolean> deleteDept(String uid) ;
 	
-	ResultDTO<List<DeptDTO>> queryAllDept();
+	ResultDTO<List<com.king.nowedge.dto.DeptDTO>> queryAllDept();
 	
 
-	ResultDTO<DeptDTO> queryDeptById(Integer id);
+	ResultDTO<com.king.nowedge.dto.DeptDTO> queryDeptById(Integer id);
 	
 	
 	
@@ -135,20 +138,20 @@ public interface SystemService   {
 	 */
 	
 	
-	ResultDTO<Boolean> createAttr(AttrDTO attrDTO);
+	ResultDTO<Boolean> createAttr(com.king.nowedge.dto.AttrDTO attrDTO);
 	
-	ResultDTO<Boolean> updateAttr(AttrDTO attrDTO);
+	ResultDTO<Boolean> updateAttr(com.king.nowedge.dto.AttrDTO attrDTO);
 	
 	
-	ResultDTO<AttrDTO> queryAttrByUid(String uid);
+	ResultDTO<com.king.nowedge.dto.AttrDTO> queryAttrByUid(String uid);
 	
-	ResultDTO<List<AttrDTO>> queryAttr(AttrQuery attrQuery);
+	ResultDTO<List<com.king.nowedge.dto.AttrDTO>> queryAttr(AttrQuery attrQuery);
 	
 	ResultDTO<Integer> countQueryAttr(AttrQuery attrQuery);
 	
 	ResultDTO<Boolean> deleteAttr(String uid) ;
 	
-	ResultDTO<List<AttrDTO>> queryAllAttr();
+	ResultDTO<List<com.king.nowedge.dto.AttrDTO>> queryAllAttr();
 	
 	
 	
@@ -157,21 +160,21 @@ public interface SystemService   {
 	 *  attrValue 
 	 */	
 	
-	ResultDTO<Boolean> createAttrValue(AttrValueDTO attrValueDTO);
+	ResultDTO<Boolean> createAttrValue(com.king.nowedge.dto.AttrValueDTO attrValueDTO);
 	
-	ResultDTO<Boolean> createOrUpdateAttrValue(AttrValueDTO attrValueDTO);
+	ResultDTO<Boolean> createOrUpdateAttrValue(com.king.nowedge.dto.AttrValueDTO attrValueDTO);
 	
-	ResultDTO<Boolean> updateAttrValue(AttrValueDTO attrValueDTO);
+	ResultDTO<Boolean> updateAttrValue(com.king.nowedge.dto.AttrValueDTO attrValueDTO);
 	
-	ResultDTO<AttrValueDTO> queryAttrValueByUid(String uid);
+	ResultDTO<com.king.nowedge.dto.AttrValueDTO> queryAttrValueByUid(String uid);
 	
-	ResultDTO<List<AttrValueDTO>> queryAttrValue(AttrValueQuery attrValueQuery);
+	ResultDTO<List<com.king.nowedge.dto.AttrValueDTO>> queryAttrValue(AttrValueQuery attrValueQuery);
 	
 	ResultDTO<Integer> countQueryAttrValue(AttrValueQuery attrValueQuery);
 	
 	ResultDTO<Boolean> deleteAttrValue(String uid) ;
 	
-	ResultDTO<List<AttrValueDTO>> queryAllAttrValue();
+	ResultDTO<List<com.king.nowedge.dto.AttrValueDTO>> queryAllAttrValue();
 	
 	
 
@@ -180,19 +183,19 @@ public interface SystemService   {
 	 */
 	
 	
-	ResultDTO<Boolean> createEmployee(EmployeeDTO employeeDTO);
+	ResultDTO<Boolean> createEmployee(com.king.nowedge.dto.EmployeeDTO employeeDTO);
 	
-	ResultDTO<Boolean> updateEmployee(EmployeeDTO employeeDTO);
+	ResultDTO<Boolean> updateEmployee(com.king.nowedge.dto.EmployeeDTO employeeDTO);
 	
-	ResultDTO<EmployeeDTO> queryEmployeeByUid(String uid);
+	ResultDTO<com.king.nowedge.dto.EmployeeDTO> queryEmployeeByUid(String uid);
 	
-	ResultDTO<List<EmployeeDTO>> queryEmployee(EmployeeQuery employeeQuery);
+	ResultDTO<List<com.king.nowedge.dto.EmployeeDTO>> queryEmployee(EmployeeQuery employeeQuery);
 	
 	ResultDTO<Integer> countQueryEmployee(EmployeeQuery employeeQuery);
 	
 	ResultDTO<Boolean> deleteEmployee(String uid) ;
 	
-	ResultDTO<List<EmployeeDTO>> queryAllEmployee();
+	ResultDTO<List<com.king.nowedge.dto.EmployeeDTO>> queryAllEmployee();
 	
 	
 	/**---------------------------------

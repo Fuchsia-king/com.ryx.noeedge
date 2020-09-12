@@ -2,7 +2,7 @@
 package com.king.nowedge.helper;
 
 import com.king.nowedge.dto.ryx.crm.*;
-import com.king.nowedge.dto.ryx.query.crm.*;
+import com.king.nowedge.query.ryx.crm.*;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;

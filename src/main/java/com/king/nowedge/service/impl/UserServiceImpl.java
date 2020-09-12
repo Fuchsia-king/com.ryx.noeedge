@@ -1,22 +1,24 @@
 package com.king.nowedge.service.impl;
 
-import com.king.nowedge.dto.AuthRoleDTO;
-import com.king.nowedge.dto.EducationExperienceDTO;
-import com.king.nowedge.dto.RecruitmentDTO;
-import com.king.nowedge.dto.UserSecqaDTO;
+
+import com.king.nowedge.dto.ContactDTO;
+import com.king.nowedge.dto.SysmenuDTO;
+import com.king.nowedge.dto.UserRoleDTO;
 import com.king.nowedge.dto.base.CompanyDTO;
 import com.king.nowedge.dto.base.ResultDTO;
 import com.king.nowedge.dto.comm.AddressDTO;
-import com.king.nowedge.dto.query.*;
-import com.king.nowedge.dto.query.base.CompanyQuery;
+import com.king.nowedge.dto.comm.RoleDTO;
+import com.king.nowedge.dto.comm.UserDTO;
 import com.king.nowedge.dto.ryx.RyxSearchDTO;
 import com.king.nowedge.dto.ryx.RyxSearchStatisticsDTO;
-import com.king.nowedge.dto.ryx.query.RyxSearchStatisticsQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import com.king.nowedge.mapper.base.CompanyMapper;
 import com.king.nowedge.mapper.comm.*;
 import com.king.nowedge.mapper.ryx.RyxSearchMapper;
 import com.king.nowedge.mapper.ryx.RyxSearchStatisticsMapper;
+import com.king.nowedge.query.*;
+import com.king.nowedge.query.base.CompanyQuery;
+import com.king.nowedge.query.ryx.RyxSearchStatisticsQuery;
 import com.king.nowedge.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,7 +99,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<Boolean> createUser(com.king.nowedge.dto.UserDTO userDTO){
+	public ResultDTO<Boolean> createUser(UserDTO userDTO){
 		
 		ResultDTO<Boolean> result = null;
 		try{
@@ -116,7 +118,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	
 	
 	@Override
-	public ResultDTO<Boolean> updateUser(com.king.nowedge.dto.UserDTO userDTO){
+	public ResultDTO<Boolean> updateUser(UserDTO userDTO){
 		
 		ResultDTO<Boolean> result = null;
 		try{
@@ -133,7 +135,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	}
 	
 	@Override	
-	public ResultDTO<Boolean> changePassd(com.king.nowedge.dto.UserDTO userDTO){
+	public ResultDTO<Boolean> changePassd(UserDTO userDTO){
 		
 		ResultDTO<Boolean> result = null;
 		try{
@@ -154,17 +156,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<List<com.king.nowedge.dto.UserDTO>> queryUser(UserQuery userQuery) {
-		ResultDTO<List<com.king.nowedge.dto.UserDTO>> result = null;
+	public ResultDTO<List<UserDTO>> queryUser(UserQuery userQuery) {
+		ResultDTO<List<UserDTO>> result = null;
 		try{
-			List<com.king.nowedge.dto.UserDTO> val = userMapper.query(userQuery);
-			result = new ResultDTO<List<com.king.nowedge.dto.UserDTO>>(val);
+			List<UserDTO> val = userMapper.query(userQuery);
+			result = new ResultDTO<List<UserDTO>>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<List<com.king.nowedge.dto.UserDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<UserDTO>>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<List<com.king.nowedge.dto.UserDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<UserDTO>>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -174,17 +176,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<List<com.king.nowedge.dto.UserDTO>> queryUserAll() {
-		ResultDTO<List<com.king.nowedge.dto.UserDTO>> result = null;
+	public ResultDTO<List<UserDTO>> queryUserAll() {
+		ResultDTO<List<UserDTO>> result = null;
 		try{
-			List<com.king.nowedge.dto.UserDTO> val = userMapper.queryAll();
-			result = new ResultDTO<List<com.king.nowedge.dto.UserDTO>>(val);
+			List<UserDTO> val = userMapper.queryAll();
+			result = new ResultDTO<List<UserDTO>>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<List<com.king.nowedge.dto.UserDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<UserDTO>>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<List<com.king.nowedge.dto.UserDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<UserDTO>>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -193,17 +195,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<com.king.nowedge.dto.UserDTO> queryUserByCode(String code) {
-		ResultDTO<com.king.nowedge.dto.UserDTO> result = null;
+	public ResultDTO<UserDTO> queryUserByCode(String code) {
+		ResultDTO<UserDTO> result = null;
 		try{
-			com.king.nowedge.dto.UserDTO val = userMapper.queryByCode(code);
-			result = new ResultDTO<com.king.nowedge.dto.UserDTO>(val);
+			UserDTO val = userMapper.queryByCode(code);
+			result = new ResultDTO<UserDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<com.king.nowedge.dto.UserDTO>("error", e.getMessage());
+			result = new ResultDTO<UserDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<com.king.nowedge.dto.UserDTO>("error", e.getMessage());
+			result = new ResultDTO<UserDTO>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -236,17 +238,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<com.king.nowedge.dto.UserDTO> queryUserByUid(String uid) {
-		ResultDTO<com.king.nowedge.dto.UserDTO> result = null;
+	public ResultDTO<UserDTO> queryUserByUid(String uid) {
+		ResultDTO<UserDTO> result = null;
 		try{
-			com.king.nowedge.dto.UserDTO val = userMapper.queryByUid(uid);
-			result = new ResultDTO<com.king.nowedge.dto.UserDTO>(val);
+			UserDTO val = userMapper.queryByUid(uid);
+			result = new ResultDTO<UserDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<com.king.nowedge.dto.UserDTO>("error", e.getMessage());
+			result = new ResultDTO<UserDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<com.king.nowedge.dto.UserDTO>("error", e.getMessage());
+			result = new ResultDTO<UserDTO>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -303,7 +305,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<Boolean> createRole(com.king.nowedge.dto.RoleDTO roleDTO) {
+	public ResultDTO<Boolean> createRole(RoleDTO roleDTO) {
 		ResultDTO<Boolean> result = null;
 		try{
 			Boolean val = roleMapper.create(roleDTO);
@@ -324,17 +326,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<List<com.king.nowedge.dto.RoleDTO>> queryRole(RoleQuery roleQuery) {
-		ResultDTO<List<com.king.nowedge.dto.RoleDTO>> result = null;
+	public ResultDTO<List<RoleDTO>> queryRole(RoleQuery roleQuery) {
+		ResultDTO<List<RoleDTO>> result = null;
 		try{
-			List<com.king.nowedge.dto.RoleDTO> val = roleMapper.query(roleQuery);
-			result = new ResultDTO<List<com.king.nowedge.dto.RoleDTO>>(val);
+			List<RoleDTO> val = roleMapper.query(roleQuery);
+			result = new ResultDTO<List<RoleDTO>>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<List<com.king.nowedge.dto.RoleDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<RoleDTO>>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<List<com.king.nowedge.dto.RoleDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<RoleDTO>>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -366,17 +368,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<com.king.nowedge.dto.RoleDTO> queryRoleById(Long id) {
-		ResultDTO<com.king.nowedge.dto.RoleDTO> result = null;
+	public ResultDTO<RoleDTO> queryRoleById(Long id) {
+		ResultDTO<RoleDTO> result = null;
 		try{
-			com.king.nowedge.dto.RoleDTO val = roleMapper.queryById(id);
-			result = new ResultDTO<com.king.nowedge.dto.RoleDTO>(val);
+			RoleDTO val = roleMapper.queryById(id);
+			result = new ResultDTO<RoleDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<com.king.nowedge.dto.RoleDTO>("error", e.getMessage());
+			result = new ResultDTO<RoleDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<com.king.nowedge.dto.RoleDTO>("error", e.getMessage());
+			result = new ResultDTO<RoleDTO>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -387,17 +389,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<com.king.nowedge.dto.RoleDTO> queryRoleByUid(String oid) {
-		ResultDTO<com.king.nowedge.dto.RoleDTO> result = null;
+	public ResultDTO<RoleDTO> queryRoleByUid(String oid) {
+		ResultDTO<RoleDTO> result = null;
 		try{
-			com.king.nowedge.dto.RoleDTO val = roleMapper.queryByUid(oid);
-			result = new ResultDTO<com.king.nowedge.dto.RoleDTO>(val);
+			RoleDTO val = roleMapper.queryByUid(oid);
+			result = new ResultDTO<RoleDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<com.king.nowedge.dto.RoleDTO>("error", e.getMessage());
+			result = new ResultDTO<RoleDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<com.king.nowedge.dto.RoleDTO>("error", e.getMessage());
+			result = new ResultDTO<RoleDTO>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -405,7 +407,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	
 	
 	@Override
-	public ResultDTO<Boolean> updateRole(com.king.nowedge.dto.RoleDTO roleDTO) {
+	public ResultDTO<Boolean> updateRole(RoleDTO roleDTO) {
 		ResultDTO<Boolean> result = null;
 		try{
 			Boolean val = roleMapper.update(roleDTO);
@@ -445,7 +447,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 ---------------------------------------------*/
 	
 	@Override
-	public ResultDTO<Boolean> createUserRole(com.king.nowedge.dto.UserRoleDTO userRoleDTO) {
+	public ResultDTO<Boolean> createUserRole(UserRoleDTO userRoleDTO) {
 		ResultDTO<Boolean> result = null;
 		try{
 			Boolean val = userRoleMapper.create(userRoleDTO);
@@ -462,7 +464,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	
 	
 	@Override
-	public ResultDTO<Boolean> authUser(com.king.nowedge.dto.UserRoleDTO userRoleDTO) {
+	public ResultDTO<Boolean> authUser(UserRoleDTO userRoleDTO) {
 		ResultDTO<Boolean> result = null;
 		try{
 
@@ -476,10 +478,10 @@ public class UserServiceImpl extends BaseService implements UserService {
 			
 			if(null != roles && roles.size() > 0){
 				
-				List<com.king.nowedge.dto.UserRoleDTO> list = new ArrayList<com.king.nowedge.dto.UserRoleDTO>();
+				List<UserRoleDTO> list = new ArrayList<UserRoleDTO>();
 				for(String roleId : roles){
 					
-					com.king.nowedge.dto.UserRoleDTO userRole = new com.king.nowedge.dto.UserRoleDTO();
+					UserRoleDTO userRole = new UserRoleDTO();
 					userRole.setUserId(userRoleDTO.getUserId());;
 					userRole.setRoleId(roleId);
 					userRole.setCreater(userRoleDTO.getCreater());
@@ -502,17 +504,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 
 
 	@Override
-	public ResultDTO<List<com.king.nowedge.dto.UserRoleDTO>> queryUserRole(UserRoleQuery userRoleQuery) {
-		ResultDTO<List<com.king.nowedge.dto.UserRoleDTO>> result = null;
+	public ResultDTO<List<UserRoleDTO>> queryUserRole(UserRoleQuery userRoleQuery) {
+		ResultDTO<List<UserRoleDTO>> result = null;
 		try{
-			List<com.king.nowedge.dto.UserRoleDTO> val = userRoleMapper.query(userRoleQuery);
-			result = new ResultDTO<List<com.king.nowedge.dto.UserRoleDTO>>(val);
+			List<UserRoleDTO> val = userRoleMapper.query(userRoleQuery);
+			result = new ResultDTO<List<UserRoleDTO>>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<List<com.king.nowedge.dto.UserRoleDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<UserRoleDTO>>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<List<com.king.nowedge.dto.UserRoleDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<UserRoleDTO>>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -552,34 +554,34 @@ public class UserServiceImpl extends BaseService implements UserService {
 
 
 	@Override
-	public ResultDTO<com.king.nowedge.dto.UserRoleDTO> queryUserRoleById(Long id) {
-		ResultDTO<com.king.nowedge.dto.UserRoleDTO> result = null;
+	public ResultDTO<UserRoleDTO> queryUserRoleById(Long id) {
+		ResultDTO<UserRoleDTO> result = null;
 		try{
-			com.king.nowedge.dto.UserRoleDTO val = userRoleMapper.queryById(id);
-			result = new ResultDTO<com.king.nowedge.dto.UserRoleDTO>(val);
+			UserRoleDTO val = userRoleMapper.queryById(id);
+			result = new ResultDTO<UserRoleDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<com.king.nowedge.dto.UserRoleDTO>("error", e.getMessage());
+			result = new ResultDTO<UserRoleDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<com.king.nowedge.dto.UserRoleDTO>("error", e.getMessage());
+			result = new ResultDTO<UserRoleDTO>("error", e.getMessage());
 		}
 		return result;
 	}
 	
 
 	@Override
-	public ResultDTO<com.king.nowedge.dto.UserRoleDTO> queryUserRoleByUid(String oid) {
-		ResultDTO<com.king.nowedge.dto.UserRoleDTO> result = null;
+	public ResultDTO<UserRoleDTO> queryUserRoleByUid(String oid) {
+		ResultDTO<UserRoleDTO> result = null;
 		try{
-			com.king.nowedge.dto.UserRoleDTO val = userRoleMapper.queryByUid(oid);
-			result = new ResultDTO<com.king.nowedge.dto.UserRoleDTO>(val);
+			UserRoleDTO val = userRoleMapper.queryByUid(oid);
+			result = new ResultDTO<UserRoleDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<com.king.nowedge.dto.UserRoleDTO>("error", e.getMessage());
+			result = new ResultDTO<UserRoleDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<com.king.nowedge.dto.UserRoleDTO>("error", e.getMessage());
+			result = new ResultDTO<UserRoleDTO>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -587,7 +589,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	
 	
 	@Override
-	public ResultDTO<Boolean> updateUserRole(com.king.nowedge.dto.UserRoleDTO userRoleDTO) {
+	public ResultDTO<Boolean> updateUserRole(UserRoleDTO userRoleDTO) {
 		ResultDTO<Boolean> result = null;
 		try{
 			Boolean val = userRoleMapper.update(userRoleDTO);
@@ -604,7 +606,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 
 	
 	@Override
-	public ResultDTO<Boolean> createOrUpdateUserRole(com.king.nowedge.dto.UserRoleDTO userRoleDTO) {
+	public ResultDTO<Boolean> createOrUpdateUserRole(UserRoleDTO userRoleDTO) {
 		ResultDTO<Boolean> result = null;
 		try{
 			Boolean val = userRoleMapper.createOrUpdateUserRole(userRoleDTO);
@@ -634,7 +636,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<Boolean> createSysmenu(com.king.nowedge.dto.SysmenuDTO sysmenuDTO) {
+	public ResultDTO<Boolean> createSysmenu(SysmenuDTO sysmenuDTO) {
 		ResultDTO<Boolean> result = null;
 		try{
 			Boolean val = sysmenuMapper.create(sysmenuDTO);
@@ -655,88 +657,88 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>> querySysmenu(SysmenuQuery sysmenuQuery) {
-		ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>> result = null;
+	public ResultDTO<List<SysmenuDTO>> querySysmenu(SysmenuQuery sysmenuQuery) {
+		ResultDTO<List<SysmenuDTO>> result = null;
 		try{
-			List<com.king.nowedge.dto.SysmenuDTO> val = sysmenuMapper.query(sysmenuQuery);
-			result = new ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>>(val);
+			List<SysmenuDTO> val = sysmenuMapper.query(sysmenuQuery);
+			result = new ResultDTO<List<SysmenuDTO>>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<SysmenuDTO>>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<SysmenuDTO>>("error", e.getMessage());
 		}
 		return result;
 	}
 
 	
 	@Override
-	public ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>> querySysmenuAll() {
-		ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>> result = null;
+	public ResultDTO<List<SysmenuDTO>> querySysmenuAll() {
+		ResultDTO<List<SysmenuDTO>> result = null;
 		try{
-			List<com.king.nowedge.dto.SysmenuDTO> val = sysmenuMapper.queryAll();
-			result = new ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>>(val);
+			List<SysmenuDTO> val = sysmenuMapper.queryAll();
+			result = new ResultDTO<List<SysmenuDTO>>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<SysmenuDTO>>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<SysmenuDTO>>("error", e.getMessage());
 		}
 		return result;
 	}
 	
 	@Override
-	public ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>> getValidSysmenu() {
-		ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>> result = null;
+	public ResultDTO<List<SysmenuDTO>> getValidSysmenu() {
+		ResultDTO<List<SysmenuDTO>> result = null;
 		try{
 			SysmenuQuery query = new SysmenuQuery();
 			query.setIdeleted(0);
 			query.setPageSize(Integer.MAX_VALUE);
-			List<com.king.nowedge.dto.SysmenuDTO> val = sysmenuMapper.query(query);
+			List<SysmenuDTO> val = sysmenuMapper.query(query);
 			query.setOrderBy("CONVERT(name USING gbk)");
-			result = new ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>>(val);
+			result = new ResultDTO<List<SysmenuDTO>>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<SysmenuDTO>>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<SysmenuDTO>>("error", e.getMessage());
 		}
 		return result;
 	}
 	
 	
 	@Override
-	public ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>> querySysmenuByUserId(String userId) {
-		ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>> result = null;
+	public ResultDTO<List<SysmenuDTO>> querySysmenuByUserId(String userId) {
+		ResultDTO<List<SysmenuDTO>> result = null;
 		try{
-			List<com.king.nowedge.dto.SysmenuDTO> val = sysmenuMapper.queryByUserId(userId);
-			result = new ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>>(val);
+			List<SysmenuDTO> val = sysmenuMapper.queryByUserId(userId);
+			result = new ResultDTO<List<SysmenuDTO>>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<SysmenuDTO>>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<SysmenuDTO>>("error", e.getMessage());
 		}
 		return result;
 	}
 	
 	
 	@Override
-	public ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>> querySysmenuByRoleId(String roleId) {
-		ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>> result = null;
+	public ResultDTO<List<SysmenuDTO>> querySysmenuByRoleId(String roleId) {
+		ResultDTO<List<SysmenuDTO>> result = null;
 		try{
-			List<com.king.nowedge.dto.SysmenuDTO> val = sysmenuMapper.queryByRoleId(roleId);
-			result = new ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>>(val);
+			List<SysmenuDTO> val = sysmenuMapper.queryByRoleId(roleId);
+			result = new ResultDTO<List<SysmenuDTO>>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<SysmenuDTO>>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<SysmenuDTO>>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -786,17 +788,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<com.king.nowedge.dto.SysmenuDTO> querySysmenuById(Long id) {
-		ResultDTO<com.king.nowedge.dto.SysmenuDTO> result = null;
+	public ResultDTO<SysmenuDTO> querySysmenuById(Long id) {
+		ResultDTO<SysmenuDTO> result = null;
 		try{
-			com.king.nowedge.dto.SysmenuDTO val = sysmenuMapper.queryById(id);
-			result = new ResultDTO<com.king.nowedge.dto.SysmenuDTO>(val);
+			SysmenuDTO val = sysmenuMapper.queryById(id);
+			result = new ResultDTO<SysmenuDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<com.king.nowedge.dto.SysmenuDTO>("error", e.getMessage());
+			result = new ResultDTO<SysmenuDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<com.king.nowedge.dto.SysmenuDTO>("error", e.getMessage());
+			result = new ResultDTO<SysmenuDTO>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -807,17 +809,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<com.king.nowedge.dto.SysmenuDTO> querySysmenuByUid(String oid) {
-		ResultDTO<com.king.nowedge.dto.SysmenuDTO> result = null;
+	public ResultDTO<SysmenuDTO> querySysmenuByUid(String oid) {
+		ResultDTO<SysmenuDTO> result = null;
 		try{
-			com.king.nowedge.dto.SysmenuDTO val = sysmenuMapper.queryByUid(oid);
-			result = new ResultDTO<com.king.nowedge.dto.SysmenuDTO>(val);
+			SysmenuDTO val = sysmenuMapper.queryByUid(oid);
+			result = new ResultDTO<SysmenuDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<com.king.nowedge.dto.SysmenuDTO>("error", e.getMessage());
+			result = new ResultDTO<SysmenuDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<com.king.nowedge.dto.SysmenuDTO>("error", e.getMessage());
+			result = new ResultDTO<SysmenuDTO>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -825,7 +827,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	
 	
 	@Override
-	public ResultDTO<Boolean> updateSysmenu(com.king.nowedge.dto.SysmenuDTO sysmenuDTO) {
+	public ResultDTO<Boolean> updateSysmenu(SysmenuDTO sysmenuDTO) {
 		ResultDTO<Boolean> result = null;
 		try{
 			Boolean val = sysmenuMapper.update(sysmenuDTO);
@@ -867,7 +869,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<Boolean> createAuthRole(AuthRoleDTO authRoleDTO) {
+	public ResultDTO<Boolean> createAuthRole(com.king.nowedge.dto.AuthRoleDTO authRoleDTO) {
 		ResultDTO<Boolean> result = null;
 		try{
 			Boolean val = authRoleMapper.create(authRoleDTO);
@@ -887,7 +889,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<Boolean> createOrUpdateAuthRole(AuthRoleDTO authRoleDTO) {
+	public ResultDTO<Boolean> createOrUpdateAuthRole(com.king.nowedge.dto.AuthRoleDTO authRoleDTO) {
 		ResultDTO<Boolean> result = null;
 		try{
 			Boolean val = authRoleMapper.createOrUpdate(authRoleDTO);
@@ -904,23 +906,23 @@ public class UserServiceImpl extends BaseService implements UserService {
 	
 	
 	@Override
-	public ResultDTO<List<AuthRoleDTO>> queryAuthByRoleId(String roleId){
+	public ResultDTO<List<com.king.nowedge.dto.AuthRoleDTO>> queryAuthByRoleId(String roleId){
 		
 		AuthRoleQuery authRoleQuery = new AuthRoleQuery();
 		authRoleQuery.setRoleId(roleId);
 		authRoleQuery.setIdeleted(0);
 		authRoleQuery.setPageSize(Integer.MAX_VALUE);
 		
-		ResultDTO<List<AuthRoleDTO>> result = null;
+		ResultDTO<List<com.king.nowedge.dto.AuthRoleDTO>> result = null;
 		try{
-			List<AuthRoleDTO> val = authRoleMapper.query(authRoleQuery);
-			result = new ResultDTO<List<AuthRoleDTO>>(val);
+			List<com.king.nowedge.dto.AuthRoleDTO> val = authRoleMapper.query(authRoleQuery);
+			result = new ResultDTO<List<com.king.nowedge.dto.AuthRoleDTO>>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<List<AuthRoleDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<com.king.nowedge.dto.AuthRoleDTO>>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<List<AuthRoleDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<com.king.nowedge.dto.AuthRoleDTO>>("error", e.getMessage());
 		}
 		return result;
 		
@@ -931,17 +933,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<List<AuthRoleDTO>> queryAuthRole(AuthRoleQuery authRoleQuery) {
-		ResultDTO<List<AuthRoleDTO>> result = null;
+	public ResultDTO<List<com.king.nowedge.dto.AuthRoleDTO>> queryAuthRole(AuthRoleQuery authRoleQuery) {
+		ResultDTO<List<com.king.nowedge.dto.AuthRoleDTO>> result = null;
 		try{
-			List<AuthRoleDTO> val = authRoleMapper.query(authRoleQuery);
-			result = new ResultDTO<List<AuthRoleDTO>>(val);
+			List<com.king.nowedge.dto.AuthRoleDTO> val = authRoleMapper.query(authRoleQuery);
+			result = new ResultDTO<List<com.king.nowedge.dto.AuthRoleDTO>>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<List<AuthRoleDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<com.king.nowedge.dto.AuthRoleDTO>>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<List<AuthRoleDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<com.king.nowedge.dto.AuthRoleDTO>>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -973,17 +975,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<AuthRoleDTO> queryAuthRoleById(Long id) {
-		ResultDTO<AuthRoleDTO> result = null;
+	public ResultDTO<com.king.nowedge.dto.AuthRoleDTO> queryAuthRoleById(Long id) {
+		ResultDTO<com.king.nowedge.dto.AuthRoleDTO> result = null;
 		try{
-			AuthRoleDTO val = authRoleMapper.queryById(id);
-			result = new ResultDTO<AuthRoleDTO>(val);
+			com.king.nowedge.dto.AuthRoleDTO val = authRoleMapper.queryById(id);
+			result = new ResultDTO<com.king.nowedge.dto.AuthRoleDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<AuthRoleDTO>("error", e.getMessage());
+			result = new ResultDTO<com.king.nowedge.dto.AuthRoleDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<AuthRoleDTO>("error", e.getMessage());
+			result = new ResultDTO<com.king.nowedge.dto.AuthRoleDTO>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -994,17 +996,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<AuthRoleDTO> queryAuthRoleByUid(String oid) {
-		ResultDTO<AuthRoleDTO> result = null;
+	public ResultDTO<com.king.nowedge.dto.AuthRoleDTO> queryAuthRoleByUid(String oid) {
+		ResultDTO<com.king.nowedge.dto.AuthRoleDTO> result = null;
 		try{
-			AuthRoleDTO val = authRoleMapper.queryByUid(oid);
-			result = new ResultDTO<AuthRoleDTO>(val);
+			com.king.nowedge.dto.AuthRoleDTO val = authRoleMapper.queryByUid(oid);
+			result = new ResultDTO<com.king.nowedge.dto.AuthRoleDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<AuthRoleDTO>("error", e.getMessage());
+			result = new ResultDTO<com.king.nowedge.dto.AuthRoleDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<AuthRoleDTO>("error", e.getMessage());
+			result = new ResultDTO<com.king.nowedge.dto.AuthRoleDTO>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -1012,7 +1014,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	
 	
 	@Override
-	public ResultDTO<Boolean> updateAuthRole(AuthRoleDTO authRoleDTO) {
+	public ResultDTO<Boolean> updateAuthRole(com.king.nowedge.dto.AuthRoleDTO authRoleDTO) {
 		ResultDTO<Boolean> result = null;
 		try{
 			Boolean val = authRoleMapper.update(authRoleDTO);
@@ -1032,7 +1034,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	
 	
 	@Override
-	public ResultDTO<Boolean> authRole(AuthRoleDTO authRoleDTO) {
+	public ResultDTO<Boolean> authRole(com.king.nowedge.dto.AuthRoleDTO authRoleDTO) {
 		ResultDTO<Boolean> result = null;
 		try{
 
@@ -1042,9 +1044,9 @@ public class UserServiceImpl extends BaseService implements UserService {
 			
 			if(null != menus && menus.size() > 0){
 				
-				List<AuthRoleDTO> list = new ArrayList<AuthRoleDTO>();
+				List<com.king.nowedge.dto.AuthRoleDTO> list = new ArrayList<com.king.nowedge.dto.AuthRoleDTO>();
 				for(String sysmenuId : menus){
-					AuthRoleDTO dto = new AuthRoleDTO();
+					com.king.nowedge.dto.AuthRoleDTO dto = new com.king.nowedge.dto.AuthRoleDTO();
 					dto.setRoleId(authRoleDTO.getRoleId());;
 					dto.setSysmenuId(sysmenuId);
 					dto.setCreater(authRoleDTO.getCreater());
@@ -1075,7 +1077,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<Boolean> createUserSecqa(UserSecqaDTO userSecqaDTO){
+	public ResultDTO<Boolean> createUserSecqa(com.king.nowedge.dto.UserSecqaDTO userSecqaDTO){
 		
 		ResultDTO<Boolean> result = null;
 		try{
@@ -1093,7 +1095,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	
 	
 	@Override
-	public ResultDTO<Boolean> createUserSecqa(List<UserSecqaDTO> list, String user){
+	public ResultDTO<Boolean> createUserSecqa(List<com.king.nowedge.dto.UserSecqaDTO> list, String user){
 		
 		ResultDTO<Boolean> result = null;
 		try{
@@ -1112,7 +1114,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	}
 	
 	@Override
-	public ResultDTO<Boolean> updateUserSecqa(UserSecqaDTO userSecqaDTO){
+	public ResultDTO<Boolean> updateUserSecqa(com.king.nowedge.dto.UserSecqaDTO userSecqaDTO){
 		
 		ResultDTO<Boolean> result = null;
 		try{
@@ -1133,17 +1135,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<List<UserSecqaDTO>> queryUserSecqa(UserSecqaQuery userSecqaQuery) {
-		ResultDTO<List<UserSecqaDTO>> result = null;
+	public ResultDTO<List<com.king.nowedge.dto.UserSecqaDTO>> queryUserSecqa(UserSecqaQuery userSecqaQuery) {
+		ResultDTO<List<com.king.nowedge.dto.UserSecqaDTO>> result = null;
 		try{
-			List<UserSecqaDTO> val = userSecqaMapper.query(userSecqaQuery);
-			result = new ResultDTO<List<UserSecqaDTO>>(val);
+			List<com.king.nowedge.dto.UserSecqaDTO> val = userSecqaMapper.query(userSecqaQuery);
+			result = new ResultDTO<List<com.king.nowedge.dto.UserSecqaDTO>>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<List<UserSecqaDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<com.king.nowedge.dto.UserSecqaDTO>>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<List<UserSecqaDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<com.king.nowedge.dto.UserSecqaDTO>>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -1180,17 +1182,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<UserSecqaDTO> queryUserSecqaByUid(String uid) {
-		ResultDTO<UserSecqaDTO> result = null;
+	public ResultDTO<com.king.nowedge.dto.UserSecqaDTO> queryUserSecqaByUid(String uid) {
+		ResultDTO<com.king.nowedge.dto.UserSecqaDTO> result = null;
 		try{
-			UserSecqaDTO val = userSecqaMapper.queryByUid(uid);
-			result = new ResultDTO<UserSecqaDTO>(val);
+			com.king.nowedge.dto.UserSecqaDTO val = userSecqaMapper.queryByUid(uid);
+			result = new ResultDTO<com.king.nowedge.dto.UserSecqaDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<UserSecqaDTO>("error", e.getMessage());
+			result = new ResultDTO<com.king.nowedge.dto.UserSecqaDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<UserSecqaDTO>("error", e.getMessage());
+			result = new ResultDTO<com.king.nowedge.dto.UserSecqaDTO>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -1214,17 +1216,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 
 
 	@Override
-	public ResultDTO<List<UserSecqaDTO>> querySecQanswrByUser(String userId) {
-		ResultDTO<List<UserSecqaDTO>> result = null;
+	public ResultDTO<List<com.king.nowedge.dto.UserSecqaDTO>> querySecQanswrByUser(String userId) {
+		ResultDTO<List<com.king.nowedge.dto.UserSecqaDTO>> result = null;
 		try{
-			List<UserSecqaDTO> val = userSecqaMapper.queryByUser(userId);
-			result = new ResultDTO<List<UserSecqaDTO>>(val);
+			List<com.king.nowedge.dto.UserSecqaDTO> val = userSecqaMapper.queryByUser(userId);
+			result = new ResultDTO<List<com.king.nowedge.dto.UserSecqaDTO>>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<List<UserSecqaDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<com.king.nowedge.dto.UserSecqaDTO>>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<List<UserSecqaDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<com.king.nowedge.dto.UserSecqaDTO>>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -1452,7 +1454,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 *   recruitment
 	 --------------------------------------*/
 	@Override
-	public ResultDTO<Boolean> createRecruitment(RecruitmentDTO recruitmentDTO){
+	public ResultDTO<Boolean> createRecruitment(com.king.nowedge.dto.RecruitmentDTO recruitmentDTO){
 		
 		ResultDTO<Boolean> result = null;
 		try{
@@ -1471,7 +1473,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	
 	
 	@Override
-	public ResultDTO<Boolean> updateRecruitment(RecruitmentDTO recruitmentDTO){
+	public ResultDTO<Boolean> updateRecruitment(com.king.nowedge.dto.RecruitmentDTO recruitmentDTO){
 		
 		ResultDTO<Boolean> result = null;
 		try{
@@ -1493,17 +1495,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<List<RecruitmentDTO>> queryRecruitment(RecruitmentQuery recruitmentQuery) {
-		ResultDTO<List<RecruitmentDTO>> result = null;
+	public ResultDTO<List<com.king.nowedge.dto.RecruitmentDTO>> queryRecruitment(RecruitmentQuery recruitmentQuery) {
+		ResultDTO<List<com.king.nowedge.dto.RecruitmentDTO>> result = null;
 		try{
-			List<RecruitmentDTO> val = recruitmentMapper.query(recruitmentQuery);
-			result = new ResultDTO<List<RecruitmentDTO>>(val);
+			List<com.king.nowedge.dto.RecruitmentDTO> val = recruitmentMapper.query(recruitmentQuery);
+			result = new ResultDTO<List<com.king.nowedge.dto.RecruitmentDTO>>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<List<RecruitmentDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<com.king.nowedge.dto.RecruitmentDTO>>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<List<RecruitmentDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<com.king.nowedge.dto.RecruitmentDTO>>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -1513,17 +1515,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<List<RecruitmentDTO>> queryRecruitmentAll() {
-		ResultDTO<List<RecruitmentDTO>> result = null;
+	public ResultDTO<List<com.king.nowedge.dto.RecruitmentDTO>> queryRecruitmentAll() {
+		ResultDTO<List<com.king.nowedge.dto.RecruitmentDTO>> result = null;
 		try{
-			List<RecruitmentDTO> val = recruitmentMapper.queryAll();
-			result = new ResultDTO<List<RecruitmentDTO>>(val);
+			List<com.king.nowedge.dto.RecruitmentDTO> val = recruitmentMapper.queryAll();
+			result = new ResultDTO<List<com.king.nowedge.dto.RecruitmentDTO>>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<List<RecruitmentDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<com.king.nowedge.dto.RecruitmentDTO>>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<List<RecruitmentDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<com.king.nowedge.dto.RecruitmentDTO>>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -1532,17 +1534,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<RecruitmentDTO> queryRecruitmentByCode(String code) {
-		ResultDTO<RecruitmentDTO> result = null;
+	public ResultDTO<com.king.nowedge.dto.RecruitmentDTO> queryRecruitmentByCode(String code) {
+		ResultDTO<com.king.nowedge.dto.RecruitmentDTO> result = null;
 		try{
-			RecruitmentDTO val = recruitmentMapper.queryByCode(code);
-			result = new ResultDTO<RecruitmentDTO>(val);
+			com.king.nowedge.dto.RecruitmentDTO val = recruitmentMapper.queryByCode(code);
+			result = new ResultDTO<com.king.nowedge.dto.RecruitmentDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<RecruitmentDTO>("error", e.getMessage());
+			result = new ResultDTO<com.king.nowedge.dto.RecruitmentDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<RecruitmentDTO>("error", e.getMessage());
+			result = new ResultDTO<com.king.nowedge.dto.RecruitmentDTO>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -1552,17 +1554,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<RecruitmentDTO> queryRecruitmentById(Long id) {
-		ResultDTO<RecruitmentDTO> result = null;
+	public ResultDTO<com.king.nowedge.dto.RecruitmentDTO> queryRecruitmentById(Long id) {
+		ResultDTO<com.king.nowedge.dto.RecruitmentDTO> result = null;
 		try{
-			RecruitmentDTO val = recruitmentMapper.queryById(id);
-			result = new ResultDTO<RecruitmentDTO>(val);
+			com.king.nowedge.dto.RecruitmentDTO val = recruitmentMapper.queryById(id);
+			result = new ResultDTO<com.king.nowedge.dto.RecruitmentDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<RecruitmentDTO>("error", e.getMessage());
+			result = new ResultDTO<com.king.nowedge.dto.RecruitmentDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<RecruitmentDTO>("error", e.getMessage());
+			result = new ResultDTO<com.king.nowedge.dto.RecruitmentDTO>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -1572,17 +1574,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<RecruitmentDTO> queryRecruitmentById(RecruitmentQuery recruitmentQuery) {
-		ResultDTO<RecruitmentDTO> result = null;
+	public ResultDTO<com.king.nowedge.dto.RecruitmentDTO> queryRecruitmentById(RecruitmentQuery recruitmentQuery) {
+		ResultDTO<com.king.nowedge.dto.RecruitmentDTO> result = null;
 		try{
-			RecruitmentDTO val = recruitmentMapper.queryByIdMember(recruitmentQuery);
-			result = new ResultDTO<RecruitmentDTO>(val);
+			com.king.nowedge.dto.RecruitmentDTO val = recruitmentMapper.queryByIdMember(recruitmentQuery);
+			result = new ResultDTO<com.king.nowedge.dto.RecruitmentDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<RecruitmentDTO>("error", e.getMessage());
+			result = new ResultDTO<com.king.nowedge.dto.RecruitmentDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<RecruitmentDTO>("error", e.getMessage());
+			result = new ResultDTO<com.king.nowedge.dto.RecruitmentDTO>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -1615,17 +1617,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<RecruitmentDTO> queryRecruitmentByUid(String uid) {
-		ResultDTO<RecruitmentDTO> result = null;
+	public ResultDTO<com.king.nowedge.dto.RecruitmentDTO> queryRecruitmentByUid(String uid) {
+		ResultDTO<com.king.nowedge.dto.RecruitmentDTO> result = null;
 		try{
-			RecruitmentDTO val = recruitmentMapper.queryByUid(uid);
-			result = new ResultDTO<RecruitmentDTO>(val);
+			com.king.nowedge.dto.RecruitmentDTO val = recruitmentMapper.queryByUid(uid);
+			result = new ResultDTO<com.king.nowedge.dto.RecruitmentDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<RecruitmentDTO>("error", e.getMessage());
+			result = new ResultDTO<com.king.nowedge.dto.RecruitmentDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<RecruitmentDTO>("error", e.getMessage());
+			result = new ResultDTO<com.king.nowedge.dto.RecruitmentDTO>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -1635,7 +1637,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	
 	
 	@Override
-	public ResultDTO<Boolean> deleteRecruitment(RecruitmentDTO dto) {
+	public ResultDTO<Boolean> deleteRecruitment(com.king.nowedge.dto.RecruitmentDTO dto) {
 		ResultDTO<Boolean> result = null;
 		try{
 			Boolean val = recruitmentMapper.delete(dto);
@@ -1847,7 +1849,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 ----------------------------------------*/
 	@Override
-	public ResultDTO<Boolean> createEducationExperience(EducationExperienceDTO educationExperienceDTO){
+	public ResultDTO<Boolean> createEducationExperience(com.king.nowedge.dto.EducationExperienceDTO educationExperienceDTO){
 		
 		ResultDTO<Boolean> result = null;
 		try{
@@ -1866,7 +1868,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	
 	
 	@Override
-	public ResultDTO<Boolean> updateEducationExperience(EducationExperienceDTO educationExperienceDTO){
+	public ResultDTO<Boolean> updateEducationExperience(com.king.nowedge.dto.EducationExperienceDTO educationExperienceDTO){
 		
 		ResultDTO<Boolean> result = null;
 		try{
@@ -1888,17 +1890,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<List<EducationExperienceDTO>> queryEducationExperience(EducationExperienceQuery educationExperienceQuery) {
-		ResultDTO<List<EducationExperienceDTO>> result = null;
+	public ResultDTO<List<com.king.nowedge.dto.EducationExperienceDTO>> queryEducationExperience(EducationExperienceQuery educationExperienceQuery) {
+		ResultDTO<List<com.king.nowedge.dto.EducationExperienceDTO>> result = null;
 		try{
-			List<EducationExperienceDTO> val = educationExperienceMapper.query(educationExperienceQuery);
-			result = new ResultDTO<List<EducationExperienceDTO>>(val);
+			List<com.king.nowedge.dto.EducationExperienceDTO> val = educationExperienceMapper.query(educationExperienceQuery);
+			result = new ResultDTO<List<com.king.nowedge.dto.EducationExperienceDTO>>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<List<EducationExperienceDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<com.king.nowedge.dto.EducationExperienceDTO>>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<List<EducationExperienceDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<com.king.nowedge.dto.EducationExperienceDTO>>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -1908,17 +1910,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<List<EducationExperienceDTO>> queryEducationExperienceAll() {
-		ResultDTO<List<EducationExperienceDTO>> result = null;
+	public ResultDTO<List<com.king.nowedge.dto.EducationExperienceDTO>> queryEducationExperienceAll() {
+		ResultDTO<List<com.king.nowedge.dto.EducationExperienceDTO>> result = null;
 		try{
-			List<EducationExperienceDTO> val = educationExperienceMapper.queryAll();
-			result = new ResultDTO<List<EducationExperienceDTO>>(val);
+			List<com.king.nowedge.dto.EducationExperienceDTO> val = educationExperienceMapper.queryAll();
+			result = new ResultDTO<List<com.king.nowedge.dto.EducationExperienceDTO>>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<List<EducationExperienceDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<com.king.nowedge.dto.EducationExperienceDTO>>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<List<EducationExperienceDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<com.king.nowedge.dto.EducationExperienceDTO>>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -1927,17 +1929,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<EducationExperienceDTO> queryEducationExperienceByCode(String code) {
-		ResultDTO<EducationExperienceDTO> result = null;
+	public ResultDTO<com.king.nowedge.dto.EducationExperienceDTO> queryEducationExperienceByCode(String code) {
+		ResultDTO<com.king.nowedge.dto.EducationExperienceDTO> result = null;
 		try{
-			EducationExperienceDTO val = educationExperienceMapper.queryByCode(code);
-			result = new ResultDTO<EducationExperienceDTO>(val);
+			com.king.nowedge.dto.EducationExperienceDTO val = educationExperienceMapper.queryByCode(code);
+			result = new ResultDTO<com.king.nowedge.dto.EducationExperienceDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<EducationExperienceDTO>("error", e.getMessage());
+			result = new ResultDTO<com.king.nowedge.dto.EducationExperienceDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<EducationExperienceDTO>("error", e.getMessage());
+			result = new ResultDTO<com.king.nowedge.dto.EducationExperienceDTO>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -1970,33 +1972,33 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<EducationExperienceDTO> queryEducationExperienceByUid(String uid) {
-		ResultDTO<EducationExperienceDTO> result = null;
+	public ResultDTO<com.king.nowedge.dto.EducationExperienceDTO> queryEducationExperienceByUid(String uid) {
+		ResultDTO<com.king.nowedge.dto.EducationExperienceDTO> result = null;
 		try{
-			EducationExperienceDTO val = educationExperienceMapper.queryByUid(uid);
-			result = new ResultDTO<EducationExperienceDTO>(val);
+			com.king.nowedge.dto.EducationExperienceDTO val = educationExperienceMapper.queryByUid(uid);
+			result = new ResultDTO<com.king.nowedge.dto.EducationExperienceDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<EducationExperienceDTO>("error", e.getMessage());
+			result = new ResultDTO<com.king.nowedge.dto.EducationExperienceDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<EducationExperienceDTO>("error", e.getMessage());
+			result = new ResultDTO<com.king.nowedge.dto.EducationExperienceDTO>("error", e.getMessage());
 		}
 		return result;
 	}
 	
 	@Override
-	public ResultDTO<EducationExperienceDTO> queryEducationExperienceById(EducationExperienceQuery educationExperienceQuery) {
-		ResultDTO<EducationExperienceDTO> result = null;
+	public ResultDTO<com.king.nowedge.dto.EducationExperienceDTO> queryEducationExperienceById(EducationExperienceQuery educationExperienceQuery) {
+		ResultDTO<com.king.nowedge.dto.EducationExperienceDTO> result = null;
 		try{
-			EducationExperienceDTO val = educationExperienceMapper.queryByIdMember(educationExperienceQuery);
-			result = new ResultDTO<EducationExperienceDTO>(val);
+			com.king.nowedge.dto.EducationExperienceDTO val = educationExperienceMapper.queryByIdMember(educationExperienceQuery);
+			result = new ResultDTO<com.king.nowedge.dto.EducationExperienceDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<EducationExperienceDTO>("error", e.getMessage());
+			result = new ResultDTO<com.king.nowedge.dto.EducationExperienceDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<EducationExperienceDTO>("error", e.getMessage());
+			result = new ResultDTO<com.king.nowedge.dto.EducationExperienceDTO>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -2027,7 +2029,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 ----------------------------------------*/
 	
 	@Override
-	public ResultDTO<Boolean> createContact(com.king.nowedge.dto.ContactDTO contactDTO){
+	public ResultDTO<Boolean> createContact(ContactDTO contactDTO){
 		
 		ResultDTO<Boolean> result = null;
 		try{
@@ -2046,7 +2048,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	
 	
 	@Override
-	public ResultDTO<Boolean> updateContact(com.king.nowedge.dto.ContactDTO contactDTO){
+	public ResultDTO<Boolean> updateContact(ContactDTO contactDTO){
 		
 		ResultDTO<Boolean> result = null;
 		try{
@@ -2089,17 +2091,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<List<com.king.nowedge.dto.ContactDTO>> queryContactAll() {
-		ResultDTO<List<com.king.nowedge.dto.ContactDTO>> result = null;
+	public ResultDTO<List<ContactDTO>> queryContactAll() {
+		ResultDTO<List<ContactDTO>> result = null;
 		try{
-			List<com.king.nowedge.dto.ContactDTO> val = contactMapper.queryAll();
-			result = new ResultDTO<List<com.king.nowedge.dto.ContactDTO>>(val);
+			List<ContactDTO> val = contactMapper.queryAll();
+			result = new ResultDTO<List<ContactDTO>>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<List<com.king.nowedge.dto.ContactDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<ContactDTO>>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<List<com.king.nowedge.dto.ContactDTO>>("error", e.getMessage());
+			result = new ResultDTO<List<ContactDTO>>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -2108,17 +2110,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<com.king.nowedge.dto.ContactDTO> queryContactByCode(String code) {
-		ResultDTO<com.king.nowedge.dto.ContactDTO> result = null;
+	public ResultDTO<ContactDTO> queryContactByCode(String code) {
+		ResultDTO<ContactDTO> result = null;
 		try{
-			com.king.nowedge.dto.ContactDTO val = contactMapper.queryByCode(code);
-			result = new ResultDTO<com.king.nowedge.dto.ContactDTO>(val);
+			ContactDTO val = contactMapper.queryByCode(code);
+			result = new ResultDTO<ContactDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<com.king.nowedge.dto.ContactDTO>("error", e.getMessage());
+			result = new ResultDTO<ContactDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<com.king.nowedge.dto.ContactDTO>("error", e.getMessage());
+			result = new ResultDTO<ContactDTO>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -2151,17 +2153,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<com.king.nowedge.dto.ContactDTO> queryContactByUid(String uid) {
-		ResultDTO<com.king.nowedge.dto.ContactDTO> result = null;
+	public ResultDTO<ContactDTO> queryContactByUid(String uid) {
+		ResultDTO<ContactDTO> result = null;
 		try{
-			com.king.nowedge.dto.ContactDTO val = contactMapper.queryByUid(uid);
-			result = new ResultDTO<com.king.nowedge.dto.ContactDTO>(val);
+			ContactDTO val = contactMapper.queryByUid(uid);
+			result = new ResultDTO<ContactDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<com.king.nowedge.dto.ContactDTO>("error", e.getMessage());
+			result = new ResultDTO<ContactDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<com.king.nowedge.dto.ContactDTO>("error", e.getMessage());
+			result = new ResultDTO<ContactDTO>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -2172,17 +2174,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<com.king.nowedge.dto.ContactDTO> queryContactById(Long id) {
-		ResultDTO<com.king.nowedge.dto.ContactDTO> result = null;
+	public ResultDTO<ContactDTO> queryContactById(Long id) {
+		ResultDTO<ContactDTO> result = null;
 		try{
-			com.king.nowedge.dto.ContactDTO val = contactMapper.queryById(id);
-			result = new ResultDTO<com.king.nowedge.dto.ContactDTO>(val);
+			ContactDTO val = contactMapper.queryById(id);
+			result = new ResultDTO<ContactDTO>(val);
 		}
 		catch (BaseDaoException e){
-			result = new ResultDTO<com.king.nowedge.dto.ContactDTO>("error", e.getMessage());
+			result = new ResultDTO<ContactDTO>("error", e.getMessage());
 		}
 		catch(Throwable e){
-			result = new ResultDTO<com.king.nowedge.dto.ContactDTO>("error", e.getMessage());
+			result = new ResultDTO<ContactDTO>("error", e.getMessage());
 		}
 		return result;
 	}
@@ -2193,7 +2195,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	 * 
 	 */
 	@Override
-	public ResultDTO<Boolean> deleteContact(com.king.nowedge.dto.ContactDTO dto) {
+	public ResultDTO<Boolean> deleteContact(ContactDTO dto) {
 		ResultDTO<Boolean> result = null;
 		try{
 			Boolean val = contactMapper.delete(dto);

@@ -39,10 +39,10 @@
 			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
 
-		<!--		<dependency>-->
-		<!--			<groupId>org.springframework.boot</groupId>-->
-		<!--			<artifactId>spring-boot-starter-security</artifactId>-->
-		<!--		</dependency>-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -366,20 +366,20 @@
 		</dependency>
 
 		<!--引入第三方jar-->
-		<dependency>
-			<groupId>com.tbc.paas.tbcs</groupId>
-			<artifactId>tbcs-api</artifactId>
-			<version>1.0-SNAPSHOT</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/open-api-4.0.0-SNAPSHOT.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>com.tbc.paas.tbcs</groupId>
-			<artifactId>link-api</artifactId>
-			<version>1.0-SNAPSHOT</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/open-sdk-4.0.0-SNAPSHOT.jar</systemPath>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.tbc.paas.tbcs</groupId>-->
+<!--			<artifactId>tbcs-api</artifactId>-->
+<!--			<version>1.0-SNAPSHOT</version>-->
+<!--			<scope>system</scope>-->
+<!--			<systemPath>${project.basedir}/src/main/resources/lib/open-api-4.0.0-SNAPSHOT.jar</systemPath>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>com.tbc.paas.tbcs</groupId>-->
+<!--			<artifactId>link-api</artifactId>-->
+<!--			<version>1.0-SNAPSHOT</version>-->
+<!--			<scope>system</scope>-->
+<!--			<systemPath>${project.basedir}/src/main/resources/lib/open-sdk-4.0.0-SNAPSHOT.jar</systemPath>-->
+<!--		</dependency>-->
 		<!--		<dependency>-->
 		<!--			<groupId>com.tbc.paas</groupId>-->
 		<!--			<artifactId>sdk</artifactId>-->
@@ -388,106 +388,106 @@
 		<!--			<systemPath>${project.basedir}/src/main/resources/lib/qiniu-java-sdk-7.2.14.jar</systemPath>-->
 		<!--		</dependency>-->
 
-		<dependency>
-			<groupId>com.joy</groupId>
-			<artifactId>qqsdk</artifactId>
-			<version>1.0-SNAPSHOT</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/qqsdk.jar</systemPath>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.joy</groupId>-->
+<!--			<artifactId>qqsdk</artifactId>-->
+<!--			<version>1.0-SNAPSHOT</version>-->
+<!--			<scope>system</scope>-->
+<!--			<systemPath>${project.basedir}/src/main/resources/lib/qqsdk.jar</systemPath>-->
+<!--		</dependency>-->
 
-		<dependency>
-			<groupId>org.terracotta.toolkit</groupId>
-			<artifactId>terracotta-toolkit-api</artifactId>
-			<version>2.7</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/terracotta-toolkit-api-2.7.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>org.terracotta.toolkit</groupId>
-			<artifactId>terracotta-toolkit-api-internal</artifactId>
-			<version>1.17</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/terracotta-toolkit-api-internal-1.17.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>spring.security</groupId>
-			<artifactId>acl</artifactId>
-			<version>3.2.4</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-acl-3.2.4.RELEASE.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>spring.security</groupId>
-			<artifactId>aspects</artifactId>
-			<version>3.2.4</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-aspects-3.2.4.RELEASE.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>spring.security</groupId>
-			<artifactId>cas</artifactId>
-			<version>3.2.4</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-cas-3.2.4.RELEASE.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>spring.security</groupId>
-			<artifactId>config</artifactId>
-			<version>3.2.4</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-config-3.2.4.RELEASE.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>spring.security</groupId>
-			<artifactId>core</artifactId>
-			<version>3.2.4</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-core-3.2.4.RELEASE.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>spring.security</groupId>
-			<artifactId>crypto</artifactId>
-			<version>3.2.4</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-crypto-3.2.4.RELEASE.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>spring.security</groupId>
-			<artifactId>ldap</artifactId>
-			<version>3.2.4</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-ldap-3.2.4.RELEASE.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>spring.security</groupId>
-			<artifactId>openid</artifactId>
-			<version>3.2.4</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-acl-3.2.4.RELEASE.jar</systemPath>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.terracotta.toolkit</groupId>-->
+<!--			<artifactId>terracotta-toolkit-api</artifactId>-->
+<!--			<version>2.7</version>-->
+<!--			<scope>system</scope>-->
+<!--			<systemPath>${project.basedir}/src/main/resources/lib/terracotta-toolkit-api-2.7.jar</systemPath>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>org.terracotta.toolkit</groupId>-->
+<!--			<artifactId>terracotta-toolkit-api-internal</artifactId>-->
+<!--			<version>1.17</version>-->
+<!--			<scope>system</scope>-->
+<!--			<systemPath>${project.basedir}/src/main/resources/lib/terracotta-toolkit-api-internal-1.17.jar</systemPath>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>spring.security</groupId>-->
+<!--			<artifactId>acl</artifactId>-->
+<!--			<version>3.2.4</version>-->
+<!--			<scope>system</scope>-->
+<!--			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-acl-3.2.4.RELEASE.jar</systemPath>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>spring.security</groupId>-->
+<!--			<artifactId>aspects</artifactId>-->
+<!--			<version>3.2.4</version>-->
+<!--			<scope>system</scope>-->
+<!--			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-aspects-3.2.4.RELEASE.jar</systemPath>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>spring.security</groupId>-->
+<!--			<artifactId>cas</artifactId>-->
+<!--			<version>3.2.4</version>-->
+<!--			<scope>system</scope>-->
+<!--			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-cas-3.2.4.RELEASE.jar</systemPath>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>spring.security</groupId>-->
+<!--			<artifactId>config</artifactId>-->
+<!--			<version>3.2.4</version>-->
+<!--			<scope>system</scope>-->
+<!--			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-config-3.2.4.RELEASE.jar</systemPath>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>spring.security</groupId>-->
+<!--			<artifactId>core</artifactId>-->
+<!--			<version>3.2.4</version>-->
+<!--			<scope>system</scope>-->
+<!--			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-core-3.2.4.RELEASE.jar</systemPath>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>spring.security</groupId>-->
+<!--			<artifactId>crypto</artifactId>-->
+<!--			<version>3.2.4</version>-->
+<!--			<scope>system</scope>-->
+<!--			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-crypto-3.2.4.RELEASE.jar</systemPath>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>spring.security</groupId>-->
+<!--			<artifactId>ldap</artifactId>-->
+<!--			<version>3.2.4</version>-->
+<!--			<scope>system</scope>-->
+<!--			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-ldap-3.2.4.RELEASE.jar</systemPath>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>spring.security</groupId>-->
+<!--			<artifactId>openid</artifactId>-->
+<!--			<version>3.2.4</version>-->
+<!--			<scope>system</scope>-->
+<!--			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-acl-3.2.4.RELEASE.jar</systemPath>-->
+<!--		</dependency>-->
 
-		<dependency>
-			<groupId>spring.security</groupId>
-			<artifactId>remoting</artifactId>
-			<version>3.2.4</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-remoting-3.2.4.RELEASE.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>spring.security</groupId>
-			<artifactId>taglibs</artifactId>
-			<version>3.2.4</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-taglibs-3.2.4.RELEASE.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>spring.security</groupId>
-			<artifactId>web</artifactId>
-			<version>3.2.4</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-web-3.2.4.RELEASE.jar</systemPath>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>spring.security</groupId>-->
+<!--			<artifactId>remoting</artifactId>-->
+<!--			<version>3.2.4</version>-->
+<!--			<scope>system</scope>-->
+<!--			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-remoting-3.2.4.RELEASE.jar</systemPath>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>spring.security</groupId>-->
+<!--			<artifactId>taglibs</artifactId>-->
+<!--			<version>3.2.4</version>-->
+<!--			<scope>system</scope>-->
+<!--			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-taglibs-3.2.4.RELEASE.jar</systemPath>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>spring.security</groupId>-->
+<!--			<artifactId>web</artifactId>-->
+<!--			<version>3.2.4</version>-->
+<!--			<scope>system</scope>-->
+<!--			<systemPath>${project.basedir}/src/main/resources/lib/spring-security-web-3.2.4.RELEASE.jar</systemPath>-->
+<!--		</dependency>-->
 		<!--old lib end-->
 		<dependency>
 			<groupId>joda-time</groupId>
@@ -516,6 +516,12 @@
 			<groupId>com.sun.xml.bind</groupId>
 			<artifactId>jaxb-impl</artifactId>
 			<version>2.2.11</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>1.1.9</version>
 		</dependency>
 
 	</dependencies>

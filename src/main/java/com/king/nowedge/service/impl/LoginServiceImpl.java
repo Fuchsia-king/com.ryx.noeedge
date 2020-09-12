@@ -1,8 +1,8 @@
 package com.king.nowedge.service.impl;
 
 import com.king.nowedge.dto.LoginDTO;
-import com.king.nowedge.dto.UserDTO;
 import com.king.nowedge.dto.base.ResultDTO;
+import com.king.nowedge.dto.comm.UserDTO;
 import com.king.nowedge.excp.BaseDaoException;
 import com.king.nowedge.mapper.comm.UserMapper;
 import com.king.nowedge.service.LoginService;

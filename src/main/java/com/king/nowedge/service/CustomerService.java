@@ -3,8 +3,8 @@ package com.king.nowedge.service;
 import com.king.nowedge.dto.CustomerDTO;
 import com.king.nowedge.dto.CustomerTagDTO;
 import com.king.nowedge.dto.base.ResultDTO;
-import com.king.nowedge.dto.query.CustomerQuery;
-import com.king.nowedge.dto.query.CustomerTagQuery;
+import com.king.nowedge.query.CustomerQuery;
+import com.king.nowedge.query.CustomerTagQuery;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

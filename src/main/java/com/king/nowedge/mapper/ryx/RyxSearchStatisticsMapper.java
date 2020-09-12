@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.king.nowedge.dto.ryx.RyxSearchDTO;
 import com.king.nowedge.dto.ryx.RyxSearchStatisticsDTO;
-import com.king.nowedge.dto.ryx.query.RyxSearchStatisticsQuery;
+import com.king.nowedge.query.ryx.RyxSearchStatisticsQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 

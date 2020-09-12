@@ -3,8 +3,8 @@ package com.king.nowedge.service;
 import com.king.nowedge.dto.MessageDTO;
 import com.king.nowedge.dto.MessageUserDTO;
 import com.king.nowedge.dto.base.ResultDTO;
-import com.king.nowedge.dto.query.MessageQuery;
-import com.king.nowedge.dto.query.MessageUserQuery;
+import com.king.nowedge.query.MessageQuery;
+import com.king.nowedge.query.MessageUserQuery;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

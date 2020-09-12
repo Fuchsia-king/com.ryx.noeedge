@@ -3,8 +3,8 @@ package com.king.nowedge.service;
 import com.king.nowedge.dto.base.IndustryDTO;
 import com.king.nowedge.dto.base.ResultDTO;
 import com.king.nowedge.dto.base.SpecialtyDTO;
-import com.king.nowedge.dto.query.base.IndustryQuery;
-import com.king.nowedge.dto.query.base.SpecialtyQuery;
+import com.king.nowedge.query.base.IndustryQuery;
+import com.king.nowedge.query.base.SpecialtyQuery;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

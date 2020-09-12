@@ -1,7 +1,7 @@
 package com.king.nowedge.mapper.crm;
 
 import com.king.nowedge.dto.ryx.crm.RyxContractDTO;
-import com.king.nowedge.dto.ryx.query.crm.RyxContractQuery;
+import com.king.nowedge.query.ryx.crm.RyxContractQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 

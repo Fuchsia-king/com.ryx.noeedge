@@ -3,7 +3,7 @@ package com.king.nowedge.mapper.comm;
 import java.util.List;
 
 import com.king.nowedge.dto.AttrValueDTO;
-import com.king.nowedge.dto.query.AttrValueQuery;
+import com.king.nowedge.query.AttrValueQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 

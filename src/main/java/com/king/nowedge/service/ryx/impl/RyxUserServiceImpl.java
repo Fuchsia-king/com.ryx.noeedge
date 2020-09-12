@@ -3,7 +3,7 @@ package com.king.nowedge.service.ryx.impl;
 import com.king.nowedge.dto.base.ResultDTO;
 import com.king.nowedge.dto.enums.EnumYesorno;
 import com.king.nowedge.dto.ryx.*;
-import com.king.nowedge.dto.ryx.query.*;
+import com.king.nowedge.query.ryx.*;
 import com.king.nowedge.excp.BaseDaoException;
 import com.king.nowedge.mapper.ryx.*;
 import com.king.nowedge.service.impl.BaseService;

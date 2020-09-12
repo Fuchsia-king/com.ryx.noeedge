@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.king.nowedge.dto.TaskRoleDTO;
-import com.king.nowedge.dto.query.TaskRoleQuery;
+import com.king.nowedge.query.TaskRoleQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 

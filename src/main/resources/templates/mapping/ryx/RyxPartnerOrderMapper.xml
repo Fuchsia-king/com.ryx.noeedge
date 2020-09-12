@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.ryx.RyxPartnerOrderMapper">  
+
+	<sql id="where">
+	
+	    <where>
+	    
+			
+			<if test="userId != null">
+				<![CDATA[ and p.user_id = #{userId} ]]>
+			</if>
+			
+			
+			<if test="partnerId != null">
+				<![CDATA[ and p.partner_id = #{partnerId} ]]>
+			</if>			
+			
+			<if test="orderId != null">
+				<![CDATA[ and p.order_id = #{orderId} ]]>
+			</if>
+			
+			<if test="status != null">
+				<![CDATA[ and status = #{status} ]]>
+			</if>
+			
+		</where>
+	</sql>
+   
+   
+   <sql id="select">
+		
+		p.id,
+		p.user_id userId,
+		p.partner_id partnerId,
+		p.order_id orderId,
+		p.amount,
+		p.rate,
+		p.commission,
+	    p.tcreate,
+	    status,
+	    tpay
+	    
+	</sql>
+	
+    <insert id="create" parameterType="RyxPartnerOrderDTO">   
+       insert into 
+       ryx_partner_order
+       (user_id,partner_id,order_id,amount,rate,commission) 
+       values
+       (#{userId},#{partnerId},#{orderId},#{amount},#{rate},#{commission}) 
+    </insert>
+    
+    
+
+      
+    
+    <select id="query" resultType="RyxPartnerOrderDTO" parameterType="RyxPartnerOrderQuery">
+         
+        select 
+        <include refid="select"/>
+        from ryx_partner_order p 
+        join ryx_order  o on p.order_id = o.id        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="RyxPartnerOrderQuery">   
+        select count(1) from ryx_partner_order p 
+        join ryx_order o on p.order_id = o.id   
+        <include refid="where"/>
+    </select>
+    
+    <select id="getById" resultType="RyxPartnerOrderDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select"/>
+        from ryx_partner_order where id = #{id}  limit 1;
+    </select>
+   
+   	<select id="getByOrderId" resultType="RyxPartnerOrderDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select"/>
+        from ryx_partner_order where order_id = #{orderId}  limit 1;
+    </select>  
+    
+    
+    <update id="update" parameterType="RyxPartnerOrderDTO">
+    
+        update ryx_partner_order
+         
+        <set>	
+					
+			<if test="key1 != null">
+				<![CDATA[ key1 = #{key1} ]]>,
+			</if>
+			
+			<if test="value != null">
+				<![CDATA[ value = #{value} ]]>,
+			</if>
+			
+			
+			<if test="value1 != null">
+				<![CDATA[ value1 = #{value1} ]]>,
+			</if>
+			
+			<if test="value2 != null">
+				<![CDATA[ value2 = #{value2} ]]>,
+			</if>
+			
+			
+			<if test="pid != null">
+				<![CDATA[ pid = #{pid} ]]>,
+			</if>
+			
+			<if test="pid1 != null">
+				<![CDATA[ pid1 = #{pid1} ]]>,
+			</if>
+			
+			<if test="pid2 != null">
+				<![CDATA[ pid2 = #{pid2} ]]>,
+			</if>
+			
+			<if test="type != null">
+				<![CDATA[ type = #{type} ]]>,
+			</if>
+			
+			tmodified = now()
+			
+		 </set>
+		 
+		where id = #{id}
+		 
+		 
+		 	
+    </update> 
+    
+ 
+    
+</mapper> 

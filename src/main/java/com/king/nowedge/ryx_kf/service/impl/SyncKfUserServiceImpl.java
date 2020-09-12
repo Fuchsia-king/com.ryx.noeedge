@@ -1,17 +1,15 @@
 package com.king.nowedge.ryx_kf.service.impl;
 
-//import static com.king.nowedge.dao.impl.base.BaseDAO.sqlSessionFactory;
-
 import com.king.nowedge.dto.base.KeyrvDTO;
 import com.king.nowedge.dto.base.ResultDTO;
 import com.king.nowedge.dto.enums.EnumKeyRelatedValueType;
 import com.king.nowedge.dto.enums.EnumUserLevel;
 import com.king.nowedge.dto.ryx.RyxUserExtDTO;
 import com.king.nowedge.dto.ryx.RyxUsersDTO;
-import com.king.nowedge.dto.ryx.query.RyxUserExtQuery;
-import com.king.nowedge.dto.ryx.query.RyxUsersQuery;
 import com.king.nowedge.helper.ConstHelper;
 import com.king.nowedge.mapper.ryx.RyxUserMapper;
+import com.king.nowedge.query.ryx.RyxUserExtQuery;
+import com.king.nowedge.query.ryx.RyxUsersQuery;
 import com.king.nowedge.ryx_kf.mapper.KfRyxUserExtMapper;
 import com.king.nowedge.ryx_kf.mapper.RyxUsersMapper;
 import com.king.nowedge.ryx_kf.pojo.*;
@@ -19,7 +17,6 @@ import com.king.nowedge.ryx_kf.service.interfaces.SyncKfUserService;
 import com.king.nowedge.ryx_kf.utils.HttpClientUtil;
 import com.king.nowedge.ryx_kf.utils.ListOrMapUtil;
 import com.king.nowedge.ryx_kf.utils.LogUtil;
-import com.king.nowedge.ryx_kf.utils.SyncSdUser;
 import com.king.nowedge.service.SystemService;
 import com.king.nowedge.service.ryx.RyxUserService;
 import com.king.nowedge.service.ryx.impl.RyxUserServiceImpl;
@@ -210,7 +207,7 @@ public class SyncKfUserServiceImpl implements SyncKfUserService {
             ryxShiDaiUserExt.setMobile(kfUserInfoModel.getCell());
             ryxShiDaiUserExt.setEmail(kfUserInfoModel.geteMail());
 
-            ok = SyncSdUser.syncData(ryxShiDaiUserExt, KF_USER_PWD, SD_ACCOUNT_ENABLE);
+//            ok = SyncSdUser.syncData(ryxShiDaiUserExt, KF_USER_PWD, SD_ACCOUNT_ENABLE);
             if (res != 4 || !ok) {
                 LogUtil.outPutErrorLog(kfUserInfoModel, SYNC_DATA_ERROR);
                 continue;
@@ -323,16 +320,16 @@ public class SyncKfUserServiceImpl implements SyncKfUserService {
             //补全appKey 和 appSecret 将对应企业大学的账号状态改为冻结
             ryxUserExtDTOS.get(0).setAppKey(mainUserExtDTO.getAppKey());
             ryxUserExtDTOS.get(0).setAppSecret(mainUserExtDTO.getAppSecret());
-            Boolean isOk = SyncSdUser.disableShidaiUser(ryxUserExtDTOS.get(0));
-            if (isOk) {
-                ryxUserExtExample = new RyxUserExtExample();
-                criteria = ryxUserExtExample.createCriteria();
-                criteria.andUidEqualTo(userNum);
-                kfRyxUserExtMapper.deleteByExample(ryxUserExtExample);
-//                sqlSession.commit();
-            } else {
-                ok = false;
-            }
+//            Boolean isOk = SyncSdUser.disableShidaiUser(ryxUserExtDTOS.get(0));
+//            if (isOk) {
+//                ryxUserExtExample = new RyxUserExtExample();
+//                criteria = ryxUserExtExample.createCriteria();
+//                criteria.andUidEqualTo(userNum);
+//                kfRyxUserExtMapper.deleteByExample(ryxUserExtExample);
+////                sqlSession.commit();
+//            } else {
+//                ok = false;
+//            }
 //            sqlSession.close();
         } catch (Exception e) {
             ok = false;
@@ -424,14 +421,14 @@ public class SyncKfUserServiceImpl implements SyncKfUserService {
                     //更改企业大学对应康富对应时代的第三方账号状态为激活
                     ryxShiDaiUserExt.setAppKey(mainUserExtDTO.getAppKey());
                     ryxShiDaiUserExt.setAppSecret(mainUserExtDTO.getAppSecret());
-                    Boolean isOk = SyncSdUser.syncData(ryxShiDaiUserExt, KF_USER_PWD, SD_ACCOUNT_ENABLE);
-                    if (res != 2 && !isOk) {
-                        LogUtil.outPutErrorLog(kfUserInfoModel, "INSERT " + UPDATE_DATA_ERROR);
-                        ok = false;
-                        continue;
-                    } else {
-                        LogUtil.outPutSuccessLog(kfUserInfoModel, "INSERT " + UPDATE_DATA_SUCCESS);
-                    }
+//                    Boolean isOk = SyncSdUser.syncData(ryxShiDaiUserExt, KF_USER_PWD, SD_ACCOUNT_ENABLE);
+//                    if (res != 2 && !isOk) {
+//                        LogUtil.outPutErrorLog(kfUserInfoModel, "INSERT " + UPDATE_DATA_ERROR);
+//                        ok = false;
+//                        continue;
+//                    } else {
+//                        LogUtil.outPutSuccessLog(kfUserInfoModel, "INSERT " + UPDATE_DATA_SUCCESS);
+//                    }
                 } else {
                     String new_uid = kfUserInfoModel.getNumber(); // 员工唯一ID
                     String new_username = KF_USER_SIGN + kfUserInfoModel.getLoginName();//登录名
@@ -497,14 +494,14 @@ public class SyncKfUserServiceImpl implements SyncKfUserService {
                     //将康富对应时代的第三方账号同步到企业大学
                     ryxShiDaiUserExt.setAppKey(mainUserExtDTO.getAppKey());
                     ryxShiDaiUserExt.setAppSecret(mainUserExtDTO.getAppSecret());
-                    Boolean isOk = SyncSdUser.syncData(ryxShiDaiUserExt, KF_USER_PWD, SD_ACCOUNT_ENABLE);
-                    if (res != 4 || !isOk) {
-                        LogUtil.outPutErrorLog(kfUserInfoModel, UPDATE_DATA_ERROR);
-                        ok = false;
-                        continue;
-                    } else {
-                        LogUtil.outPutSuccessLog(kfUserInfoModel, SYNC_DATA_SUCCESS);
-                    }
+//                    Boolean isOk = SyncSdUser.syncData(ryxShiDaiUserExt, KF_USER_PWD, SD_ACCOUNT_ENABLE);
+//                    if (res != 4 || !isOk) {
+//                        LogUtil.outPutErrorLog(kfUserInfoModel, UPDATE_DATA_ERROR);
+//                        ok = false;
+//                        continue;
+//                    } else {
+//                        LogUtil.outPutSuccessLog(kfUserInfoModel, SYNC_DATA_SUCCESS);
+//                    }
                 }
             }
         }

@@ -3,7 +3,7 @@ package com.king.nowedge.controller.comm;
 import com.king.nowedge.controller.BaseController;
 import com.king.nowedge.dto.ConsumerDTO;
 import com.king.nowedge.dto.base.ResultDTO;
-import com.king.nowedge.dto.query.ConsumerQuery;
+import com.king.nowedge.query.ConsumerQuery;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;

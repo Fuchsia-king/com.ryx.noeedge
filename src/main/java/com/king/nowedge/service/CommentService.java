@@ -2,7 +2,7 @@ package com.king.nowedge.service;
 
 import com.king.nowedge.dto.CommentDTO;
 import com.king.nowedge.dto.base.ResultDTO;
-import com.king.nowedge.dto.query.CommentQuery;
+import com.king.nowedge.query.CommentQuery;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.king.nowedge.controller.comm;
 
 import com.king.nowedge.controller.BaseController;
-import com.king.nowedge.dto.UserDTO;
+import com.king.nowedge.dto.comm.UserDTO;
 import com.king.nowedge.service.LoginService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,7 +46,7 @@ public class CopyOfLoginController extends BaseController {
 	    }  
 	  
 	    @RequestMapping("/test/login3.do")  
-	    public ModelAndView testLogin3(UserDTO user) {  
+	    public ModelAndView testLogin3(UserDTO user) {
 	        // ͬ��֧�ֲ���Ϊ�?����������Struts��ActionForm��User����Ҫ�κ����ã�ֱ��д����  
 //	        String username = user.getUsername();  
 //	        String password = user.getPassword();  

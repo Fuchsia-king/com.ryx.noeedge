@@ -2,7 +2,7 @@ package com.king.nowedge.service.impl;
 
 import com.king.nowedge.dto.NoticeDTO;
 import com.king.nowedge.dto.base.ResultDTO;
-import com.king.nowedge.dto.query.NoticeQuery;
+import com.king.nowedge.query.NoticeQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import com.king.nowedge.mapper.comm.NoticeMapper;
 import com.king.nowedge.service.NoticeService;

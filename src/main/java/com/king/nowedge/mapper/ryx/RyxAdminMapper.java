@@ -1,11 +1,11 @@
 package com.king.nowedge.mapper.ryx;
 
-import java.util.List;
-
 import com.king.nowedge.dto.ryx.RyxAdminDTO;
-import com.king.nowedge.dto.ryx.query.RyxAdminQuery;
 import com.king.nowedge.excp.BaseDaoException;
+import com.king.nowedge.query.ryx.RyxAdminQuery;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface RyxAdminMapper {	

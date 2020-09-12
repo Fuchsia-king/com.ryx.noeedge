@@ -2,7 +2,7 @@ package com.king.nowedge.mapper.ryx;
 
 import com.king.nowedge.dto.ryx.RyxCourseDTO;
 import com.king.nowedge.dto.ryx.RyxObjectLimitDTO;
-import com.king.nowedge.dto.ryx.query.RyxCourseQuery;
+import com.king.nowedge.query.ryx.RyxCourseQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 

@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.ryx.RyxObjectLimitMapper">  
+
+
+	 <sql id="select">
+		
+		id,
+	    user_id userId,
+	    muser_id muserId,
+	    oid,
+	    moid,
+	    otype,
+	    status,
+	    limi,
+	    category,
+	    sort,
+	    order_type orderType
+	    
+	</sql>
+	
+
+	<sql id="where">
+	
+	    <where>
+	    
+	    	<if test="userId != null">
+				<![CDATA[ and user_id = #{userId} ]]>
+			</if>
+			
+			<if test="muserId != null">
+				<![CDATA[ and muser_id = #{muserId} ]]>
+			</if>
+			
+			<if test="otype != null and otype != '' ">
+				<![CDATA[ and otype = #{otype} ]]>
+			</if>			
+			
+			<if test="oid != null and oid != '' ">
+				<![CDATA[ and oid = #{oid} ]]>
+			</if>	
+			
+			<if test="moid != null and moid != '' ">
+				<![CDATA[ and moid = #{moid} ]]>
+			</if>	
+			
+			<if test="status != null and status != '' ">
+				<![CDATA[ and status = #{status} ]]>
+			</if>
+			
+			<if test="category != null and category != 0 ">
+				<![CDATA[ and category = #{category} ]]>
+			</if>
+			
+			<if test="orderType != null and orderType != 0 ">
+				<![CDATA[ and order_type = #{orderType} ]]>
+			</if>
+			
+			<if test="slimi != null and slimi != '' ">
+				<![CDATA[ and limi > #{slimi} ]]>
+			</if>
+			
+			<if test="elimi != null and elimi != '' ">
+				<![CDATA[ and limi <= #{elimi} ]]>
+			</if>
+			
+			
+			
+			<if test="otypes != null and otypes.size()>0" >
+	        	and otype in
+		        <foreach item="otype" index="index" collection="otypes" open="(" separator="," close=")">  
+				 	#{otype}  
+				</foreach>
+			</if>
+			
+			<if test="statuss != null and statuss.size()>0" >
+	        	and status in
+		        <foreach item="status" index="index" collection="statuss" open="(" separator="," close=")">  
+				 	#{otype}  
+				</foreach>
+			</if>
+			
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="RyxObjectLimitDTO">  
+     
+       insert into ryx_object_limit(user_id,oid,otype,limi,status,category,moid,sort,order_type,muser_id) 
+       values
+       (#{userId},#{oid},#{otype},#{limi},#{status},#{category},#{moid},#{sort},#{orderType},#{muserId})         
+       <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+			select LAST_INSERT_ID() 
+		</selectKey>
+		
+    </insert>
+    
+    
+
+      
+    
+    <select id="query" resultType="RyxObjectLimitDTO" parameterType="RyxObjectLimitQuery">
+         
+        select
+        <include refid="select"/>
+        from ryx_object_limit         
+        <include refid="where"/>
+        		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+    
+    <select id="queryUnique" resultType="RyxObjectLimitDTO" parameterType="RyxObjectLimitQuery">
+         
+        select user_id userId, moid ,limi,status,muser_id muserId from ryx_object_limit         
+        <include refid="where"/>        
+        group by user_id,moid,limi,status,muser_id       		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+     
+    <select id="queryAll" resultType="RyxObjectLimitDTO">         
+        select code,name from ryx_object_limit where ideleted = 0 order by name		
+    </select>
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="RyxObjectLimitQuery">   
+        select count(1) from ryx_object_limit 
+        <include refid="where"/>
+    </select>
+    
+    <select id="queryById" resultType="RyxObjectLimitDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select"/>
+        from ryx_object_limit where id = #{id}  limit 1;
+    </select>    
+    
+    <select id="queryByUid" resultType="RyxObjectLimitDTO" parameterType="java.lang.String">   
+        select 
+        <include refid="select"/>
+        from ryx_object_limit where uid = #{uid}  limit 1; 
+    </select>
+    
+     <select id="queryPassdByUid" resultType="java.lang.String" parameterType="java.lang.String">   
+        select password from ryx_object_limit where uid = #{uid}  limit 1; 
+    </select>    
+    
+    <select id="queryByOou" resultType="RyxObjectLimitDTO" parameterType="RyxObjectLimitQuery">   
+        select
+        <include refid="select"/>
+        from ryx_object_limit where user_id = #{userId} and oid = #{oid} 
+        <if test="otype != null">
+        	and otype = #{otype} 
+        </if>
+        limit 1;  
+    </select> 
+    
+    
+    <update id="update" parameterType="RyxObjectLimitDTO">
+    
+        update ryx_object_limit
+                 
+        <set>	
+			
+			<if test="limi != null">
+				<![CDATA[ limi = #{limi} ]]>,
+			</if>
+			
+			<if test="status != null">
+				<![CDATA[ status = #{status} ]]>,
+			</if>
+			
+			<if test="category != null">
+				<![CDATA[ category = #{category} ]]>,
+			</if>
+			
+			<if test="moid != null">
+				<![CDATA[ moid = #{moid} ]]>,
+			</if>
+			
+			<if test="sort != null">
+				<![CDATA[ sort = #{sort} ]]>,
+			</if>
+			
+			<if test="orderType != null">
+				<![CDATA[ order_type = #{orderType} ]]>,
+			</if>
+			
+			tmodified = now(),
+			creater_id = #{createrId}
+			
+		 </set>
+		 
+		where id = #{id}
+		 
+		 
+		 	
+    </update> 
+    
+    <update id="updateLimitByOou" parameterType="RyxObjectLimitDTO">
+    	 update ryx_object_limit 
+    	 <set>	
+	    	 <if test="limi != null">  
+	    	 	limi = #{limi} , 
+	    	 </if>
+	    	 <if test="status != null">
+	    	 	status = #{status} , 
+	    	 </if>
+	    	 <if test="moid != null">
+	    	 	moid = #{moid} ,
+	    	 </if>
+	    	 <if test="muserId != null">
+	    	 	muser_id = #{muserId} ,
+	    	 </if>
+	    	 <if test="sort != null">    	 
+	    	 	sort = #{sort}  , 
+	    	 </if>
+	    	 <if test="category != null">
+	    	 	category = #{category},
+	    	 </if>
+	    	 <if test="orderType != null">
+				 <![CDATA[ order_type = #{orderType} ]]>,
+			 </if> 
+		 </set>
+    	 where 
+    	 user_id = #{userId} and oid = #{oid} and otype = #{otype}  
+    </update>
+    
+    
+    <update id="updateLimitByUserId" parameterType="RyxObjectLimitDTO">
+    	 update ryx_object_limit 
+    	 <set>		    	 
+	    	 <if test="muserId != null">
+				 <![CDATA[ muser_id = #{muserId} ]]>,
+			 </if> 
+		 </set>
+    	 where 
+    	 user_id = #{userId}  
+    </update>
+    
+    
+    <delete id="delete" parameterType="java.lang.Long">        
+        update ryx_object_limit
+        set ideleted = 1
+		where id = #{id}		 	
+    </delete> 
+    
+    <delete id="deleteByMuserIdMoid" parameterType="RyxObjectLimitDTO">        
+        delete from ryx_object_limit where muser_id = #{muserId} and moid = #{moid} 	
+    </delete> 
+    
+     <delete id="deleteByMuserIdUserId" parameterType="RyxObjectLimitDTO">        
+        delete from ryx_object_limit where muser_id = #{muserId} and user_id = #{userId} 	
+    </delete> 
+    
+     <delete id="cdelete" parameterType="RyxObjectLimitDTO">   
+        delete from ryx_object_limit where 
+        user_id = #{userId} and status = #{status}        
+        <if test="otype != null">
+			<![CDATA[ and otype = #{otype} ]]>
+		</if> 
+        <if test="oid != null">
+			<![CDATA[ and oid = #{oid} ]]>
+		</if>  
+    </delete>
+    
+    <delete id="deleteOrgAuth" parameterType="RyxObjectLimitDTO">   
+        delete from ryx_object_limit where 
+        user_id = #{userId} and status = #{status} 
+        <if test="oid != null">
+			<![CDATA[ and oid = #{oid} ]]>
+		</if>  
+		<if test="moid != null">
+			<![CDATA[ and moid = #{moid} ]]>
+		</if>  
+    </delete>
+    
+</mapper> 

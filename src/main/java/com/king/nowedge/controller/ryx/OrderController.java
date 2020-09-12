@@ -11,7 +11,7 @@ import com.king.nowedge.alipay.AlipaySubmit;
 import com.king.nowedge.controller.BaseController;
 import com.king.nowedge.dto.base.ResultDTO;
 import com.king.nowedge.dto.ryx.*;
-import com.king.nowedge.dto.ryx.query.RyxCourseQuery;
+import com.king.nowedge.query.ryx.RyxCourseQuery;
 import com.king.nowedge.utils.IPUtils;
 import com.king.nowedge.utils.Tools;
 import com.king.nowedge.wxpay.WeiMaCreate;

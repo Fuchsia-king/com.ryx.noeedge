@@ -1,11 +1,15 @@
 package com.king.nowedge.service;
 
-import com.king.nowedge.dto.*;
+import com.king.nowedge.dto.LoreDTO;
+import com.king.nowedge.dto.LoreSplitDTO;
+import com.king.nowedge.dto.LoreTagDTO;
+import com.king.nowedge.dto.LoretRelatedDTO;
 import com.king.nowedge.dto.base.ResultDTO;
-import com.king.nowedge.dto.query.LoreInputQuery;
-import com.king.nowedge.dto.query.LoreQuery;
-import com.king.nowedge.dto.query.LoreTagQuery;
-import com.king.nowedge.dto.query.LoretRelatedQuery;
+import com.king.nowedge.dto.comm.LoreInputDTO;
+import com.king.nowedge.query.LoreInputQuery;
+import com.king.nowedge.query.LoreQuery;
+import com.king.nowedge.query.LoreTagQuery;
+import com.king.nowedge.query.LoretRelatedQuery;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -92,7 +96,7 @@ public interface LoreService   {
 	
 	ResultDTO<Boolean> createLoretRelated(LoretRelatedDTO loretRelatedDTO) ;
 	
-	ResultDTO<List<LoretRelatedDTO>> queryLoretRelated(LoretRelatedQuery loretRelatedQuery);	
+	ResultDTO<List<LoretRelatedDTO>> queryLoretRelated(LoretRelatedQuery loretRelatedQuery);
 	
 	ResultDTO<Integer> countQueryLoretRelated(LoretRelatedQuery loretRelatedQuery) ;
 	

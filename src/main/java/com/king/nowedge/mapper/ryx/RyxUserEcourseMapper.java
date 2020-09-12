@@ -3,7 +3,7 @@ package com.king.nowedge.mapper.ryx;
 import java.util.List;
 
 import com.king.nowedge.dto.ryx.RyxUserEcourseDTO;
-import com.king.nowedge.dto.ryx.query.RyxUserEcourseQuery;
+import com.king.nowedge.query.ryx.RyxUserEcourseQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 

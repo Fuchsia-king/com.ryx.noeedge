@@ -1,12 +1,13 @@
 package com.king.nowedge.mapper.ryx;
 
-import java.util.List;
-
 import com.king.nowedge.dto.ryx.RyxUserCouponDTO;
 import com.king.nowedge.dto.ryx.RyxUsersDTO;
-import com.king.nowedge.dto.ryx.query.RyxUsersQuery;
+import com.king.nowedge.query.ryx.RyxUsersQuery;
+import com.king.nowedge.dto.three.UserInfo;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface RyxUserMapper {	
@@ -20,6 +21,8 @@ public interface RyxUserMapper {
 	
 	//根据手机号获取用户
 	public RyxUsersDTO getUserByMobileOrEmail(String username)throws BaseDaoException;
+
+	public UserInfo loadUserByUsername(String usernmae);
 	
 	//保存用户
 	public Long create(RyxUsersDTO user)throws BaseDaoException;

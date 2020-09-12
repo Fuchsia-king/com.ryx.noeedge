@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.king.nowedge.dto.TaskFormDTO;
-import com.king.nowedge.dto.query.TaskFormQuery;
+import com.king.nowedge.query.TaskFormQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 

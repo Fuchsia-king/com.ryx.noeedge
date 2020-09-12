@@ -2,7 +2,7 @@ package com.king.nowedge.service.impl;
 
 import com.king.nowedge.dto.ConsumerDTO;
 import com.king.nowedge.dto.base.ResultDTO;
-import com.king.nowedge.dto.query.ConsumerQuery;
+import com.king.nowedge.query.ConsumerQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import com.king.nowedge.mapper.comm.ConsumerMapper;
 import com.king.nowedge.service.ConsumerService;

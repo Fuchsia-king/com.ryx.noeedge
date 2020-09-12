@@ -5,7 +5,7 @@ import com.king.nowedge.controller.BaseController;
 import com.king.nowedge.dto.CommentDTO;
 import com.king.nowedge.dto.base.ResultDTO;
 import com.king.nowedge.dto.enums.EnumCommentType;
-import com.king.nowedge.dto.query.CommentQuery;
+import com.king.nowedge.query.CommentQuery;
 import com.king.nowedge.service.CommentService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;

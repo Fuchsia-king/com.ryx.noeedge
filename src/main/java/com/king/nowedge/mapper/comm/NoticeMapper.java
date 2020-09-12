@@ -3,7 +3,7 @@ package com.king.nowedge.mapper.comm;
 import java.util.List;
 
 import com.king.nowedge.dto.NoticeDTO;
-import com.king.nowedge.dto.query.NoticeQuery;
+import com.king.nowedge.query.NoticeQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 

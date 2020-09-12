@@ -1,9 +1,13 @@
 package com.king.nowedge.controller.comm;
 
 import com.king.nowedge.controller.BaseController;
-import com.king.nowedge.dto.*;
+import com.king.nowedge.dto.LoreSplitDTO;
+import com.king.nowedge.dto.LoreTagDTO;
+import com.king.nowedge.dto.SysmenuDTO;
 import com.king.nowedge.dto.base.ResultDTO;
-import com.king.nowedge.dto.query.LoreQuery;
+import com.king.nowedge.dto.comm.LoreInputDTO;
+import com.king.nowedge.dto.comm.UserDTO;
+import com.king.nowedge.query.LoreQuery;
 import com.king.nowedge.dto.ryx.RyxUsersDTO;
 import com.king.nowedge.helper.SessionHelper;
 import com.king.nowedge.utils.SecurityExUtils;
@@ -248,7 +252,7 @@ public class IndexsController extends BaseController {
 	 * 记录历史记录
 	 * @param request
 	 */
-	private void createLoreInput(HttpServletRequest request,LoreQuery loreQuery,UserDTO user){
+	private void createLoreInput(HttpServletRequest request, LoreQuery loreQuery, UserDTO user){
 
 		try {
 

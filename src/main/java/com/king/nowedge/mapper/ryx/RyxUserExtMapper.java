@@ -1,7 +1,7 @@
 package com.king.nowedge.mapper.ryx;
 
 import com.king.nowedge.dto.ryx.RyxUserExtDTO;
-import com.king.nowedge.dto.ryx.query.RyxUserExtQuery;
+import com.king.nowedge.query.ryx.RyxUserExtQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 

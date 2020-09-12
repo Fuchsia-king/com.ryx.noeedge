@@ -3,7 +3,7 @@ package com.king.nowedge.controller.ryx;
 import com.king.nowedge.controller.BaseController;
 import com.king.nowedge.dto.base.ResultDTO;
 import com.king.nowedge.dto.ryx.*;
-import com.king.nowedge.dto.ryx.query.RyxCategoryQuery;
+import com.king.nowedge.query.ryx.RyxCategoryQuery;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;

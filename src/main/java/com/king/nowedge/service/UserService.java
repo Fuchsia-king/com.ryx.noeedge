@@ -1,17 +1,17 @@
 package com.king.nowedge.service;
 
-import com.king.nowedge.dto.RoleDTO;
 import com.king.nowedge.dto.SysmenuDTO;
-import com.king.nowedge.dto.UserDTO;
 import com.king.nowedge.dto.UserRoleDTO;
 import com.king.nowedge.dto.base.CompanyDTO;
 import com.king.nowedge.dto.base.ResultDTO;
 import com.king.nowedge.dto.comm.AddressDTO;
-import com.king.nowedge.dto.query.*;
-import com.king.nowedge.dto.query.base.CompanyQuery;
+import com.king.nowedge.dto.comm.RoleDTO;
+import com.king.nowedge.dto.comm.UserDTO;
 import com.king.nowedge.dto.ryx.RyxSearchDTO;
 import com.king.nowedge.dto.ryx.RyxSearchStatisticsDTO;
-import com.king.nowedge.dto.ryx.query.RyxSearchStatisticsQuery;
+import com.king.nowedge.query.*;
+import com.king.nowedge.query.base.CompanyQuery;
+import com.king.nowedge.query.ryx.RyxSearchStatisticsQuery;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

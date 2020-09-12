@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<ehcache name="ColorCache">
+
+  	<defaultCache
+	    maxElementsInMemory="10000"
+	    eternal="false"
+	    timeToIdleSeconds="200"
+	    timeToLiveSeconds="200"
+	    diskSpoolBufferSizeMB="30"
+	    maxElementsOnDisk="10000000"
+	    diskExpiryThreadIntervalSeconds="12">
+	    <persistence strategy="localTempSwap"/>
+  	</defaultCache>
+  
+  
+  	<cache name="cachedLore"
+         maxElementsInMemory="100"
+         maxElementsOnDisk="0"
+         eternal="false"
+         timeToIdleSeconds="20"
+         timeToLiveSeconds="20">   
+  	</cache>
+  	
+  	<cache name="cacheRyxUser"
+         maxElementsInMemory="100"
+         maxElementsOnDisk="0"
+         eternal="false"
+         timeToIdleSeconds="200"
+         timeToLiveSeconds="200">   
+  	</cache>
+  
+  
+  	<cache name="cachedLoreList"
+         maxElementsInMemory="100"
+         maxElementsOnDisk="0"
+         eternal="false"
+         timeToIdleSeconds="20"
+         timeToLiveSeconds="20">   
+  	</cache>
+  
+  
+  	<cache name="cachedTagList"
+         maxElementsInMemory="100"
+         maxElementsOnDisk="0"
+         eternal="false"
+         timeToIdleSeconds="20"
+         timeToLiveSeconds="20">   
+  	</cache>
+  
+  
+	<cache name="cachedSysmenuList"
+         maxElementsInMemory="100"
+         maxElementsOnDisk="0"
+         eternal="false"
+         timeToIdleSeconds="20"
+         timeToLiveSeconds="20">   
+ 	</cache>  
+  
+  
+ 	<cache name="cachedCommentList"
+         maxElementsInMemory="100"
+         maxElementsOnDisk="0"
+         eternal="false"
+         timeToIdleSeconds="20"
+         timeToLiveSeconds="20">   
+	</cache>  
+   
+   
+	<cache name="cachedNoticeList"
+         maxElementsInMemory="100"
+         maxElementsOnDisk="0"
+         eternal="false"
+         timeToIdleSeconds="20"
+         timeToLiveSeconds="20">   
+   	</cache>
+  
+  
+  	<cache name="cachedUserList"
+         maxElementsInMemory="100"
+         maxElementsOnDisk="0"
+         eternal="false"
+         timeToIdleSeconds="20"
+         timeToLiveSeconds="20">   
+   	</cache>
+   
+   
+   	<cache name="cachedTaskStatus"
+         maxElementsInMemory="100"
+         maxElementsOnDisk="0"
+         eternal="false"
+         timeToIdleSeconds="20"
+         timeToLiveSeconds="20">   
+   	</cache>
+   
+   
+   	<cache name="cachedTaskType"
+         maxElementsInMemory="100"
+         maxElementsOnDisk="0"
+         eternal="false"
+         timeToIdleSeconds="20"
+         timeToLiveSeconds="20">   
+   	</cache>
+   
+   	<cache name="cachedSecurityQuestion"
+         maxElementsInMemory="100"
+         maxElementsOnDisk="0"
+         eternal="false"
+         timeToIdleSeconds="20"
+         timeToLiveSeconds="20">   
+   	</cache>
+   	
+   	
+   	<cache name="cacheMetadata"
+         maxElementsInMemory="10000"
+         maxElementsOnDisk="10000"
+         eternal="false"
+         timeToIdleSeconds="20"
+         timeToLiveSeconds="20">   
+   	</cache>
+   	
+   	<cache name="cacheCourse"
+         maxElementsInMemory="10000"
+         maxElementsOnDisk="10000"
+         eternal="false"
+         timeToIdleSeconds="20"
+         timeToLiveSeconds="20"> 
+   	</cache>
+   	
+   	
+   	<cache name="cacheCompany"
+         maxElementsInMemory="100"
+         maxElementsOnDisk="0"
+         eternal="false"
+         timeToIdleSeconds="20"
+         timeToLiveSeconds="20">   
+   	</cache>
+  
+  <!-- terracottaConfig url="localhost:9510"/>  -->
+</ehcache>

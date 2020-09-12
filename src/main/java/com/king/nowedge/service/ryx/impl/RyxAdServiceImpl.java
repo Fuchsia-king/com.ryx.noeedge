@@ -2,7 +2,7 @@ package com.king.nowedge.service.ryx.impl;
 
 import com.king.nowedge.dto.base.ResultDTO;
 import com.king.nowedge.dto.ryx.RyxAdDTO;
-import com.king.nowedge.dto.ryx.query.RyxAdQuery;
+import com.king.nowedge.query.ryx.RyxAdQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import com.king.nowedge.mapper.ryx.RyxAdMapper;
 import com.king.nowedge.service.impl.BaseService;

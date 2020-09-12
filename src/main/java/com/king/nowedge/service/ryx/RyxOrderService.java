@@ -2,9 +2,9 @@ package com.king.nowedge.service.ryx;
 
 import com.king.nowedge.dto.base.ResultDTO;
 import com.king.nowedge.dto.ryx.*;
-import com.king.nowedge.dto.ryx.query.RyxOrderDetailQuery;
-import com.king.nowedge.dto.ryx.query.RyxOrderQuery;
-import com.king.nowedge.dto.ryx.query.RyxPartnerOrderQuery;
+import com.king.nowedge.query.ryx.RyxOrderDetailQuery;
+import com.king.nowedge.query.ryx.RyxOrderQuery;
+import com.king.nowedge.query.ryx.RyxPartnerOrderQuery;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -3,7 +3,7 @@ package com.king.nowedge.mapper.comm;
 import java.util.List;
 
 import com.king.nowedge.dto.RecruitmentDTO;
-import com.king.nowedge.dto.query.RecruitmentQuery;
+import com.king.nowedge.query.RecruitmentQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 

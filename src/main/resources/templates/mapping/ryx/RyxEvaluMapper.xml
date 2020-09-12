@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.ryx.RyxEvaluMapper">  
+
+    
+    
+    <sql id="select">		
+		id,
+	    user_id userId,
+	    obj_id objId,
+	    obj_type objType,
+	    lcreate,
+	    status,
+	    ideleted,
+	    category,
+	    score,
+	    descr,
+	    objer	    
+	</sql>
+
+	<sql id="where">
+	
+	    <where>
+	    
+			<if test="userId != null">
+				<![CDATA[ and user_id = #{userId} ]]>
+			</if>
+			
+			<if test="objer != null">
+				<![CDATA[ and objer = #{objer} ]]>
+			</if>
+			
+			<if test="objId != null">
+				<![CDATA[ and obj_id = #{objId} ]]>
+			</if>			
+			
+			<if test="status != null">
+				<![CDATA[ and status = #{status} ]]>
+			</if>
+			<if test="objType != null">
+				<![CDATA[ and obj_type = #{objType} ]]>
+			</if>
+			<if test="score != null">
+				<![CDATA[ and score = #{score} ]]>
+			</if>
+			<if test="category != null">
+				<![CDATA[ and category = #{category} ]]>
+			</if>
+			
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="RyxEvaluDTO">   
+       insert into ryx_evalu(       
+		    user_id,
+		    status,
+		    objer,
+		    obj_id,
+		    obj_type,
+		    category,
+		    score,
+		    descr,
+		    lcreate       
+       ) 
+       values
+       (
+		    #{userId},
+		    #{status},
+		    #{objer},
+		    #{objId},
+		    #{objType},
+		    #{category},
+		    #{score},
+		    #{descr},
+		    UNIX_TIMESTAMP(now())
+       ) 
+    </insert>
+      
+    
+    <select id="query" resultType="RyxEvaluDTO" parameterType="RyxEvaluQuery">
+         
+        select         
+        <include refid="select"/>        
+        from ryx_evalu         
+        <include refid="where"/>		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+     
+    <select id="getEvaluByCourseId" resultType="RyxEvaluDTO" parameterType="java.lang.Long" >
+         
+        select         
+        <include refid="select"/>
+        from ryx_evalu t where t.status = 1 and t.course_id = #{courseId} order by feedbackTime desc 
+		
+    </select>
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="RyxEvaluQuery">   
+        select count(1) from ryx_evalu 
+        <include refid="where"/>
+    </select>
+    
+    <select id="getEvaluScore" resultType="java.lang.Double" parameterType="RyxEvaluQuery">   
+        select  avg(score) from ryx_evalu 
+        <include refid="where"/>
+    </select>
+    
+    <select id="getById" resultType="RyxEvaluDTO" parameterType="java.lang.Long">   
+        select
+        <include refid="select"/>
+        from ryx_evalu where id = #{id}  limit 1;
+    </select>    
+    
+    
+    <select id="getByIdUserIdOid" resultType="RyxEvaluDTO" parameterType="RyxEvaluDTO">   
+        select
+        <include refid="select"/>
+        from ryx_evalu where user_id = #{userId} and obj_id = #{objId} and  obj_type = #{objType} limit 1;
+    </select> 
+    
+    
+    <update id="updateOrCreate" parameterType="RyxEvaluDTO">
+    
+        update ryx_evalu         
+        <set>		
+			<if test="ideleted != null">
+				<![CDATA[ ideleted = #{ideleted} ]]>,
+			</if>
+			
+			<if test="score != null">
+				<![CDATA[ score = #{score} ]]>,
+			</if>
+			
+			<if test="status != null">
+				<![CDATA[ status = #{status} ]]>,
+			</if>
+			
+			<if test="descr != null">
+				<![CDATA[ descr = #{descr} ]]>,
+			</if>
+			 creater = #{creater},
+			 lcreate = UNIX_TIMESTAMP(now())			 
+		 </set>
+		 where user_id = #{userId} and obj_id = #{objId} and  obj_type = #{objType}
+    </update>
+   
+    
+    <update id="update" parameterType="RyxEvaluDTO">
+    
+        update ryx_evalu         
+        <set>		
+			<if test="ideleted != null">
+				<![CDATA[ ideleted = #{ideleted} ]]>,
+			</if>
+			
+			<if test="score != null">
+				<![CDATA[ score = #{score} ]]>,
+			</if>
+			
+			<if test="status != null">
+				<![CDATA[ status = #{status} ]]>,
+			</if>
+			
+			<if test="descr != null">
+				<![CDATA[ descr = #{descr} ]]>,
+			</if>
+			 creater = #{creater},
+			 lcreate = UNIX_TIMESTAMP(now())			 
+		 </set>
+		 where	id = #{id}
+		 <if test="userId != null">
+			<![CDATA[ and user_id = #{userId} ]]>
+		 </if>
+		 	
+    </update> 
+    
+  
+    
+    <delete id="delete" parameterType="java.lang.Long">    
+        update ryx_evalu         
+        set ideleted = 1		 
+		where id = #{id}
+		 	
+    </delete> 
+    
+    <delete id="cdelete" parameterType="java.lang.Long">    
+        delete from ryx_evalu where id = #{id}	
+         <if test="userId != null">
+			<![CDATA[ and user_id = #{userId} ]]>
+		 </if>	 	
+    </delete> 
+    
+</mapper> 

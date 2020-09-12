@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.ryx.RyxUserExtMapper">  
+
+    
+    
+    <sql id="select">
+		id ,
+		source ,
+		username ,
+		corp_code corpCode ,
+		secret ,
+		domain ,
+		imain ,
+		app_key appKey,
+		app_secret appSecret,
+		uid,
+		orate,
+		ispread
+	</sql>
+	
+	<sql id="orderby">	
+		<choose>
+			<when test="orderBy != null and orderBy !=''">
+				order by ${orderBy}	
+				<if test="sooort != null and sooort !=''">
+					${sooort}
+				</if>	
+			</when>		
+			<otherwise>
+				order by corp_code desc
+			</otherwise>
+		</choose>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>	
+		
+	</sql>
+
+	<sql id="where">
+	    <where>
+			<if test="id != null and id != '' ">
+				<![CDATA[ and id = #{id} ]]>
+			</if>
+			
+			<if test="uid != null and uid != '' ">
+				<![CDATA[ and uid = #{uid} ]]>
+			</if>
+			
+			<if test="appKey != null and appKey != '' ">
+				<![CDATA[ and app_key = #{appKey} ]]>
+			</if>
+			
+			<if test="appSecret != null and appSecret != '' ">
+				<![CDATA[ and app_secret = #{appSecret} ]]>
+			</if>
+			
+			<if test="source != null and source != '' ">
+				<![CDATA[ and source = #{source} ]]>
+			</if>
+			
+			<if test="username != null and username != '' ">
+				<![CDATA[ and username = #{username} ]]>
+			</if>
+			
+			<if test="corpCode != null and corpCode != '' ">
+				<![CDATA[ and corp_code = #{corpCode} ]]>
+			</if>
+			
+			<if test="imain != null and imain != '' ">
+				<![CDATA[ and imain = #{imain} ]]>
+			</if>
+		</where>
+	</sql>
+   
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="RyxUserExtQuery">   
+        select count(1) from ryx_user_ext 
+        <include refid="where"/>
+    </select>
+    
+   	<select id="query" resultType="RyxUserExtDTO" parameterType="RyxUserExtQuery">         
+        select         
+        <include refid="select"/>        
+        from ryx_user_ext      
+        <include refid="where"/>		
+		<include refid="orderby"/>		
+    </select>
+    
+    
+    <select id="querySingle" resultType="RyxUserExtDTO" parameterType="RyxUserExtQuery">         
+        select         
+        <include refid="select"/>        
+        from ryx_user_ext      
+        <include refid="where"/>		
+		<include refid="orderby"/>		
+    </select>
+    
+    <insert id="create" parameterType="RyxUserExtDTO">   
+    
+       insert into ryx_user_ext(
+		   id,
+		   source,
+		   username,
+		   corp_code,
+		   secret,
+		   domain,
+		   imain,
+		   uid,
+		   app_secret,
+		   app_key
+       ) 
+       values
+       (
+		    #{id},
+		    #{source},
+		    #{username},
+		   	#{corpCode},
+		   	#{secret},
+		    #{domain},
+		    #{imain},
+		    #{uid}, 
+		    #{appSecret},
+		    #{appKey}
+		    
+       )    
+    </insert>
+     
+    
+     <update id="update" parameterType="RyxUserExtDTO">
+        update ryx_user_ext
+        <set>	
+					
+			<if test="username != null">
+				<![CDATA[ username = #{username} ]]>,
+			</if>			
+			<if test="source != null">
+				<![CDATA[ source = #{source} ]]>,
+			</if>
+			<if test="domain != null">
+				<![CDATA[ domain = #{domain} ]]>,
+			</if> 
+			<if test="secret != null">
+				<![CDATA[ secret = #{secret} ]]>,
+			</if> 
+			<if test="corpCode != null">
+				<![CDATA[ corp_code = #{corpCode} ]]>,
+			</if> 
+			
+			<if test="appSecret != null">
+				<![CDATA[ app_secret = #{appSecret} ]]>,
+			</if>
+			
+			<if test="appKey != null">
+				<![CDATA[ app_key = #{appKey} ]]>,
+			</if>
+			
+			
+			<if test="username != null">
+				<![CDATA[ username = #{username} ]]>,
+			</if>
+			
+			<if test="imain != null">
+				<![CDATA[ imain = #{imain} ]]>,
+			</if>
+			
+			<if test="uid != null">
+				<![CDATA[ uid = #{uid} ]]>,
+			</if>
+			
+			<if test="ispread != null">
+				<![CDATA[ ispread = #{ispread} ]]>,
+			</if>
+			
+		 </set>
+		 
+		 where	id = #{id}
+		 	
+    </update> 
+    
+    
+   	<select id="getBySourceId" resultType="RyxUserExtDTO" parameterType="RyxUserExtQuery">
+        select <include refid="select"/> from ryx_user_ext where source = #{source} and corp_code = #{corpCode}        
+        <if test="imain != null and imain != '' ">
+			<![CDATA[ and imain = #{imain} ]]>
+		</if>
+		<if test="username != null and username != '' ">
+			<![CDATA[ and username = #{username} ]]>
+		</if>
+		
+		<if test="uid != null and uid != '' ">
+			<![CDATA[ and uid = #{uid} ]]>
+		</if>
+    </select>
+    
+    
+   	<select id="getById" resultType="RyxUserExtDTO" parameterType="java.lang.Long">
+        select <include refid="select"/> from ryx_user_ext where id = #{id}
+    </select> 
+    
+    <delete id="delete" parameterType="java.lang.Long">
+        delete from ryx_user_ext where id = #{id}
+    </delete> 
+    
+    <delete id="deleteByUsername" parameterType="RyxUserExtDTO">
+        delete from ryx_user_ext where id = #{id}
+    </delete>
+    
+    
+</mapper> 

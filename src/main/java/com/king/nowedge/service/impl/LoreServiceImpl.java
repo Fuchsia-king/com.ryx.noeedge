@@ -1,14 +1,14 @@
 package com.king.nowedge.service.impl;
 
 import com.king.nowedge.dto.LoreDTO;
-import com.king.nowedge.dto.LoreInputDTO;
 import com.king.nowedge.dto.LoreTagDTO;
 import com.king.nowedge.dto.LoretRelatedDTO;
 import com.king.nowedge.dto.base.ResultDTO;
-import com.king.nowedge.dto.query.LoreInputQuery;
-import com.king.nowedge.dto.query.LoreQuery;
-import com.king.nowedge.dto.query.LoreTagQuery;
-import com.king.nowedge.dto.query.LoretRelatedQuery;
+import com.king.nowedge.dto.comm.LoreInputDTO;
+import com.king.nowedge.query.LoreInputQuery;
+import com.king.nowedge.query.LoreQuery;
+import com.king.nowedge.query.LoreTagQuery;
+import com.king.nowedge.query.LoretRelatedQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import com.king.nowedge.mapper.comm.*;
 import com.king.nowedge.service.LoreService;
@@ -302,12 +302,7 @@ public class LoreServiceImpl  extends BaseService implements LoreService {
 			result = new ResultDTO<Integer>("error", e.getMessage());
 		}
 		return result;
-	}	
-	
-
-	
-	
-	
+	}
 	
 	@Override
 	public ResultDTO<List<LoreInputDTO>> queryLoreInput(LoreInputQuery loreInputQuery) {
@@ -445,7 +440,7 @@ public class LoreServiceImpl  extends BaseService implements LoreService {
 	
 	/*
 	 * (non-Javadoc)
-	 * @see com.king.nowedge.service.LoreService#queryLoreTag(com.king.nowedge.dto.query.LoreTagQuery)
+	 * @see com.king.nowedge.service.LoreService#queryLoreTag(com.king.nowedge.query.LoreTagQuery)
 	 */
 	@Override
 	public ResultDTO<List<LoreTagDTO>> queryLoreTag(LoreTagQuery loreTagQuery) {

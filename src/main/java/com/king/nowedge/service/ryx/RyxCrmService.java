@@ -2,9 +2,9 @@ package com.king.nowedge.service.ryx;
 
 import com.king.nowedge.dto.CustomerTagDTO;
 import com.king.nowedge.dto.base.ResultDTO;
-import com.king.nowedge.dto.query.CustomerTagQuery;
+import com.king.nowedge.query.CustomerTagQuery;
 import com.king.nowedge.dto.ryx.crm.*;
-import com.king.nowedge.dto.ryx.query.crm.*;
+import com.king.nowedge.query.ryx.crm.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

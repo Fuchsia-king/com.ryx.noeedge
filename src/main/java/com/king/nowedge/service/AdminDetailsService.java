@@ -1,6 +1,6 @@
 package com.king.nowedge.service;
 
-import com.king.nowedge.dto.UserDTO;
+import com.king.nowedge.dto.comm.UserDTO;
 import com.king.nowedge.mapper.comm.UserMapper;
 import net.sf.json.JSONObject;
 import org.springframework.security.core.GrantedAuthority;
@@ -41,7 +41,7 @@ public class AdminDetailsService implements UserDetailsService,UserDetails{
 
 		try{
 		
-	        UserDTO userDTO = this.userMapper.queryByCode(username);  
+	        UserDTO userDTO = this.userMapper.queryByCode(username);
 	        if(userDTO == null) {  
 	            throw new UsernameNotFoundException(username);  
 	        }  

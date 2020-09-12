@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=1920 initial-scale=1.0">
+
+  <!-- First use the latest version of IE and Chrome -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>融易学</title>
+  <!-- Keyword -->
+  <!-- <meta name="keywords" content=""> -->
+  <!-- describe -->
+  <meta name="description" content="">
+
+  <!-- 360 use Google Chrome Frame -->
+  <meta name="renderer" content="webkit">
+  <!-- Baidu prohibition of transcoding -->
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <!-- Definition of web search engine index -->
+  <meta name="robots" content="index,follow">
+  <!-- ios -->
+  <!-- The title that is added to the main screen -->
+  <meta name="apple-mobile-web-app-title" content="">
+  <!-- Whether WebApp full screen mode is enabled -->
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <!-- Setting the background color of the State Bar -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Android theme-color  Used to control the color of the tabs -->
+  <meta name="theme-color" content="#747474">
+  <meta name="mobile-web-app-capable" content="yes">
+  <!-- Turn off the translation plug-in under the Chrome browser -->
+  <meta name="google" value="notranslate" />
+  <!-- uc Forced vertical screen -->
+  <meta name="screen-orientation" content="portrait">
+  <!-- QQ Forced vertical screen -->
+  <meta name="x5-orientation" content="portrait">
+  <!-- UC Mandatory full screen -->
+  <meta name="full-screen" content="yes">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/swiper.min.css" rel="stylesheet" type="text/css" />
+  <link href="/css/public.css" rel="stylesheet">
+  <link href="/css/inStyle.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="/css/font-other.css" />
+</head>
+
+<body class="resetStyle black-bg">
+  <div class="video-middle">
+    <div class="flex-l">
+      <div class="video-modal" >
+        <div class="get-back syht">
+          <a th:href="@{'/curriculumDetails?courseId='+${mcourse.id}}">
+            <img class="whiteBck" src="/images/video/icon_back.png">
+            <img class="orgBck" src="/images/video/icon_backs.png">
+            <span>返回课程</span>
+          </a>
+        </div>
+        <div class="sidebar-icon" id="sidebar-icon">
+          <img src="/images/video/sidebar_l.png">
+        </div>
+        <div class="null-login" id="video-end">
+          <div class="text syht">尊敬的用户本集试看已结束</div>
+          <a href="" class="buy-btn syht">立即购买</a>
+        </div>
+        <!--保利威视频播放器放置处-->
+        <div id="vid" style="height:100%"></div>
+      </div>
+    </div>
+    <div class="flex-r" id="sidebar-main">
+      <div class="curriculum-tit syht" th:text="${mcourse.title}"></div>
+      <div class="curriculum-list" th:each="subcourse:${subcourseList}">
+        <div class="item">
+          <a th:href="@{'/playvideoPage/?id='+${subcourse.id}+'&mid='+${mcourse.id}+'&index='+${subcourseStat.index}}">
+            <div class="flex-l">
+              <div class="progress-icon">
+                 <div th:if="${true}" th:class="circle"></div>
+              </div>
+              <div class="numb pf" th:if="${subcourseStat.count<10}" th:text="'0'+${subcourseStat.count}"></div>
+              <div class="numb pf" th:if="${subcourseStat.count>9}" th:text="${subcourseStat.count}"></div>
+              <div class="tit syht" th:text="${subcourse.title}"></div>
+            </div>
+            <div class="flex-r">
+              <div class="time syht" th:text="${subcourse.duration}"></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="mes-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="header-modal">
+            <div class="left">意见反馈</div>
+            <div class="right" data-dismiss="modal"><img src="/images/error.png"></div>
+          </div>
+          <div class="body-modal">
+            <div class="modal-item">
+              <div class="lable-l">姓名：</div>
+              <div class="lable-r">
+                <div class="input-box">
+                  <input type="text" placeholder="请输入内容">
+                </div>
+              </div>
+            </div>
+            <div class="modal-item">
+              <div class="lable-l">联系方式：</div>
+              <div class="lable-r">
+                <div class="input-box">
+                  <input type="text" placeholder="请输入内容">
+                </div>
+              </div>
+            </div>
+            <div class="modal-item">
+              <div class="lable-l">问题详情：</div>
+              <div class="lable-r">
+                <div class="textarea-box">
+                  <textarea placeholder="请输入内容"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="btn-modal">
+            <button type="submit">提 交</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/swiper.min.js"></script>
+  <!-- privatjs -->
+  <script type="text/javascript" src="/js/public.js"></script>
+  <script type="text/javascript" src="/js/inMain.js"></script>
+  <script type="text/javascript" src="/js/sound.js"></script>
+  <!--end-->
+
+  <script src="//player.polyv.net/script/player.js"></script>
+  <script>
+    function getToken(){
+      var token='';
+      var userId = "[[${userId}]]";
+      var videoId = "[[${course.vid}]]";
+      var times = "[[${times}]]";
+      var ip = "[[${ip}]]";
+      var memberId = "[[${memberId}]]";
+      var newSign = "[[${newSign}]]";
+      $.ajax({
+        type:'POST',
+        url:'https://hls.videocc.net/service/v1/token',
+        data:{"userId":userId,
+          "videoId":videoId,
+          "ts":times,
+          "viewerIp":ip,
+          "viewerId":memberId,
+          "sign":newSign},
+        async:false,
+        success:function(req){
+          console.log("req"+req);
+          token = req;
+          console.log('userId:'+userId);
+          console.log('video:'+videoId);
+          console.log('times:'+times);
+          console.log('ip:'+ip);
+          console.log('memberId:'+memberId);
+          console.log('newSign:'+newSign);
+        },
+        error:function(res){
+          console.log('userId:'+userId);
+          console.log('video:'+videoId);
+          console.log('times:'+times);
+          console.log('ip:'+ip);
+          console.log('memberId:'+memberId);
+          console.log('newSign:'+newSign);
+        }
+      });
+      return token;
+    }
+    $(function(){
+      let buyFlag = '[[${buyFlag}]]';
+      let price = [[${course.price}]]
+      if(!buyFlag&&price>0){
+        var player = polyvPlayer({
+          wrap: '#vid',
+          width: '100%',
+          height: $(window).height(),
+          vid: '[[${course.vid}]]',
+          preview:true,
+          playsafe: getToken().data.token,
+          hideSwitchPlayer:true,
+          forceH5: true,
+          df:1,
+          ban_history_time:'off',
+          history_video_duration:'1'
+        });
+      }else{
+        var player = polyvPlayer({
+          wrap: '#vid',
+          width: '100%',
+          height: $(window).height(),
+          vid: '[[${course.vid}]]',
+          playsafe: getToken().data.token,
+          hideSwitchPlayer:true,
+          forceH5: true,
+          df:1,
+          ban_history_time:'off',
+          history_video_duration:'1'
+        });
+      }
+    });
+
+  </script>
+</body>
+
+
+</html>

@@ -12,7 +12,7 @@ import com.king.nowedge.controller.BaseController;
 import com.king.nowedge.dto.base.ResultDTO;
 import com.king.nowedge.dto.enums.*;
 import com.king.nowedge.dto.ryx.*;
-import com.king.nowedge.dto.ryx.query.*;
+import com.king.nowedge.query.ryx.*;
 import com.king.nowedge.helper.*;
 import com.king.nowedge.utils.IPUtils;
 import com.king.nowedge.utils.NumberExUtils;

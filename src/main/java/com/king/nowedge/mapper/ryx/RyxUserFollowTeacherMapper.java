@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.king.nowedge.dto.ryx.RyxUserFollowTeacherDTO;
-import com.king.nowedge.dto.ryx.query.RyxUserFollowTeacherQuery;
+import com.king.nowedge.query.ryx.RyxUserFollowTeacherQuery;
 import com.king.nowedge.excp.BaseDaoException;
 
 @Mapper

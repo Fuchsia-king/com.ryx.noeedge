@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
+<mapper namespace="com.king.nowedge.mapper.ryx.RyxUserMapper">
+    
+    <sql id="select">
+		id,
+	    username,
+	    password,
+	    email,
+	    mobile,
+	    reg_time regTime,
+	    reg_ip regIp,
+	    last_login_time lastLoginTime,
+	    last_login_ip lastLoginIp,
+	    update_time updateTime,
+	    status,
+	    path,
+	    login,
+	    gender,
+	    introduction,
+	    integral,
+	    birthday,
+	    sign,
+	    district1,
+	    district2,
+	    district3,
+	    address,
+	    balance,
+	    balance1,
+	    tbalance1,
+	    auth_type authType,
+	    validateCode,
+	    qq_open_id qqOpenId,
+	    flag,
+	    province,
+	    industry,
+	    tcreate,
+	    coupon,
+	    mid,
+	    name,
+	    dcode,
+	    dpic1,
+	    dpic2,
+	    fname,
+	    scale,
+	    industry0,
+	    otype,
+	    sid,
+	    icode,
+	    weixin_union_id weixinUnionId,
+	    rfrom,
+	    orate,
+	    ispread
+	</sql>
+
+	<sql id="where">
+	
+	    <where>
+	    
+			<if test="username != null and username!='' ">
+				<![CDATA[ and username = #{username} ]]>
+			</if>
+			
+			<if test="keyword != null and keyword != '' ">
+				<![CDATA[and username like concat('%', #{keyword}, '%')  ]]>
+			</if>
+			
+			<if test="password != null and password !='' ">
+				<![CDATA[ and password = #{password} ]]>
+			</if>
+			
+			<if test="email != null and email != '' ">
+				<![CDATA[ and email = #{email} ]]>
+			</if>
+			
+			<if test="mobile != null and  mobile != '' ">
+				<![CDATA[ and mobile = #{mobile} ]]>
+			</if>
+			<if test="mid != null ">
+				<![CDATA[ and mid = #{mid} ]]>
+			</if>
+			
+			<if test="flag != null ">
+				<![CDATA[ and flag = #{flag} ]]>
+			</if>
+			
+			<if test="status != null ">
+				<![CDATA[ and status = #{status} ]]>
+			</if>
+			
+			<if test="icode != null ">
+				<![CDATA[ and icode = #{icode} ]]>
+			</if>
+			
+			<if test="sid != null ">
+				<![CDATA[ and sid = #{sid} ]]>
+			</if>
+			
+			<if test="status != null ">
+				<![CDATA[ and status = #{status} ]]>
+			</if>
+			
+			<if test="province != null and province !='' ">
+				<![CDATA[and province = #{province} ]]>
+			</if>
+			
+			<if test="rfrom != null">
+				<![CDATA[and rfrom = #{rfrom} ]]>
+			</if>
+			
+			
+			<if test="gender != null and gender !='' ">
+				<![CDATA[and gender = #{gender} ]]>
+			</if>
+			<if test="flag != null and flag !='' ">
+				<![CDATA[and  flag = #{flag} ]]>
+			</if>
+			<if test="industry != null and industry !='' ">
+				<![CDATA[and  industry = #{industry} ]]>
+			</if>
+			
+			<if test="startTime != null and startTime !='' ">
+				<![CDATA[and  reg_time >= #{startTime} ]]>
+			</if>
+			<if test="endTime != null and endTime !='' ">
+				<![CDATA[and  reg_time <= #{endTime} ]]>
+			</if>
+			
+			<if test="dstartTime != null and dstartTime !='' ">
+				<![CDATA[and  tcreate >= #{dstartTime} ]]>
+			</if>
+			<if test="dendTime != null and dendTime !='' ">
+				<![CDATA[and  tcreate <= #{dendTime} ]]>
+			</if>
+			
+			<if test="ispread != null">
+				<![CDATA[and ispread = #{ispread} ]]>
+			</if>
+			
+		</where>
+	</sql>
+   
+    <insert id="create" parameterType="RyxUsersDTO">   
+    
+       insert into ryx_users(
+       
+		    username,
+		    password,
+		    email,
+		    mobile,
+		    reg_time,
+		    reg_ip,
+		    last_login_time,
+		    last_login_ip,
+		    update_time,
+		    status,
+		    path,
+		    login,
+		    gender,
+		    introduction,
+		    integral,
+		    birthday,
+		    sign,
+		    district1,
+		    district2,
+		    district3,
+		    address,
+		    balance,
+		    auth_type,
+		    validateCode,
+		    qq_open_id,
+		    flag,
+		    province,
+		    industry,
+		    mid,
+		    name,
+		    icode,
+		    sid,
+		    rfrom,
+		    weixin_union_id
+    
+       ) 
+       values
+       (
+       
+       		
+		    #{username},
+		    #{password},
+		    #{email},
+		    #{mobile},		    
+		    UNIX_TIMESTAMP(now()),
+		    #{regIp},
+		    #{lastLoginTime},
+		    #{lastLoginIp},
+		    #{updateTime},
+		    #{status},
+		    #{path},
+		    #{login},
+		    #{gender},
+		    #{introduction},
+		    #{integral},
+		    #{birthday},
+		    #{sign},
+		    #{district1},
+		    #{district2},
+		    #{district3},
+		    #{address},
+		    0,
+		    #{authType},
+		    #{validateCode},
+		    #{qqOpenId},
+		    #{flag},
+		    #{province},
+		    #{industry},
+		    #{industry},
+		    #{name},
+		    #{icode},
+		    #{sid},
+		    #{rfrom},
+		    #{weixinUnionId}
+       )        
+       <selectKey keyProperty="iid" resultType="java.lang.Integer" order="AFTER">
+			select LAST_INSERT_ID() 
+		</selectKey>
+    </insert>
+      
+    
+    
+    <select id="queryUserId" resultType="java.lang.Long" parameterType="RyxUsersQuery">
+         
+        select id from ryx_users         
+        <include refid="where"/>		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+    
+    
+    <select id="query" resultType="RyxUsersDTO" parameterType="RyxUsersQuery">
+         
+        select
+         
+        <include refid="select"/>
+        
+        from ryx_users 
+        
+        <include refid="where"/>
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+
+    
+    <select id="getUserByMobileOrEmail" resultType="RyxUsersDTO"  parameterType="java.lang.String" >
+        select 
+		<include refid="select"/>
+ 		from ryx_users where mobile=#{username} or email=#{username} or username=#{username}   limit 1 for update  ;
+    </select>
+    
+     <select id="getUserByMobileOrUsername" resultType="RyxUsersDTO"  parameterType="RyxUsersQuery" >         
+        select 
+		<include refid="select"/>
+ 		from ryx_users where mobile= #{mobile} or username = #{username} limit 1 for update  ;
+    </select>
+    
+    
+    <select id="getByWeixinUnionId" resultType="RyxUsersDTO" parameterType="java.lang.String">         
+        select 
+		<include refid="select"/>
+ 		from ryx_users where weixin_union_id= #{weixinUnionId} limit 1 for update  ;
+    </select>
+    
+    <select id="getUserIdByIcode" resultType="java.lang.Long"  parameterType="java.lang.String" >         
+        select id from ryx_users where icode = #{icode} limit 1 ;
+    </select>
+  
+    
+    <select id="getUserByEmailAndValidateCode" resultType="RyxUsersDTO"  parameterType="RyxUsersDTO" >         
+        select 
+		<include refid="select"/>
+		from ryx_users where email=#{email} and validateCode=#{validateCode}   limit 1 for update  ;
+    </select>
+    
+    
+    <select id="getUserByEmail" resultType="RyxUsersDTO"  parameterType="java.lang.String" >         
+        select 
+		<include refid="select"/>
+		from ryx_users where email=#{email}  limit 1 for update  ;
+    </select>
+    
+    
+    <select id="getUserById" resultType="RyxUsersDTO"  parameterType="java.lang.Long" >         
+        select 
+		<include refid="select"/>
+		from ryx_users where id = #{id}
+    </select>
+    
+    <select id="getUserByUsername" resultType="RyxUsersDTO"  parameterType="java.lang.String" >         
+        select 
+		<include refid="select"/>
+		from ryx_users where username=#{username}   limit 1 for update  ;
+    </select>
+    
+    <select id="getUserByMobile" resultType="RyxUsersDTO"  parameterType="java.lang.String" >         
+        select 
+		<include refid="select"/>
+		from ryx_users where mobile=#{mobile}   limit 1 for update  ;
+    </select>
+    
+    <select id="getByOpenId" resultType="RyxUsersDTO"  parameterType="java.lang.String" >         
+        select 
+		<include refid="select"/>
+		from ryx_users  where qq_open_id=#{qqOpenId}
+    </select>
+    
+    
+    <select id="checkUserLogin" resultType="RyxUsersDTO"  parameterType="RyxUsersQuery" >         
+        select 
+		<include refid="select"/>
+		from ryx_users t where (t.email=#{username} or t.mobile=#{username} or t.username=#{username}) and password=#{password}  limit 1 for update  ;
+    </select>
+    
+    
+    <select id="checkUserLoginByUseramePassword" resultType="RyxUsersDTO"  parameterType="RyxUsersQuery" >         
+        select 
+		<include refid="select"/>
+		from ryx_users t where t.username=#{username} and t.password=#{password}   limit 1 for update  ;
+    </select>
+    
+    
+    <select id="countQuery" resultType="java.lang.Integer" parameterType="RyxUsersQuery">   
+        select count(1) from ryx_users 
+        <include refid="where"/>  limit 1 ;
+    </select>
+    
+    <select id="getUserCountByUsernameExcludeSelf" resultType="java.lang.Integer" parameterType="RyxUsersQuery">   
+        select count(1) from ryx_users where username =#{username} and id != #{id}
+    </select>
+    
+    <select id="getUserCountByEmailExcludeSelf" resultType="java.lang.Integer" parameterType="RyxUsersQuery">   
+        select count(1) from ryx_users where email =#{email} and id != #{id}
+    </select>
+    
+    <select id="getById" resultType="RyxUsersDTO" parameterType="java.lang.Long">   
+        select 
+        <include refid="select"/>
+        from ryx_users where id = #{id}  limit 1;
+    </select>    
+    
+    
+    <select id="getUserBlanceById" resultType="java.lang.Double" parameterType="java.lang.Long">   
+        select balance from ryx_users where id = #{id} limit 1;
+    </select> 
+    
+    <select id="getUserBalance1ById" resultType="java.lang.Double" parameterType="java.lang.Long">   
+        select balance1 from ryx_users where id = #{id} limit 1;
+    </select> 
+    
+    
+    <select id="getUserBlance1ById" resultType="java.lang.Double" parameterType="java.lang.Long">   
+        select balance1 from ryx_users where id = #{id}  limit 1;
+    </select>     
+    
+    
+    <select id="getUserTblance1ById" resultType="java.lang.Double" parameterType="java.lang.Long">   
+        select tbalance1 from ryx_users where id = #{id} limit 1;
+    </select>    
+    
+    <select id="queryByIdMember" resultType="RyxUsersDTO" parameterType="RyxUsersQuery">   
+        select 
+        <include refid="select"/>
+        from ryx_users where id = #{id} and member =#{member} limit 1;
+    </select>
+    
+    <select id="queryByUid" resultType="RyxUsersDTO" parameterType="java.lang.String">   
+        select 
+        <include refid="select"/>
+        from ryx_users where uid = #{uid}  limit 1; 
+    </select>
+    
+     <select id="getCouponById" resultType="java.lang.Double" parameterType="java.lang.Long">   
+        select 
+        coupon
+        from ryx_users where id = #{id}  limit 1  for update; 
+    </select>
+    
+    <select id="getScoreById" resultType="java.lang.Double" parameterType="java.lang.Long">   
+        select score from ryx_users where id = #{id}  limit 1  for update; 
+    </select>
+    
+     <select id="queryPassdByUid" resultType="java.lang.String" parameterType="java.lang.String">   
+        select passd from ryx_users where uid = #{uid}  limit 1; 
+    </select>    
+    
+    <select id="queryByCode" resultType="RyxUsersDTO" parameterType="java.lang.String">   
+        select 
+        <include refid="select"/>
+        from ryx_users where code = #{code} and ideleted =0 limit 1; 
+    </select> 
+    
+    
+    <update id="update" parameterType="RyxUsersDTO">
+    
+        update ryx_users
+         
+        <set>	
+					
+			<if test="username != null">
+				<![CDATA[ username = #{username} ]]>,
+			</if>
+			
+			<if test="password != null">
+				<![CDATA[ password = #{password} ]]>,
+			</if>
+			
+			<if test="email != null">
+				<![CDATA[ email = #{email} ]]>,
+			</if>
+			
+			<if test="mobile != null">
+				<![CDATA[ mobile = #{mobile} ]]>,
+			</if>
+			
+			<if test="regIp != null">
+				<![CDATA[ reg_ip = #{regIp} ]]>,
+			</if>
+			
+			<if test="lastLoginTime != null">
+				<![CDATA[ last_login_time = #{lastLoginTime} ]]>,
+			</if>
+
+			<if test="lastLoginIp != null">
+				<![CDATA[ last_login_ip = #{lastLoginIp} ]]>,
+			</if>
+			
+			<if test="updateTime != null">
+				<![CDATA[ update_time = #{updateTime} ]]>,
+			</if>
+			
+			<if test="status != null">
+				<![CDATA[ status = #{status} ]]>,
+			</if>
+			
+			<if test="path != null">
+				<![CDATA[ path = #{path} ]]>,
+			</if>
+			
+			<if test="login != null">
+				<![CDATA[ login = #{login} ]]>,
+			</if>
+			
+			<if test="gender != null">
+				<![CDATA[ gender = #{gender} ]]>,
+			</if>
+			
+			<if test="introduction != null">
+				<![CDATA[ introduction = #{introduction} ]]>,
+			</if>
+			
+			
+			<if test="integral != null">
+				<![CDATA[ integral = #{integral} ]]>,
+			</if>
+			
+			<if test="birthday != null">
+				<![CDATA[ birthday = #{birthday} ]]>,
+			</if>
+			
+			<if test="sign != null">
+				<![CDATA[ sign = #{sign} ]]>,
+			</if>
+			
+			<if test="district1 != null">
+				<![CDATA[ district1 = #{district1} ]]>,
+			</if>
+			
+			<if test="district2 != null">
+				<![CDATA[ district2 = #{district2} ]]>,
+			</if>
+			
+			<if test="district3 != null">
+				<![CDATA[ district3 = #{district3} ]]>,
+			</if>
+			
+			<if test="address != null">
+				<![CDATA[ address = #{address} ]]>,
+			</if>
+			
+			
+			<if test="authType != null">
+				<![CDATA[ auth_type = #{authType} ]]>,
+			</if>
+			
+			<if test="validateCode != null">
+				<![CDATA[ validateCode = #{validateCode} ]]>,
+			</if>
+			
+			<if test="qqOpenId != null">
+				<![CDATA[ qq_open_id = #{qqOpenId} ]]>,
+			</if>
+			
+			
+			<if test="flag != null">
+				<![CDATA[ flag = #{flag} ]]>,
+			</if>
+			
+			<if test="province != null">
+				<![CDATA[ province = #{province} ]]>,
+			</if>
+			
+			<if test="industry != null">
+				<![CDATA[ industry = #{industry} ]]>,
+			</if>
+			
+			<if test="name != null">
+				<![CDATA[ name = #{name} ]]>,
+			</if>
+			
+			<if test="dcode != null">
+				<![CDATA[ dcode = #{dcode} ]]>,
+			</if>
+			
+			<if test="dpic1 != null">
+				<![CDATA[ dpic1 = #{dpic1} ]]>,
+			</if>
+			
+			 <if test="dpic2 != null">
+				<![CDATA[ dpic2 = #{dpic2} ]]>,
+			</if>
+			
+			<if test="fname != null">
+				<![CDATA[ fname = #{fname} ]]>,
+			</if>
+			
+			<if test="scale != null">
+				<![CDATA[ scale = #{scale} ]]>,
+			</if>
+			
+			<if test="industry0 != null">
+				<![CDATA[ industry0 = #{industry0} ]]>,
+			</if>
+			
+			<if test="otype != null">
+				<![CDATA[ otype = #{otype} ]]>,
+			</if>
+
+			<if test="orate != null">
+				<![CDATA[ orate = #{orate} ]]>,
+			</if>
+			
+			<if test="ispread != null">
+				<![CDATA[ ispread = #{ispread} ]]>,
+			</if>
+			
+			<if test="weixinUnionId != null">
+				<![CDATA[ weixin_union_id = #{weixinUnionId} ]]>,
+			</if>
+		 </set>
+		 
+		 where	id = #{id}
+		 	
+    </update> 
+    
+    <update id="updatePasswordByMobile" parameterType="RyxUsersDTO">
+    	 update ryx_users t set t.password=#{password} where t.mobile=#{mobile}
+    </update>
+    
+    <update id="addCoupon" parameterType="RyxUserCouponDTO">
+    	 update ryx_users t set t.coupon= t.coupon + #{coupon} where t.id=#{userId}
+    </update>
+    
+    <update id="addScore" parameterType="RyxUserCouponDTO">
+    	 update ryx_users t set t.score= t.score + #{coupon} where t.id=#{userId}
+    </update>
+    
+    <update id="addBalance" parameterType="RyxUserCouponDTO">
+    	 update ryx_users t set t.balance= t.balance + #{coupon} where t.id=#{userId}
+    </update>
+    
+    <update id="addBalance1" parameterType="RyxUserCouponDTO">
+    	 update ryx_users t set t.balance1 = t.balance1 + #{coupon} where t.id=#{userId}
+    </update>
+    
+     <update id="addTbalance1" parameterType="RyxUserCouponDTO">
+    	 update ryx_users t set t.tbalance1 = t.tbalance1 + #{coupon} where t.id=#{userId}
+    </update>
+    
+    <update id="addBlance" parameterType="RyxUsersDTO">
+    	 update ryx_users t set t.balance=t.balance + #{balance} where t.id=#{id}
+    </update>
+    
+     <update id="updateBlance" parameterType="RyxUsersDTO">
+    	 update ryx_users t set t.balance = #{balance} where t.id=#{id}
+    </update>
+    
+     <update id="updateStatusByEmail" parameterType="RyxUsersDTO">
+    	 update ryx_users set status=1, validateCode=#{validateCode} where email=#{email}
+    </update>
+    
+    <update id="updateMobileById" parameterType="RyxUsersDTO">
+    	 update ryx_users t set t.mobile=#{mobile}, t.flag=1 where t.id=#{id}
+    </update>
+    <delete id="delete" parameterType="java.lang.String">
+    
+        update ryx_users         
+        set ideleted = 1		 
+		where uid = #{uid}
+		 	
+    </delete> 
+    
+    <select id="queryUserAnalysis" resultType="RyxUsersDTO" parameterType="RyxUsersQuery">
+    
+    	select province , gender ,flag, industry , count(*) usersCount from
+         
+        (select province , gender ,flag, industry
+        
+        from ryx_users 
+        
+      	 <include refid="where"/>
+       )t1 
+        group by  province , gender ,flag, industry
+		
+		<if test="orderBy != null and orderBy !=''">
+			order by ${orderBy}	
+			<if test="sooort != null and sooort !=''">
+				${sooort}
+			</if>	
+		</if>
+		
+		<if test="pageSize != null">
+			limit ${startRow}, ${pageSize}
+		</if>		
+		
+    </select>
+     <select id="queryUserAnalysisCount" resultType="java.lang.Integer" parameterType="RyxUsersQuery">
+    
+    	select  count(*) from 
+    	(
+    	select province , gender ,flag, industry 
+        
+        from ryx_users 
+        <include refid="where"/>
+        group by  province , gender ,flag, industry
+
+		)t
+        
+    </select>
+    
+</mapper> 

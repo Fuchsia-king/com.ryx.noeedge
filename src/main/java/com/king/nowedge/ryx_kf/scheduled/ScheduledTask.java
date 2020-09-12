@@ -78,9 +78,6 @@ public class ScheduledTask {
                 //测试环境地址
                 result = HttpClientUtil.doPost(KF_GET_ORGANIZATIONAL_STRUCTURE_INFO_URL_TEST, ListOrMapUtil.objectToMap(kfGetOrgServiceParam));
             }
-            
-
-            
             //获取加密数据 并且解密以及转换有用数据 kfUserInfo
             List<KfUserInfoModel> kfUserInfo = new ArrayList<>();
             List<KfUserInfoModel> kfUserInfoCopy = new ArrayList<>();
@@ -105,7 +102,6 @@ public class ScheduledTask {
                 System.out.println("Time:【" + new Date() + "】   同步数据失败！！！");
             }
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

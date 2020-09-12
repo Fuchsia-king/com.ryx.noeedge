@@ -2,11 +2,11 @@ package com.king.nowedge.controller.comm;
 
 import com.king.nowedge.controller.BaseController;
 import com.king.nowedge.dto.LoreDTO;
-import com.king.nowedge.dto.LoreInputDTO;
 import com.king.nowedge.dto.base.ResultDTO;
+import com.king.nowedge.dto.comm.LoreInputDTO;
 import com.king.nowedge.dto.enums.EnumEcologyType;
-import com.king.nowedge.dto.query.LoreInputQuery;
-import com.king.nowedge.dto.query.LoreQuery;
+import com.king.nowedge.query.LoreInputQuery;
+import com.king.nowedge.query.LoreQuery;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

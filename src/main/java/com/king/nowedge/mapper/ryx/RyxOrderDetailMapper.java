@@ -3,7 +3,7 @@ package com.king.nowedge.mapper.ryx;
 import java.util.List;
 
 import com.king.nowedge.dto.ryx.RyxOrderDetailDTO;
-import com.king.nowedge.dto.ryx.query.RyxOrderDetailQuery;
+import com.king.nowedge.query.ryx.RyxOrderDetailQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 

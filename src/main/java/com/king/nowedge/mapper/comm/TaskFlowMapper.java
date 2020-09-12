@@ -3,7 +3,7 @@ package com.king.nowedge.mapper.comm;
 import java.util.List;
 
 import com.king.nowedge.dto.TaskFlowDTO;
-import com.king.nowedge.dto.query.TaskFlowQuery;
+import com.king.nowedge.query.TaskFlowQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 

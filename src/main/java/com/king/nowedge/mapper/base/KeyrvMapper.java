@@ -1,7 +1,7 @@
 package com.king.nowedge.mapper.base;
 
 import com.king.nowedge.dto.base.KeyrvDTO;
-import com.king.nowedge.dto.query.base.KeyrvQuery;
+import com.king.nowedge.query.base.KeyrvQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 

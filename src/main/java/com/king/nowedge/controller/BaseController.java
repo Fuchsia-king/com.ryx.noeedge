@@ -3,22 +3,22 @@ package com.king.nowedge.controller;
 import com.king.nowedge.dto.LoreDTO;
 import com.king.nowedge.dto.NoticeDTO;
 import com.king.nowedge.dto.RecruitmentDTO;
-import com.king.nowedge.dto.UserDTO;
 import com.king.nowedge.dto.base.CompanyDTO;
 import com.king.nowedge.dto.base.KeyrvDTO;
 import com.king.nowedge.dto.base.KeyvalueDTO;
 import com.king.nowedge.dto.base.ResultDTO;
+import com.king.nowedge.dto.comm.UserDTO;
 import com.king.nowedge.dto.enums.*;
-import com.king.nowedge.dto.query.LoreQuery;
-import com.king.nowedge.dto.query.RecruitmentQuery;
-import com.king.nowedge.dto.query.base.KeyrvQuery;
-import com.king.nowedge.dto.query.base.KeyvalueQuery;
-import com.king.nowedge.dto.query.base.LoreBaseQuery;
+import com.king.nowedge.query.LoreQuery;
+import com.king.nowedge.query.RecruitmentQuery;
+import com.king.nowedge.query.base.KeyrvQuery;
+import com.king.nowedge.query.base.KeyvalueQuery;
+import com.king.nowedge.query.base.LoreBaseQuery;
 import com.king.nowedge.dto.ryx.*;
-import com.king.nowedge.dto.ryx.query.RyxApplyQuery;
-import com.king.nowedge.dto.ryx.query.RyxCategoryQuery;
-import com.king.nowedge.dto.ryx.query.RyxObjectLimitQuery;
-import com.king.nowedge.dto.ryx.query.RyxTeacherQuery;
+import com.king.nowedge.query.ryx.RyxApplyQuery;
+import com.king.nowedge.query.ryx.RyxCategoryQuery;
+import com.king.nowedge.query.ryx.RyxObjectLimitQuery;
+import com.king.nowedge.query.ryx.RyxTeacherQuery;
 import com.king.nowedge.dto.ryx2.validate.OnlineDTO;
 import com.king.nowedge.helper.*;
 import com.king.nowedge.service.*;
@@ -956,7 +956,7 @@ public class BaseController {
 					||  targetUrl.indexOf("default.html") >0
 					){
 				
-				targetUrl = "/index.html" ;
+				targetUrl = "/" ;
 				
 			}
 		}
@@ -969,7 +969,7 @@ public class BaseController {
 					||  targetUrl.indexOf("default.html") >0
 					){
 				
-				targetUrl = "/index.html" ;
+				targetUrl = "/" ;
 				
 			}
 		}

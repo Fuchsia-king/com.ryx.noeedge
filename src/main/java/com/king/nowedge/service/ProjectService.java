@@ -4,9 +4,9 @@ import com.king.nowedge.dto.ProjectDTO;
 import com.king.nowedge.dto.ProjectStatusDTO;
 import com.king.nowedge.dto.ProjectTypeDTO;
 import com.king.nowedge.dto.base.ResultDTO;
-import com.king.nowedge.dto.query.ProjectQuery;
-import com.king.nowedge.dto.query.ProjectStatusQuery;
-import com.king.nowedge.dto.query.ProjectTypeQuery;
+import com.king.nowedge.query.ProjectQuery;
+import com.king.nowedge.query.ProjectStatusQuery;
+import com.king.nowedge.query.ProjectTypeQuery;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

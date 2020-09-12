@@ -495,8 +495,8 @@
 
         </div>
 
-
       </div>
+
 
     </div>
   <script src="/js/jquery-2.1.1.min.js"></script>
@@ -514,7 +514,7 @@
         }
         let divs = "";
         courseArr.forEach(function (course, index) {
-          divs += '<div class="item"><a onclick="to_course_detail(this)"><div class="dt"><div class="pic"><img src="' + course.image + '"><div class="liveTit">最新</div></div></div><div class="dd"><div class="tit">' + course.title + '</div><div class="time-box"><div class="flex-l">¥' + course.price + '</div><div class="flex-r"><div class="hour-box"><div class="left"><img src="/images/home/time.png">' + course.applyCount + '</div><div class="right"><img src="/images/home/browse.png">' + course.hits + '</div></div></div></div></div></a></div>';
+          divs += '<div class="item"><a onclick="to_course_detail()"><div class="dt"><div class="pic"><img src="' + course.image + '"><div class="liveTit">最新</div></div></div><div class="dd"><div class="tit">' + course.title + '</div><div class="time-box"><div class="flex-l">¥' + course.price + '</div><div class="flex-r"><div class="hour-box"><div class="left"><img src="/images/home/time.png">' + course.applyCount + '</div><div class="right"><img src="/images/home/browse.png">' + course.hits + '</div></div></div></div></div></a></div>';
         })
         document.getElementById("middle-list1").innerHTML=divs;
       }
@@ -570,18 +570,36 @@
       document.getElementById("nextpage").setAttribute('href',url);
     }
 
+    // <input name="${(_csrf.parameterName)!}" value="${(_csrf.token)!}" type="hidden">
+    // $(document).ajaxSend(function(e, xhr, options) {
+    //   xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+    // });
+
     /**
      * 点击课程预览图,跳转到课程详情页
      */
-    function to_course_detail(ele){
-      let keyword = '[[${keyword}]]';
-      keyword = 1;
-      if(null == keyword || undefined == keyword || "" === keyword){
-        return;
-      }else{
-        let url = "/curriculumDetails";
-        ele.setAttribute('href',url);
-      }
+    function to_course_detail(){
+      // let keyword = '[[${keyword}]]';
+      keyword = '1';
+      let from = '1';
+      var data = {"courseId":keyword,"from":from}
+      $.ajax({
+        type:'POST',
+        url:'/curriculumDetails.html'
+        data:data,
+        dataType: "json",
+        success: function (response) {
+          alert('chenggong');
+        }
+      });
+      
+      // $.post('/curriculumDetails.html');
+      // if(null == keyword || undefined == keyword || "" === keyword){
+      //   return;
+      // }else{
+      //   let url = "/curriculumDetails.html?courseId="+keyword+"&from="+from;
+      //   ele.setAttribute('href',url);
+      // }
     }
   </script>
   <script src="/js/bootstrap.min.js"></script>

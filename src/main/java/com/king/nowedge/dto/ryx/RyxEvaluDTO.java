@@ -1,17 +1,10 @@
 package com.king.nowedge.dto.ryx;
 
-import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.king.nowedge.dto.base.BaseDTO;
 
 /**
- * RyxFeedback entity.
- * 
- * @author MyEclipse Persistence Tools
+ * evalu:评价,评论
  */
-
 public class RyxEvaluDTO extends BaseDTO implements java.io.Serializable {
 
 	/**

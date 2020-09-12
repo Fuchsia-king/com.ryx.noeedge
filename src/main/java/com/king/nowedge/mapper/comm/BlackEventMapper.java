@@ -3,7 +3,7 @@ package com.king.nowedge.mapper.comm;
 import java.util.List;
 
 import com.king.nowedge.dto.BlackEventDTO;
-import com.king.nowedge.dto.query.BlackEventQuery;
+import com.king.nowedge.query.BlackEventQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 

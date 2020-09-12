@@ -1,11 +1,11 @@
 package com.king.nowedge.mapper.comm;
 
-import java.util.List;
-
-import com.king.nowedge.dto.RoleDTO;
-import com.king.nowedge.dto.query.RoleQuery;
+import com.king.nowedge.dto.comm.RoleDTO;
 import com.king.nowedge.excp.BaseDaoException;
+import com.king.nowedge.query.RoleQuery;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface RoleMapper {

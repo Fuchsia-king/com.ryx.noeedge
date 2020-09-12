@@ -5,7 +5,7 @@ import com.king.nowedge.dto.TaskFlowDTO;
 import com.king.nowedge.dto.TaskStatusDTO;
 import com.king.nowedge.dto.TaskTypeDTO;
 import com.king.nowedge.dto.base.ResultDTO;
-import com.king.nowedge.dto.query.*;
+import com.king.nowedge.query.*;
 import com.king.nowedge.excp.BaseDaoException;
 import com.king.nowedge.mapper.comm.*;
 import com.king.nowedge.service.TaskService;

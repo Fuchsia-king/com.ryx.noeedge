@@ -2,7 +2,7 @@ package com.king.nowedge.service;
 
 import com.king.nowedge.dto.ConsumerDTO;
 import com.king.nowedge.dto.base.ResultDTO;
-import com.king.nowedge.dto.query.ConsumerQuery;
+import com.king.nowedge.query.ConsumerQuery;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -3,8 +3,8 @@ package com.king.nowedge.service.ryx;
 import com.king.nowedge.dto.base.ResultDTO;
 import com.king.nowedge.dto.ryx.RyxTeacherDTO;
 import com.king.nowedge.dto.ryx.RyxUserFollowTeacherDTO;
-import com.king.nowedge.dto.ryx.query.RyxTeacherQuery;
-import com.king.nowedge.dto.ryx.query.RyxUserFollowTeacherQuery;
+import com.king.nowedge.query.ryx.RyxTeacherQuery;
+import com.king.nowedge.query.ryx.RyxUserFollowTeacherQuery;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -3,7 +3,7 @@ package com.king.nowedge.service.impl;
 import com.king.nowedge.dto.CommentDTO;
 import com.king.nowedge.dto.LoreDTO;
 import com.king.nowedge.dto.base.ResultDTO;
-import com.king.nowedge.dto.query.CommentQuery;
+import com.king.nowedge.query.CommentQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import com.king.nowedge.mapper.comm.CommentMapper;
 import com.king.nowedge.mapper.comm.LoreMapper;

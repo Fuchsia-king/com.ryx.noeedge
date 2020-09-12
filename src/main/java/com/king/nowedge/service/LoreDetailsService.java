@@ -1,6 +1,6 @@
 package com.king.nowedge.service;
 
-import com.king.nowedge.dto.UserDTO;
+import com.king.nowedge.dto.comm.UserDTO;
 import com.king.nowedge.dto.enums.EnumAuditStatus;
 import com.king.nowedge.dto.enums.EnumTeacherType;
 import com.king.nowedge.dto.enums.EnumUserLevel;
@@ -8,9 +8,9 @@ import com.king.nowedge.dto.ryx.RyxAdminDTO;
 import com.king.nowedge.dto.ryx.RyxPartnerDTO;
 import com.king.nowedge.dto.ryx.RyxTeacherDTO;
 import com.king.nowedge.dto.ryx.RyxUsersDTO;
-import com.king.nowedge.dto.ryx.query.RyxAdminQuery;
-import com.king.nowedge.dto.ryx.query.RyxPartnerQuery;
-import com.king.nowedge.dto.ryx.query.RyxTeacherQuery;
+import com.king.nowedge.query.ryx.RyxAdminQuery;
+import com.king.nowedge.query.ryx.RyxPartnerQuery;
+import com.king.nowedge.query.ryx.RyxTeacherQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import com.king.nowedge.helper.MetaHelper;
 import com.king.nowedge.helper.SessionHelper;
@@ -181,7 +181,7 @@ public class LoreDetailsService implements UserDetailsService,UserDetails,Serial
 		
 		try{
 			
-	        UserDTO userDTO = this.userMapper.queryByCode(username);  
+	        UserDTO userDTO = this.userMapper.queryByCode(username);
 	        if(userDTO == null) {  
 	            throw new UsernameNotFoundException(username);  
 	        }  

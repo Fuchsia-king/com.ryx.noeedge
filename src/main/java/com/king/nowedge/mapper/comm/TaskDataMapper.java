@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.king.nowedge.dto.TaskDataDTO;
-import com.king.nowedge.dto.query.TaskDataQuery;
+import com.king.nowedge.query.TaskDataQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 

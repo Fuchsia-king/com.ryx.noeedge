@@ -3,7 +3,7 @@ package com.king.nowedge.mapper.comm;
 import java.util.List;
 
 import com.king.nowedge.dto.LoreDTO;
-import com.king.nowedge.dto.query.LoreQuery;
+import com.king.nowedge.query.LoreQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 

@@ -1,7 +1,7 @@
 package com.king.nowedge.mapper.comm;
 
 import com.king.nowedge.dto.comm.AddressDTO;
-import com.king.nowedge.dto.query.AddressQuery;
+import com.king.nowedge.query.AddressQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 

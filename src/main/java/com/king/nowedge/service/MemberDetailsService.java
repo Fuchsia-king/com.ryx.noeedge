@@ -1,6 +1,6 @@
 package com.king.nowedge.service;
 
-import com.king.nowedge.dto.UserDTO;
+import com.king.nowedge.dto.comm.UserDTO;
 import com.king.nowedge.mapper.comm.UserMapper;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -65,7 +65,7 @@ public class MemberDetailsService implements UserDetailsService,UserDetails     
 	
 	
 	//取得用户的权限  
-    private Set<GrantedAuthority> obtionGrantedAuthorities(UserDTO userDTO) {  
+    private Set<GrantedAuthority> obtionGrantedAuthorities(UserDTO userDTO) {
         Set<GrantedAuthority> authSet = new HashSet<GrantedAuthority>();  
         
         

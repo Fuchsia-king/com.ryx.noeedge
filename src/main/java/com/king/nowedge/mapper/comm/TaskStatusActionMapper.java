@@ -3,7 +3,7 @@ package com.king.nowedge.mapper.comm;
 import java.util.List;
 
 import com.king.nowedge.dto.TaskStatusActionDTO;
-import com.king.nowedge.dto.query.TaskStatusActionQuery;
+import com.king.nowedge.query.TaskStatusActionQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
 

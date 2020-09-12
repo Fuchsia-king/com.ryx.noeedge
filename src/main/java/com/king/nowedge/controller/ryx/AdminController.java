@@ -2,24 +2,25 @@ package com.king.nowedge.controller.ryx;
 
 import com.king.nowedge.controller.BaseController;
 import com.king.nowedge.controller.comm.IndexsController;
-import com.king.nowedge.dto.HistoryDTO;
-import com.king.nowedge.dto.RcityDTO;
-import com.king.nowedge.dto.SecurityQuestionDTO;
-import com.king.nowedge.dto.WarehouseDTO;
+import com.king.nowedge.dto.DeptDTO;
+import com.king.nowedge.dto.EmployeeDTO;
+import com.king.nowedge.dto.SysmenuDTO;
+import com.king.nowedge.dto.UserRoleDTO;
 import com.king.nowedge.dto.base.KeyrvDTO;
 import com.king.nowedge.dto.base.KeyvDTO;
 import com.king.nowedge.dto.base.KeyvalueDTO;
 import com.king.nowedge.dto.base.ResultDTO;
+import com.king.nowedge.dto.comm.RoleDTO;
 import com.king.nowedge.dto.enums.*;
-import com.king.nowedge.dto.query.*;
-import com.king.nowedge.dto.query.base.KeyrvQuery;
-import com.king.nowedge.dto.query.base.KeyvQuery;
-import com.king.nowedge.dto.query.base.KeyvalueQuery;
 import com.king.nowedge.dto.ryx.*;
-import com.king.nowedge.dto.ryx.query.*;
 import com.king.nowedge.dto.ryx2.validate.*;
 import com.king.nowedge.excp.BaseException;
 import com.king.nowedge.helper.*;
+import com.king.nowedge.query.*;
+import com.king.nowedge.query.base.KeyrvQuery;
+import com.king.nowedge.query.base.KeyvQuery;
+import com.king.nowedge.query.base.KeyvalueQuery;
+import com.king.nowedge.query.ryx.*;
 import com.king.nowedge.utils.Md5Util;
 import com.king.nowedge.utils.NumberExUtils;
 import org.apache.commons.lang.StringUtils;
@@ -116,7 +117,7 @@ public class AdminController extends BaseController {
 			historyQuery.setStartRow(historyQuery.getStartRow() - 1);
 		}
 
-		ResultDTO<List<HistoryDTO>> result = systemService.queryHistory(historyQuery);
+		ResultDTO<List<com.king.nowedge.dto.HistoryDTO>> result = systemService.queryHistory(historyQuery);
 		if (!result.isSuccess()) {
 			errList.add(result.getErrorMsg());
 		} else {
@@ -169,7 +170,7 @@ public class AdminController extends BaseController {
 	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping("/mryx/admin/do_create_rcity")
-	public ModelAndView doCreateRcity(HttpServletRequest request, @Valid @ModelAttribute("createDTO") RcityDTO rcityDTO, BindingResult bindingResult,
+	public ModelAndView doCreateRcity(HttpServletRequest request, @Valid @ModelAttribute("createDTO") com.king.nowedge.dto.RcityDTO rcityDTO, BindingResult bindingResult,
 									  HttpServletResponse response) throws UnsupportedEncodingException {
 
 		ModelAndView mav = new ModelAndView("/ryx/admin/system/listRcity");
@@ -298,8 +299,8 @@ public class AdminController extends BaseController {
 
 	}
 
-	private List<RcityDTO> getAllRcity() {
-		ResultDTO<List<RcityDTO>> result = systemService.queryAllRcity();
+	private List<com.king.nowedge.dto.RcityDTO> getAllRcity() {
+		ResultDTO<List<com.king.nowedge.dto.RcityDTO>> result = systemService.queryAllRcity();
 		if (result.isSuccess()) {
 			return result.getModule();
 		} else {
@@ -322,7 +323,7 @@ public class AdminController extends BaseController {
 			rcityQuery.setStartRow(rcityQuery.getStartRow() - 1);
 		}
 
-		ResultDTO<List<RcityDTO>> result = systemService.queryRcity(rcityQuery);
+		ResultDTO<List<com.king.nowedge.dto.RcityDTO>> result = systemService.queryRcity(rcityQuery);
 		if (!result.isSuccess()) {
 			errList.add(result.getErrorMsg());
 		} else {
@@ -390,7 +391,7 @@ public class AdminController extends BaseController {
 
 		try {
 
-			ResultDTO<RcityDTO> result = systemService.queryRcityByUid(uid);
+			ResultDTO<com.king.nowedge.dto.RcityDTO> result = systemService.queryRcityByUid(uid);
 
 			if (!result.isSuccess()) {
 				errList.add(result.getErrorMsg());
@@ -409,8 +410,8 @@ public class AdminController extends BaseController {
 	}
 
 	@RequestMapping("/mryx/admin/do_update_rcity")
-	public ModelAndView doUpdateRcity(@Valid @ModelAttribute("updateDTO") RcityDTO rcityDTO, BindingResult bindingResult, HttpServletRequest request,
-			HttpServletResponse response) throws UnsupportedEncodingException {
+	public ModelAndView doUpdateRcity(@Valid @ModelAttribute("updateDTO") com.king.nowedge.dto.RcityDTO rcityDTO, BindingResult bindingResult, HttpServletRequest request,
+									  HttpServletResponse response) throws UnsupportedEncodingException {
 
 		ModelAndView mav = new ModelAndView("/ryx/admin/system/listRcity"); // new
 																		// 
@@ -514,7 +515,7 @@ public class AdminController extends BaseController {
 	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping("/mryx/admin/do_create_security_question")
-	public ModelAndView doCreateSecurityQuestion(HttpServletRequest request, @Valid @ModelAttribute("createDTO") SecurityQuestionDTO securityQuestionDTO,
+	public ModelAndView doCreateSecurityQuestion(HttpServletRequest request, @Valid @ModelAttribute("createDTO") com.king.nowedge.dto.SecurityQuestionDTO securityQuestionDTO,
 			BindingResult bindingResult, HttpServletResponse response) throws UnsupportedEncodingException {
 
 		ModelAndView mav = new ModelAndView("/ryx/admin/system/listSecurityQuestion");
@@ -593,8 +594,8 @@ public class AdminController extends BaseController {
 
 	}
 
-	private List<SecurityQuestionDTO> getAllSecurityQuestion() {
-		ResultDTO<List<SecurityQuestionDTO>> result = systemService.queryAllSecurityQuestion();
+	private List<com.king.nowedge.dto.SecurityQuestionDTO> getAllSecurityQuestion() {
+		ResultDTO<List<com.king.nowedge.dto.SecurityQuestionDTO>> result = systemService.queryAllSecurityQuestion();
 		if (result.isSuccess()) {
 			return result.getModule();
 		} else {
@@ -617,7 +618,7 @@ public class AdminController extends BaseController {
 			securityQuestionQuery.setStartRow(securityQuestionQuery.getStartRow() - 1);
 		}
 
-		ResultDTO<List<SecurityQuestionDTO>> result = systemService.querySecurityQuestion(securityQuestionQuery);
+		ResultDTO<List<com.king.nowedge.dto.SecurityQuestionDTO>> result = systemService.querySecurityQuestion(securityQuestionQuery);
 		if (!result.isSuccess()) {
 			errList.add(result.getErrorMsg());
 		} else {
@@ -686,7 +687,7 @@ public class AdminController extends BaseController {
 
 		try {
 
-			ResultDTO<SecurityQuestionDTO> result = systemService.querySecurityQuestionByUid(uid);
+			ResultDTO<com.king.nowedge.dto.SecurityQuestionDTO> result = systemService.querySecurityQuestionByUid(uid);
 
 			if (!result.isSuccess()) {
 				errList.add(result.getErrorMsg());
@@ -705,8 +706,8 @@ public class AdminController extends BaseController {
 	}
 
 	@RequestMapping("/mryx/admin/do_update_security_question")
-	public ModelAndView doUpdateSecurityQuestion(@Valid @ModelAttribute("updateDTO") SecurityQuestionDTO securityQuestionDTO, BindingResult bindingResult,
-			HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+	public ModelAndView doUpdateSecurityQuestion(@Valid @ModelAttribute("updateDTO") com.king.nowedge.dto.SecurityQuestionDTO securityQuestionDTO, BindingResult bindingResult,
+												 HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 
 		ModelAndView mav = new ModelAndView("/ryx/admin/system/listSecurityQuestion"); // new
 		// 
@@ -810,7 +811,7 @@ public class AdminController extends BaseController {
 	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping("/mryx/admin/do_create_warehouse")
-	public ModelAndView doCreateWarehouse(HttpServletRequest request, @Valid @ModelAttribute("createDTO") WarehouseDTO warehouseDTO, BindingResult bindingResult,
+	public ModelAndView doCreateWarehouse(HttpServletRequest request, @Valid @ModelAttribute("createDTO") com.king.nowedge.dto.WarehouseDTO warehouseDTO, BindingResult bindingResult,
 										  HttpServletResponse response) throws UnsupportedEncodingException {
 
 		ModelAndView mav = new ModelAndView("/ryx/admin/system/listWarehouse");
@@ -888,8 +889,8 @@ public class AdminController extends BaseController {
 
 	}
 
-	private List<WarehouseDTO> getAllWarehouse() {
-		ResultDTO<List<WarehouseDTO>> result = systemService.queryAllWarehouse();
+	private List<com.king.nowedge.dto.WarehouseDTO> getAllWarehouse() {
+		ResultDTO<List<com.king.nowedge.dto.WarehouseDTO>> result = systemService.queryAllWarehouse();
 		if (result.isSuccess()) {
 			return result.getModule();
 		} else {
@@ -912,7 +913,7 @@ public class AdminController extends BaseController {
 			warehouseQuery.setStartRow(warehouseQuery.getStartRow() - 1);
 		}
 
-		ResultDTO<List<WarehouseDTO>> result = systemService.queryWarehouse(warehouseQuery);
+		ResultDTO<List<com.king.nowedge.dto.WarehouseDTO>> result = systemService.queryWarehouse(warehouseQuery);
 		if (!result.isSuccess()) {
 			errList.add(result.getErrorMsg());
 		} else {
@@ -980,7 +981,7 @@ public class AdminController extends BaseController {
 
 		try {
 
-			ResultDTO<WarehouseDTO> result = systemService.queryWarehouseByUid(uid);
+			ResultDTO<com.king.nowedge.dto.WarehouseDTO> result = systemService.queryWarehouseByUid(uid);
 
 			if (!result.isSuccess()) {
 				errList.add(result.getErrorMsg());
@@ -999,8 +1000,8 @@ public class AdminController extends BaseController {
 	}
 
 	@RequestMapping("/mryx/admin/do_update_warehouse")
-	public ModelAndView doUpdateWarehouse(@Valid @ModelAttribute("updateDTO") WarehouseDTO warehouseDTO, BindingResult bindingResult, HttpServletRequest request,
-			HttpServletResponse response) throws UnsupportedEncodingException {
+	public ModelAndView doUpdateWarehouse(@Valid @ModelAttribute("updateDTO") com.king.nowedge.dto.WarehouseDTO warehouseDTO, BindingResult bindingResult, HttpServletRequest request,
+										  HttpServletResponse response) throws UnsupportedEncodingException {
 
 		ModelAndView mav = new ModelAndView("/ryx/admin/system/listWarehouse"); // new
 																			// 
@@ -1104,7 +1105,7 @@ public class AdminController extends BaseController {
 	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping("/mryx/admin/do_create_dept")
-	public ModelAndView doCreateDept(HttpServletRequest request, @Valid @ModelAttribute("createDTO") com.king.nowedge.dto.DeptDTO orgDTO, BindingResult bindingResult,
+	public ModelAndView doCreateDept(HttpServletRequest request, @Valid @ModelAttribute("createDTO") DeptDTO orgDTO, BindingResult bindingResult,
 									 HttpServletResponse response) throws UnsupportedEncodingException {
 
 		ModelAndView mav = new ModelAndView("/ryx/admin/system/listDept");
@@ -1182,8 +1183,8 @@ public class AdminController extends BaseController {
 
 	}
 
-	private List<com.king.nowedge.dto.DeptDTO> getAllOrg() {
-		ResultDTO<List<com.king.nowedge.dto.DeptDTO>> result = systemService.queryAllDept();
+	private List<DeptDTO> getAllOrg() {
+		ResultDTO<List<DeptDTO>> result = systemService.queryAllDept();
 		if (result.isSuccess()) {
 			return result.getModule();
 		} else {
@@ -1258,7 +1259,7 @@ public class AdminController extends BaseController {
 
 		try {
 
-			ResultDTO<com.king.nowedge.dto.DeptDTO> result = systemService.queryDeptByUid(uid);
+			ResultDTO<DeptDTO> result = systemService.queryDeptByUid(uid);
 
 			if (!result.isSuccess()) {
 				errList.add(result.getErrorMsg());
@@ -1277,7 +1278,7 @@ public class AdminController extends BaseController {
 	}
 
 	@RequestMapping("/mryx/admin/do_update_dept")
-	public ModelAndView doUpdateDept(@Valid @ModelAttribute("updateDTO") com.king.nowedge.dto.DeptDTO deptDTO, BindingResult bindingResult, HttpServletRequest request,
+	public ModelAndView doUpdateDept(@Valid @ModelAttribute("updateDTO") DeptDTO deptDTO, BindingResult bindingResult, HttpServletRequest request,
 									 HttpServletResponse response) throws UnsupportedEncodingException {
 
 		ModelAndView mav = new ModelAndView("/ryx/admin/system/listDept"); // new
@@ -1381,7 +1382,7 @@ public class AdminController extends BaseController {
 	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping("/mryx/admin/do_create_employee")
-	public ModelAndView doCreateEmployee(HttpServletRequest request, @Valid @ModelAttribute("createDTO") com.king.nowedge.dto.EmployeeDTO employeeDTO, BindingResult bindingResult,
+	public ModelAndView doCreateEmployee(HttpServletRequest request, @Valid @ModelAttribute("createDTO") EmployeeDTO employeeDTO, BindingResult bindingResult,
 										 HttpServletResponse response) throws UnsupportedEncodingException {
 
 		ModelAndView mav = new ModelAndView("/ryx/admin/system/listEmployee");
@@ -1461,8 +1462,8 @@ public class AdminController extends BaseController {
 
 	}
 
-	private List<com.king.nowedge.dto.EmployeeDTO> getAllEmployee() {
-		ResultDTO<List<com.king.nowedge.dto.EmployeeDTO>> result = systemService.queryAllEmployee();
+	private List<EmployeeDTO> getAllEmployee() {
+		ResultDTO<List<EmployeeDTO>> result = systemService.queryAllEmployee();
 		if (result.isSuccess()) {
 			return result.getModule();
 		} else {
@@ -1485,7 +1486,7 @@ public class AdminController extends BaseController {
 			employeeQuery.setStartRow(employeeQuery.getStartRow() - 1);
 		}
 
-		ResultDTO<List<com.king.nowedge.dto.EmployeeDTO>> result = systemService.queryEmployee(employeeQuery);
+		ResultDTO<List<EmployeeDTO>> result = systemService.queryEmployee(employeeQuery);
 		if (!result.isSuccess()) {
 			errList.add(result.getErrorMsg());
 		} else {
@@ -1553,7 +1554,7 @@ public class AdminController extends BaseController {
 
 		try {
 
-			ResultDTO<com.king.nowedge.dto.EmployeeDTO> result = systemService.queryEmployeeByUid(uid);
+			ResultDTO<EmployeeDTO> result = systemService.queryEmployeeByUid(uid);
 
 			if (!result.isSuccess()) {
 				errList.add(result.getErrorMsg());
@@ -1572,7 +1573,7 @@ public class AdminController extends BaseController {
 	}
 
 	@RequestMapping("/mryx/admin/do_update_employee")
-	public ModelAndView doUpdateEmployee(@Valid @ModelAttribute("updateDTO") com.king.nowedge.dto.EmployeeDTO employeeDTO, BindingResult bindingResult, HttpServletRequest request,
+	public ModelAndView doUpdateEmployee(@Valid @ModelAttribute("updateDTO") EmployeeDTO employeeDTO, BindingResult bindingResult, HttpServletRequest request,
 										 HttpServletResponse response) throws UnsupportedEncodingException {
 
 		ModelAndView mav = new ModelAndView("/ryx/admin/system/listEmployee"); // new
@@ -5365,7 +5366,7 @@ public class AdminController extends BaseController {
 		try {
 			
 			errList = new ArrayList<String>();	
-			ResultDTO<List<com.king.nowedge.dto.RoleDTO>> rolesResult =  MetaHelper.getInstance().getRoles();
+			ResultDTO<List<RoleDTO>> rolesResult =  MetaHelper.getInstance().getRoles();
 			addList(errList, rolesResult.getErrorMsg());
 			mav.addObject("roles",rolesResult.getModule());
 
@@ -5373,13 +5374,13 @@ public class AdminController extends BaseController {
 			userRoleQuery.setUserId(userId);
 			userRoleQuery.setIdeleted(0);
 			userRoleQuery.setPageSize(Integer.MAX_VALUE);
-			ResultDTO<List<com.king.nowedge.dto.UserRoleDTO>> userRolesResult  = userService.queryUserRole(userRoleQuery);
+			ResultDTO<List<UserRoleDTO>> userRolesResult  = userService.queryUserRole(userRoleQuery);
 			addList(errList, userRolesResult.getErrorMsg());
 			
-			List<com.king.nowedge.dto.UserRoleDTO> userRoleList = userRolesResult.getModule();
+			List<UserRoleDTO> userRoleList = userRolesResult.getModule();
 			Map<String, Boolean> userRoleMap = new HashMap<String, Boolean>();
 			if(null != userRoleList){
-				for(com.king.nowedge.dto.UserRoleDTO userRoleDTO : userRoleList){
+				for(UserRoleDTO userRoleDTO : userRoleList){
 					userRoleMap.put(userRoleDTO.getRoleId(), true);
 				}
 			}
@@ -5410,7 +5411,7 @@ public class AdminController extends BaseController {
 			@RequestParam(value = "roleId") String roleId,
 			@RequestParam(value = "ideleted") String ideleted,
 			
-			com.king.nowedge.dto.UserRoleDTO userRoleDTO,
+			UserRoleDTO userRoleDTO,
 			
 			HttpServletRequest request, HttpServletResponse response)
 			throws UnsupportedEncodingException {
@@ -5919,7 +5920,7 @@ public class AdminController extends BaseController {
 	}
 	
 	@RequestMapping("/mryx/admin/ajax_update_sysmenu.html")
-	public void ajaxUpdateSysmenu(HttpServletRequest request, com.king.nowedge.dto.SysmenuDTO dto,
+	public void ajaxUpdateSysmenu(HttpServletRequest request, SysmenuDTO dto,
 			BindingResult bindingResult, HttpServletResponse response) throws 
 			UnsupportedEncodingException {
 		
@@ -10996,7 +10997,7 @@ public class AdminController extends BaseController {
 		
 		//UserCache userCache = new UserCache(userService);
 		RyxUsersDTO users = getRyxUser();
-		ResultDTO<List<com.king.nowedge.dto.SysmenuDTO>> result = MetaHelper.getInstance().getMyMenu(users.getId());
+		ResultDTO<List<SysmenuDTO>> result = MetaHelper.getInstance().getMyMenu(users.getId());
 		if(result.isSuccess()){
 			mav.addObject("sysmenuList", result.getModule());
 		}

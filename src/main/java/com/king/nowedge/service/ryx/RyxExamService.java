@@ -3,8 +3,8 @@ package com.king.nowedge.service.ryx;
 import com.king.nowedge.dto.base.ResultDTO;
 import com.king.nowedge.dto.ryx.RyxEitemDTO;
 import com.king.nowedge.dto.ryx.RyxExamDTO;
-import com.king.nowedge.dto.ryx.query.RyxEitemQuery;
-import com.king.nowedge.dto.ryx.query.RyxExamQuery;
+import com.king.nowedge.query.ryx.RyxEitemQuery;
+import com.king.nowedge.query.ryx.RyxExamQuery;
 import org.springframework.stereotype.Service;
 
 @Service("ryxExamService")

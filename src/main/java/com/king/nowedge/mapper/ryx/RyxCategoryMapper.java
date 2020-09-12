@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.king.nowedge.dto.ryx.RyxCategoryDTO;
-import com.king.nowedge.dto.ryx.query.RyxCategoryQuery;
+import com.king.nowedge.query.ryx.RyxCategoryQuery;
 import com.king.nowedge.excp.BaseDaoException;
 
 @Mapper

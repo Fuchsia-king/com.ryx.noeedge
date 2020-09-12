@@ -1,16 +1,16 @@
 package com.king.nowedge.mapper.comm;
 
-import java.util.List;
-
-import com.king.nowedge.dto.UserDTO;
-import com.king.nowedge.dto.query.UserQuery;
+import com.king.nowedge.dto.comm.UserDTO;
+import com.king.nowedge.query.UserQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface UserMapper {
 	
-	public Boolean create(UserDTO userDTO) throws BaseDaoException; 
+	public Boolean create(UserDTO userDTO) throws BaseDaoException;
 
 	public List<UserDTO> query(UserQuery userQuery) throws BaseDaoException;
 	

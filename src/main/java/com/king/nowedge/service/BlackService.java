@@ -3,8 +3,8 @@ package com.king.nowedge.service;
 import com.king.nowedge.dto.BlackEventDTO;
 import com.king.nowedge.dto.BlackListDTO;
 import com.king.nowedge.dto.base.ResultDTO;
-import com.king.nowedge.dto.query.BlackEventQuery;
-import com.king.nowedge.dto.query.BlackListQuery;
+import com.king.nowedge.query.BlackEventQuery;
+import com.king.nowedge.query.BlackListQuery;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
