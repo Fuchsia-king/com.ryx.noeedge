@@ -86,7 +86,7 @@
         select passd from user where uid = #{uid}  limit 1; 
     </select>    
     
-    <select id="queryByCode" resultType="UserDTO" parameterType="java.lang.String">   
+    <select id="queryByCode" resultType="UserDTO" parameterType="java.lang.String">
         select * from user where code = #{code} and ideleted =0 limit 1; 
     </select> 
     
