@@ -67,179 +67,22 @@
                 <div class="down-content">
                   <div class="main">
                     <div class="left">
-                      <ul class="max-navlist">
-                        <li class="active"><a class="pf" href="javacript:void(0);">融资租赁</a></li>
-                        <li><a class="pf" href="javacript:void(0);">汽车金融</a></li>
-                        <li><a class="pf" href="javacript:void(0);">供应链金融</a></li>
-                        <li><a class="pf" href="javacript:void(0);">证券基金</a></li>
-                        <li><a class="pf" href="javacript:void(0);">金融科技</a></li>
-                        <li><a class="pf" href="javacript:void(0);">金融小动画</a></li>
-                        <li><a class="pf" href="javacript:void(0);">金融基础</a></li>
+                      <ul class="max-navlist" >
+                        <li th:each="ryxCategoryDTO:${ryxCategoryDTOList}" th:class="${ryxCategoryDTOStat.index==0?'active':''}"><a class="pf condition1" th:href="@{'/curriculumList/?h='+${ryxCategoryDTO.id}}" href="javacript:void(0);" th:text="${ryxCategoryDTO.title}" >行业</a></li>
                       </ul>
                     </div>
                     <div class="right">
-                      <div class="menus-list" id="menus-list">
-                        <div class="item active">
-                          <div class="screen">
+                      <div class="menus-list" id="menus-list" >
+                        <!--融资租赁-->
+                        <div th:each="submap,stat1:${map2}" th:class="${stat1.index==0?'item active':'item'}" class="item" >
+                          <div class="screen" th:each="submap2,stat:${submap}">
                             <div class="superclass">
-                              <a class="pfre" href="">中小微租赁</a>
+                              <a class="pfre condition1" th:href="@{'/curriculumList?h='+submap.key.id+'&l='+submap2.key.id}" th:text="${submap2.key.title}">领域</a>
                             </div>
                             <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">厂商租赁</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">医疗大健康租赁</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">高端制造租赁</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">政府平台租赁</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">飞机租赁</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">飞机租赁</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="item">
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">汽车金融</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">汽车金融</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">汽车金融</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">汽车金融</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">汽车金融</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">汽车金融</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
+                              <div class="sub-item condition1" th:each="skill:${submap2.value}" th:if="${not #lists.isEmpty(submap2.value)}">
+                                <a th:href="@{'/curriculumList?h='+submap.key.id+'&l='+submap2.key.id+'&j='+skill.id}" th:text="${skill.title}" th:unless="${skill}">技能</a>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -280,13 +123,27 @@
         </div>
         <div class="head-r">
           <div class="search-icon">
-            <div class="search-input"><input type="text" placeholder=""></div>
+            <div class="search-input">
+              <input type="text" style="width:0;height:0;float:left;visibility:hidden"/>
+              <input type="password" style="width:0;height:0;float:left;visibility:hidden"/>
+              <input type="text" placeholder="">
+            </div>
             <button type="submit"><img src="/images/icon_search.png"></button>
           </div>
-          <div class="operation">
-            <span class="it"><a class="syht" href="#">登录</a></span>
+          <div class="operation syht" id="logreg1">
+            <span class="it"><a href="#" data-toggle="modal" data-target="#modal-middle" id="loginbut">登录</a></span>
             <span class="it">I</span>
-            <span class="it"><a class="syht" href="#">注册</a></span>
+            <span class="it"><a href="#" data-toggle="modal" data-target="#modal-middle" id="regbut">注册</a></span>
+          </div>
+          <div class="face-head" id="face-head1" style="display: none">
+            <div class="img"><img src="/images/user/face_img.png"></div>
+            <div class="userInfo">
+              <div class="user-li"><a href="">刘强东</a></div>
+              <div class="user-li"><a href="">订单中心</a></div>
+              <div class="user-li"><a href="">个人设置</a></div>
+              <div class="user-li"><a href="/logout" id="logout1">退出登录</a></div>
+              <div class="triangle"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -348,9 +205,8 @@
           <div class="purchase-box">
             <div class="wrap-l">
               <div class="purchase orange">
-                <a href="">
-                  立即购买
-                  <!-- 加入学习
+                <a th:href="@{${users!=null?'/payment?orderCourseIds='+course.id:'/mustLogin?cid='+course.id}}" th:text="${course.price>0&&isBuyMainOnline==false?'立即购买':'加入学习'}">
+                  <!-- 立即购买 加入学习
                   继续学习 -->
                 </a>
               </div>
@@ -428,8 +284,7 @@
                     </div>
                   </div>
                   <div class="box-r">
-                    <a th:href="@{'/playvideoPage/?id='+${subcourse.id}+'?mid='+${course.id}+'?index='+${subcourseStat.index}}" class="watch" th:if="${subcourse.price>0}">试看</a>
-                    <a th:href="@{'/playvideoPage/?id='+${subcourse.id}+'?mid='+${course.id}+'?index='+${subcourseStat.index}}" class="study" th:if="${subcourse.price<=0}">进入学习</a>
+                    <a th:href="@{'/playvideoPage/?id='+${subcourse.id}+'&mid='+${course.id}+'&index='+${subcourseStat.index}}" th:class="${subcourse.price>0?'watch':'study'}" th:text="${subcourse.price>0?'试看':'进入学习'}"></a>
                   </div>
                 </div>
               </div>
@@ -652,7 +507,95 @@
     </div>
 
   </div>
+  <div style="display: none" id="login_regist1">
+    <div class="modal modal-main" id="modal-middle" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-middle">
+        <div class="login-box" id="login_box1">
+          <div class="tab-list" id="toggle-list">
+            <div class="item Hvtc" id="login_div">登录</div>
+            <div class="item Hvtc" id="regist_div">注册</div>
+          </div>
 
+          <div class="toggle-list" id="modal-list">
+            <div class="item" >
+              <form th:action="@{/login}" method="POST" id="login_form">
+                <div class="phone-number">
+                  <input id="login_phone" name="username" type="text" placeholder="请输入手机号码">
+                </div>
+                <div class="password-number">
+                  <input id="login_psw" name="password" type="password" placeholder="请输入密码">
+                </div>
+                <div id="login_error" style="color:red;display: none;">密码或用户名错误</div>
+                <div class="forget-pass"><span class="Helvbold" id="forgetful-btn">找回密码</span></div>
+                <button type="submit" id="index_login" class="login-btn Helvbold">登录</button>
+                <div class="rests-box">
+                  <div class="line"></div>
+                  <div class="text Helvbold">其他登录方式</div>
+                  <div class="line"></div>
+                </div>
+                <div class="wechat-box">
+                  <img src="/images/share/weixin_active.png" id="weixin-btn">
+                </div>
+              </form>
+            </div>
+            <div class="item" id="regist_div">
+              <div class="register-main" id="register-box">
+                <div class="common-input"><input type="text" placeholder="请输入手机号码"></div>
+                <div class="conmon-code">
+                  <div class="conmon-l"><input type="text" placeholder="请输入验证码"></div>
+                  <div class="conmon-r"><img src="http://gss0.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D450%2C600/sign=0c6c13fb203fb80e0c8469d303e10318/54fbb2fb43166d2242cf0a5e472309f79152d2bb.jpg" ></div>
+                </div>
+                <div class="conmon-notecode">
+                  <div class="conmon-l"><input type="text" placeholder="请输入短信验证码"></div>
+                  <div class="conmon-r"><button class="Helvbold" type="submit">获取验证码</button></div>
+                </div>
+                <div class="common-input"><input type="password" placeholder="请输入密码"></div>
+                <div class="common-input"><input type="password" placeholder="请确认密码"></div>
+                <div class="protocol-text Helvbold">
+                  <label><input name="已阅读" id="register_read" type="checkbox" value="已阅读" checked /></label>
+                  我已阅读<a href="">【用户服务协议及隐私政策】</a></div>
+                <button type="submit" id="index_register" class="login-btn Helvbold">注册</button>
+                <div class="rests-box">
+                  <div class="line"></div>
+                  <div class="text Helvbold">其他登录方式</div>
+                  <div class="line"></div>
+                </div>
+                <div class="wechat-box">
+                  <img src="/images/share/weixin_active.png" id="weixin-btn">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="forgetmodal-middle" id="forgetmodal">
+      <div class="forgetmodal-box">
+        <div class="err-box" id="forgetmodal-btn"><img src="/images/modal/icon_err.png"></div>
+        <div class="err-title Helvbold">找回密码</div>
+        <div class="public-wrap" id="forgetPsw-btn">
+          <div class="public-box"><input type="text" placeholder="请输入手机号码"></div>
+          <div class="conmon-notecode">
+            <div class="conmon-l"><input type="text" placeholder="请输入短信验证码"></div>
+            <div class="conmon-r"><button class="Helvbold" type="submit">获取验证码</button></div>
+          </div>
+          <div class="public-box"><input type="password" placeholder="请输入新密码"></div>
+          <div class="public-box"><input type="password" placeholder="请确认密码"></div>
+        </div>
+        <div class="affirm-btn">
+          <button class="Helvbold" id="index_submit_psw" type="submit">确认</button>
+        </div>
+      </div>
+    </div>
+    <div class="weixinmodal-middle" id="weixinmodal">
+      <div class="weixinmodal-box">
+        <div class="err-box" id="weixinmodal-btn"><img src="/images/modal/icon_err.png"></div>
+        <div class="err-title Helvbold">微信扫码登录</div>
+        <div class="img"><img src="/images/weixinmodal-img.jpg"></div>
+        <div class="desc Helvbold">请使用微信扫描二维码登录<br>“融易学金融学院”</div>
+      </div>
+    </div>
+  </div>
  
   <script src="/js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
   <script src="/js/bootstrap.min.js"></script>
@@ -661,12 +604,59 @@
   <script type="text/javascript" src="/js/public.js"></script>
   <script type="text/javascript" src="/js/inMain.js"></script>
   <!--end-->
+  <script type="text/javascript" th:src="@{/js/jquery_form.js}"></script>
+  <script type="text/javascript" th:src="@{/js/jquery-cookie-1.4.1.min.js}"></script>
 
   <script>
 
     $(function(){
+      /**
+       *登录
+       */
+      //点击登录激活登录div并弹出登录注册框
+      $('#loginbut').click(function(){
+        $('#login_div').addClass('active');
+        $('#login_regist1')[0].style.display='';
+      });
+
+      //获取登录表单返回数据,隐藏登录注册按钮,显示个人信息
+      $("form").ajaxForm(function(data) {
+        if(data.code==200){
+          $('#login_div').removeClass('active');
+          $('#login_regist1').toggle();
+          $('#logreg1').toggle();
+          $('#face-head1').toggle();
+          window.location.reload();
+        }else{
+          $('#login_error')[0].style.display='';
+        }
+      });
+
+      if($('#face-head1')[0].style.display=='none'){
+        //通过sessionId保持登录
+        let  un = '[[${session.user}]]';
+        if($.cookie('sessionId')&&un){
+          $('#logreg1')[0].style.display='none';
+          $('#face-head1')[0].style.display='';
+        }else{
+          if('[[${isLoged}]]'=='false'){
+            $('#loginbut').click();
+          }
+        }
+      }
+
+
+      //退出并清除cookie
+      // $('#logout1').click(function() {
+      //   $.removeCookie('sessionId');
+      //   $('#logreg1')[0].style.display = '';
+      //   $('#face-head1')[0].style.display = 'none';
+      // });
+
 
     });
+
+
 
   </script>
 </body>

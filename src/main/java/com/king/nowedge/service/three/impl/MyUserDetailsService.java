@@ -8,9 +8,6 @@ import com.king.nowedge.dto.ryx.RyxAdminDTO;
 import com.king.nowedge.dto.ryx.RyxPartnerDTO;
 import com.king.nowedge.dto.ryx.RyxTeacherDTO;
 import com.king.nowedge.dto.ryx.RyxUsersDTO;
-import com.king.nowedge.query.ryx.RyxAdminQuery;
-import com.king.nowedge.query.ryx.RyxPartnerQuery;
-import com.king.nowedge.query.ryx.RyxTeacherQuery;
 import com.king.nowedge.excp.BaseDaoException;
 import com.king.nowedge.helper.MetaHelper;
 import com.king.nowedge.helper.SessionHelper;
@@ -21,6 +18,9 @@ import com.king.nowedge.mapper.ryx.RyxAdminMapper;
 import com.king.nowedge.mapper.ryx.RyxPartnerMapper;
 import com.king.nowedge.mapper.ryx.RyxTeacherMapper;
 import com.king.nowedge.mapper.ryx.RyxUserMapper;
+import com.king.nowedge.query.ryx.RyxAdminQuery;
+import com.king.nowedge.query.ryx.RyxPartnerQuery;
+import com.king.nowedge.query.ryx.RyxTeacherQuery;
 import net.sf.json.JSONObject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -167,7 +167,7 @@ public class MyUserDetailsService implements UserDetailsService {
             boolean accountNonLocked = true;
             JSONObject userObject = JSONObject.fromObject(usersDTO);
             User userdetail = new User(userObject.toString(), usersDTO.getPassword(), enables, accountNonExpired,
-                    credentialsNonExpired, accountNonLocked, grantedAuths);
+                    credentialsNonExpired, accountNonLocked,grantedAuths );
             return userdetail;
         }
         catch(Exception e){

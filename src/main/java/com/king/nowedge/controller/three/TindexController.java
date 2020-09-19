@@ -6,9 +6,10 @@ import com.king.nowedge.dto.comm.LoreInputDTO;
 import com.king.nowedge.dto.enums.EnumAuditStatus;
 import com.king.nowedge.dto.enums.EnumCourseType;
 import com.king.nowedge.dto.enums.EnumObjectType;
+import com.king.nowedge.dto.ryx.RyxCategoryDTO;
 import com.king.nowedge.dto.ryx.RyxUsersDTO;
-import com.king.nowedge.query.ryx.RyxCourseQuery;
 import com.king.nowedge.helper.MetaHelper;
+import com.king.nowedge.query.ryx.RyxCourseQuery;
 import com.king.nowedge.service.three.SearchHistoryServeice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,19 +21,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Controller
 public class TindexController  extends BaseController {
 
-	@RequestMapping("/")
+	@RequestMapping("/I")
 	public ModelAndView toIndex(
 			HttpServletRequest request,
 			HttpServletResponse response)
 			throws UnsupportedEncodingException {
 
-		ModelAndView mav = new ModelAndView("/index");
-		return   mav ;
+		ModelAndView mav = new ModelAndView("index");
+		List<RyxCategoryDTO> ryxCategoryDTOList =  MetaHelper.getInstance().getOnlineCategory();
+		mav.addObject("ryxCategoryDTOList",ryxCategoryDTOList);
+		HashMap<RyxCategoryDTO,List<RyxCategoryDTO>> map = null;
+		Map<RyxCategoryDTO,Map> map2 = new HashMap<>();
+		for(RyxCategoryDTO rcd: ryxCategoryDTOList){
+			List<RyxCategoryDTO> sublist = MetaHelper.getInstance().getSubCategoryByPid(rcd.getId().intValue());
+			map = new HashMap<>();
+			for(int i=0;i<sublist.size()-1;i++){
+				map.put(rcd,MetaHelper.getInstance().getSubCategoryByPid(sublist.get(i).getId().intValue()));
+			}
+			map2.put(rcd,map);
+		}
+		mav.addObject("map2",map2);
+		return  mav ;
 	}
 	
 	@RequestMapping("/first")
@@ -67,7 +84,7 @@ public class TindexController  extends BaseController {
 		request.getParameter("keyword");
 		errList = new ArrayList<String>();
 		RyxUsersDTO users = getRyxUser();
-		ModelAndView mav = new ModelAndView("search");
+		ModelAndView mav = new ModelAndView("member/search");
 		courseQuery.setPageSize(DEFAULT_PAGE_SIZE);
 		courseQuery.setObjType(EnumObjectType.ONLINE_MODULE.getCode());
 		courseQuery.setStatus(EnumAuditStatus.APPROVED.getCode());

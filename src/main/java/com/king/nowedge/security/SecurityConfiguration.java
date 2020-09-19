@@ -34,12 +34,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .formLogin().permitAll().successHandler(myAuthenticationSuccessHandler).failureHandler(myAuthenticationFailHander)
+            .formLogin().successHandler(myAuthenticationSuccessHandler).failureHandler(myAuthenticationFailHander).permitAll()
             .and()
-            .logout().permitAll()
+            .logout().deleteCookies("sessionId").logoutSuccessUrl("/").permitAll()
             .and()
-            .authorizeRequests().antMatchers("/index","/css/*","/js/*","/fonts/*","/images/*","/video/*").permitAll()
+            .authorizeRequests().antMatchers("/index","/css/*","/js/*","/fonts/*","/images/*","/video/*","/curriculumList/*").permitAll()
             .and()
-            .csrf().disable();
+            .cors().disable()
+            .csrf().disable();  //不使用session就禁用
     }
 }

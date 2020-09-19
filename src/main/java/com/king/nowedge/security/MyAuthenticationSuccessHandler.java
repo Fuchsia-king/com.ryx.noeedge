@@ -1,14 +1,17 @@
 package com.king.nowedge.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.king.nowedge.dto.ryx.RyxUsersDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,13 +31,13 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
 
-//        HttpSession session = request.getSession();
-//        RyxUsersDTO usersDTO = new RyxUsersDTO();
-//        usersDTO.setUsername(request.getParameter("username"));
-//        session.setAttribute("userName",usersDTO);
-//        Cookie cookie = new Cookie("sessionId",session.getId());
-//        cookie.setMaxAge(30*24*60*60);
-//        response.addCookie(cookie);
+        HttpSession session = request.getSession();
+        RyxUsersDTO usersDTO = new RyxUsersDTO();
+        usersDTO.setUsername(request.getParameter("username"));
+        session.setAttribute("user",usersDTO);
+        Cookie cookie = new Cookie("sessionId",session.getId());
+        cookie.setMaxAge(30*24*60*60);
+        response.addCookie(cookie);
 
         String targetUrl = request.getRequestURI();
         Map<String,String> map=new HashMap<>();

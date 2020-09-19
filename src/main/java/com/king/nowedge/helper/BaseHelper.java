@@ -33,40 +33,29 @@ public class BaseHelper {
     
     @Autowired  
     protected RyxUserService ryxUserService;
-    
-    
 
     @Autowired  
     protected RyxCrmService ryxCrmService;
-    
-    
-    
-    
+
     @Autowired  
     protected RyxNewsService ryxNewsService;
-    
-    
+
     @Autowired 
     protected RyxCategoryService ryxCategoryService;
-    
-    
+
     @Autowired 
     protected RyxConfigService ryxConfigService;
     
     @Autowired 
     protected RyxAdService ryxAdService;
-    
-    
+
     @Autowired 
     protected RyxOrderService ryxOrderService;
     
     @Autowired 
     protected TaskService taskService;
     
-	
-	
-  
-    public void setUserInfo(UserService userService) {  
+    public void setUserInfo(UserService userService) {
         this.userService = userService;  
     }  
     

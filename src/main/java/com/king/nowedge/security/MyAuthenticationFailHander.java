@@ -36,7 +36,7 @@ public class MyAuthenticationFailHander extends SimpleUrlAuthenticationFailureHa
         Map<String,String> map=new HashMap<>();
         map.put("code", "201");
         map.put("msg", "登录失败");
-        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        response.setStatus(HttpStatus.OK.value());
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(objectMapper.writeValueAsString(map));

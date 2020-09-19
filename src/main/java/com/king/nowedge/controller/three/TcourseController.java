@@ -8,25 +8,28 @@ import com.king.nowedge.dto.enums.*;
 import com.king.nowedge.dto.ryx.*;
 import com.king.nowedge.helper.*;
 import com.king.nowedge.query.base.KeyrvQuery;
-import com.king.nowedge.query.ryx.RyxCategoryQuery;
-import com.king.nowedge.query.ryx.RyxCourseOutlineQuery;
-import com.king.nowedge.query.ryx.RyxCourseQuery;
-import com.king.nowedge.query.ryx.RyxEvaluQuery;
+import com.king.nowedge.query.ryx.*;
+import com.king.nowedge.utils.NumberExUtils;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -49,11 +52,24 @@ public class TcourseController  extends BaseController {
 				return new ModelAndView("redirect:http://am.ryx365.com/m/list_online3.html");
 			}
 		}
-
+		ModelAndView mav = new ModelAndView("member/curriculumList");
+		String h = request.getParameter("h");//行业
+		if(h==""){
+			h = null;
+		}
+		mav.addObject("h",h);
+		String l = request.getParameter("l");//领域
+		if(l==""){
+			l = null;
+		}
+		mav.addObject("l",l);
+		String j = request.getParameter("j");//技能
+		if(j==""){
+			j = null;
+		}
+		mav.addObject("j",j);
 		errList = new ArrayList<String>();
 		RyxUsersDTO users = getRyxUser();
-
-		ModelAndView mav = new ModelAndView("member/curriculumList");
 
 		courseQuery.setPageSize(DEFAULT_PAGE_SIZE);
 		courseQuery.setFlag(EnumCourseType.MAIN_COURSE.getCode());
@@ -61,31 +77,62 @@ public class TcourseController  extends BaseController {
 		courseQuery.setIdeleted(0);
 		courseQuery.setObjType(EnumObjectType.ONLINE_MODULE.getCode());
 		courseQuery.setDisplay(1);
+		String free = request.getParameter("f");
+		mav.addObject("free",free);
+		String pay = request.getParameter("p");
+		mav.addObject("pay",pay);
+		if(StringUtils.isNotEmpty(free)&&StringUtils.isNotEmpty(pay)&&free.equals("true")&&pay.equals("false")){
+			courseQuery.setEprice(0d);
+		}
+		if(StringUtils.isNotEmpty(free)&&StringUtils.isNotEmpty(pay)&&free.equals("false")&&pay.equals("true")){
+			courseQuery.setSprice(0d);
+		}
+		if(StringUtils.isNotEmpty(j)){
+			courseQuery.setTcate(Integer.parseInt(j));
+		}else{
+			if(StringUtils.isNotEmpty(l)){
+				courseQuery.setCategory(Integer.parseInt(h));
+				courseQuery.setSubcate(Integer.parseInt(l));
+			}else{
+				if(StringUtils.isNotEmpty(h)){
+					courseQuery.setCategory(Integer.parseInt(h));
+				}
+			}
+		}
 		if (StringHelper.isNullOrEmpty(courseQuery.getOrderBy())) {
 			courseQuery.setOrderBy("update_time");
 			courseQuery.setSooort("desc");
 		}
+		String or = request.getParameter("or");
+		mav.addObject("or",or);
+		if(StringUtils.isNotEmpty(request.getParameter("or"))){
+			courseQuery.setOrderBy("hits");
+		}
 		ResultDTO<RyxCourseQuery> courseResult = MetaHelper.getInstance().queryCourseCache(courseQuery);
 		errList = addList(errList, courseResult.getErrorMsg());
 		courseQuery = courseResult.getModule();
-
-		mav.addObject("categorys", MetaHelper.getInstance().getOnlineCategory());
+		mav.addObject("categorys", MetaHelper.getInstance().getOnlineCategory());//行业
 
 		/**
 		 * 二级类目
 		 */
-		if (null != courseQuery.getCategory()) {
-			ResultDTO<RyxCategoryQuery> subcateResult = MetaHelper.getInstance().getCategoryByPid(courseQuery.getCategory());
-			errList = addList(errList, subcateResult.getErrorMsg());
-			mav.addObject("subcates", subcateResult.getModule().getList());
-			String title = MetaHelper.getInstance().getCategoryById(courseQuery.getCategory()).getModule().getTitle();
-			if (null != courseQuery.getSubcate()) {
-				title += "_" + MetaHelper.getInstance().getCategoryById(courseQuery.getSubcate()).getModule().getTitle();
-			}
-			mav.addObject("title", title + "_教育培训课程");
-		} else {
-			mav.addObject("title", "融资租赁培训课程");
-		}
+//		if (null != courseQuery.getCategory()) {
+//			ResultDTO<RyxCategoryQuery> subcateResult = MetaHelper.getInstance().getCategoryByPid(courseQuery.getCategory());
+//			errList = addList(errList, subcateResult.getErrorMsg());
+//			mav.addObject("subcates", subcateResult.getModule().getList());
+////			String title = MetaHelper.getInstance().getCategoryById(courseQuery.getCategory()).getModule().getTitle();
+//			RyxCategoryDTO rcd1 =  MetaHelper.getInstance().getCategoryById(courseQuery.getCategory()).getModule();
+//			String title = "";
+//			if(rcd1!=null){
+//				title += rcd1.getTitle();
+//			}
+//			if (null != courseQuery.getSubcate()) {
+//				title += "_" + MetaHelper.getInstance().getCategoryById(courseQuery.getSubcate()).getModule().getTitle();
+//			}
+//			mav.addObject("title", title + "_教育培训课程");
+//		} else {
+//			mav.addObject("title", "融资租赁培训课程");
+//		}
 
 		ResultDTO<List<RyxAdDTO>> courseHigtResult = MetaHelper.getInstance().queryAdCache(137);
 		errList = addList(errList, courseHigtResult.getErrorMsg());
@@ -97,8 +144,35 @@ public class TcourseController  extends BaseController {
 		Gson gs = new Gson();
 		String gsStr = gs.toJson(courseQuery.getList());
 		mav.addObject("courseList", gsStr);
+
 		mav.addObject("tatalPage", courseQuery.getTotalPage());
 		mav.addObject("keyword", courseQuery.getKeyword());
+
+		List<RyxCategoryDTO> subcategoryList = new ArrayList<>();
+		if(StringUtils.isNotEmpty(h)){
+			subcategoryList = MetaHelper.getInstance().getSubCategoryByPid(Integer.parseInt(h));
+		}
+		mav.addObject("subcategoryList",subcategoryList);
+
+		List<RyxCategoryDTO> tcategoryList= new ArrayList<>();
+		if(StringUtils.isNotEmpty(l)){
+			tcategoryList = MetaHelper.getInstance().getSubCategoryByPid(Integer.parseInt(l));
+		}
+		mav.addObject("tcategoryList",tcategoryList);
+
+		List<RyxCategoryDTO> ryxCategoryDTOList =  MetaHelper.getInstance().getOnlineCategory();
+		mav.addObject("ryxCategoryDTOList",ryxCategoryDTOList);
+		HashMap<RyxCategoryDTO,List<RyxCategoryDTO>> map = null;
+		Map<RyxCategoryDTO, Map> map2 = new HashMap<>();
+		for(RyxCategoryDTO rcd: ryxCategoryDTOList){
+			List<RyxCategoryDTO> sublist = MetaHelper.getInstance().getSubCategoryByPid(rcd.getId().intValue());
+			map = new HashMap<>();
+			for(int i=0;i<sublist.size()-1;i++){
+				map.put(rcd,MetaHelper.getInstance().getSubCategoryByPid(sublist.get(i).getId().intValue()));
+			}
+			map2.put(rcd,map);
+		}
+		mav.addObject("map2",map2);
 		return mav;
 
 	}
@@ -115,18 +189,17 @@ public class TcourseController  extends BaseController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/curriculumDetails")
-	public ModelAndView currentCourseDetail(String from,
+	public ModelAndView currentCourseDetail(String from,String isLoged,
 											RyxEvaluQuery query,
 											HttpServletRequest request, HttpServletResponse response,
 											RedirectAttributes rt) throws Exception {
-
 		ModelAndView mav = new ModelAndView("member/curriculumDetails");
+		mav.addObject("isLoged",isLoged);
 		String courseId = request.getParameter("courseId");
 		Long cid = Long.parseLong(courseId);
 		RyxUsersDTO users = getRyxUser();
+		mav.addObject("users",users);
 		//暂时写死一个user用于测试
-		users = new RyxUsersDTO();
-		users.setId(123L);
 		errList = new ArrayList<String>();
 		ResultDTO<RyxCourseDTO> courseResult = MetaHelper.getInstance().getCourseById(cid);
 		errList = addList(errList, courseResult.getErrorMsg());
@@ -186,12 +259,18 @@ public class TcourseController  extends BaseController {
 			for (KeyrvDTO k : keyrvDTOList) {
 				RyxCourseDTO subcourse = new CourseHelper().getCourseById(StringHelper.string2Long(k.getRkey()));
 				subcourseList.add(subcourse);
-				isBuySubOnlineList.add(new CourseHelper().isBuySubOnline(users.getId(), subcourse.getId()));
+				if(users!=null){
+					isBuySubOnlineList.add(new CourseHelper().isBuySubOnline(users.getId(), subcourse.getId()));
+				}
 			}
 			mav.addObject("subcourseList", subcourseList);
 			mav.addObject("presubcourse",subcourseList.get(0));
-			Boolean isBuyMainOnline = new CourseHelper().isBuyMainOnline(users.getId(), cid);
-			mav.addObject("isBuyMainOnline", isBuyMainOnline);
+			if(users!=null){
+				Boolean isBuyMainOnline = new CourseHelper().isBuyMainOnline(users.getId(), cid);
+				mav.addObject("isBuyMainOnline", isBuyMainOnline);
+			}else{
+				mav.addObject("isBuyMainOnline", false);
+			}
 			Boolean isMustSeriesBuy = new CourseHelper().isMustSeriesBuy(cid);
 			mav.addObject("isMustSeriesBuy", isMustSeriesBuy);
 			mav.addObject("cid", cid);
@@ -211,26 +290,23 @@ public class TcourseController  extends BaseController {
 
 			List<RyxUsersDTO> userTopicList = new ArrayList<>();
 			for (int i=0;i<redList.size();i++) {
-				RyxUsersDTO userTopic = new MetaHelper().getUserById(redList.get(i).getUserId()).getModule();
-				userTopic.setUname(StringHelper.getFuzzyUsername(userTopic));
-				if(!StringHelper.isNullOrEmpty(userTopic.getPath())){
-					userTopic.setPath(ConstHelper.getDefaultImage());
+				RyxUsersDTO topicUser = new MetaHelper().getUserById(redList.get(i).getUserId()).getModule();
+				if(topicUser!=null){
+					topicUser.setUname(StringHelper.getFuzzyUsername(topicUser));
+					if(!StringHelper.isNullOrEmpty(topicUser.getPath())){
+						topicUser.setPath(ConstHelper.getDefaultImage());
+					}
+					topicUser.setDcode(redList.get(i).getDescr());
+					topicUser.setStatus(redList.get(i).getStatus());
+					topicUser.setAddress(redList.get(i).getLcreate()*1000+"");
+					userTopicList.add(topicUser);
 				}
-				userTopic.setDcode(redList.get(i).getDescr());
-				userTopic.setStatus(redList.get(i).getStatus());
-				userTopic.setAddress(redList.get(i).getLcreate()*1000+"");
-				userTopicList.add(userTopic);
 			}
 			mav.addObject("userTopicList",userTopicList);
 			if (null != users) {
 				Boolean buyFlag = isBuyOnline(course, users.getId(), null, null);
 				mav.addObject("buyFlag", buyFlag);
 			}
-
-	//		Long ts = System.currentTimeMillis();
-	//		mav.addObject("ts", ts);
-	//		logger.debug("Kd8jQHITMj" + course.getVid() + ts);
-	//		mav.addObject("sign", Md5Util.GetMD5Code("Kd8jQHITMj" + course.getVid() + ts));
 
 			/**
 			 * 更新课程查看次数
@@ -254,9 +330,187 @@ public class TcourseController  extends BaseController {
 			addPasswordModel(mav, request, getCurrentUrl(request));
 		}
 		mav.addObject("from",from);
+
+		List<RyxCategoryDTO> ryxCategoryDTOList =  MetaHelper.getInstance().getOnlineCategory();
+		mav.addObject("ryxCategoryDTOList",ryxCategoryDTOList);
+		HashMap<RyxCategoryDTO,List<RyxCategoryDTO>> map = null;
+		Map<RyxCategoryDTO, Map> map2 = new HashMap<>();
+		for(RyxCategoryDTO rcd: ryxCategoryDTOList){
+			List<RyxCategoryDTO> sublist = MetaHelper.getInstance().getSubCategoryByPid(rcd.getId().intValue());
+			map = new HashMap<>();
+			for(int i=0;i<sublist.size()-1;i++){
+				map.put(rcd,MetaHelper.getInstance().getSubCategoryByPid(sublist.get(i).getId().intValue()));
+			}
+			map2.put(rcd,map);
+		}
+		mav.addObject("map2",map2);
 		return mav;
 	}
 
+	/**
+	 * 在课程详情点击立即购买,跳转个人支付中心
+	 * @return
+	 */
+	@RequestMapping("payment")
+	public ModelAndView payment(Long[] orderCourseIds, Model model, HttpSession session,
+								HttpServletRequest request, HttpServletResponse response,
+								RedirectAttributes rt){
+		ModelAndView mav = new ModelAndView("member/payment");
+		errList = new ArrayList<String>();
+		RyxUsersDTO user = getRyxUser();
+		Long orderId = null;
+		if (null == orderCourseIds || orderCourseIds.length == 0) {
+			errList = addList(errList, "请选择课程");
+		} else {
+			/**
+			 * 判断有没有已经支付、未过期的课程
+			 */
+			Double amount = 0.00;
+			Double onlineCourse = 0.00;
+			RyxCourseDTO course = null;
+			for (Long courseId : orderCourseIds) {
+				ResultDTO<RyxCourseDTO> courseResult = ryxCourseService.getCourseById(courseId);
+				errList = addList(errList, courseResult.getErrorMsg());
+				course = courseResult.getModule();
+				if (courseResult.isSuccess() && null != course) {
+					if ( EnumObjectType.ONLINE_MODULE.getCode() == course.getObjType() ) {// 线上课程
+						onlineCourse += course.getPrice();
+					}
+					amount += course.getPrice();
+				}
+			}
+			Double originalPrice = amount;//原本的价格
+			Double discount1 = 1.00;
+			RyxOrderDTO order = new RyxOrderDTO();
+			order.setDiscount1(discount1);
+			order.setStatus(1); // 未支付
+			order.setOrderUid(user.getId());
+			order.setOrderAmount(amount);
+			order.setOrderTime(new Long(System.currentTimeMillis() / 1000).intValue());
+			order.setCourseIds(orderCourseIds);
+			order.setUid(NumberExUtils.longIdString(4));
+			order.setOriginalPrice(originalPrice);
+			order.setIfFeedback(0);
+			order.setOrderType(EnumOrderType.COURSE_ORDER.getCode());
+			String serverName = request.getServerName().toLowerCase();
+			if(!StringHelper.isNullOrEmpty(serverName) && serverName.indexOf("m.ryx365.com")>=0){
+				order.setSource(EnumOrderSource.H5.getCode());
+			}
+			else {
+				order.setSource(EnumOrderSource.PC.getCode());
+			}
+			/**
+			 * 获取合作伙伴的Id
+			 */
+			order.setPartnerId(RequestHelper.getSpecailParterId(request,user));
+			/***
+			 * 事务处理， 1、create order 2、 order detail 3、delete from cart
+			 */
+			ResultDTO<Long> createOrderResult = ryxOrderService.saveOrder(order);
+			errList = addList(errList, createOrderResult.getErrorMsg());
+//			orderId = createOrderResult.getModule();
+			orderId = order.getId();
+			logger.error("saveOrder:orderId--->" + orderId);
+			return this.go2Pay(orderId, errList, request, response, rt,course);
+		}
+		mav.addObject("errList", errList);
+		mav.addObject("loginUsers", user);
+		return mav;
+	}
+
+	@RequestMapping("go2pay")
+	public ModelAndView go2Pay(Long orderId, ArrayList<String> errList1, HttpServletRequest request, HttpServletResponse response,
+							   RedirectAttributes rt,RyxCourseDTO course) {
+		if (null == errList1) {
+			errList = new ArrayList<String>();
+		}
+		else {
+			errList = errList1;
+		}
+
+		/**
+		 * 判断是否是微信
+		 */
+		ModelAndView mav = new ModelAndView("member/payment");
+		mav.addObject("course",course);
+		String serverName = request.getServerName().toLowerCase();
+		if(!StringHelper.isNullOrEmpty(serverName) && serverName.indexOf("m.ryx365.com")>=0){
+			mav = new ModelAndView("/ryx/m/my/mpay");
+		}
+		RyxUsersDTO users = getRyxUser();
+		if (null == orderId) {
+			errList = addList(errList, "无效订单Id");
+		}else {
+			ResultDTO<RyxOrderDTO> orderResult = ryxOrderService.getOrderById(orderId, users.getId());
+			errList = addList(errList, orderResult.getErrorMsg());
+			RyxOrderDTO order = orderResult.getModule();
+			if (null != order) {
+				order.setOrderIdStr(getRyxOrderId(order));
+				mav.addObject("order", order);
+				ResultDTO<RyxUsersDTO> userResult = ryxUserService.getUserById(users.getId());
+				errList = addList(errList, userResult.getErrorMsg());
+				if (userResult.isSuccess()) {
+					RyxUsersDTO usersDTO = userResult.getModule();
+					Double balance = usersDTO.getBalance();
+					balance = null == balance ? 0.00 : balance;
+					/**
+					 * 融易学余额
+					 */
+					mav.addObject("balance", balance);
+					Double requestAmount = order.getOrderAmount(); // 订单价格
+					Integer maxUsedCoupon = getMaxUsedCoupon(requestAmount);
+					Double canUsedCoupon = 0.0;
+					if(maxUsedCoupon>0){
+						/**
+						 * 从数据库中读取是否有没有过期的优惠券
+						 */
+						RyxUserCouponQuery userCouponQuery = new RyxUserCouponQuery();
+						userCouponQuery.setIuse(0); // 未使用
+						userCouponQuery.setSlimi(System.currentTimeMillis()/1000);
+						userCouponQuery.setType(EnumAccountType.COUPON.getCode());
+						userCouponQuery.setEcoupon(maxUsedCoupon);
+						userCouponQuery.setScoupon(1);
+						userCouponQuery.setPageSize(1);
+						userCouponQuery.setOrderBy("coupon");
+						userCouponQuery.setSooort("desc");
+						userCouponQuery.setUserId(users.getId());
+						ResultDTO<RyxUserCouponQuery> couponResult = ryxUserService.queryCoupon(userCouponQuery);
+						userCouponQuery = couponResult.getModule();
+						if(couponResult.isSuccess() && null != userCouponQuery && null != userCouponQuery.getList() && userCouponQuery.getList().size()>0 ){
+							RyxUserCouponDTO userCouponDTO = (RyxUserCouponDTO)userCouponQuery.getList().get(0);
+							canUsedCoupon = userCouponDTO.getCoupon();
+						}
+					}
+					mav.addObject("canUsedCoupon", canUsedCoupon);
+					/**
+					 * 计算可用余额
+					 */
+					Double canUsedBalance = balance + canUsedCoupon >= order.getOrderAmount() ? order.getOrderAmount()  - canUsedCoupon : balance ;
+					/**
+					 * 计算额外支付金额 （支付宝、微信支付）
+					 */
+					mav.addObject("requestAmount",order.getOrderAmount() - canUsedBalance - canUsedCoupon  );
+				}
+				else {
+					//todo
+				}
+			}
+		}
+		mav.addObject("errList", errList);
+		mav.addObject("loginUsers", users);
+		Boolean isWeixinExplorer = isWeixinExplorer(request);
+		mav.addObject("isWeixinExplorer", isWeixinExplorer);
+		return mav;
+	}
+
+
+	@RequestMapping("mustLogin")
+	public ModelAndView mustLogin(HttpServletRequest request,HttpServletResponse response){
+		Long courseId = Long.parseLong(request.getParameter("cid"));
+		ModelAndView mav = new ModelAndView("redirect:http://localhost:9090/curriculumDetails/?courseId="+courseId);
+		mav.addObject("isLoged","false");
+		return mav;
+	}
 
 	/**
 	 * 从课程明细跳转到课程的视频列表的明细

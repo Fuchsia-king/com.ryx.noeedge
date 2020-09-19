@@ -184,12 +184,11 @@ public class BaseController {
 
 		try {
 
-			Object obj = SecurityContextHolder.getContext().getAuthentication()
-					.getPrincipal();
+			Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 			UserDetails userDetails = (UserDetails) obj;
 
-			JSONObject jsonObject = JSONObject.fromObject( userDetails.getUsername());			
+			JSONObject jsonObject = JSONObject.fromObject( userDetails.getUsername());
 			
 			return (RyxUsersDTO)JSONObject.toBean(jsonObject, RyxUsersDTO.class);
 

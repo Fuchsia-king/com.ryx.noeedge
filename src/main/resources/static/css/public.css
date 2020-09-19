@@ -3382,3 +3382,421 @@ body {
 .video-middle > .flex-r .toggle-list > .item.active .curriculum-list .item:first-child {
   padding-top: 20px;
 }
+.modal-main .modal-middle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  z-index: 9999;
+  width: 360px;
+}
+.modal-main .modal-middle .login-box {
+  width: 360px;
+  background-color: #fff;
+  padding: 34px 56px 33px 56px;
+  border-radius: 4px;
+  margin: 0 auto;
+}
+.modal-main .modal-middle .login-box .tab-list {
+  display: flex;
+  justify-content: center;
+}
+.modal-main .modal-middle .login-box .tab-list .item {
+  padding: 0 13px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #999;
+  transition: all 0.3s;
+}
+.modal-main .modal-middle .login-box .tab-list .item.active {
+  color: #333;
+  font-weight: bold;
+}
+.modal-main .modal-middle .login-box .toggle-list .item {
+  display: none;
+  margin-top: 65px;
+}
+.modal-main .modal-middle .login-box .toggle-list .item.active {
+  display: block;
+}
+.modal-main .modal-middle .login-box .toggle-list .item input {
+  outline: none;
+  border: none;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+.modal-main .modal-middle .login-box .toggle-list .item input::placeholder {
+  color: #d1d1d1;
+  font-size: 14px;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .phone-number,
+.modal-main .modal-middle .login-box .toggle-list .item .password-number {
+  height: 35px;
+  border-bottom: 1px solid #e2e2e2;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .phone-number {
+  margin-bottom: 30px;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .forget-pass {
+  margin-top: 10px;
+  color: #333;
+  text-align: right;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .forget-pass span {
+  cursor: pointer;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .forget-pass span:hover {
+  color: #f96400;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .rests-box {
+  display: flex;
+  align-items: center;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .rests-box > div {
+  flex: 1;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .rests-box .line {
+  height: 1px;
+  background-color: #e2e2e2;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .rests-box .text {
+  color: #999;
+  font-size: 12px;
+  margin: 0 11px;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .login-btn {
+  outline: none;
+  border: none;
+  color: #fdfdfd;
+  font-size: 16px;
+  width: 100%;
+  height: 31px;
+  line-height: 31px;
+  background-color: #e2e2e2;
+  border-radius: 33px;
+  margin-top: 37px;
+  margin-bottom: 60px;
+  transition: all 0.3s;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .login-btn.active {
+  background-color: #f96400;
+  box-shadow: 1px 9px 14px -3px rgba(249, 100, 0, 0.7);
+}
+.modal-main .modal-middle .login-box .toggle-list .item .wechat-box {
+  margin-top: 14px;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .wechat-box img {
+  cursor: pointer;
+}
+.modal-main .modal-middle .login-box .toggle-list .item:last-child {
+  margin-top: 0;
+}
+.modal-main .modal-middle .login-box .toggle-list .item:last-child .rests-box {
+  display: flex;
+  align-items: center;
+}
+.modal-main .modal-middle .login-box .toggle-list .item:last-child .rests-box > div {
+  flex: 1;
+}
+.modal-main .modal-middle .login-box .toggle-list .item:last-child .rests-box .line {
+  height: 1px;
+  background-color: #e2e2e2;
+}
+.modal-main .modal-middle .login-box .toggle-list .item:last-child .rests-box .text {
+  color: #999;
+  font-size: 12px;
+  margin: 0 11px;
+}
+.modal-main .modal-middle .login-box .toggle-list .item:last-child .login-btn {
+  margin-top: 8px;
+  margin-bottom: 30px;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main {
+  margin-top: 30px;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .common-input {
+  height: 35px;
+  border-bottom: 1px solid #e2e2e2;
+  margin-bottom: 20px;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .common-input input {
+  outline: none;
+  border: none;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .common-input input::placeholder {
+  color: #d1d1d1;
+  font-size: 14px;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .conmon-code {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: flex-end;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .conmon-code .conmon-l {
+  border-bottom: 1px solid #e2e2e2;
+  margin-right: 7px;
+  height: 35px;
+  line-height: 35px;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .conmon-code .conmon-r {
+  width: 80px;
+  height: 30px;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .conmon-code .conmon-r img {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .conmon-notecode {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: flex-end;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .conmon-notecode .conmon-l {
+  border-bottom: 1px solid #e2e2e2;
+  margin-right: 7px;
+  height: 35px;
+  line-height: 35px;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .conmon-notecode .conmon-r {
+  width: 80px;
+  height: 30px;
+  border-radius: 3px;
+  border: 1px solid #e2e2e2;
+  transition: all 0.3s;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .conmon-notecode .conmon-r:hover {
+  border-color: #333;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .conmon-notecode .conmon-r:hover button {
+  color: #333;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .conmon-notecode .conmon-r button {
+  color: #d1d1d1;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  font-size: 12px;
+  background-color: transparent;
+  transition: all 0.3s;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .protocol-text {
+  color: #d1d1d1;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .protocol-text label,
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .protocol-text input {
+  margin: 0;
+  cursor: pointer;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .protocol-text label {
+  margin-right: 5px;
+  width: 11px;
+  height: 11px;
+  border: 1px solid #666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .protocol-text input {
+  outline: none;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .protocol-text input[type="checkbox"] {
+  -webkit-appearance: none;
+  /*清除复选框默认样式*/
+  background: #fff;
+  /*高度*/
+  vertical-align: middle;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .protocol-text input[type="checkbox"]:checked {
+  height: 7px;
+  width: 7px;
+  background-color: #666;
+  background-position: center;
+  border-color: none;
+}
+.modal-main .modal-middle .login-box .toggle-list .item .register-main .protocol-text a {
+  color: #666;
+  margin-left: 7px;
+}
+.forgetmodal-middle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999999;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+.forgetmodal-middle .forgetmodal-box {
+  width: 360px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 4px;
+}
+.forgetmodal-middle .forgetmodal-box .err-box {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0 0 auto;
+  padding-right: 10px;
+  cursor: pointer;
+}
+.forgetmodal-middle .forgetmodal-box .err-title {
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 35px;
+  font-weight: bold;
+}
+.forgetmodal-middle .forgetmodal-box .public-wrap {
+  margin: 0 56px;
+}
+.forgetmodal-middle .forgetmodal-box .public-wrap .public-box {
+  height: 35px;
+  line-height: 35px;
+  border-bottom: 1px solid #e2e2e2;
+  margin-bottom: 20px;
+}
+.forgetmodal-middle .forgetmodal-box .public-wrap .public-box input {
+  outline: none;
+  border: none;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+.forgetmodal-middle .forgetmodal-box .public-wrap .public-box input::placeholder {
+  color: #d1d1d1;
+  font-size: 14px;
+}
+.forgetmodal-middle .forgetmodal-box .public-wrap .conmon-notecode {
+  display: flex;
+  margin-bottom: 20px;
+  height: 35px;
+  align-items: flex-end;
+}
+.forgetmodal-middle .forgetmodal-box .public-wrap .conmon-notecode .conmon-l {
+  border-bottom: 1px solid #e2e2e2;
+  margin-right: 7px;
+  height: 35px;
+  line-height: 35px;
+}
+.forgetmodal-middle .forgetmodal-box .public-wrap .conmon-notecode .conmon-l input {
+  outline: none;
+  border: none;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+.forgetmodal-middle .forgetmodal-box .public-wrap .conmon-notecode .conmon-l input::placeholder {
+  color: #d1d1d1;
+  font-size: 14px;
+}
+.forgetmodal-middle .forgetmodal-box .public-wrap .conmon-notecode .conmon-r {
+  width: 80px;
+  height: 30px;
+  border-radius: 3px;
+  border: 1px solid #e2e2e2;
+  transition: all 0.3s;
+}
+.forgetmodal-middle .forgetmodal-box .public-wrap .conmon-notecode .conmon-r:hover {
+  border-color: #333;
+}
+.forgetmodal-middle .forgetmodal-box .public-wrap .conmon-notecode .conmon-r:hover button {
+  color: #333;
+}
+.forgetmodal-middle .forgetmodal-box .public-wrap .conmon-notecode .conmon-r button {
+  color: #d1d1d1;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  font-size: 12px;
+  background-color: transparent;
+  transition: all 0.3s;
+}
+.forgetmodal-middle .forgetmodal-box .affirm-btn {
+  margin-top: 37px;
+  margin-bottom: 60px;
+  padding: 0 57px;
+}
+.forgetmodal-middle .forgetmodal-box .affirm-btn button {
+  outline: none;
+  border: none;
+  color: #fdfdfd;
+  font-size: 16px;
+  width: 100%;
+  height: 31px;
+  line-height: 31px;
+  background-color: #e2e2e2;
+  border-radius: 33px;
+  transition: all 0.3s;
+}
+.forgetmodal-middle .forgetmodal-box .affirm-btn button.active {
+  background-color: #f96400;
+  box-shadow: 1px 9px 14px -3px rgba(249, 100, 0, 0.7);
+}
+.weixinmodal-middle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999999;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+.weixinmodal-middle .weixinmodal-box {
+  width: 360px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 4px;
+  padding-bottom: 99px;
+}
+.weixinmodal-middle .weixinmodal-box .err-box {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0 0 auto;
+  padding-right: 10px;
+  cursor: pointer;
+}
+.weixinmodal-middle .weixinmodal-box .err-title {
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 45px;
+  font-weight: bold;
+}
+.weixinmodal-middle .weixinmodal-box .img {
+  width: 210px;
+  height: 210px;
+  padding: 10px;
+  margin: 0 auto;
+  border: 1px solid #e2e2e2;
+}
+.weixinmodal-middle .weixinmodal-box .img img {
+  width: 100%;
+  height: 100%;
+}
+.weixinmodal-middle .weixinmodal-box .desc {
+  color: #333;
+  font-size: 12px;
+  margin-top: 15px;
+}

@@ -1,7 +1,8 @@
 package com.king.nowedge.controller.three;
 
 import com.king.nowedge.controller.BaseController;
-import com.king.nowedge.dto.ryx.RyxUsersDTO;
+import com.king.nowedge.dto.three.UserInfo;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,8 +22,11 @@ public class TUserController extends BaseController {
 
     @RequestMapping("/getUser")
     @ResponseBody
-    public RyxUsersDTO getCuurUser(){
-        return getUser();
+    public UserInfo getCuurUser(){
+        UserInfo userInfo = (UserInfo)SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+
+        return userInfo;
     }
 
     @RequestMapping("/tologin")

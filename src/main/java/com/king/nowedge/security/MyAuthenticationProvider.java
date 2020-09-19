@@ -32,7 +32,7 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        // TODO Auto-generated method stub
+
         String userName = authentication.getName();//前端传入用户名
         String password = (String) authentication.getCredentials();// 前端传入密码
         String MD5Password = Md5Util.GetMD5Code(password);

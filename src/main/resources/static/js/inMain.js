@@ -207,46 +207,49 @@ $(function () {
     },
   });
 
-  var bodySwiper = new Swiper('#bodySwiper', {
-    direction: 'vertical',
-    speed:1000,
-    slideClass : 'my-slide',
-    pagination: {
-      el: '.swiper-pagination',
-      clickable :true,
-    },
-    observer:true,
-    // mousewheel: true,
-    slidesPerView : 'auto',
-  })
-  //为了防止不触发用了下面的原生监听滚动
-  var bl = false
-  var scrollFunc = function (e) {  
-    e = e || window.event;  
-    if(bl) return true
-    if (e.wheelDelta) {  //判断浏览器IE，谷歌滑轮事件               
-      if (e.wheelDelta > 0) { //当滑轮向上滚动时  
-        bodySwiper.slidePrev();
-        bl = true
-      }  
-      if (e.wheelDelta < 0) { //当滑轮向下滚动时  
-        bodySwiper.slideNext();
-        bl = true
+  if ($("#bodySwiper").length != 0) {
+    var bodySwiper = new Swiper('#bodySwiper', {
+      direction: 'vertical',
+      speed:1000,
+      slideClass : 'my-slide',
+      pagination: {
+        el: '.swiper-pagination',
+        clickable :true,
+      },
+      observer:true,
+      // mousewheel: true,
+      slidesPerView : 'auto',
+    })
+    //为了防止不触发用了下面的原生监听滚动
+    var bl = false
+    var scrollFunc = function (e) {  
+      e = e || window.event;  
+      if(bl) return true
+      if (e.wheelDelta) {  //判断浏览器IE，谷歌滑轮事件               
+        if (e.wheelDelta > 0) { //当滑轮向上滚动时  
+          bodySwiper.slidePrev();
+          bl = true
+        }  
+        if (e.wheelDelta < 0) { //当滑轮向下滚动时  
+          bodySwiper.slideNext();
+          bl = true
+        }
+      } else if (e.detail) {  //Firefox滑轮事件
+        if (e.detail> 0) { //当滑轮向上滚动时
+          bodySwiper.slidePrev();
+          bl = true 
+        }  
+        if (e.detail< 0) { //当滑轮向下滚动时
+          bodySwiper.slideNext();
+          bl = true 
+        }  
       }
-    } else if (e.detail) {  //Firefox滑轮事件
-      if (e.detail> 0) { //当滑轮向上滚动时
-        bodySwiper.slidePrev();
-        bl = true 
-      }  
-      if (e.detail< 0) { //当滑轮向下滚动时
-        bodySwiper.slideNext();
-        bl = true 
-      }  
-    }
-    setTimeout(() => {
-      bl = false
-    },1000)
-  }  
+      setTimeout(() => {
+        bl = false
+      },1000)
+    }  
+  }
+
   //给页面绑定滑轮滚动事件  
   if (document.addEventListener) {//firefox  
     document.addEventListener('DOMMouseScroll', scrollFunc, false);  
