@@ -210,7 +210,28 @@ public class RyxCategoryServiceImpl extends BaseService implements RyxCategorySe
 	@Override
 	public ResultDTO<RyxCategoryQuery> queryCategory(RyxCategoryQuery query) {
 		
-		ResultDTO<RyxCategoryQuery> result = null;
+		return getRyxCategoryQueryResultDTO(query);
+	}
+
+	@Override
+	public ResultDTO<RyxCategoryQuery> queryCategory1(RyxCategoryQuery query,List<Integer> pidList) {
+
+		ResultDTO<RyxCategoryQuery> result;
+		try{
+			query.setList(categoryMapper.query1(pidList));
+			result = new ResultDTO<RyxCategoryQuery>(query);
+		}
+		catch (BaseDaoException e){
+			result = new ResultDTO<RyxCategoryQuery>("error", e.getMessage());
+		}
+		catch(Throwable e){
+			result = new ResultDTO<RyxCategoryQuery>("error", e.getMessage());
+		}
+		return result;
+	}
+
+	private ResultDTO<RyxCategoryQuery> getRyxCategoryQueryResultDTO(RyxCategoryQuery query) {
+		ResultDTO<RyxCategoryQuery> result;
 		try{
 			query.setTotalItem(categoryMapper.countQuery(query));
 			query.setList(categoryMapper.query(query));
@@ -222,11 +243,10 @@ public class RyxCategoryServiceImpl extends BaseService implements RyxCategorySe
 		catch(Throwable e){
 			result = new ResultDTO<RyxCategoryQuery>("error", e.getMessage());
 		}
-		return result;		
+		return result;
 	}
-	
-	
-	
+
+
 	@Override
 	public ResultDTO<Integer> countQueryCategory(RyxCategoryQuery query) {
 		
@@ -305,19 +325,8 @@ public class RyxCategoryServiceImpl extends BaseService implements RyxCategorySe
 		query.setIdeleted(0);
 		
 		ResultDTO<RyxCategoryQuery> result = null;
-		try{
-			query.setTotalItem(categoryMapper.countQuery(query));
-			query.setList(categoryMapper.query(query));
-			result = new ResultDTO<RyxCategoryQuery>(query);
-		}
-		catch (BaseDaoException e){
-			result = new ResultDTO<RyxCategoryQuery>("error", e.getMessage());
-		}
-		catch(Throwable e){
-			result = new ResultDTO<RyxCategoryQuery>("error", e.getMessage());
-		}
-		return result;	
-		
+		return getRyxCategoryQueryResultDTO(query);
+
 	}
 	
 	
@@ -333,18 +342,7 @@ public class RyxCategoryServiceImpl extends BaseService implements RyxCategorySe
 		query.setSooort("asc");
 		
 		ResultDTO<RyxCategoryQuery> result = null;
-		try{
-			query.setTotalItem(categoryMapper.countQuery(query));
-			query.setList(categoryMapper.query(query));
-			result = new ResultDTO<RyxCategoryQuery>(query);
-		}
-		catch (BaseDaoException e){
-			result = new ResultDTO<RyxCategoryQuery>("error", e.getMessage());
-		}
-		catch(Throwable e){
-			result = new ResultDTO<RyxCategoryQuery>("error", e.getMessage());
-		}
-		return result;	
-		
+		return getRyxCategoryQueryResultDTO(query);
+
 	}
 }

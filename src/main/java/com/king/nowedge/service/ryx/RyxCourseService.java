@@ -33,9 +33,13 @@ public interface RyxCourseService {
 	public ResultDTO<Double> getCoursePriceById(Long courseId);
 	
 	public ResultDTO<List<RyxCourseDTO>> getCourseByVId(String vid);
-	
+
+	//获取老师所有直播课程
 	public ResultDTO<List<RyxCourseDTO>> getCourseByTeacherId(RyxCourseQuery query);
-	
+
+	//获取老师所有的课程
+	public ResultDTO<List<RyxCourseDTO>> getAllCourseByTeacherId(RyxCourseQuery query);
+
 	//最新课程
 	public ResultDTO<List<RyxCourseDTO>> getLastCourse(Integer recordCount);
 	

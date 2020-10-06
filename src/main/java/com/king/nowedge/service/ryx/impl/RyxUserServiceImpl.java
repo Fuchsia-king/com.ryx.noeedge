@@ -3,9 +3,9 @@ package com.king.nowedge.service.ryx.impl;
 import com.king.nowedge.dto.base.ResultDTO;
 import com.king.nowedge.dto.enums.EnumYesorno;
 import com.king.nowedge.dto.ryx.*;
-import com.king.nowedge.query.ryx.*;
 import com.king.nowedge.excp.BaseDaoException;
 import com.king.nowedge.mapper.ryx.*;
+import com.king.nowedge.query.ryx.*;
 import com.king.nowedge.service.impl.BaseService;
 import com.king.nowedge.service.ryx.RyxUserService;
 import com.king.nowedge.utils.JavaSmsApi;
@@ -141,10 +141,23 @@ public class RyxUserServiceImpl extends BaseService implements RyxUserService {
 
             if (0 == smsResultDTO.getCode()) {
                 RyxTempUserDTO tempUser = new RyxTempUserDTO();
+                Long time = System.currentTimeMillis();
                 tempUser.setTelephone(mobile);
                 tempUser.setRandom(random);
-                tempUser.setTime(System.currentTimeMillis());
-                Boolean val = ryxTempUserMapper.createOrUpdate(tempUser);
+                tempUser.setTime(time);
+                RyxTempUserQuery query = new RyxTempUserQuery();
+                query.setTelephone(mobile);
+                query.setRandom(random);
+                query.setTime(time);
+                List<RyxTempUserDTO> list = ryxTempUserMapper.query(query);
+                Boolean val;
+                if(list.size()>0){
+                    int ret = ryxTempUserMapper.update(tempUser);
+                    if(ret==0){
+                        val = true;
+                    }
+                }
+                val = ryxTempUserMapper.create(tempUser);
 
                 result = new ResultDTO<RyxSmsResultDTO>(smsResultDTO);
             } else {

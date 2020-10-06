@@ -2,6 +2,8 @@ package com.king.nowedge.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.king.nowedge.dto.ryx.RyxUsersDTO;
+import com.king.nowedge.excp.BaseDaoException;
+import com.king.nowedge.mapper.ryx.RyxUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
@@ -26,6 +28,9 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
 
     @Autowired
     private ObjectMapper objectMapper;
+    @Autowired
+    RyxUserMapper ryxUserMapper;
+
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
@@ -43,6 +48,14 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
         Map<String,String> map=new HashMap<>();
         map.put("code", "200");
         map.put("msg", "登录成功");
+        String nname = request.getParameter("username");
+        String loginname = null;
+        try {
+            loginname = ryxUserMapper.getUserByMobileOrEmail(nname).getUsername();
+        } catch (BaseDaoException e) {
+            e.printStackTrace();
+        }
+        map.put("username",loginname);
         if(targetUrl.indexOf("register") >0
                 ||  targetUrl.indexOf("reset_password") >0
                 ||  targetUrl.indexOf("login") >0

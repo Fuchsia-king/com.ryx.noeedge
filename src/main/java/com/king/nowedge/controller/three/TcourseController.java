@@ -1,31 +1,51 @@
 package com.king.nowedge.controller.three;
 
 import com.google.gson.Gson;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.king.nowedge.alipay.AlipayConfig;
+import com.king.nowedge.alipay.AlipaySubmit;
 import com.king.nowedge.controller.BaseController;
 import com.king.nowedge.dto.base.KeyrvDTO;
+import com.king.nowedge.dto.base.KeyvDTO;
 import com.king.nowedge.dto.base.ResultDTO;
 import com.king.nowedge.dto.enums.*;
 import com.king.nowedge.dto.ryx.*;
 import com.king.nowedge.helper.*;
-import com.king.nowedge.query.base.KeyrvQuery;
-import com.king.nowedge.query.ryx.*;
+import com.king.nowedge.query.ryx.RyxCourseOutlineQuery;
+import com.king.nowedge.query.ryx.RyxCourseQuery;
+import com.king.nowedge.query.ryx.RyxEvaluQuery;
+import com.king.nowedge.query.ryx.RyxUserCouponQuery;
+import com.king.nowedge.utils.IPUtils;
 import com.king.nowedge.utils.NumberExUtils;
+import com.king.nowedge.wxpay.WeiMaCreate;
+import com.king.nowedge.wxpay.WeixinPrepayResult;
+import net.sf.json.JSONObject;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.text.ParseException;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -111,6 +131,7 @@ public class TcourseController  extends BaseController {
 		ResultDTO<RyxCourseQuery> courseResult = MetaHelper.getInstance().queryCourseCache(courseQuery);
 		errList = addList(errList, courseResult.getErrorMsg());
 		courseQuery = courseResult.getModule();
+
 		mav.addObject("categorys", MetaHelper.getInstance().getOnlineCategory());//行业
 
 		/**
@@ -160,19 +181,8 @@ public class TcourseController  extends BaseController {
 		}
 		mav.addObject("tcategoryList",tcategoryList);
 
-		List<RyxCategoryDTO> ryxCategoryDTOList =  MetaHelper.getInstance().getOnlineCategory();
-		mav.addObject("ryxCategoryDTOList",ryxCategoryDTOList);
-		HashMap<RyxCategoryDTO,List<RyxCategoryDTO>> map = null;
-		Map<RyxCategoryDTO, Map> map2 = new HashMap<>();
-		for(RyxCategoryDTO rcd: ryxCategoryDTOList){
-			List<RyxCategoryDTO> sublist = MetaHelper.getInstance().getSubCategoryByPid(rcd.getId().intValue());
-			map = new HashMap<>();
-			for(int i=0;i<sublist.size()-1;i++){
-				map.put(rcd,MetaHelper.getInstance().getSubCategoryByPid(sublist.get(i).getId().intValue()));
-			}
-			map2.put(rcd,map);
-		}
-		mav.addObject("map2",map2);
+		//加载全部课程列表
+		CourseHelper.getInstance().getAllCategoryAttr(mav);
 		return mav;
 
 	}
@@ -215,7 +225,7 @@ public class TcourseController  extends BaseController {
 			mav = new ModelAndView("redirect:/article_" + courseId + ".html");
 			return mav;
 		} else if (EnumObjectType.VIDEO_MODULE.getCode() == course.getObjType()) {
-			mav = new ModelAndView("redirect:/video_" + courseId + ".html");
+			mav = new ModelAndView("redirect:/onlineLiveDetails?courseId=" + courseId);
 			return mav;
 		} else if (EnumObjectType.ACTIVITY_MODULE.getCode() == course.getObjType()) {
 			mav = new ModelAndView("redirect:/activity_" + courseId + ".html");
@@ -231,25 +241,25 @@ public class TcourseController  extends BaseController {
 					return new ModelAndView("redirect:http://am.ryx365.com/m/online_" + courseId + ".html");
 				}
 			}
-			//如果课程不是体系主课程
-			if (course.getFlag() != EnumCourseType.MAIN_COURSE.getCode()) {
-				KeyrvQuery keyrvQuery = new KeyrvQuery();
-				keyrvQuery.setRkey(courseId);
-				keyrvQuery.setType(EnumKeyRelatedValueType.KV_COURSE_SERIES.getCode());
-				ResultDTO<KeyrvQuery> keyrvResult = systemService.queryKeyrv(keyrvQuery);
-				if (keyrvResult.isSuccess() && null != keyrvResult.getModule()) {
-					List<KeyrvDTO> list = keyrvResult.getModule().getList();
-					if (null != list && list.size() > 0) {
-						mav = new ModelAndView("redirect:online_" + courseId + "_" + list.get(0).getKey1() + ".htm");
-
-					} else {
-						mav = new ModelAndView("redirect:online_" + courseId + "_0.htm");
-					}
-				} else {
-					mav = new ModelAndView("redirect:online_" + courseId + "_0.htm");
-				}
-				return mav;
-			}
+//			//如果课程不是体系主课程
+//			if (course.getFlag() != EnumCourseType.MAIN_COURSE.getCode()) {
+//				KeyrvQuery keyrvQuery = new KeyrvQuery();
+//				keyrvQuery.setRkey(courseId);
+//				keyrvQuery.setType(EnumKeyRelatedValueType.KV_COURSE_SERIES.getCode());
+//				ResultDTO<KeyrvQuery> keyrvResult = systemService.queryKeyrv(keyrvQuery);
+//				if (keyrvResult.isSuccess() && null != keyrvResult.getModule()) {
+//					List<KeyrvDTO> list = keyrvResult.getModule().getList();
+//					if (null != list && list.size() > 0) {
+////						mav = new ModelAndView("redirect:online_" + courseId + "_" + list.get(0).getKey1() + ".htm");
+//
+//					} else {
+////						mav = new ModelAndView("redirect:online_" + courseId + "_0.htm");
+//					}
+//				} else {
+////					mav = new ModelAndView("redirect:online_" + courseId + "_0.htm");
+//				}
+//				return mav;
+//			}
 			mav.addObject("course", course);
 			//获取课程编号下的课程列表
 			List<RyxCourseDTO> subcourseList = new ArrayList<>();
@@ -264,7 +274,9 @@ public class TcourseController  extends BaseController {
 				}
 			}
 			mav.addObject("subcourseList", subcourseList);
-			mav.addObject("presubcourse",subcourseList.get(0));
+			if(subcourseList.size()>0){
+				mav.addObject("presubcourse",subcourseList.get(0));
+			}
 			if(users!=null){
 				Boolean isBuyMainOnline = new CourseHelper().isBuyMainOnline(users.getId(), cid);
 				mav.addObject("isBuyMainOnline", isBuyMainOnline);
@@ -330,20 +342,8 @@ public class TcourseController  extends BaseController {
 			addPasswordModel(mav, request, getCurrentUrl(request));
 		}
 		mav.addObject("from",from);
-
-		List<RyxCategoryDTO> ryxCategoryDTOList =  MetaHelper.getInstance().getOnlineCategory();
-		mav.addObject("ryxCategoryDTOList",ryxCategoryDTOList);
-		HashMap<RyxCategoryDTO,List<RyxCategoryDTO>> map = null;
-		Map<RyxCategoryDTO, Map> map2 = new HashMap<>();
-		for(RyxCategoryDTO rcd: ryxCategoryDTOList){
-			List<RyxCategoryDTO> sublist = MetaHelper.getInstance().getSubCategoryByPid(rcd.getId().intValue());
-			map = new HashMap<>();
-			for(int i=0;i<sublist.size()-1;i++){
-				map.put(rcd,MetaHelper.getInstance().getSubCategoryByPid(sublist.get(i).getId().intValue()));
-			}
-			map2.put(rcd,map);
-		}
-		mav.addObject("map2",map2);
+		//加载全部课程列表
+		CourseHelper.getInstance().getAllCategoryAttr(mav);
 		return mav;
 	}
 
@@ -408,7 +408,6 @@ public class TcourseController  extends BaseController {
 			 */
 			ResultDTO<Long> createOrderResult = ryxOrderService.saveOrder(order);
 			errList = addList(errList, createOrderResult.getErrorMsg());
-//			orderId = createOrderResult.getModule();
 			orderId = order.getId();
 			logger.error("saveOrder:orderId--->" + orderId);
 			return this.go2Pay(orderId, errList, request, response, rt,course);
@@ -427,10 +426,6 @@ public class TcourseController  extends BaseController {
 		else {
 			errList = errList1;
 		}
-
-		/**
-		 * 判断是否是微信
-		 */
 		ModelAndView mav = new ModelAndView("member/payment");
 		mav.addObject("course",course);
 		String serverName = request.getServerName().toLowerCase();
@@ -451,14 +446,11 @@ public class TcourseController  extends BaseController {
 				errList = addList(errList, userResult.getErrorMsg());
 				if (userResult.isSuccess()) {
 					RyxUsersDTO usersDTO = userResult.getModule();
-					Double balance = usersDTO.getBalance();
+					Double balance = usersDTO.getBalance();//获取余额
 					balance = null == balance ? 0.00 : balance;
-					/**
-					 * 融易学余额
-					 */
 					mav.addObject("balance", balance);
-					Double requestAmount = order.getOrderAmount(); // 订单价格
-					Integer maxUsedCoupon = getMaxUsedCoupon(requestAmount);
+					Double requestAmount = order.getOrderAmount(); // 订单总价格
+					Integer maxUsedCoupon = getMaxUsedCoupon(requestAmount);//每满一百,可使用10%的优惠券,如200可使用满200减20的券
 					Double canUsedCoupon = 0.0;
 					if(maxUsedCoupon>0){
 						/**
@@ -486,6 +478,7 @@ public class TcourseController  extends BaseController {
 					 * 计算可用余额
 					 */
 					Double canUsedBalance = balance + canUsedCoupon >= order.getOrderAmount() ? order.getOrderAmount()  - canUsedCoupon : balance ;
+					mav.addObject("canUsedBalance",canUsedBalance);
 					/**
 					 * 计算额外支付金额 （支付宝、微信支付）
 					 */
@@ -503,6 +496,373 @@ public class TcourseController  extends BaseController {
 		return mav;
 	}
 
+	/**
+	 * 阿里支付
+	 * @param orderId
+	 * @param isUsingCoupon
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/payByAlipay", method = RequestMethod.GET)
+	public void payByAlipay(Long orderId,Boolean isUsingCoupon, Model model, HttpServletRequest request,
+							HttpServletResponse response, HttpSession session) throws IOException {
+
+		RyxUsersDTO user = getRyxUser();
+		errList = new ArrayList<String>();
+
+		ResultDTO<RyxUsersDTO> userResultDTO = ryxUserService.getUserById(user.getId());
+		errList = addList(errList, userResultDTO.getErrorMsg());
+		RyxUsersDTO usersDTO = userResultDTO.getModule();
+
+		/**
+		 * 余额
+		 */
+		Double balance = usersDTO.getBalance();
+		balance = null == balance ? 0.00 : balance;
+
+		ResultDTO<RyxOrderDTO> orderResult = ryxOrderService.getOrderById(orderId, user.getId());
+		errList = addList(errList, orderResult.getErrorMsg());
+		RyxOrderDTO order = orderResult.getModule();
+		if (null != order) {
+
+			Double requestAmount = order.getOrderAmount();
+			Integer maxUsedCoupon = getMaxUsedCoupon(requestAmount,isUsingCoupon);
+			Double canUsedCoupon = 0.0;
+
+			Long couponId = 0L;
+
+			if(maxUsedCoupon>0){
+				/**
+				 * 从数据库中读取是否有没有过期的优惠券
+				 */
+				RyxUserCouponQuery userCouponQuery = new RyxUserCouponQuery();
+				userCouponQuery.setIuse(0); // 未使用
+				userCouponQuery.setSlimi(System.currentTimeMillis()/1000);
+				userCouponQuery.setType(EnumAccountType.COUPON.getCode());
+				userCouponQuery.setEcoupon(maxUsedCoupon);
+				userCouponQuery.setScoupon(1);
+				userCouponQuery.setPageSize(1);
+				userCouponQuery.setOrderBy("coupon");
+				userCouponQuery.setSooort("desc");
+				userCouponQuery.setUserId(user.getId());
+				ResultDTO<RyxUserCouponQuery> couponResult = ryxUserService.queryCoupon(userCouponQuery);
+				userCouponQuery = couponResult.getModule();
+				if(couponResult.isSuccess() && null != userCouponQuery && null != userCouponQuery.getList() && userCouponQuery.getList().size()>0 ){
+					RyxUserCouponDTO userCouponDTO = (RyxUserCouponDTO)userCouponQuery.getList().get(0);
+					canUsedCoupon = userCouponDTO.getCoupon();
+					couponId = userCouponDTO.getId();
+				}
+			}
+
+			requestAmount = requestAmount - canUsedCoupon;
+
+			Double usedBalance = balance > requestAmount ? requestAmount : balance; //使用的余额
+			requestAmount = requestAmount - usedBalance;
+			requestAmount = requestAmount < 0 ? 0 : requestAmount;
+			if (requestAmount >= 0) { // 需要支付宝支付
+
+				RyxExtraParamDTO extraParamDTO = new RyxExtraParamDTO() ;
+				extraParamDTO.setB(usedBalance) ;
+				extraParamDTO.setC(canUsedCoupon) ;
+				extraParamDTO.setCid(couponId);
+
+				String payment_type = "1";
+
+				// 服务器异步通知页面路径
+				String notify_url = "http://" + request.getServerName() + "/alipay_notify_url.html";
+
+				// 需http://格式的完整路径，不能加?id=123这类自定义参数
+				// 页面跳转同步通知页面路径
+
+				String return_url = "http://" + request.getServerName() + "/my/alipay_return_url.html";
+
+				if (null == order.getStatus() || order.getStatus() == 1) {// 未支付
+
+					/*
+					 * 判断 uid 是否为空 如果为空，创建一个 。并更新 填补之前的漏洞
+					 */
+					if (StringHelper.isNullOrEmpty(order.getUid())) {
+						String uid = NumberExUtils.longIdString(4);
+						order.setUid(uid);
+						ryxOrderService.updateOrderUid(orderId, uid);
+					}
+
+					// 把请求参数打包成数组
+					Map<String, String> sParaTemp = new HashMap<String, String>();
+					sParaTemp.put("service", "create_direct_pay_by_user");
+					sParaTemp.put("partner", AlipayConfig.partner);
+					sParaTemp.put("seller_email", AlipayConfig.seller_email);
+					sParaTemp.put("_input_charset", AlipayConfig.input_charset);
+					sParaTemp.put("payment_type", payment_type);
+					sParaTemp.put("notify_url", notify_url);
+					sParaTemp.put("return_url", return_url);
+					sParaTemp.put("out_trade_no", order.getUid());
+					sParaTemp.put("subject", "融易学--中国金融在线教育平台");
+					sParaTemp.put("total_fee", String.format("%.2f", requestAmount));
+					// sParaTemp.put("total_fee", "0.01");
+					sParaTemp.put("exter_invoke_ip", null);
+					sParaTemp.put("body", null);
+					sParaTemp.put("show_url", null);
+					sParaTemp.put("anti_phishing_key", null);
+					sParaTemp.put("extra_common_param", java.net.URLEncoder.encode(JSONObject.fromObject(extraParamDTO).toString(),"UTF-8"));
+					// 建立请求
+					response.setContentType("text/html");
+					response.setCharacterEncoding("UTF-8");
+					PrintWriter out = response.getWriter();
+					String sHtmlText = AlipaySubmit.buildRequest(sParaTemp, "get", "确认");
+					out.println(sHtmlText);
+					return;
+				} else {
+					return;
+				}
+			} else {
+
+
+			}
+		} else { // order is null
+			return;
+		}
+		// }
+		// return null;
+
+	}
+
+	/**
+	 * 微信支付
+	 */
+	@RequestMapping(value = "payByWechat",method = RequestMethod.GET)
+	public void payByWechat(Long orderId,Boolean isUsingCoupon,
+							HttpSession session, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+		//1.有无优惠券
+		//2.有无余额抵扣
+		//3.微信支付金额
+		errList = new ArrayList<String>();
+		RyxUsersDTO user = getRyxUser();
+		ResultDTO<RyxUsersDTO> userResultDTO = ryxUserService.getUserById(user.getId());
+		errList = addList(errList, userResultDTO.getErrorMsg());
+		RyxUsersDTO users  = userResultDTO.getModule();//获得当前付款用户
+		if (userResultDTO.isSuccess() && null != users) {
+			Double balance = users.getBalance();
+			balance = null == balance ? 0.00 : balance;
+			ResultDTO<RyxOrderDTO> orderResult = ryxOrderService.getOrderById(orderId, user.getId());
+			errList = addList(errList, orderResult.getErrorMsg());
+			if (orderResult.isSuccess()) {
+				RyxOrderDTO order = orderResult.getModule();//获取当前购买订单
+				if (null != order) {
+					/*
+					 * 判断 uid 是否为空 如果为空，创建一个 。并更新
+					 */
+					String uid = NumberExUtils.longIdString(4);
+					order.setUid(uid);
+					ryxOrderService.updateOrderUid(orderId, uid);
+
+					Double requestAmount = order.getOrderAmount();
+					Integer maxUsedCoupon = getMaxUsedCoupon(requestAmount,isUsingCoupon); // 本次最多可用优惠券
+					Double canUsedCoupon = 0.0;
+
+					Long couponId = 0L;
+
+					if(maxUsedCoupon>0){
+						/**
+						 * 从数据库中读取是否有没有过期的优惠券
+						 */
+						RyxUserCouponQuery userCouponQuery = new RyxUserCouponQuery();
+						userCouponQuery.setIuse(0); // 未使用
+						userCouponQuery.setSlimi(System.currentTimeMillis()/1000);
+						userCouponQuery.setType(EnumAccountType.COUPON.getCode());
+						userCouponQuery.setEcoupon(maxUsedCoupon);
+						userCouponQuery.setScoupon(1);
+						userCouponQuery.setPageSize(1);
+						userCouponQuery.setOrderBy("coupon");
+						userCouponQuery.setSooort("desc");
+						userCouponQuery.setUserId(users.getId());
+						ResultDTO<RyxUserCouponQuery> couponResult = ryxUserService.queryCoupon(userCouponQuery);
+						userCouponQuery = couponResult.getModule();
+						if(couponResult.isSuccess() && null != userCouponQuery && null != userCouponQuery.getList() && userCouponQuery.getList().size()>0 ){
+							RyxUserCouponDTO userCouponDTO = (RyxUserCouponDTO)userCouponQuery.getList().get(0);
+							canUsedCoupon = userCouponDTO.getCoupon();
+							couponId = userCouponDTO.getId();
+						}
+					}
+
+					requestAmount = requestAmount - canUsedCoupon;
+
+					Double usedBalance = balance > requestAmount ? requestAmount : balance; //使用的余额
+					requestAmount = requestAmount - usedBalance;
+					requestAmount = requestAmount < 0 ? 0 : requestAmount;
+
+					if (requestAmount > 0) { // 需要微信支付
+
+						RyxExtraParamDTO extraParamDTO = new RyxExtraParamDTO() ;
+						extraParamDTO.setB(usedBalance) ;
+						extraParamDTO.setC(canUsedCoupon) ;
+						extraParamDTO.setCid(couponId);
+
+						ResultDTO<WeixinPrepayResult> weixinUrlResult =
+								WeiMaCreate.createWeima(order.getUid(), requestAmount, IPUtils.getIpAddr(request),
+										URLEncoder.encode(JSONObject.fromObject(extraParamDTO).toString(),"UTF-8"),
+										"http://" + request.getServerName() + ConstHelper.pc_weixin_erweima_notify_url);
+						errList = addList(errList, weixinUrlResult.getErrorMsg());
+
+						if (weixinUrlResult.isSuccess()) {
+							MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+							String payurl = weixinUrlResult.getModule().getCodeUrl();
+							Map hints = new HashMap();
+							hints.put(EncodeHintType.CHARACTER_SET, "UTF-8"); // 设置字符集编码类型
+							BitMatrix bitMatrix = null;
+							try {
+								bitMatrix = multiFormatWriter.encode(payurl, BarcodeFormat.QR_CODE, 300, 300, hints);
+								BufferedImage image = toBufferedImage(bitMatrix);
+								// 输出二维码图片流
+								try {
+									ImageIO.write(image, "png", response.getOutputStream());
+								} catch (IOException e) {
+									errList = addList(errList, e.getMessage());
+								}
+							} catch (WriterException e1) {
+								errList = addList(errList, e1.getMessage());
+							} catch (Throwable t) {
+								errList = addList(errList, t.getMessage());
+							}
+						}
+					}
+					else{
+						// 全部用券支付
+					}
+				}
+				else {
+					errList = addList(errList, "无效OrderId===>" + orderId);
+				}
+			}
+		}
+
+		return;
+	}
+
+	/**
+	 * 把微信支付图片转换为字节矩阵流
+	 * @param matrix
+	 * @return
+	 */
+	public BufferedImage toBufferedImage(BitMatrix matrix) {
+		int width = matrix.getWidth();
+		int height = matrix.getHeight();
+		BufferedImage image = new BufferedImage(width, height, 1);
+		for (int x = 0; x < width; ++x) {
+			for (int y = 0; y < height; ++y) {
+				image.setRGB(x, y, (matrix.get(x, y)) ? -16777216 : -1);
+			}
+		}
+		return image;
+	}
+
+
+	/**
+	 * 融易学余额支付
+	 * @param orderId
+	 * @param isUsingCoupon
+	 * @param model
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "pay_by_balance", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String,String> payByRyx(Long orderId,Boolean isUsingCoupon, Model model, HttpServletRequest request,
+								 HttpServletResponse response, HttpSession session) throws IOException {
+
+//		ModelAndView mav = new ModelAndView("member/payment");
+		Map<String,String> map = new HashMap();
+		String serverName = request.getServerName().toLowerCase();
+		if(!StringHelper.isNullOrEmpty(serverName) && serverName.indexOf("m.ryx365.com")>=0){
+//			mav = new ModelAndView("/ryx/m/my/malipayResult");
+		}
+
+		RyxUsersDTO user = getRyxUser();
+		errList = new ArrayList<String>();
+
+		ResultDTO<RyxUsersDTO> userResultDTO = ryxUserService.getUserById(user.getId());
+		errList = addList(errList, userResultDTO.getErrorMsg());
+		RyxUsersDTO usersDTO = userResultDTO.getModule();
+
+//		mav.addObject("loginUsers", user);
+
+		/**
+		 * 余额
+		 */
+		Double balance = usersDTO.getBalance();
+		balance = null == balance ? 0.00 : balance;
+
+
+		ResultDTO<RyxOrderDTO> orderResult = ryxOrderService.getOrderById(orderId, user.getId());
+		errList = addList(errList, orderResult.getErrorMsg());
+		RyxOrderDTO order = orderResult.getModule();
+
+		if (null != order) {
+
+			Double requestAmount = order.getOrderAmount();
+			Integer maxUsedCoupon = getMaxUsedCoupon(requestAmount,isUsingCoupon);
+			Double canUsedCoupon = 0.0;
+			Long couponId = 0L;
+			if(maxUsedCoupon>0.1){
+				/**
+				 * 从数据库中读取是否有没有过期的优惠券
+				 */
+				RyxUserCouponQuery userCouponQuery = new RyxUserCouponQuery();
+				userCouponQuery.setIuse(0); // 未使用
+				userCouponQuery.setSlimi(System.currentTimeMillis()/1000);
+				userCouponQuery.setType(EnumAccountType.COUPON.getCode());
+				userCouponQuery.setEcoupon(maxUsedCoupon);
+				userCouponQuery.setScoupon(1);
+				userCouponQuery.setPageSize(1);
+				userCouponQuery.setOrderBy("coupon");
+				userCouponQuery.setSooort("desc");
+				userCouponQuery.setUserId(user.getId());
+				ResultDTO<RyxUserCouponQuery> couponResult = ryxUserService.queryCoupon(userCouponQuery);
+				userCouponQuery = couponResult.getModule();
+				if(couponResult.isSuccess() && null != userCouponQuery && null != userCouponQuery.getList() && userCouponQuery.getList().size()>0 ){
+					RyxUserCouponDTO userCouponDTO = (RyxUserCouponDTO)userCouponQuery.getList().get(0);
+					canUsedCoupon = userCouponDTO.getCoupon();
+					couponId = userCouponDTO.getId();
+				}
+			}
+			Double usedBalance = requestAmount - canUsedCoupon ;
+
+			order.setOrderIdStr(getRyxOrderId(order));
+
+			if (orderResult.isSuccess() && null != order) {
+
+				if (EnumOrderStatus.PAY_SUCCESS.getCode() != order.getStatus()) { // 尚未支付成功
+					processOrderAfterPaySuccess(errList,order,order.getUid(),usedBalance,canUsedCoupon,requestAmount,null,
+							EnumPayType.RYX_PAY.getCode(),couponId);
+					orderResult = ryxOrderService.getOrderById(orderId, user.getId());
+					errList = addList(errList, orderResult.getErrorMsg());
+					order = orderResult.getModule();
+				}
+			}
+			map.put("orderId",order.getId().toString());
+//			mav.addObject("payway","余额抵扣");
+			map.put("payway","余额抵扣");
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//			mav.addObject("paytime",simpleDateFormat.format(order.getOrderTime()));
+			map.put("paytime",simpleDateFormat.format(order.getOrderTime()));
+//			mav.addObject("complateOrder", order);
+			map.put("count",usedBalance.toString());
+			map.put("status",order.getStatus().toString());
+			return map;
+
+		} else {
+
+		}
+//		mav.addObject("errList", errList);
+//		return mav;
+		map.put("errList",errList.toString());
+		return map;
+	}
 
 	@RequestMapping("mustLogin")
 	public ModelAndView mustLogin(HttpServletRequest request,HttpServletResponse response){
@@ -534,9 +894,6 @@ public class TcourseController  extends BaseController {
 		mid = request.getParameter("mid");
 		index = request.getParameter("index");
 		RyxUsersDTO users = getRyxUser();
-		users = new RyxUsersDTO();
-		users.setMobile("17328702821");
-		users.setId(3429l);
 		if(users==null){
 			return new ModelAndView("redirct:/");
 		}
@@ -687,62 +1044,145 @@ public class TcourseController  extends BaseController {
 		return mav;
 	}
 
+	/**
+	 * 线下课程列表
+	 * @param addPage
+	 * @param courseQuery
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping("/offlineList")
-	public ModelAndView offlineList(){
+	public ModelAndView offlineList(Integer addPage,RyxCourseQuery courseQuery,HttpServletRequest request,HttpServletResponse response){
 		ModelAndView mav = new ModelAndView("member/offlineList");
+		if(StringHelper.isMoblie(request)){
+			if(ConstHelper.isPreEnvironment()){
+				return new ModelAndView("redirect:http://pm.ryx365.com/m/list_offline.html");
+			}
+			else if(ConstHelper.isFormalEnvironment()){
+				return new ModelAndView("redirect:http://m.ryx365.com/m/list_offline.html");
+			}
+			else{
+				return new ModelAndView("redirect:http://am.ryx365.com/m/list_offline.html");
+			}
+		}
+		errList = new ArrayList<String>();
+		RyxUsersDTO users = getRyxUser();
+		List<KeyvDTO> cityListResult = MetaHelper.getInstance().getOfflineCourseCityList1();
+		Map<String,String> map1 = new HashMap<>();
+		for (KeyvDTO kd:cityListResult) {
+			map1.put(kd.getKey1(),MetaHelper.getInstance().getKeyvalueByUid(StringHelper.getKeyvalueUid(kd.getKey1(),18)).getValue());
+		}
+		mav.addObject("map1",map1);
+		//加载全部课程列表
+		CourseHelper.getInstance().getAllCategoryAttr(mav);
+
+		int pagesize = 8;
+		if(addPage!=null){
+			pagesize = courseQuery.getPageSize();
+			pagesize += addPage;
+		}
+		courseQuery.setPageSize(pagesize);
+		mav.addObject("courseQuery",courseQuery);
+		courseQuery.setCurrentPage(1);
+		courseQuery.setStatus(EnumAuditStatus.APPROVED.getCode());
+		courseQuery.setObjType(EnumObjectType.OFFLINE_MODULE.getCode());
+		courseQuery.setIdeleted(0);
+		courseQuery.setDisplay(1);
+		courseQuery = MetaHelper.getInstance().queryOfflineCourseCache(courseQuery);
+		List<RyxCourseDTO> ryxCourseDTOS = courseQuery.getList();
+		Map<String,String> map3;
+		List<Map<String,String>> mapList = new ArrayList<>();
+		for(RyxCourseDTO rcd:ryxCourseDTOS){
+			map3 = new HashMap<>();
+			Long time = System.currentTimeMillis();
+			if(time-rcd.getTend()>0){
+				map3.put("status","已结束");
+			}
+			if(time-rcd.getTstart()<0){
+				map3.put("status","未开始");
+			}
+			if(time-rcd.getTstart()>0&&time-rcd.getTend()<0){
+				map3.put("status","进行中");
+			}
+			map3.put("dateAround","时间: "+DateHelper.second2String("yyyy年MM月dd日",rcd.getTstart()) + "-" + DateHelper.second2String("MM月dd日",rcd.getTend()));
+			map3.put("id",rcd.getId().toString());
+			map3.put("image",rcd.getImage());
+			map3.put("location",rcd.getLocation());
+			map3.put("title",rcd.getTitle());
+			mapList.add(map3);
+		}
+		mav.addObject("mapList",mapList);
+		mav.addObject("query",courseQuery);
 		return mav;
 	}
-	@RequestMapping("/topteacherList")
-	public ModelAndView topteacherList(){
-		ModelAndView mav = new ModelAndView("member/topteacherList");
+
+	@RequestMapping("/offlineDetails")
+	public ModelAndView offlineDetails(String courseId){
+		ModelAndView mav = MAVHelper.getMav("member/offlineDetails");
+		ResultDTO<RyxCourseDTO> result = MetaHelper.getInstance().getCourseById(Long.parseLong(courseId));
+		if (result.isSuccess()) {
+			RyxCourseDTO course = result.getModule();
+			Map<String,String> map = new HashMap<>();
+			map.put("title",course.getTitle());
+			map.put("dateAround","时间: "+DateHelper.second2String("yyyy年MM月dd日",course.getTstart()) + "-" + DateHelper.second2String("MM月dd日",course.getTend()));
+			map.put("location",course.getLocation());
+			map.put("price",course.getPrice().toString());
+			map.put("oprice",course.getOprice().toString());
+			map.put("content",course.getContent());
+			map.put("image",course.getImage());
+			mav.addObject("map",map);
+		}
+		//获取所有课程列表
+		CourseHelper.getInstance().getAllCategoryAttr(mav);
 		return mav;
 	}
+
 	@RequestMapping("/customPage")
 	public ModelAndView customPage(){
 		ModelAndView mav = new ModelAndView("member/customPage");
+		//获取所有课程列表
+		CourseHelper.getInstance().getAllCategoryAttr(mav);
 		return mav;
 	}
 	@RequestMapping("/collegePage")
 	public ModelAndView collegePage(){
 		ModelAndView mav = new ModelAndView("member/collegePage");
+		//获取所有课程列表
+		CourseHelper.getInstance().getAllCategoryAttr(mav);
 		return mav;
 	}
 	@RequestMapping("/enterprisePage")
 	public ModelAndView enterprisePage(){
 		ModelAndView mav = new ModelAndView("member/enterprisePage");
+		//获取所有课程列表
+		CourseHelper.getInstance().getAllCategoryAttr(mav);
 		return mav;
 	}
 
 	@RequestMapping("/annualPage")
 	public ModelAndView annualPage(){
 		ModelAndView mav = new ModelAndView("member/annualPage");
+		//获取所有课程列表
+		CourseHelper.getInstance().getAllCategoryAttr(mav);
 		return mav;
 	}
-	@RequestMapping("/advisoryList")
-	public ModelAndView advisoryList(){
-		ModelAndView mav = new ModelAndView("member/advisoryList");
-		return mav;
-	}
-	@RequestMapping("/booksList")
-	public ModelAndView booksList(){
-		ModelAndView mav = new ModelAndView("member/booksList");
-		return mav;
-	}
+
 	@RequestMapping("/appdownloadPage")
 	public ModelAndView appdownloadPage(){
 		ModelAndView mav = new ModelAndView("member/appdownloadPage");
+		//获取所有课程列表
+		CourseHelper.getInstance().getAllCategoryAttr(mav);
 		return mav;
 	}
 	@RequestMapping("/seriesList")
 	public ModelAndView seriesList(){
 		ModelAndView mav = new ModelAndView("member/seriesList");
+		//获取所有课程列表
+		CourseHelper.getInstance().getAllCategoryAttr(mav);
 		return mav;
 	}
-	@RequestMapping("/onlineLive")
-	public ModelAndView onlineLive(){
-		ModelAndView mav = new ModelAndView("member/onlineLive");
-		return mav;
-	}
+
 	@RequestMapping("/info_aboutus")
 	public ModelAndView info_aboutus(){
 		ModelAndView mav = new ModelAndView("member/info_aboutus");
@@ -751,260 +1191,52 @@ public class TcourseController  extends BaseController {
 	@RequestMapping("/info_contactus")
 	public ModelAndView info_contactus(){
 		ModelAndView mav = new ModelAndView("member/info_contactus");
+		//获取所有课程列表
+		CourseHelper.getInstance().getAllCategoryAttr(mav);
 		return mav;
 	}
 
 	@RequestMapping("/info_statement")
 	public ModelAndView info_statement(){
 		ModelAndView mav = new ModelAndView("member/info_statement");
+		//获取所有课程列表
+		CourseHelper.getInstance().getAllCategoryAttr(mav);
 		return mav;
 	}
 	@RequestMapping("/info_register")
 	public ModelAndView info_register(){
 		ModelAndView mav = new ModelAndView("member/info_register");
+		//获取所有课程列表
+		CourseHelper.getInstance().getAllCategoryAttr(mav);
 		return mav;
 	}
 	@RequestMapping("/info_choosecourse")
 	public ModelAndView info_choosecourse(){
 		ModelAndView mav = new ModelAndView("member/info_choosecourse");
+		//获取所有课程列表
+		CourseHelper.getInstance().getAllCategoryAttr(mav);
 		return mav;
 	}
 	@RequestMapping("/info_opencourse")
 	public ModelAndView info_opencourse(){
 		ModelAndView mav = new ModelAndView("member/info_opencourse");
+		//获取所有课程列表
+		CourseHelper.getInstance().getAllCategoryAttr(mav);
 		return mav;
 	}
 	@RequestMapping("/info_avai")
 	public ModelAndView info_avai(){
 		ModelAndView mav = new ModelAndView("member/info_avai");
+		//获取所有课程列表
+		CourseHelper.getInstance().getAllCategoryAttr(mav);
 		return mav;
 	}
 	@RequestMapping("/info_cooperation")
 	public ModelAndView info_cooperation(){
 		ModelAndView mav = new ModelAndView("member/info_cooperation");
+		//获取所有课程列表
+		CourseHelper.getInstance().getAllCategoryAttr(mav);
 		return mav;
 	}
 
-
-	@RequestMapping("/list_gangwei.html")
-	public ModelAndView listGangwei(HttpServletRequest request, HttpServletResponse response, RedirectAttributes rt)
-			throws UnsupportedEncodingException {
-		
-
-		errList = new ArrayList<String>();
-		RyxUsersDTO users = getRyxUser();
-		
-
-		ModelAndView mav = new ModelAndView("/3/listGangwei");
-		
-		return mav;
-		
-	}
-	
-	
-	
-	@RequestMapping("/list_video3.html")
-	public ModelAndView listVideoCourse(HttpServletRequest request, RyxCourseQuery courseQuery, HttpServletResponse response, RedirectAttributes rt)
-			throws UnsupportedEncodingException {
-		
-		
-		if(StringHelper.isMoblie(request)){
-			if(ConstHelper.isPreEnvironment()){
-				return new ModelAndView("redirect:http://pm.ryx365.com/m/list_video.html");
-			}
-			else if(ConstHelper.isFormalEnvironment()){
-				return new ModelAndView("redirect:http://m.ryx365.com/m/list_video.html");
-			}
-			else{
-				return new ModelAndView("redirect:http://am.ryx365.com/m/list_video.html");
-			}
-		}
-
-		errList = new ArrayList<String>();
-		RyxUsersDTO users = getRyxUser();
-		
-
-		ModelAndView mav = new ModelAndView("/3/listVideo3");
-		
-		
-		if(EnumVideoStatus.AFTER_LIVING.getCode() == courseQuery.getInterval()){ // 已经结束
-			courseQuery.setEtend(System.currentTimeMillis()/1000);
-		}
-		else if(EnumVideoStatus.BEFORE_LIVING.getCode() == courseQuery.getInterval()){  // 尚未开始
-			courseQuery.setTtstart(System.currentTimeMillis()/1000);
-		}
-		else if(EnumVideoStatus.LIVING.getCode() == courseQuery.getInterval()){   // 直播中 
-			courseQuery.setEtstart(System.currentTimeMillis()/1000);
-			courseQuery.setTtend(System.currentTimeMillis()/1000);
-		}
-		else if(EnumVideoStatus.PLAY_BACK.getCode() == courseQuery.getInterval()){   // 直播中 
-			courseQuery.setEtend(System.currentTimeMillis()/1000);
-			courseQuery.setVid("1");
-		}
-		else{
-			mav.addObject("unendVideo",MetaHelper.getInstance().getUnendVideo(Integer.MAX_VALUE));
-			courseQuery.setEtend(System.currentTimeMillis()/1000);
-		}
-		
-		
-		courseQuery.setPageSize(18);		
-		courseQuery.setStatus(EnumAuditStatus.APPROVED.getCode());
-		courseQuery.setIdeleted(0);
-		courseQuery.setObjType(EnumObjectType.VIDEO_MODULE.getCode());
-		if(StringHelper.isNullOrEmpty(courseQuery.getOrderBy())){
-			courseQuery.setOrderBy("tstart");
-			courseQuery.setSooort("desc");
-		}
-		//courseQuery.setDisplay(1);
-		ResultDTO<RyxCourseQuery> courseResult = MetaHelper.getInstance().queryCourseCache(courseQuery);
-		errList = addList(errList, courseResult.getErrorMsg());
-		courseQuery = courseResult.getModule();
-
-		mav.addObject("categorys",MetaHelper.getInstance().getOnlineCategory());
-
-	
-
-		ResultDTO<List<RyxAdDTO>> courseHigtResult = MetaHelper.getInstance().queryAdCache(137);
-		errList = addList(errList, courseHigtResult.getErrorMsg());
-		mav.addObject("high", courseHigtResult.getModule());
-
-		mav.addObject("title", "金融培训教育_直播课程");
-		mav.addObject("errList", errList);
-		mav.addObject("loginUsers", users);
-		mav.addObject("query", courseQuery);
-
-		return mav;
-
-	}
-	
-	
-	@RequestMapping("/list_offline3.html")
-	public ModelAndView listOffline(HttpServletRequest request, RyxCourseQuery courseQuery, 
-			HttpServletResponse response, RedirectAttributes rt)
-			throws UnsupportedEncodingException, ParseException {
-		
-		
-		if(StringHelper.isMoblie(request)){
-			if(ConstHelper.isPreEnvironment()){
-				return new ModelAndView("redirect:http://pm.ryx365.com/m/list_offline3.html");
-			}
-			else if(ConstHelper.isFormalEnvironment()){
-				return new ModelAndView("redirect:http://m.ryx365.com/m/list_offline3.html");
-			}
-			else{
-				return new ModelAndView("redirect:http://am.ryx365.com/m/list_offline3.html");
-			}
-		}
-
-		errList = new ArrayList<String>();
-		RyxUsersDTO users = getRyxUser();
-
-		ModelAndView mav = new ModelAndView("/3/listOffline3");
-		
-
-		//courseQuery.setTtstart(System.currentTimeMillis()/1000);
-		
-		/**
-		 * 时间 > 全部 明天 本周 本周末 本月
-		 */
-		if(EnumIntervalType.THIS_MONTH.getCode() == courseQuery.getInterval()){
-			courseQuery.setTtstart(DateHelper.getTodayLongSecond());
-			courseQuery.setEtstart(DateHelper.getMonthendLongSecond(30L));
-		}
-		else if(EnumIntervalType.THIS_WEEK.getCode() == courseQuery.getInterval()){
-			courseQuery.setTtstart(DateHelper.getTodayLongSecond());
-			courseQuery.setEtstart(DateHelper.getWeekendLong(2));
-		}
-		else if(EnumIntervalType.TOMORROW.getCode() == courseQuery.getInterval()){
-			System.out.println(DateHelper.getTomorrow());
-			courseQuery.setTtstart(DateHelper.getTomorrowLong());
-			courseQuery.setEtstart(DateHelper.getTomorrowLong(1));
-		}
-		else if(EnumIntervalType.THIS_WEEKEND.getCode() == courseQuery.getInterval()){
-			courseQuery.setTtstart(DateHelper.getWeekendLong());
-			courseQuery.setEtstart(DateHelper.getWeekendLong(2));
-		}
-		else if(EnumIntervalType.THIS_MONTH_AFTER.getCode() == courseQuery.getInterval()){
-			courseQuery.setTtstart(DateHelper.getMonthendLong());
-		}
-		else if(EnumIntervalType.TODAY_BEFORE.getCode() == courseQuery.getInterval()){
-			courseQuery.setEtstart(DateHelper.getTodayLongSecond());
-		}	
-		else if(EnumIntervalType.THREE_MONTH_INNER.getCode() == courseQuery.getInterval()){
-			courseQuery.setTtstart(DateHelper.getTodayLongSecond());
-			courseQuery.setEtstart(DateHelper.getMonthendLongSecond(90L));
-		}
-		
-		
-		Integer unendCount = 0 ;
-
-		if(null == courseQuery.getInterval()){
-			
-			/**
-			 * 第一页
-			 */
-			if( null == courseQuery.getCurrentPage() || courseQuery.getCurrentPage() ==1){
-				RyxCourseQuery ryxCourseQuery = new RyxCourseQuery();
-				BeanUtils.copyProperties(courseQuery,ryxCourseQuery ,BeanHelper.getNullPropertyNames(courseQuery));
-				ryxCourseQuery.setPageSize(Integer.MAX_VALUE);
-				mav.addObject("unendList", MetaHelper.getInstance().getUnendOffline(ryxCourseQuery));
-				unendCount  = ryxCourseQuery.getTotalItem();
-			}
-
-			courseQuery.setEtstart(System.currentTimeMillis()/1000);
-			courseQuery.setOrderBy("tstart");
-			courseQuery.setSooort("desc");
-			
-		}
-		else{
-			
-			
-			courseQuery.setOrderBy("tstart");
-			courseQuery.setSooort("asc");
-		}
-		
-		
-		Integer ecount = 16 - unendCount ;
-		
-		courseQuery.setPageSize( ecount );
-		courseQuery.setStatus(EnumAuditStatus.APPROVED.getCode());
-		courseQuery.setObjType(EnumObjectType.OFFLINE_MODULE.getCode());
-		courseQuery.setIdeleted(0);
-		courseQuery.setDisplay(1);
-		courseQuery = MetaHelper.getInstance().queryOfflineCourseCache(courseQuery);
-
-		List<RyxCategoryDTO> offlineCategoryResult = MetaHelper.getInstance().getOfflineCategory();
-		
-		mav.addObject("categorys", offlineCategoryResult);
-
-		List<KeyrvDTO> cityListResult = MetaHelper.getInstance().getOfflineCourseCityList();
-		
-		mav.addObject("citys", cityListResult);
-
-
-		ResultDTO<List<RyxAdDTO>> courseHigtResult = MetaHelper.getInstance().queryAdCache(137);
-		errList = addList(errList, courseHigtResult.getErrorMsg());
-		mav.addObject("high", courseHigtResult.getModule());
-
-		mav.addObject("intervals", EnumIntervalType.getList());
-		if (null != courseQuery.getCategory()) {
-			ResultDTO<RyxCategoryQuery> subcateResult = MetaHelper.getInstance().getCategoryByPid(courseQuery.getCategory());
-			errList = addList(errList, subcateResult.getErrorMsg());
-			mav.addObject("subcates", subcateResult.getModule().getList());
-			String title = MetaHelper.getInstance().getCategoryById(courseQuery.getCategory()).getModule().getTitle();
-			if(null != courseQuery.getSubcate()){
-				title += "_" + MetaHelper.getInstance().getCategoryById(courseQuery.getSubcate()).getModule().getTitle();
-			}
-			mav.addObject("title", title + "_培训课程");
-		}
-		else{
-			mav.addObject("title", "融资租赁培训课程_线下培训");
-		}
-		mav.addObject("errList", errList);
-		mav.addObject("loginUsers", users);
-		mav.addObject("query", courseQuery);
-
-		return mav;
-
-	}
 }

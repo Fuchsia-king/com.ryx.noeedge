@@ -1,10 +1,9 @@
 package com.king.nowedge.dto.ryx;
 
-import javax.validation.constraints.NotNull;
-
+import com.king.nowedge.dto.base.BaseDTO;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.king.nowedge.dto.base.BaseDTO;
+import javax.validation.constraints.NotNull;
 
 /**
  * RyxCategory entity.
@@ -12,7 +11,7 @@ import com.king.nowedge.dto.base.BaseDTO;
  * @author MyEclipse Persistence Tools
  */
 
-public class RyxCategoryDTO extends BaseDTO implements java.io.Serializable {
+public class RyxCategoryDTO extends BaseDTO implements java.io.Serializable,Comparable<RyxCategoryDTO> {
 
 	// Fields
 
@@ -249,7 +248,16 @@ public class RyxCategoryDTO extends BaseDTO implements java.io.Serializable {
 		this.qqGroupLink = qqGroupLink;
 	}
 
-	
-	
 
+	@Override
+	public int compareTo(RyxCategoryDTO o) {
+		if(this.getId().longValue()>o.getId().longValue()){
+			return 1;
+		}
+		else if(this.getId().longValue()<o.getId().longValue()){
+			return -1;
+		}else{
+			return 0;
+		}
+	}
 }

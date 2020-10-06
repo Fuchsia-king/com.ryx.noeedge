@@ -1,5 +1,7 @@
 server:
   port: 9090
+  servlet:
+    context-path: /
 spring:
   cache:
     ehcache:
@@ -18,8 +20,8 @@ spring:
       # 使用druid数据源
       driver-class-name: com.mysql.jdbc.Driver
       #配置初始化大小/最小/最大
-      initial-size: 1
-      min-idle: 1
+      initial-size: 5
+      min-idle: 5
       max-active: 20
       #获取连接等待超时时间
       max-wait: 60000
@@ -34,17 +36,19 @@ spring:
       #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
-    thymeleaf:
-      prefix: classpath:/templates/
-      suffix: .html
-      encoding: UTF-8
-      content-type: text/html
-      cache: false
-      mode: HTML5
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+    mode: HTML5
+
+
 
 mybatis:
   mapper-locations: classpath:mapping/**/*.xml
   type-aliases-package: com.king.nowedge.dto,com.king.nowedge.query
 logging:
   level:
-    com.king.nowedge.mapper: debug
+    com.king.nowedge.mapper: error

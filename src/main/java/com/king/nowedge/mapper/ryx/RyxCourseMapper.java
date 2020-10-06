@@ -51,6 +51,8 @@ public interface RyxCourseMapper {
 	
 	public List<RyxCourseDTO> getCourseByTeacherId(RyxCourseQuery query) throws BaseDaoException;
 
+	public List<RyxCourseDTO> getAllCourseByTeacherId(RyxCourseQuery query) throws BaseDaoException;
+
 	public List<RyxCourseDTO> getMyOfflineCourse(RyxCourseQuery query)throws BaseDaoException;
 	
 	public Integer getMyOfflineCount(RyxCourseQuery query)throws BaseDaoException;

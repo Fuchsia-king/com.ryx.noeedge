@@ -15,14 +15,14 @@ import java.util.Date;
 
 public class RyxUsersDTO extends BaseDTO implements Serializable {
 	private Integer iid;
-	private String username;
+	private String username;//用户名
 	private String password;
 	private String uname;
 	private String name ;
 	private String weixinUnionId ;
 	@Email(message="{common.email.invalid}")
 	@NotEmpty(message="{common.email.not.empty}")
-	private String email;
+	private String email; //邮箱
 	@Pattern(regexp = "^\\d{11}$" ,message="{common.mobile.invalid}")
 	private String mobile;
 	private Integer regTime;
@@ -33,10 +33,10 @@ public class RyxUsersDTO extends BaseDTO implements Serializable {
 	private Integer status;
 	private String path;
 	private Integer login;
-	private Short gender;
+	private Short gender; //性别
 	private String introduction;
 	private Integer integral;
-	private Date birthday;
+	private Date birthday; //生日
 	private Short sign;
 	private Integer district1;
 	private Integer district2;
@@ -52,13 +52,15 @@ public class RyxUsersDTO extends BaseDTO implements Serializable {
 	private String code;
 	private Double coupon = 0.0;
 	private String province;
-	private Integer industry;
+	private Integer industry; //行业
 	private Long mid;  // main id ， 主账号Id
 	private Boolean isSubacunt;
 	private Double score = 0.0;
 	private Long tid;
 	private Integer usersCount;
 	private Integer rfrom ;
+	private String company; //公司
+	private String position; //职位
 	/**
 	 * 邀请人Id
 	 */
@@ -452,7 +454,20 @@ public class RyxUsersDTO extends BaseDTO implements Serializable {
 	public void setIspread(Integer ispread) {
 		this.ispread = ispread;
 	}
-	
-	
-	
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
 }

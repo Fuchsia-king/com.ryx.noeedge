@@ -4,20 +4,20 @@ import com.king.nowedge.dto.base.KeyrvDTO;
 import com.king.nowedge.dto.base.KeyvDTO;
 import com.king.nowedge.dto.base.ResultDTO;
 import com.king.nowedge.dto.enums.*;
+import com.king.nowedge.dto.ryx.*;
 import com.king.nowedge.query.base.KeyrvQuery;
 import com.king.nowedge.query.base.KeyvQuery;
-import com.king.nowedge.dto.ryx.*;
 import com.king.nowedge.query.ryx.*;
 import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.Element;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 
 @Component
@@ -37,8 +37,61 @@ public class CourseHelper  extends BaseHelper {
 		
 		courseHelper = this;  
     	
-    }  
-	
+    }
+
+
+	/**
+	 * 获取全部分类课程的链接(行业,领域,技能)
+	 * @param mav
+	 * @return
+	 */
+	@Cacheable("cacheMetadata")
+	public void getAllCategoryAttr(ModelAndView mav){
+		List<RyxCategoryDTO> ryxCategoryDTOList = MetaHelper.getInstance().getOnlineCategory();
+		Map<RyxCategoryDTO,List<RyxCategoryDTO>> map = null;
+		Map<RyxCategoryDTO, Map<RyxCategoryDTO,List<RyxCategoryDTO>>> map2 = new LinkedHashMap<>();
+		List<Integer> pidList = new ArrayList<>();
+		List<Integer> pidList1 = new ArrayList<>();
+//		for(RyxCategoryDTO rcd: ryxCategoryDTOList){
+//			List<RyxCategoryDTO> sublist = MetaHelper.getInstance().getSubCategoryByPid(rcd.getId().intValue());
+//			map = new HashMap<>();
+//			for(int i=0;i<sublist.size()-1;i++){
+//				map.put(sublist.get(i),MetaHelper.getInstance().getSubCategoryByPid(sublist.get(i).getId().intValue()));
+//			}
+//			map2.put(rcd,map);
+//		}
+		for(RyxCategoryDTO rcd: ryxCategoryDTOList){
+			pidList.add(rcd.getId().intValue());
+		}
+		List<RyxCategoryDTO> sublist = MetaHelper.getInstance().getSubCategoryByPid1(pidList);
+		for(RyxCategoryDTO rcd:sublist){
+			pidList1.add(rcd.getId().intValue());
+		}
+		List<RyxCategoryDTO> sublist1 = MetaHelper.getInstance().getSubCategoryByPid1(pidList1);
+		Collections.sort(ryxCategoryDTOList);
+		for (int i=0;i<ryxCategoryDTOList.size();i++){
+			RyxCategoryDTO rcd = ryxCategoryDTOList.get(i);
+			List<RyxCategoryDTO> list1 = new ArrayList<>();
+			for(RyxCategoryDTO rcd1:sublist) {
+				if (rcd1.getPid() == rcd.getId().intValue()) {
+					list1.add(rcd1);
+				}
+			}
+			map = new LinkedHashMap<>();
+			for (RyxCategoryDTO rcd2:list1){
+				List<RyxCategoryDTO> list2 = new ArrayList<>();
+				for(RyxCategoryDTO rcd3:sublist1){
+					if(rcd3.getPid()==rcd2.getId().intValue()){
+						list2.add(rcd3);
+					}
+				}
+				map.put(rcd2,list2);
+			}
+			map2.put(rcd,map);
+		}
+		mav.addObject("ryxCategoryDTOList",ryxCategoryDTOList);
+		mav.addObject("map2",map2);
+	}
 	/**
 	 * 
 	 * @param userId

@@ -67,10 +67,10 @@ public class PindexController extends BaseController {
 //        this.sessionRegistry = sessionRegistry;
 //    }
 
-	@GetMapping("/")
-	public String toIndex(){
-		return "index";
-	}
+//	@GetMapping("/")
+//	public String toIndex(){
+//		return "index";
+//	}
 
 	@RequestMapping("/my/mtest.html")
 	public ModelAndView test1(HttpServletRequest request, HttpServletResponse response, RedirectAttributes rt) throws IOException {
@@ -4984,12 +4984,7 @@ public class PindexController extends BaseController {
 				registerDTO.setTargetUrl("/default.html") ;
 			}
 		}
-		
-		
-		
-
 		if (!bindingResult.hasErrors()) {
-
 			ResultDTO<RyxTempUserDTO> listr = ryxUserService.getTempUserByRandomMobile(registerDTO.getMobile(), registerDTO.getVerifyCode());
 			RyxTempUserDTO list = listr.getModule();
 			errList = addList(errList, listr.getErrorMsg());
@@ -4997,12 +4992,10 @@ public class PindexController extends BaseController {
 			if (null == list) {
 				errList.add("短信验证码无效");
 			}
-
 			if (!registerDTO.getImgVerifyCode().toLowerCase()
 					.equals(SessionHelper.get(SessionHelper.IMG_VERIFY_CODE_COOKIE, request, response).toString().toLowerCase())) {
 				errList.add("图形验证码无效");
 			}
-
 			RyxUsersQuery query = new RyxUsersQuery();
 			query.setMobile(registerDTO.getMobile());
 			query.setEmail(registerDTO.getEmail());
@@ -5013,23 +5006,16 @@ public class PindexController extends BaseController {
 			if (null != user) {
 				errList.add("该电子邮箱已经注册，请直接登录");
 			}
-
-		
-
 			ResultDTO<RyxUsersDTO> mobileResult = ryxUserService.getUserByMobile(registerDTO.getMobile());
 			errList = addList(errList, mobileResult.getErrorMsg());
 			user = mobileResult.getModule();
 			if (null != user) {
 				errList.add("该手机号码已经注册，请直接登录");
 			}
-			
 			if(!registerDTO.getPassword().equals(registerDTO.getConfirmPassword())){
 				errList.add("密码与确认密码不一致，请重新输入");
 			}
-
 			if (null == errList || errList.size() == 0) {
-
-				
 				/**
 				 * 注册用户
 				 */
@@ -5048,20 +5034,14 @@ public class PindexController extends BaseController {
 				user.setIcode(icode);
 				ResultDTO<Long> createUserResult = ryxUserService.saveUser(user);
 				errList = addList(errList, createUserResult.getErrorMsg());
-
 				if (createUserResult.isSuccess()) {
-
-				
-					
 					Long userId = createUserResult.getModule();
 					ResultDTO<RyxUsersDTO> queryUserResult = ryxUserService.getUserById(userId);
 					errList = addList(errList, createUserResult.getErrorMsg());
 					if (queryUserResult.isSuccess() && null != queryUserResult.getModule()) {
-						
 						/**
 						 * 注册成功送代金券
 						 */
-						
 						RyxUserCouponDTO userCouponDTO = new RyxUserCouponDTO();
 						userCouponDTO.setCoupon(ConstHelper.REGISTER_COUPON);//
 						userCouponDTO.setUserId(userId);
@@ -5070,20 +5050,6 @@ public class PindexController extends BaseController {
 								ConstHelper.DEFAULT_COUPON_LIMIT_DAYS * 24 * 3600);
 						userCouponDTO.setCreaterId(userId);
 						ryxUserService.addUserCoupon(userCouponDTO);
-							
-						
-//						if(null != ConstHelper.REGISTER_SCORE && ConstHelper.REGISTER_SCORE > 0){
-//							UserCouponDTO userCouponDTO = new UserCouponDTO();
-//							userCouponDTO.setCoupon(ConstHelper.REGISTER_SCORE);//
-//							userCouponDTO.setUserId(userId);
-//							userCouponDTO.setRemark("注册赠送"+ ConstHelper.REGISTER_COUPON +"积分");
-//							userCouponDTO.setCreaterId(userId);
-//							ResultDTO<Boolean> result = ryxUserService.addUserScore(userCouponDTO);
-//							addList(errList, result.getErrorMsg());
-//						}
-						
-						
-						
 						/**
 						 * 注册成功，给邀请人送体验券
 						 */
@@ -5100,8 +5066,6 @@ public class PindexController extends BaseController {
 								addList(errList, result.getErrorMsg());
 							}
 						}
-						
-						
 						mav.addObject("registerResult", "1");
 						
 						/*fjy*/
@@ -5113,19 +5077,7 @@ public class PindexController extends BaseController {
 							RyxPresentDTO presentDTO = (RyxPresentDTO)JSONObject.toBean(jsonObject, RyxPresentDTO.class);
 							CookieHelper.removeCookies(SessionHelper.REGISTER_PRESENT,  "/", request, response);
 							if (presentDTO.getType() == EnumObjectType.OFFLINE_MODULE.getCode()) {//线下课程
-								/*CourseDTO dto = ryxCourseService.getCourseById(Long.parseLong(value)).getModule();
-								ApplyDTO applyDTO = new ApplyDTO();
-								applyDTO.setNbr(1);
-								applyDTO.setContact("");
-								applyDTO.setStatus(EnumOrderStatus.PRESENT.getCode());
-								applyDTO.setAddr("");
-								applyDTO.setEmail(user.getEmail());
-								applyDTO.setMobile(user.getMobile());
-								applyDTO.setOid(dto.getId());
-								applyDTO.setOtype(dto.getObjType());
-								applyDTO.setObjer(dto.getCuid());
-								applyDTO.setUserId(userId);
-								ResultDTO<Long> resultDTO = ryxUserService.createApply(applyDTO);*/
+
 							}else if (presentDTO.getType()== EnumObjectType.ONLINE_MODULE.getCode()) {//在线课程
 								RyxCourseDTO dto = CourseHelper.getInstance().getCourseById(presentDTO.getValue());
 								RyxOrderDTO order = new RyxOrderDTO();
@@ -5141,35 +5093,25 @@ public class PindexController extends BaseController {
 								order.setOrderType(EnumOrderType.COURSE_ORDER.getCode());
 								order.setDiscount2(1.0);
 								order.setCreater(userId);
-								
 								Long[] cids = { (long)dto.getId()};
 								order.setCourseIds(cids);
 								ResultDTO<Long> createOrderResult1 = ryxOrderService.saveOrder(order);
 								errList = addList(errList, createOrderResult1.getErrorMsg());
-								
 								if(createOrderResult1.isSuccess()){
 									order.setTnow(System.currentTimeMillis() / 1000);
 									order.setId(order.getId());
-									
 									order.setPayType(EnumPayType.OUTER_ADMIN_PAY.getCode());
 									order.setTpay(new Date());
-									order.setStatus(EnumOrderStatus.PAY_SUCCESS.getCode()); 
-	
-	
+									order.setStatus(EnumOrderStatus.PAY_SUCCESS.getCode());
 									order.setCoupon(0.0);
 									order.setDiscount1(order.getDiscount1());
-									
 									ResultDTO<Boolean> updateOrderResult = ryxOrderService.updateOrderAfterPaySuccess(order);
 									errList = addList(errList, updateOrderResult.getErrorMsg());
-									
 									if(updateOrderResult.isSuccess()){
-										
 										ResultDTO<Boolean> updateStudyCountResult = ryxCourseService.updateCourseStudyCount(dto.getId());
 										errList = addList(errList, updateStudyCountResult.getErrorMsg());
-										
 									}
 								}
-										
 							}else if (presentDTO.getType() == EnumObjectType.SCORE_MODULE.getCode()) {//积分
 								RyxUserCouponDTO userCouponDTO2 = new RyxUserCouponDTO();
 								userCouponDTO2.setCoupon(presentDTO.getValue().doubleValue());//
@@ -5180,8 +5122,6 @@ public class PindexController extends BaseController {
 								userCouponDTO2.setUid(userId.toString());
 								ResultDTO<Boolean> resultDTO = ryxUserService.addUserScore(userCouponDTO2);
 								errList = addList(errList, resultDTO.getErrorMsg());
-								
-								
 							}else if (presentDTO.getType() == EnumObjectType.COUPON_MODULE.getCode()) {//代金券
 								RyxUserCouponDTO userCouponDTO1 = new RyxUserCouponDTO();
 								userCouponDTO1.setCoupon(presentDTO.getValue().doubleValue());//
@@ -5219,16 +5159,9 @@ public class PindexController extends BaseController {
 		} else {
 
 		}
-
 		mav.addObject("errList", errList);
-		
 		mav.addObject("targetUrl",registerDTO.getTargetUrl()) ;
-		
-		// mav.addObject("createBindingResult", bindingResult);
-
 		return mav;
-
-
 	}
 	
 	
@@ -5514,25 +5447,13 @@ public class PindexController extends BaseController {
 			@RequestParam(value = "imgVerifyCode") String imgVerifyCode,
 			HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 
+		response.setContentType("text/html;charset=utf-8");
 		try {
-			
-			
 			String referer = request.getHeader("Referer");
 			if(StringHelper.isNullOrEmpty(referer)){
 				writeAjax(response, false, "操作过于频繁，请60分钟之后再试");
 				return ;
 			}
-			
-//			if(StringHelper.checkSendMobileSecond(30,request)){
-//				writeAjax(response, false, "操作过于频繁，请30分钟之后再试");
-//				return ;
-//			}
-//			
-//			if(StringHelper.checkSendMobileTimes(request)){
-//				writeAjax(response, false, "已超出短信获取限制，请联系客服");
-//				return ;
-//			}
-			
 			if (StringExUtils.isNullOrEmpty(mobile)) {
 				writeAjax(response, false, "请输入手机号码");
 			} else if (!StringExUtils.isMobile(mobile)) {

@@ -2,12 +2,9 @@
 <!DOCTYPE mapper   
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">   
-<mapper namespace="com.king.nowedge.mapper.ryx.RyxUserMapper">  
-
-    
+<mapper namespace="com.king.nowedge.mapper.ryx.RyxUserMapper">
     
     <sql id="select">
-		
 		id,
 	    username,
 	    password,
@@ -56,9 +53,6 @@
 	    rfrom,
 	    orate,
 	    ispread
-	    
-    
-	    
 	</sql>
 
 	<sql id="where">
@@ -274,13 +268,9 @@
 		</if>		
 		
     </select>
+
     
-    
-	
-	
-    
-    
-    <select id="getUserByMobileOrEmail" resultType="RyxUsersDTO"  parameterType="java.lang.String" >         
+    <select id="getUserByMobileOrEmail" resultType="RyxUsersDTO"  parameterType="java.lang.String" >
         select 
 		<include refid="select"/>
  		from ryx_users where mobile=#{username} or email=#{username} or username=#{username}   limit 1 for update  ;

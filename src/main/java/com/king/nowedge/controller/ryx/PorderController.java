@@ -89,22 +89,12 @@ public class PorderController extends BaseController {
 		else {
 			errList = errList1;
 		}
-
-		/**
-		 * 判断是否是微信
-		 */
-
-		
-
 		ModelAndView mav = new ModelAndView("/ryx/pc/my/cpay");
-		
 		String serverName = request.getServerName().toLowerCase();
 		if(!StringHelper.isNullOrEmpty(serverName) && serverName.indexOf("m.ryx365.com")>=0){
 			mav = new ModelAndView("/ryx/m/my/mpay");
 		}
-		
 		RyxUsersDTO users = getRyxUser();
-
 		if (null == orderId) {
 			errList = addList(errList, "无效订单Id");
 		}else {
@@ -112,71 +102,21 @@ public class PorderController extends BaseController {
 			errList = addList(errList, orderResult.getErrorMsg());
 			RyxOrderDTO order = orderResult.getModule();
 			if (null != order) {
-//				List<OrderDetailDTO> orderDetailListDto = ryxOrderService.getOrderDetailByOrderId(orderId).getModule();
-//				if (null != orderDetailListDto && orderDetailListDto.size() > 0) {
-//					List<Long> orderCourseIds = new ArrayList<>();
-//					for (OrderDetailDTO odto : orderDetailListDto) {
-////						fjy
-//						orderCourseIds.add(odto.getObjId());
-//						KeyrvQuery query = new KeyrvQuery();
-//						query.setType(EnumKeyRelatedValueType.KV_COURSE_SERIES.getCode());
-//						query.setKey1(odto.getObjId().toString());
-//						List<KeyrvDTO> list = systemService.queryKeyrv(query).getModule().getList();
-//						if (null != list && list.size() > 0) {
-//							for (KeyrvDTO dto : list) {
-//								orderCourseIds.add(Long.parseLong(dto.getRkey()));
-//							}
-//						}
-//					}
-//					CourseQuery courseQuery = new CourseQuery();
-//					courseQuery.setUserId(users.getId());
-//					courseQuery.setPageSize(Integer.MAX_VALUE);
-//					courseQuery.setFlag(0);
-//					courseQuery.setTnow(System.currentTimeMillis() / 1000);
-//					courseQuery.setOrderCourseIds(orderCourseIds);
-//					courseQuery.setObjType(EnumObjectType.getOnlineModule().getCode());
-//					ResultDTO<CourseQuery> resultDTO = ryxCourseService.getMyUnexpiredCourse1(courseQuery);
-//					errList = addList(errList, resultDTO.getErrorMsg());
-//					
-//					if (resultDTO.isSuccess() && null != resultDTO) {
-//
-//						List<CourseDTO> list = resultDTO.getModule().getList();
-//						if (null != list && list.size() > 0) {
-//							errList.add("您已购买以下体系子课程,再次购买将延长到期时间：");
-//							for (CourseDTO courseDTO : list) {
-//								errList.add("《"+courseDTO.getTitle()+"》，"+ DateHelper.long2String("yyyy年MM月dd日",courseDTO.getLimitTime()*1000) +"到期（剩余"+ StringHelper.daysLeft(courseDTO.getLimitTime())+"天）");
-//							}
-//						}
-//					}
-					
-//				}
-				
-				
-
-				
-				
-				
-				
 				order.setOrderIdStr(getRyxOrderId(order));
-
 				mav.addObject("order", order);
 				ResultDTO<RyxUsersDTO> userResult = ryxUserService.getUserById(users.getId());
 				errList = addList(errList, userResult.getErrorMsg());
 				if (userResult.isSuccess()) {
-
 					RyxUsersDTO usersDTO = userResult.getModule();
 					Double balance = usersDTO.getBalance();
 					balance = null == balance ? 0.00 : balance;
-				
 					/**
 					 * 融易学余额
 					 */
 					mav.addObject("balance", balance);
-
 					Double requestAmount = order.getOrderAmount(); // 订单价格
 					Integer maxUsedCoupon = getMaxUsedCoupon(requestAmount);
 					Double canUsedCoupon = 0.0;
-					
 					if(maxUsedCoupon>0){
 						/**
 						 * 从数据库中读取是否有没有过期的优惠券
@@ -198,31 +138,18 @@ public class PorderController extends BaseController {
 							canUsedCoupon = userCouponDTO.getCoupon();
 						}
 					}
-							
-					
 					mav.addObject("canUsedCoupon", canUsedCoupon);
-					
-					
 					/**
 					 * 计算可用余额
 					 */
 					Double canUsedBalance = balance + canUsedCoupon >= order.getOrderAmount() ? order.getOrderAmount()  - canUsedCoupon : balance ;
-
 					/**
 					 * 计算额外支付金额 （支付宝、微信支付）
 					 */
 					mav.addObject("requestAmount",order.getOrderAmount() - canUsedBalance - canUsedCoupon  );
-				} 
-				else {
-
-				}
+				} else {}
 			} 
 		}
-
-
-		
-		
-
 		mav.addObject("errList", errList);
 		mav.addObject("loginUsers", users);
 		Boolean isWeixinExplorer = isWeixinExplorer(request);
@@ -230,9 +157,18 @@ public class PorderController extends BaseController {
 		return mav;
 	}
 
-	
-	
+
+	/**
+	 *使用打赏余额支付
+	 * @param orderId
+	 * @param errList1
+	 * @param request
+	 * @param response
+	 * @param rt
+	 * @return
+	 */
 	@RequestMapping("/my/goto_pay_dashang.html")
+	@Deprecated
 	public ModelAndView go2PayDashang(Long orderId, ArrayList<String> errList1,HttpServletRequest request, HttpServletResponse response, RedirectAttributes rt) {
 
 		if (null == errList1) {
@@ -273,8 +209,17 @@ public class PorderController extends BaseController {
 		mav.addObject("isWeixinExplorer", isWeixinExplorer);
 		return mav;
 	}
-	
-	
+
+
+	/**
+	 * 给余额充值
+	 * @param orderId
+	 * @param errList1
+	 * @param request
+	 * @param response
+	 * @param rt
+	 * @return
+	 */
 	@RequestMapping("/my/goto_pay_balance.html")
 	public ModelAndView go2PayBalance(Long orderId, ArrayList<String> errList1,HttpServletRequest request, HttpServletResponse response, RedirectAttributes rt) {
 
@@ -421,32 +366,22 @@ public class PorderController extends BaseController {
 			HttpSession session, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 
 		ModelAndView mav = new ModelAndView();
-
 		errList = new ArrayList<String>();
 		RyxUsersDTO user = getRyxUser();
 		ResultDTO<RyxUsersDTO> userResultDTO = ryxUserService.getUserById(user.getId());
 		errList = addList(errList, userResultDTO.getErrorMsg());
 		RyxUsersDTO users  = userResultDTO.getModule();
-		
-	
-
-
-		
 		if (userResultDTO.isSuccess() && null != users) {
 			Double balance = users.getBalance();
 			balance = null == balance ? 0.00 : balance;
-			
-
 			ResultDTO<RyxOrderDTO> orderResult = ryxOrderService.getOrderById(orderId, user.getId());
 			errList = addList(errList, orderResult.getErrorMsg());
 			if (orderResult.isSuccess()) {
 				RyxOrderDTO order = orderResult.getModule();
 				if (null != order) {
-
 					/*
 					 * 判断 uid 是否为空 如果为空，创建一个 。并更新
 					 */
-					
 					String uid = NumberExUtils.longIdString(4);
 					order.setUid(uid);
 					ryxOrderService.updateOrderUid(orderId, uid);
@@ -883,6 +818,7 @@ public class PorderController extends BaseController {
 	
 	
 	@RequestMapping(value = "/my/pay_by_alipay_dashang.html", method = RequestMethod.GET)
+	@Deprecated
 	public void payByAlipayDashang(Long orderId, Model model, HttpServletRequest request, 
 			HttpServletResponse response, HttpSession session) throws IOException {
 		RyxUsersDTO user = getRyxUser();

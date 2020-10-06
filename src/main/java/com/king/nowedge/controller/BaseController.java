@@ -1692,7 +1692,7 @@ public class BaseController {
 	
 	
 	protected void processOrderAfterPaySuccess(ArrayList<String> errList,
-			RyxOrderDTO order,String returnOuterId,
+			RyxOrderDTO order,String returnOrterId,
 			Double usedBalance,Double usedCoupon,Double totalFee,
 			ModelAndView mav,
 			Integer payType,
@@ -1709,11 +1709,10 @@ public class BaseController {
 		updateOrder.setUid(order.getUid());
 		updateOrder.setTnow(System.currentTimeMillis() / 1000);
 		updateOrder.setId(order.getId());
-		updateOrder.setReturnOrderId(returnOuterId);
+		updateOrder.setReturnOrderId(returnOrterId);
 		updateOrder.setPayType(payType);
 		updateOrder.setTpay(new Date());
 		updateOrder.setStatus(EnumOrderStatus.PAY_SUCCESS.getCode()); // 支付成功
-		updateOrder.setOrderType(order.getOrderType());
 
 		updateOrder.setRealPrice(order.getOrderAmount() - usedCoupon); // 实际支付金额  + 余额支付的那部分
 		updateOrder.setUseBalance(usedBalance);

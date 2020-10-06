@@ -161,6 +161,19 @@
 		</if>		
 		
     </select>
+	<select id="query1" resultType="RyxCategoryDTO" parameterType="Integer">
+        select
+        <include refid="select"/>
+        from ryx_category
+		WHERE pid IN
+		<foreach collection="list" item="pid" index="index" open="(" close=")" separator=",">
+			#{pid}
+		</foreach>
+
+		order by 'sort' desc
+	</select>
+
+
      
     <select id="queryAll" resultType="RyxCategoryDTO">         
         select code,name from ryx_category where ideleted = 0 order by name

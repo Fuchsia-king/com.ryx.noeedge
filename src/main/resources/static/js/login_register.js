@@ -6,7 +6,7 @@ $(function(){
                 input_index++;
             }
         })
-        if(input_index==6&&$('#register_read').get(0).checked){
+        if(input_index==8&&$('#register_read').get(0).checked){
             $('#index_register').addClass('active');
         }else{
             $('#index_register').removeClass('active');
@@ -43,5 +43,43 @@ $(function(){
             $('#index_submit_psw').removeClass('active');
         }
     })
+
+    //点击登录
+    $('#loginbut').click(function(){
+        $("#index_login").addClass('active');//使登录按钮变橙色
+    });
+
+    //获取登录表单返回数据,隐藏登录注册按钮,显示个人信息
+    $("#login-form").ajaxForm(function(data) {
+        if(data.code==200){
+            $('#infoname').text(data.username);
+            $('#login_div').removeClass('active');
+            $('#login_regist1').toggle();
+            $('#logreg1').toggle();
+            $('#face-head1').toggle();
+        }else{
+            $('#login_error')[0].style.display='';
+        }
+    });
+
+    //获得随机防爬图形码
+    $('#verify_img').click(function(){
+        let w = 118;
+        let h = 36;
+        // let l = 4; //默认验证码为4位,支持调整
+        getImageVerifyCode('verify_img',w,h);
+    });
+    //获得手机验证码
+    $('#btnSendVerifyCode').click(function (){
+        var mobile = $("#mobile").val();
+        var imgVerifyCode = $("#imgVerifyCode").val();
+        let data = {"mobile":mobile,"imgVerifyCode":imgVerifyCode}
+        $.post('/send_register_verify_code',data,function (msg){
+            let obj = $.parseJSON(msg);
+            if(!obj.isSuccess){
+                layer.msg(obj.errorMsg);
+            }
+        });
+    });
     
 })

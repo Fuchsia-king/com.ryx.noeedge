@@ -255,10 +255,89 @@
         join ryx_course c on o.oid=c.id
         where <![CDATA[o.status <> 1 ]]> and o.limi > #{tnow} and c.id= #{courseId} and o.user_id = #{orderUid}
     </select>
-    
-    
-    
-    <update id="update" parameterType="RyxOrderDTO">
+
+	<update id="updateOrderAfterPaySuccess" parameterType="RyxOrderDTO">
+
+		update ryx_order
+
+		<set>
+
+			<if test="orderType != null">
+				<![CDATA[ order_type = #{orderType} ]]>,
+			</if>
+
+			<if test="orderUid != null">
+				<![CDATA[ order_uid = #{orderUid} ]]>,
+			</if>
+
+			<if test="tnow != null">
+				<![CDATA[ tnow = #{tnow} ]]>,
+			</if>
+
+			<if test="orderStatus != null">
+				<![CDATA[ order_status = #{orderStatus} ]]>,
+			</if>
+
+			<if test="returnOrderId != null">
+				<![CDATA[ return_order_id = #{returnOrderId} ]]>,
+			</if>
+
+			<if test="payType != null">
+				<![CDATA[ pay_type = #{payType} ]]>,
+			</if>
+
+			<if test="tpay != null">
+				<![CDATA[ tpay = #{tpay} ]]>,
+			</if>
+
+			<if test="status != null">
+				<![CDATA[ status = #{status} ]]>,
+			</if>
+
+			<if test="realPrice != null">
+				<![CDATA[ real_price = #{realPrice} ]]>,
+			</if>
+
+			<if test="useBalance != null">
+				<![CDATA[ use_balance = #{useBalance} ]]>,
+			</if>
+
+			<if test="coupon != null">
+				<![CDATA[ coupon = #{coupon} ]]>,
+			</if>
+
+			<if test="discount1 != null">
+				<![CDATA[ discount1 = #{discount1} ]]>,
+			</if>
+
+			<if test="discount2 != null">
+				<![CDATA[ discount2 = #{discount2} ]]>,
+			</if>
+
+			<if test="orderUid != null">
+				<![CDATA[ order_uid = #{orderUid} ]]>,
+			</if>
+
+			<if test="partnerId != null">
+				<![CDATA[ partner_id = #{partnerId} ]]>,
+			</if>
+
+			<if test="balance != null">
+				<![CDATA[ balance = #{balance} ]]>,
+			</if>
+
+			<if test="couponId != null">
+				<![CDATA[ coupon_id = #{couponId} ]]>,
+			</if>
+		</set>
+
+		where	id = #{id}
+
+	</update>
+
+
+
+	<update id="update" parameterType="RyxOrderDTO">
     
         update ryx_order
          

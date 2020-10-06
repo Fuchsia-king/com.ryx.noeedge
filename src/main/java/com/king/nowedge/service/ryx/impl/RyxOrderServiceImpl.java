@@ -1,44 +1,48 @@
 
 package com.king.nowedge.service.ryx.impl;
 
+import com.king.nowedge.dto.base.KeyrvDTO;
 import com.king.nowedge.dto.base.ResultDTO;
-import com.king.nowedge.dto.enums.EnumOrderType;
+import com.king.nowedge.dto.enums.*;
 import com.king.nowedge.dto.ryx.*;
-import com.king.nowedge.query.ryx.*;
 import com.king.nowedge.excp.BaseDaoException;
+import com.king.nowedge.helper.ConstHelper;
+import com.king.nowedge.helper.CourseHelper;
+import com.king.nowedge.helper.MetaHelper;
+import com.king.nowedge.helper.StringHelper;
+import com.king.nowedge.mapper.base.KeyrvMapper;
 import com.king.nowedge.mapper.ryx.*;
+import com.king.nowedge.query.base.KeyrvQuery;
+import com.king.nowedge.query.ryx.*;
 import com.king.nowedge.service.impl.BaseService;
 import com.king.nowedge.service.ryx.RyxOrderService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service("ryxOrderService")
 public class RyxOrderServiceImpl   extends BaseService implements RyxOrderService {
-	
 
-	@Autowired
-	RyxOrderMapper ryxOrderMapper;
-	
-	@Autowired
-	RyxOrderDetailMapper ryxOrderDetailMapper;
-	
-	@Autowired
-	RyxCartMapper ryxCartMapper;
-	
-	@Autowired
-	RyxPartnerOrderMapper ryxPartnerOrderMapper;
-
-	@Autowired
-	RyxApplyMapper ryxApplyMapper;
-	
-	
 	private static final Log logger = LogFactory.getLog(RyxOrderServiceImpl.class);
-	
-	
+	@Autowired RyxOrderMapper ryxOrderMapper;
+	@Autowired RyxCartMapper ryxCartMapper;
+	@Autowired RyxApplyMapper ryxApplyMapper;
+	//updateOrderAfterPaySuccess
+	@Autowired RyxUserCouponMapper ryxUserCouponMapper;
+	@Autowired RyxObjectLimitMapper ryxObjectLimitMapper;
+	@Autowired RyxOrderDetailMapper ryxOrderDetailMapper;
+	@Autowired KeyrvMapper keyrvMapper;
+	@Autowired RyxUserMapper ryxUserMapper;
+	@Autowired RyxCourseMapper ryxCourseMapper;
+	@Autowired RyxPartnerOrderMapper ryxPartnerOrderMapper;
+
+	Boolean isApplyCourse = false;  // 是否是报名课程
+
 	@Override
 	public ResultDTO<Long> saveOrder(RyxOrderDTO order) {
 		
@@ -64,8 +68,7 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 		
 		
 	}
-	
-	
+
 	@Override
 	public ResultDTO<Long> saveAdminOrder(RyxOrderDTO order) {
 		
@@ -84,7 +87,6 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 		return result;
 		
 	}
-	
 	
 	@Override
 	public ResultDTO<Boolean> saveOrderDetail(Long orderId, Long[] courseIds) {
@@ -122,10 +124,7 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 //		namedParameterJdbcTemplate.batchUpdate(sql, ps);
 ////		return keyHolder.getKey().intValue();
 	}
-	
-	
-	
-	
+
 	@Override
 	public ResultDTO<Boolean> updateOrderIfFeedback(Long id) {
 		
@@ -168,8 +167,7 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 //		String sql = "select * from ryx_order where order_uid=" + userId + " order by order_time desc";
 //		return namedParameterJdbcTemplate.getJdbcOperations().query(sql, new BeanPropertyRowMapper<OrderDTO>(OrderDTO.class));
 	}
-	
-	
+
 	@Override
 	public ResultDTO<RyxOrderQuery> queryOrder(RyxOrderQuery query) {
 		
@@ -211,9 +209,7 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 		
 		
 	}
-	
-	
-	
+
 	@Override
 	public ResultDTO<RyxOrderDetailQuery> queryOrderDetail(RyxOrderDetailQuery query) {		
 		ResultDTO<RyxOrderDetailQuery> result = null;
@@ -235,8 +231,7 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 		return result;
 		
 	}
-	
-	
+
 	@Override
 	public ResultDTO<RyxOrderDetailQuery> queryOldOrderDetail(RyxOrderDetailQuery query) {		
 		ResultDTO<RyxOrderDetailQuery> result = null;
@@ -254,9 +249,7 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 		return result;
 		
 	}
-	
-	
-	
+
 	@Override
 	public ResultDTO<Boolean> deleteOrderById(Long orderId, Long userId) {
 		
@@ -309,8 +302,7 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 		
 		return false;
 	}
-	
-	
+
 	@Override
 	public ResultDTO<Integer> getOrderCountByUserIdAndCourseId(Long userId,
 			Long courseId,Long tnow) {
@@ -338,9 +330,7 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 //			+ userId + " and d.limit_time>" + System.currentTimeMillis()/1000 + " and c.id=" + courseId;
 //		return namedParameterJdbcTemplate.getJdbcOperations().queryForInt(sql);
 	}
-	
-	
-	
+
 	@Override
 	public ResultDTO<RyxOrderDTO> getOrderById(Long orderId) {
 		
@@ -360,15 +350,17 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 //		String sql = "select * from ryx_order where id=" + orderId;
 //		return namedParameterJdbcTemplate.getJdbcOperations().queryForObject(sql, new BeanPropertyRowMapper<OrderDTO>(OrderDTO.class));
 	}
-	
 
-	
-	//支付成功更改订单明细
+	/**
+	 * 各类型订单支付成功更改订单及明细
+	 * @param order
+	 * @return
+	 */
 	@Override
+	@Transactional
 	public ResultDTO<Boolean> updateOrderAfterPaySuccess(RyxOrderDTO order) {
 		
 		ResultDTO<Boolean> result = null;
-		
 		try{
 			Boolean val = false;
 			if(EnumOrderType.EXPERIENCE_COURSE_ORDER.getCode() == order.getOrderType()){
@@ -378,7 +370,8 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 				ryxOrderMapper.updateEcourseOrder(order);
 			} 
 			else{
-				ryxOrderMapper.updateOrderAfterPaySuccess(order);
+				//普通订单支付完成更新明细
+				val = updateOrderAndDetail(order);
 			}
 			result = new ResultDTO<Boolean>(val);
 		}
@@ -391,8 +384,276 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 		return result;
 		
 	}
-	
-	
+
+	/**
+	 * 普通订单支付完成更新明细
+	 * @param order
+	 * @return
+	 * @throws BaseDaoException
+	 */
+	private Boolean updateOrderAndDetail(RyxOrderDTO order) throws BaseDaoException {
+
+			//更新订单状态
+			ryxOrderMapper.update(order);
+			/**
+			 *  记录购物券
+			 *  从会员那边扣除购物券
+			 *  增加购物券消费记录
+			 */
+			if (null != order.getCouponId() && order.getCouponId() > 0L) {
+				RyxUserCouponDTO userCouponDTO = new RyxUserCouponDTO();
+				userCouponDTO.setId(order.getCouponId());
+				userCouponDTO.setIuse(1); // 已结使用
+				userCouponDTO.setRemark("订单:" + order.getUid().toString() + "抵扣");
+				ryxUserCouponMapper.update(userCouponDTO);
+			}
+			/**
+			 * 记录余额支付
+			 */
+			if (null != order.getBalance() && order.getBalance() > 0.1) {
+
+				RyxUserCouponDTO userCouponDTO = new RyxUserCouponDTO();
+				userCouponDTO.setCoupon(-order.getBalance());
+				userCouponDTO.setCreaterId(order.getOrderUid());
+				userCouponDTO.setOrderId(order.getId());
+				userCouponDTO.setUserId(order.getOrderUid());
+				userCouponDTO.setRemark("订单:" + order.getUid().toString() + ",消费金额:" + order.getBalance());
+				userCouponDTO.setType(EnumAccountType.MONEY.getCode());
+				/**
+				 * 更新用户购物券余额
+				 */
+				ryxUserMapper.addBalance(userCouponDTO);
+				Double balance = ryxUserMapper.getUserBlanceById(userCouponDTO.getUserId());//余额
+				userCouponDTO.setType(EnumAccountType.MONEY.getCode());
+				userCouponDTO.setBalance(balance);  // 设置余额
+				ryxUserCouponMapper.create(userCouponDTO);//历史记录
+			}
+			//更新订单明细状态
+			List<RyxOrderDetailDTO> orderDetailList = ryxOrderDetailMapper.getOrderDetailByOrderId(order.getId());
+			Integer index = 0;
+			for (RyxOrderDetailDTO orderDetailDTO : orderDetailList) {
+
+				RyxCourseDTO ryxCourseDTO = ryxCourseMapper.getCourseById(orderDetailDTO.getObjId());
+
+				if (EnumObjectType.getApplyCourseList().contains(orderDetailDTO.getObjType())) {
+					isApplyCourse = true;
+				}
+				Integer avaiDay = (null == orderDetailDTO.getAvaiDay() ? ConstHelper.DEFAULT_AVAI_DAY : orderDetailDTO.getAvaiDay());
+				/**
+				 * 之前老旧的到期计算方式，先保留
+				 */
+				orderDetailDTO.setOrderId(order.getId());
+				orderDetailDTO.setTnow(order.getTnow());
+				orderDetailDTO.setRealPrice(orderDetailDTO.getPrice() * order.getDiscount2());
+				;
+				orderDetailDTO.setCoupon(orderDetailDTO.getPrice() - orderDetailDTO.getRealPrice());
+				orderDetailDTO.setStatus(order.getStatus());
+				orderDetailDTO.setPayTime(System.currentTimeMillis() / 1000);
+				if (null != orderDetailDTO.getObjer()) {
+					Map<Integer, Double> teacherRateMap = MetaHelper.getInstance().getTeacherRate(orderDetailDTO.getObjer());
+					if (null != teacherRateMap) {
+						orderDetailDTO.setOrate(teacherRateMap.get(orderDetailDTO.getObjType()));
+						if (
+								null != orderDetailDTO.getRealPrice() &&
+										null != orderDetailDTO.getOrate() &&
+										orderDetailDTO.getOrate() > 0.01 &&
+										orderDetailDTO.getRealPrice() > 0.01) //不是管理员订单
+
+						{
+							orderDetailDTO.setOamount(orderDetailDTO.getOrate() * orderDetailDTO.getRealPrice()); //更新讲师佣金金额
+						}
+					}
+				}
+				ryxOrderDetailMapper.updateLimitTimeByOrderDetailId(orderDetailDTO);
+
+				/**
+				 * 增加讲师佣金
+				 * fjy
+				 */
+				if (null != orderDetailDTO.getOrate() && null != orderDetailDTO.getOamount() && orderDetailDTO.getOrate() > 0.1
+						&& orderDetailDTO.getOamount() > 0.1 && orderDetailDTO.getRealPrice() > 0.1) {//&& !order.getIadminOrder() // 不是管理员订单
+					RyxUserCouponDTO userCouponDTO = new RyxUserCouponDTO();
+					userCouponDTO.setUserId(orderDetailDTO.getObjer());
+					userCouponDTO.setCoupon(orderDetailDTO.getOamount()); // 佣金收入
+					ryxUserMapper.addBalance1(userCouponDTO);
+					/**
+					 * 记录历史记录
+					 */
+					userCouponDTO.setCreaterId(order.getOrderUid());
+					userCouponDTO.setOrderId(order.getId());
+					userCouponDTO.setBalance(ryxUserMapper.getUserBalance1ById(orderDetailDTO.getObjer()));
+					userCouponDTO.setUserId(orderDetailDTO.getObjer());
+					userCouponDTO.setRemark("订单:" + order.getUid().toString() + "佣金收入,金额:"
+							+ StringHelper.double2String(userCouponDTO.getCoupon(), 2));
+					userCouponDTO.setType(EnumAccountType.COMMISSION.getCode());
+					ryxUserCouponMapper.create(userCouponDTO);
+
+				}
+				if (EnumObjectType.ONLINE_MODULE.getCode() == orderDetailDTO.getObjType()) {
+					/**
+					 * 设置链接合作伙伴的佣金明细、余额记录
+					 */
+					if (index == 0) {
+						RyxUsersDTO ryxUsersDTO = ryxUserMapper.getById(order.getOrderUid());
+						if (null != ryxUsersDTO.getSid() && 0L != ryxUsersDTO.getSid() && null != order.getRealPrice() &&
+								order.getRealPrice() > 0.01 && !order.getIadminOrder()) {
+
+							Double onlineRate = 0.2; // 默认分佣比例
+							RyxUsersDTO sidUsersDTO = ryxUserMapper.getById(ryxUsersDTO.getSid());
+							if (!StringHelper.isNullOrEmpty(sidUsersDTO.getOrate())) {
+								try {
+									onlineRate = Double.parseDouble(sidUsersDTO.getOrate().split(",")[0]);
+								} catch (Throwable t) {
+									logger.error(t.getMessage(), t);
+								}
+							}
+							RyxUserCouponDTO userCouponDTO = new RyxUserCouponDTO();
+							userCouponDTO.setUserId(ryxUsersDTO.getSid());
+							userCouponDTO.setCoupon(order.getRealPrice() * onlineRate);    // 佣金收入，默认佣金比例
+							ryxUserMapper.addBalance1(userCouponDTO);
+							ryxUserMapper.addTbalance1(userCouponDTO);
+
+							/**
+							 * 记录历史记录
+							 */
+							userCouponDTO.setCreaterId(ryxUsersDTO.getSid());
+							userCouponDTO.setOrderId(order.getId());
+							userCouponDTO.setBalance(ryxUserMapper.getUserBalance1ById(ryxUsersDTO.getSid()));
+							userCouponDTO.setUserId(ryxUsersDTO.getSid());
+							userCouponDTO.setRemark("订单:" + order.getUid().toString() + "推广佣金收入,金额:" + StringHelper.double2String(userCouponDTO.getCoupon(), 2));
+							userCouponDTO.setType(EnumAccountType.COMMISSION.getCode());
+							ryxUserCouponMapper.create(userCouponDTO);
+
+							RyxPartnerOrderDTO ryxPartnerOrderDTO = new RyxPartnerOrderDTO();
+							ryxPartnerOrderDTO.setAmount(order.getRealPrice());
+							ryxPartnerOrderDTO.setCommission(userCouponDTO.getCoupon());
+							ryxPartnerOrderDTO.setRate(onlineRate);
+							ryxPartnerOrderDTO.setOrderId(order.getId());
+							ryxPartnerOrderDTO.setUserId(order.getOrderUid());
+							ryxPartnerOrderDTO.setPartnerId(userCouponDTO.getUserId());
+							ryxPartnerOrderMapper.create(ryxPartnerOrderDTO);
+						}
+					}
+					index++;
+
+					/**
+					 * 新的到期计算方式
+					 */
+
+					/**
+					 * 查询体系
+					 */
+					KeyrvQuery keyrvQuery = new KeyrvQuery();
+					keyrvQuery.setKey1(orderDetailDTO.getObjId().toString());
+					keyrvQuery.setType(EnumKeyRelatedValueType.KV_COURSE_SERIES.getCode());
+					keyrvQuery.setPageSize(Integer.MAX_VALUE);
+					List<KeyrvDTO> courseSeries = keyrvMapper.query(keyrvQuery);
+					/**
+					 * 没有子课程
+					 */
+					if (null == courseSeries || courseSeries.size() == 0) {
+						/**
+						 * 当前课程是子课程，保存自己
+						 * 更新object limit（object 过期时间）
+						 */
+						KeyrvDTO keyrvDTO = CourseHelper.getInstance().getMainCourseBySubCourse1(orderDetailDTO.getObjId());
+						if (null != keyrvDTO && !StringHelper.isNullOrEmpty(keyrvDTO.getKey1())) {
+							RyxCourseDTO mainCourse = CourseHelper.getInstance().getCourseById(Long.parseLong(keyrvDTO.getKey1()));
+							if (null != mainCourse) {
+								RyxObjectLimitQuery objectLimitQuery = new RyxObjectLimitQuery();
+								objectLimitQuery.setOtype(orderDetailDTO.getObjType());
+								objectLimitQuery.setOid(orderDetailDTO.getObjId());
+								objectLimitQuery.setUserId(order.getOrderUid());
+								RyxObjectLimitDTO objectLimitDTO = ryxObjectLimitMapper.queryByOou(objectLimitQuery);
+								if (null == objectLimitDTO) {
+									objectLimitDTO = new RyxObjectLimitDTO();
+									objectLimitDTO.setOid(objectLimitQuery.getOid());
+									objectLimitDTO.setOtype(objectLimitQuery.getOtype());
+									objectLimitDTO.setUserId(objectLimitQuery.getUserId());
+									objectLimitDTO.setLimi(System.currentTimeMillis() / 1000 + avaiDay * 24 * 3600);
+									objectLimitDTO.setStatus(EnumOrderStatus.PAY_SUCCESS.getCode());
+									objectLimitDTO.setMoid(Long.parseLong(keyrvDTO.getKey1()));
+									objectLimitDTO.setSort(keyrvDTO.getSort());
+									objectLimitDTO.setCategory(mainCourse.getCategory());
+									objectLimitDTO.setOrderType(EnumOrderType.COURSE_ORDER.getCode());
+									ryxObjectLimitMapper.create(objectLimitDTO);
+								} else {
+									//判断是否到期，如果到期重新创建
+									Long limit = objectLimitDTO.getLimi();
+									if (limit >= System.currentTimeMillis() / 1000) { // 未过期，续费
+										limit = limit + avaiDay * 24 * 3600;
+									} else {//已过期，重新设置时间
+										limit = System.currentTimeMillis() / 1000 + avaiDay * 24 * 3600;
+									}
+									objectLimitDTO.setStatus(EnumOrderStatus.PAY_SUCCESS.getCode());
+									objectLimitDTO.setLimi(limit);
+									objectLimitDTO.setCategory(mainCourse.getCategory());
+									objectLimitDTO.setMoid(Long.parseLong(keyrvDTO.getKey1()));
+									objectLimitDTO.setSort(keyrvDTO.getSort());
+									objectLimitDTO.setOrderType(EnumOrderType.COURSE_ORDER.getCode());
+									ryxObjectLimitMapper.updateLimitByOou(objectLimitDTO);
+								}
+							}
+						}
+
+					} else {
+						/**
+						 * 当前课程是主课程,保存他的子课程
+						 */
+						for (KeyrvDTO keyrvDTO : courseSeries) {
+							/**
+							 * 更新object limit（object 过期时间）
+							 */
+							RyxObjectLimitQuery objectLimitQuery = new RyxObjectLimitQuery();
+							objectLimitQuery.setOtype(orderDetailDTO.getObjType());
+							objectLimitQuery.setOid(Long.parseLong(keyrvDTO.getRkey()));
+							objectLimitQuery.setUserId(order.getOrderUid());
+							RyxObjectLimitDTO objectLimitDTO = ryxObjectLimitMapper.queryByOou(objectLimitQuery);
+							if (null == objectLimitDTO) {
+								objectLimitDTO = new RyxObjectLimitDTO();
+								objectLimitDTO.setOid(objectLimitQuery.getOid());
+								objectLimitDTO.setOtype(objectLimitQuery.getOtype());
+								objectLimitDTO.setUserId(objectLimitQuery.getUserId());
+								objectLimitDTO.setLimi(System.currentTimeMillis() / 1000 + avaiDay * 24 * 3600);
+								objectLimitDTO.setStatus(EnumOrderStatus.PAY_SUCCESS.getCode());
+								objectLimitDTO.setMoid(orderDetailDTO.getObjId());
+								objectLimitDTO.setSort(keyrvDTO.getSort());
+								objectLimitDTO.setCategory(ryxCourseDTO.getCategory());
+								objectLimitDTO.setOrderType(EnumOrderType.COURSE_ORDER.getCode());
+								ryxObjectLimitMapper.create(objectLimitDTO);
+							} else {
+								//判断是否到期，如果到期重新创建
+								Long limit = objectLimitDTO.getLimi();
+								if (limit >= System.currentTimeMillis() / 1000) { // 未过期，续费
+									limit = limit + avaiDay * 24 * 3600;
+								} else {//已过期，重新设置时间
+									limit = System.currentTimeMillis() / 1000 + avaiDay * 24 * 3600;
+								}
+								objectLimitDTO.setLimi(limit);
+								objectLimitDTO.setMoid(orderDetailDTO.getObjId());
+								objectLimitDTO.setStatus(EnumOrderStatus.PAY_SUCCESS.getCode());
+								objectLimitDTO.setSort(keyrvDTO.getSort());
+								objectLimitDTO.setCategory(ryxCourseDTO.getCategory());
+								objectLimitDTO.setOrderType(EnumOrderType.COURSE_ORDER.getCode());
+								ryxObjectLimitMapper.updateLimitByOou(objectLimitDTO);
+							}
+						}
+					}
+				}
+			}
+			/**
+			 * 更新报名课程支付状态
+			 */
+			if (isApplyCourse) {
+				RyxApplyDTO applyDTO = new RyxApplyDTO();
+				applyDTO.setOrderId(order.getId());
+				applyDTO.setIattent(EnumYesorno.NO.getCode());
+				applyDTO.setStatus(EnumOrderStatus.PAY_SUCCESS.getCode());
+				ryxApplyMapper.updateByOrderId(applyDTO);
+			}
+			return true;
+	}
+
 	@Override
 	public ResultDTO<Boolean> batchCreateOfflineApply(RyxApplyDTO dto) {
 		
@@ -436,8 +697,7 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 		return result;
 		
 	}
-	
-	
+
 	//支付成功更改订单明细
 	@Override
 	public ResultDTO<Boolean> updateOrder(RyxOrderDTO order) {
@@ -459,12 +719,10 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 //		String sql = "update ryx_order_detail t set t.limit_time=t.avai_day*24*3600+" + System.currentTimeMillis()/1000 + " where t.order_id=" + orderId;
 //		namedParameterJdbcTemplate.getJdbcOperations().update(sql);
 	}
-	
-	
-	
+
 	//支付成功更改订单明细
-		@Override
-		public ResultDTO<Boolean> updateOrderUid(Long id,String uid) {
+	@Override
+	public ResultDTO<Boolean> updateOrderUid(Long id,String uid) {
 			
 			ResultDTO<Boolean> result = null;
 			try{
@@ -485,7 +743,6 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 //			String sql = "update ryx_order_detail t set t.limit_time=t.avai_day*24*3600+" + System.currentTimeMillis()/1000 + " where t.order_id=" + orderId;
 //			namedParameterJdbcTemplate.getJdbcOperations().update(sql);
 		}
-	
 	
 	@Override
 	public ResultDTO<List<RyxOrderDetailDTO>> getOrderDetailByOrderId1(Long orderId) {
@@ -508,8 +765,7 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 //		String sql = "select * from ryx_order_detail t where t.order_id=" + orderId;
 //		return namedParameterJdbcTemplate.getJdbcOperations().query(sql, new BeanPropertyRowMapper<OrderDetailDTO>(OrderDetailDTO.class));
 	}
-	
-	
+
 	//评价过了，更改状态
 	@Override
 	public ResultDTO<Boolean> updateOrderDetailIfFeedback(Long id) {
@@ -528,9 +784,7 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 		return result;
 		
 	}
-	
-	
-	
+
 	//保存到购物车
 	@Override
 	public ResultDTO<Boolean> save2Cart(RyxCartDTO cart) {
@@ -598,8 +852,7 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 		}
 		return result;
 	}
-	
-	
+
 	@Override
 	public ResultDTO<Integer> countQueryCart(Long userId) {		
 		
@@ -661,7 +914,7 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 //		return namedParameterJdbcTemplate.getJdbcOperations().queryForObject(sql, Double.class);
 	}
 	
-	//根据订单号获取订单{
+	//根据订单号获取订单
 	@Override
 	public ResultDTO<RyxOrderDTO> getOrderById(Long orderId, Long userId) {
 		
@@ -709,8 +962,7 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 //		String sql = "select * from ryx_order t where t.id=" + orderId + " and t.order_uid=" + userId;
 //		return namedParameterJdbcTemplate.getJdbcOperations().queryForObject(sql, new BeanPropertyRowMapper<OrderDTO>(OrderDTO.class));
 	}
-	
-	
+
 	@Override
 	public ResultDTO<RyxOrderDTO> getOrderByUid(String uid) {
 		
@@ -731,8 +983,7 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 //		String sql = "select * from ryx_order t where t.id=" + orderId + " and t.order_uid=" + userId;
 //		return namedParameterJdbcTemplate.getJdbcOperations().queryForObject(sql, new BeanPropertyRowMapper<OrderDTO>(OrderDTO.class));
 	}
-	
-	
+
 	public ResultDTO<Boolean> updateUseBalance(Double useBalance, Long orderId) {
 		
 		ResultDTO<Boolean> result = null;
@@ -750,12 +1001,9 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 			result = new ResultDTO<Boolean>("error", e.getMessage());logger.error(e);
 		}
 		return result;
-		
-		
 //		String sql = "update ryx_order t set t.use_balance=" + useBalance + " where t.id=" + orderId;
 //		namedParameterJdbcTemplate.getJdbcOperations().update(sql);
 	}
-
 
 	@Override
 	public ResultDTO<RyxOrderDetailDTO> getOrderDetailById(Long id) {
@@ -773,8 +1021,6 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 		return result;
 	}
 	
-	
-	
 	@Override
 	public ResultDTO<Integer> countQueryOrderDetail(RyxOrderDetailQuery query) {
 		ResultDTO<Integer> result = null;
@@ -790,8 +1036,7 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 		}
 		return result;
 	}
-	
-	
+
 	@Override
 	public ResultDTO<Integer> countQueryOrder(RyxOrderQuery query) {
 		ResultDTO<Integer> result = null;
@@ -807,8 +1052,6 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 		}
 		return result;
 	}
-	
-	
 	
 	@Override
 	public ResultDTO<RyxPartnerOrderQuery> queryPartnerOrder(RyxPartnerOrderQuery query) {
@@ -834,8 +1077,7 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 		return result;
 		
 	}
-	
-	
+
 	@Override
 	public ResultDTO<RyxPartnerOrderDTO> getPartnerOrderByOrderId(Long orderId) {
 		
@@ -853,8 +1095,7 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 		return result;
 		
 	}
-	
-	
+
 	@Override
 	public ResultDTO<Integer> countQueryPartnerOrder(RyxPartnerOrderQuery query) {
 		ResultDTO<Integer> result = null;
@@ -870,7 +1111,6 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 		}
 		return result;
 	}
-
 
 	@Override
 	public ResultDTO<RyxOrderDetailQuery> queryOrderDetailBuy(RyxOrderDetailQuery query) {
@@ -891,7 +1131,6 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 		}
 		return result;
 	}
-
 
 	@Override
 	public ResultDTO<Boolean> updateOrderDetailByObjer(RyxOrderDetailDTO ryxOrderDetailDTO) {
@@ -922,7 +1161,6 @@ public class RyxOrderServiceImpl   extends BaseService implements RyxOrderServic
 		return result;
 		
 	}
-
 
 	@Override
 	public ResultDTO<Double> sumTeacherOamount(RyxOrderDetailQuery query) {

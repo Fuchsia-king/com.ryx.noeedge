@@ -1,18 +1,18 @@
 package com.king.nowedge.mapper.ryx;
 
-import java.util.List;
-
+import com.king.nowedge.dto.ryx.RyxCategoryDTO;
+import com.king.nowedge.excp.BaseDaoException;
+import com.king.nowedge.query.ryx.RyxCategoryQuery;
 import org.apache.ibatis.annotations.Mapper;
 
-import com.king.nowedge.dto.ryx.RyxCategoryDTO;
-import com.king.nowedge.query.ryx.RyxCategoryQuery;
-import com.king.nowedge.excp.BaseDaoException;
+import java.util.List;
 
 @Mapper
 public interface RyxCategoryMapper {
 
 	
 	public List<RyxCategoryDTO> query(RyxCategoryQuery query)throws BaseDaoException;
+	public List<RyxCategoryDTO> query1(List<Integer> pidlist)throws BaseDaoException;
 
 	public Integer countQuery(RyxCategoryQuery categoryQuery) throws BaseDaoException;
 

@@ -1056,6 +1056,20 @@ public class RyxCourseServiceImpl extends BaseService implements RyxCourseServic
 	}
 
 	@Override
+	public ResultDTO<List<RyxCourseDTO>> getAllCourseByTeacherId(RyxCourseQuery query) {
+		ResultDTO<List<RyxCourseDTO>> result = null;
+		try {
+			List<RyxCourseDTO> val = courseMapper.getAllCourseByTeacherId(query);
+			result = new ResultDTO<List<RyxCourseDTO>>(val);
+		} catch (BaseDaoException e) {
+			result = new ResultDTO<List<RyxCourseDTO>>("error", e.getMessage());logger.error(e.getMessage(), e);
+		} catch (Throwable e) {
+			result = new ResultDTO<List<RyxCourseDTO>>("error", e.getMessage());logger.error(e.getMessage(), e);
+		}
+		return result;
+	}
+
+	@Override
 	public ResultDTO<Integer> countCourseHits(RyxCourseQuery query) {
 		ResultDTO<Integer> result = null;
 		try{			

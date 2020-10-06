@@ -2709,6 +2709,16 @@ ins {
             align-items: center;
             font-family: Helvetica;
 
+            .tit-text{
+              max-width: 433px;
+              overflow : hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+
+            }
+
             span {
               font-size: 14px;
               font-family: PingFang-Regular;
@@ -2716,6 +2726,8 @@ ins {
               display: inline-block;
               border-radius: 12px;
               margin-left: 9px;
+              min-width: 64px;
+
             }
 
             .green {

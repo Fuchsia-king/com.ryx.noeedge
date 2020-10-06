@@ -103,7 +103,7 @@
               <div class="td-name">
               <div class="main">
                 <div class="flex-l">
-                  <div class="pic"><img th:src="@{course.image}" ></div>
+                  <div class="pic"><img th:src="@{${course.image}}" ></div>
                 </div>
                 <div class="flex-r">
                   <div class="title" th:text="${course.title}"></div>
@@ -119,8 +119,8 @@
       </div>
       <div class="mode-payment">
         <div class="payment-list" id="payment-list">
-          <div class="item ">
-            <input type="radio" name="pay" class="radio-input"/>
+          <div class="item  active" th:style="${balance>0?'display:'+'':'display:'+'none'}">
+            <input id="balance_pay" type="radio" name="pay" class="radio-input" checked/>
             <div class="border"></div>
             <div class="img"><img src="/images/payment/icon_bankcard.png"></div>
             <div class="balance gray">
@@ -129,12 +129,12 @@
             </div>
           </div>
           <div class="item">
-            <input type="radio" name="pay" class="radio-input"/>
+            <input id="weixin_pay" type="radio" name="pay" class="radio-input"/>
             <div class="border"></div>
             <div class="img"><img src="/images/payment/icon_weixin.png"></div>
           </div>
-          <div class="item active">
-            <input type="radio" name="pay" class="radio-input" checked/>
+          <div class="item">
+            <input id="alipay" type="radio" name="pay" class="radio-input" />
             <div class="border"></div>
             <div class="img"><img src="/images/payment/icon_zhifubao.png"></div>
           </div>
@@ -149,8 +149,8 @@
               <div class="select-add">
                 <input id ="coupon1" type="text" readonly th:value="${canUsedCoupon>0?canUsedCoupon:0}" th:placeholder="${canUsedCoupon>0?'请选择优惠券':'暂无可使用优惠券'}">
                 <div class="lable-item" id="couponClick">
-                  <div class="list-box" th:if="${canUsedCoupon>0}" th:data-val="${canUsedCoupon}" th:text="${'可使用使用优惠券金额:'+canUsedCoupon}"></div>
-                  <div class="list-box" data-val="0">暂无优惠券</div>
+                  <div class="list-box" th:if="${canUsedCoupon>0}" th:data-val="${canUsedCoupon}" th:text="${'可使用优惠券金额:'+canUsedCoupon}"></div>
+                  <div class="list-box" th:unless="${canUsedCoupon>0}" data-val="暂无可用优惠券">暂无优惠券</div>
                 </div>
               </div>
             </div>
@@ -165,11 +165,11 @@
             </div>
             <div class="item">
               <div class="lable-l">优惠券：</div>
-              <div class="lable-r" id = "useCoupon1" ></div>
+              <div class="lable-r" id = "useCoupon1" th:text="${canUsedCoupon>0?'￥'+canUsedCoupon:''}"></div>
             </div>
             <div class="item">
               <div class="lable-l">余额抵扣：</div>
-              <div class="lable-r" th:text="${'¥'+balance}"></div>
+              <div class="lable-r" th:text="${'¥'+canUsedBalance}"></div>
             </div>
             <div class="total-price">
               <div class="lable-l">需付金额：</div>
@@ -178,7 +178,7 @@
           </div>
         </div>
         <div class="pay-btn">
-          <button type="submit">立即支付</button>
+          <button type="submit" id="paynow1">立即支付</button>
         </div>
         <div class="note-text">本站课程均属于虚拟商品，购买后无特殊原因，不支持退款</div>
         <div class="agreement">
@@ -187,33 +187,33 @@
       </div>
       <div class="pay-wrap">
         <div class="img">
-          <img src="/images/payment/icon_success.png">
-          <!-- <img src="./images/payment/icon_err.png"> -->
+          <img src="/images/payment/icon_success.png" style="display: none" id="success_img">
+          <img src="./images/payment/icon_err.png" style="display: none" id="error_img">
         </div>
         <div class="state-text">
-          <span>支付成功</span>
-          <!-- <span>支付失败</span> -->
+          <span style="display: none" id="success_span">支付成功</span>
+          <span style="display: none" id="error_span">支付失败</span >
         </div>
         <!-- <div class="state-desc">请核对并修改以下信息后，再重新提交。</div> -->
-        <div class="info">
+        <div class="info" style="display: none" id="success_info">
           <div class="item">
-            <div class="lable-l">订单编号：</div>
-            <div class="lable-r">8020200322190926o105tx</div>
+            <div class="lable-l" >订单编号：</div>
+            <div class="lable-r" id="order_id1"></div>
           </div>
           <div class="item">
-            <div class="lable-l">支付方式：</div>
-            <div class="lable-r">微信支付</div>
+            <div class="lable-l" >支付方式：</div>
+            <div class="lable-r" id="pay_way1"></div>
           </div>
           <div class="item">
             <div class="lable-l">支付时间：</div>
-            <div class="lable-r">2020-03-12 14:57:47</div>
+            <div class="lable-r" id="pay_time1"></div>
           </div>
           <div class="item">
             <div class="lable-l">支付金额：</div>
-            <div class="lable-r">￥1247.00</div>
+            <div class="lable-r" id="count1"></div>
           </div>
         </div>
-        <!-- <div class="err-box">
+        <div class="err-box" style="display: none">
           <div class="tit">您提交的内容可能有如下错误：</div>
           <div class="err-list">
             <div class="err-item">
@@ -223,140 +223,52 @@
               <img src="./images/payment/err.png">你的账户余额不足
             </div>
           </div>
-        </div> -->
+        </div>
         <div class="study-btn">
-          <button type="submit" class="orange">立即学习</button>
-          <!-- <button type="submit" class="blue">重新支付</button> -->
+          <button type="submit" class="orange" style="display: none" id="success_btn">立即学习</button>
+          <button type="submit" class="blue" style="display: none" id="error_btn">重新支付</button>
         </div>
       </div>
     </div>
+
   </div>
-    <div class="footer">
-      <div class="footer-links">
-        <div class="container">
-          <div class="logo">
-            <a href="#"> <img src="/images/logo.png" alt="logo"></a>
-          </div>
-          <div class="skip-middle">
-            <div class="slide">
-              <div class="title Helvbold">关于我们</div>
-              <ul class="link-ul">
-                <li class="link"><a class="Helvbold" href="info_aboutus">融易学简介</a></a></li>
-                <li class="link"><a class="Helvbold" href="info_contactus">联系我们</a></a></li>
-                <li class="link"><a class="Helvbold" href="info_statement">免责声明</a></a></li>
-              </ul>
-            </div>
-            <div class="slide">
-              <div class="title Helvbold">帮助中心</div>
-              <ul class="link-ul">
-                <li class="link"><a class="Helvbold" href="info_register">如何注册</a></a></li>
-                <li class="link"><a class="Helvbold" href="info_choosecourse">如何选课</a></a></li>
-                <li class="link"><a class="Helvbold" href="info_opencourse">如何开课</a></li>
-                <li class="link"><a class="Helvbold" href="info_avai">课程有效期</a></li>
-              </ul>
-            </div>
-            <div class="slide">
-              <div class="title Helvbold">商务合作</div>
-              <ul class="link-ul">
-                <li class="link"><a class="Helvbold" href="info_cooperation">合作方式</a></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="contact">
-            <div class="icon">
-              <a href="">
-                <img class="icon-hidden" src="/images/people.png">
-                <img class="icon-show" src="/images/people_active.png">
-              </a>
-              <a href="javacript:void(0);">
-                <img class="icon-hidden" src="/images/wx.png">
-                <img class="icon-show" src="/images/wx_active.png">
-                <div class="serve-code">
-                  <div class="pic">
-                    <img src="/images/app_img.png">
-                  </div>
-                  <div class="text">关注融易学服务号</div>
-                </div>
-              </a>
-              <a href="javacript:void(0);">
-                <img class="icon-hidden" src="/images/code.png">
-                <img class="icon-show" src="/images/code_active.png">
-                <div class="app-code">
-                  <div class="pic">
-                    <img src="/images/ewm.png">
-                  </div>
-                  <div class="text">扫码下载APP</div>
-                </div>
-              </a>
-            </div>
-            <div class="time">
-              <img src="/images/phone.png" alt="phone"><span class="text">周一至周五9:00—18:00</span>
-            </div>
-            <div class="phone"><a href="tel:0755-2532-0861">0755-2532-0861</a></div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="footer-info">
-        <div class="organization">
-          <div class="container">
-            <div class="swiper-container" id="swiper-organization">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
-                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
-                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
-                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
-                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
-                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
-                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
-              </div>
-              <div class="swiper-button-prev"></div>
-              <div class="swiper-button-next"></div>
-            </div>
-          </div>
-        </div>
-        <div class="report">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="report-item">
-                  Copyright©2015-2018********
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="report-item">
-                  CP备：粤ICP备*********号
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="report-item">
-                  CP备：粤ICP备*********号
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-
-
-        </div>
-
-
-      </div>
-
+  <div class="footer" th:include="comm/footer :: comm_footer"></div>
+<!--    <div class="modal fade" id="weixinScanPayModel" style="display: none">-->
+<!--      <div class="modal-header">-->
+<!--        <button type="button" class="close" data-dismiss="modal">-->
+<!--          <i class="icon icon-close"></i>-->
+<!--        </button>-->
+<!--        <div class="title-m">微信扫码支付</div>-->
+<!--      </div>-->
+<!--      <div class="modal-body-m" id="weixinScanPayModelBody">-->
+<!--        <input type="hidden" name="orderId" id="orderId" />-->
+<!--        <div class="row-fluid sortable">-->
+<!--          <img id="imgWinPay" style="width:59%;float:left" />-->
+<!--          <img src="/images/weixin-phone-bg.png" style="width:39%;float:left;margin-top:10px"/>-->
+<!--        </div>-->
+<!--        <div class="row-fluid sortable" id="errorContainer" style="display:none">-->
+<!--          <div class="alert-mm alert-error" style="float:none;" id="errorContent">正在检测支付状态...</div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="modal-footer-m">-->
+<!--        <a href="#" class="btn" data-dismiss="modal">关闭</a>-->
+<!--      </div>-->
+<!--    </div>-->
+    <div id="weixinScanPayModel" style="display: none">
+      <img src="" id="imgWinPay" style="width: 50%"/>
+<!--      <img src="/images/weixin-phone-bg.png" style="width: 39%"/>-->
+      <p style="height:30px;background-color: #FFB6C1;font-size: 14px;color:#A42D00;text-align:left;padding-top:7px;padding-left: 5px;margin-bottom: 10px">尚未完成支付,请用微信扫码支付</p>
     </div>
-  <script src="/js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/jquery-2.1.1.min.js"  charset="utf-8"></script>
   <script src="/js/bootstrap.min.js"></script>
   <script src="/js/swiper.min.js"></script>
   <!-- privatjs -->
-  <script type="text/javascript" src="/js/public.js"></script>
-  <script type="text/javascript" src="/js/inMain.js"></script>
+  <script  src="/js/public.js"></script>
+  <script  src="/js/inMain.js"></script>
   <!--end-->
-  <script type="text/javascript" th:src="@{/js/jquery_form.js}"></script>
-  <script type="text/javascript" th:src="@{/js/jquery-cookie-1.4.1.min.js}"></script>
+  <script  th:src="@{/js/jquery_form.js}"></script>
+  <script  th:src="@{/js/jquery-cookie-1.4.1.min.js}"></script>
+  <script src="/js/layer/layer.js"></script>
   <script>
     $(function (){
       if($('#face-head1')[0].style.display=='none') {
@@ -366,6 +278,74 @@
           $('#face-head1')[0].style.display = '';
         }
       }
+      let amount = Number('[[${requestAmount}]]');
+      let coupon = Number('[[${canUsedCoupon}]]');
+      let orderId = '[[${order.id}]]';
+      $('#paynow1').click(function (){
+        if(amount>0){
+          //支付宝支付
+          if($('#alipay')[0].checked){
+            if(coupon>0){
+              window.location.href='/payByAlipay?orderId='+orderId+'&isUsingCoupon=true';
+            }else{
+              window.location.href='/payByAlipay?orderId='+orderId+'&isUsingCoupon=false';
+            }
+          }else if($('#weixin_pay')[0].checked){//微信支付
+            let url='';
+            if(coupon>0){
+              url = "/payByWechat?orderId="+ orderId +"&isUsingCoupon=true";
+              $('#imgWinPay').attr("src",url);
+              // $.get(url,function (res){
+              //
+              //   console.log(res);
+              // });
+            }else{
+              url = "/payByWechat?orderId="+ orderId +"&isUsingCoupon=false";
+              $('#imgWinPay').attr("src",url);
+              // $('#weixinScanPayModel')[0].style.display='';
+
+              // $.get(url,function(res){
+              //   alert(res);
+              //   console.log(res);
+              // });
+            }
+             if($('#imgWinPay').height!=0){
+                 layer.open({
+                   title:['微信扫码支付','font-size:18px;margin-left:0'],
+                   type:1,
+                   closeBtn:2,
+                   shade:true,
+                   zindex:999,
+                   content:$('#weixinScanPayModel'),
+                   offset: 'auto',
+                   success: function(layero, index){
+                   }
+                 });
+             }
+          }else{
+            layer.msg("请选择一种支付方式");
+          }
+        }else{
+          let canUsedBalance = Number('[[${canUsedBalance}]]');
+          if(canUsedBalance>0){
+            let data = {"orderId":[[${order.id}]],"isUsingCoupon":true};
+            $.post('pay_by_balance',data,function(res){
+              console.log(res);
+              if(res.status==2){
+                $('#success_img')[0].style.display='';
+                $('#success_span')[0].style.display='';
+                $('#success_info')[0].style.display='';
+                $('#success_btn')[0].style.display='';
+                $('#order_id1').text(res.orderId);
+                $('#pay_way1').text(res.payway);
+                $('#pay_time1').text(res.paytime);
+                $('#count1').text('￥'+res.count);
+              }
+            });
+          }
+        }
+      });
+
       // $('#useCoupon1')[0].innerText = '¥'+$('#coupon1').val();
       $('#coupon1 input').change(function(){
         alert('来了');

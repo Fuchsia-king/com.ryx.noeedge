@@ -34,7 +34,8 @@ public interface RyxCategoryService {
 	public ResultDTO<Integer> countQueryCategory(RyxCategoryQuery query) ;
 	
 	public ResultDTO<RyxCategoryQuery> queryCategory(RyxCategoryQuery query) ;
-	
+	public ResultDTO<RyxCategoryQuery> queryCategory1(RyxCategoryQuery query,List<Integer> pidList) ;
+
 	
 	
 	public ResultDTO<RyxCategoryDTO> getCategoryById(Integer id) ;

@@ -1,11 +1,11 @@
 package com.king.nowedge.mapper.ryx;
 
-import java.util.List;
-
 import com.king.nowedge.dto.ryx.RyxTempUserDTO;
-import com.king.nowedge.query.ryx.RyxTempUserQuery;
 import com.king.nowedge.excp.BaseDaoException;
+import com.king.nowedge.query.ryx.RyxTempUserQuery;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface RyxTempUserMapper {
@@ -16,6 +16,7 @@ public interface RyxTempUserMapper {
 	
 	public RyxTempUserDTO getTempUserByRandomMobile(RyxTempUserQuery query) throws BaseDaoException;
 
+	public Integer update(RyxTempUserDTO ryxTempUserDTO);
 
 	public Integer countQuery(RyxTempUserQuery query)throws BaseDaoException;
 

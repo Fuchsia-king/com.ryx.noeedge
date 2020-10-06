@@ -3281,6 +3281,18 @@ public List<KeyvalueDTO> getPosition0(){
 		
 		return (List<RyxCategoryDTO>) elem.getObjectValue();
 	}
+
+	public List<RyxCategoryDTO> getSubCategoryByPid1(List<Integer> pidList) {
+
+			RyxCategoryQuery query = new RyxCategoryQuery();
+			query.setPageSize(Integer.MAX_VALUE);
+			query.setIdeleted(0);
+			query.setDisplay(1);
+			query.setOrderBy("sort");
+			ResultDTO<RyxCategoryQuery> result = metaHelper.ryxCategoryService.queryCategory1(query,pidList);
+
+		return result.getModule().getList();
+	}
 	
 	
 	
@@ -3616,6 +3628,27 @@ public List<KeyvalueDTO> getPosition0(){
 		}
 		
 		return (List<KeyrvDTO>) elem.getObjectValue();
+	}
+
+	public List<KeyvDTO> getOfflineCourseCityList1() {
+
+		String key="_gfct_";
+
+		Ehcache ehcache =  getCache("cacheMetadata");
+
+		ResultDTO<List<KeyvalueDTO>> cityResult = null;
+
+		Element elem =ehcache.get(key);
+		if (elem == null) {
+			KeyvQuery query = new KeyvQuery();
+			query.setIdeleted(0);
+			query.setType(EnumKeyValueType.KV_RYX_OFFLLINE_CITY.getCode());
+			query.setPageSize(Integer.MAX_VALUE);
+			ResultDTO<KeyvQuery> result = metaHelper.systemService.queryKeyv(query);
+			ehcache.put(elem = new Element(key,result.getModule().getList()));
+		}
+
+		return (List<KeyvDTO>) elem.getObjectValue();
 	}
 	
 	

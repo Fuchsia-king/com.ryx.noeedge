@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+<body class="body-pc" style="margin:0px;overflow-x:hidden;overflow-y:hidden;">
+  <div class="container-fluid-c" >
+    <iframe th:if="${offline.price <= 0||isBuyOffline}" th:src="@{${offline.url+'?name='+username }}" id="iframe" allowfullscreen="true" allow="microphone; camera" style="height:1000px;width:100%;border:0px solid;">
+    </iframe>
+    <i style="font-style: normal" th:unless="${offline.price <= 0||isBuyOffline}">尚未购买课程</i>
+  </div>
+  <script src="js/jquery-2.1.1.min.js"></script>
+  <script>
+    alert('[[${username}]]');
+  </script>
+<!--  <script src="/js/common/wdatepicker.js"></script>-->
+<!--  &lt;!&ndash; external javascript-->
+<!--  ================================================== &ndash;&gt;-->
+<!--  &lt;!&ndash; Placed at the end of the document so the pages load faster &ndash;&gt;-->
+<!--  &lt;!&ndash; jQuery &ndash;&gt;-->
+<!--  <script src="/js/common/jquery-1.7.2.min.js"></script>-->
+<!--  &lt;!&ndash; jQuery UI &ndash;&gt;-->
+<!--  <script src="/js/common/jquery-ui-1.8.21.custom.min.js"></script>-->
+<!--  &lt;!&ndash; transition / effect library &ndash;&gt;-->
+<!--  <script src="/js/common/bootstrap-transition.js"></script>-->
+<!--  &lt;!&ndash; alert enhancer library &ndash;&gt;-->
+<!--  <script src="/js/common/bootstrap-alert.js"></script>-->
+<!--  &lt;!&ndash; modal / dialog library &ndash;&gt;-->
+<!--  <script src="/js/common/bootstrap-modal.js"></script>-->
+<!--  &lt;!&ndash; custom dropdown library &ndash;&gt;-->
+<!--  <script src="/js/common/bootstrap-dropdown.js"></script>-->
+<!--  &lt;!&ndash; scrolspy library &ndash;&gt;-->
+<!--  <script src="/js/common/bootstrap-scrollspy.js"></script>-->
+<!--  &lt;!&ndash; library for creating tabs &ndash;&gt;-->
+<!--  <script src="/js/common/bootstrap-tab.js"></script>-->
+<!--  &lt;!&ndash; library for advanced tooltip &ndash;&gt;-->
+<!--  <script src="/js/common/bootstrap-tooltip.js"></script>-->
+<!--  &lt;!&ndash; popover effect library &ndash;&gt;-->
+<!--  <script src="/js/common/bootstrap-popover.js"></script>-->
+<!--  &lt;!&ndash; button enhancer library &ndash;&gt;-->
+<!--  <script src="/js/common/bootstrap-button.js"></script>-->
+<!--  &lt;!&ndash; accordion library (optional, not used in demo) &ndash;&gt;-->
+<!--  <script src="/js/common/bootstrap-collapse.js"></script>-->
+<!--  &lt;!&ndash; carousel slfileInputIdeshow library (optional, not used in demo) &ndash;&gt;-->
+<!--  <script src="/js/common/bootstrap-carousel.js"></script>-->
+<!--  &lt;!&ndash; autocomplete library &ndash;&gt;-->
+<!--  <script src="/js/common/bootstrap-typeahead.js"></script>-->
+<!--  &lt;!&ndash; tour library &ndash;&gt;-->
+<!--  <script src="/js/common/bootstrap-tour.js"></script>-->
+<!--  &lt;!&ndash; library for cookie management &ndash;&gt;-->
+<!--  <script src="/js/jquery-cookie-1.4.1.min.js"></script>-->
+<!--  &lt;!&ndash; calander plugin &ndash;&gt;-->
+<!--  <script src='/js/common/fullcalendar.min.js'></script>-->
+<!--  &lt;!&ndash; data table plugin &ndash;&gt;-->
+<!--  <script src='/js/common/jquery.dataTables.min.js'></script>-->
+<!--  &lt;!&ndash; chart libraries start &ndash;&gt;-->
+<!--  <script src="/js/common/excanvas.js"></script>-->
+<!--  <script src="/js/common/jquery.flot.min.js"></script>-->
+<!--  <script src="/js/common/jquery.flot.pie.min.js"></script>-->
+<!--  <script src="/js/common/jquery.flot.stack.js"></script>-->
+<!--  <script src="/js/common/jquery.flot.resize.min.js"></script>-->
+<!--  &lt;!&ndash; chart libraries end &ndash;&gt;-->
+<!--  &lt;!&ndash; select or dropdown enhancer &ndash;&gt;-->
+<!--  <script src="/js/common/jquery.chosen.min.js"></script>-->
+<!--  &lt;!&ndash; checkbox, radio, and file input styler &ndash;&gt;-->
+<!--  <script src="/js/common/jquery.uniform.min.js"></script>-->
+<!--  &lt;!&ndash; plugin for gallery image view &ndash;&gt;-->
+<!--  <script src="/js/common/jquery.colorbox.min.js"></script>-->
+<!--  &lt;!&ndash; rich text editor library &ndash;&gt;-->
+<!--  <script src="/js/common/jquery.cleditor.min.js"></script>-->
+<!--  &lt;!&ndash; notification plugin &ndash;&gt;-->
+<!--  <script src="/js/common/jquery.noty.js"></script>-->
+<!--  &lt;!&ndash; file manager library &ndash;&gt;-->
+<!--  <script src="/js/common/jquery.elfinder.min.js"></script>-->
+<!--  &lt;!&ndash; star rating plugin &ndash;&gt;-->
+<!--  <script src="/js/common/jquery.raty.min.js"></script>-->
+<!--  &lt;!&ndash; for iOS style toggle switch &ndash;&gt;-->
+<!--  <script src="/js/common/jquery.iphone.toggle.js"></script>-->
+<!--  &lt;!&ndash; autogrowing textarea plugin &ndash;&gt;-->
+<!--  <script src="/js/common/jquery.autogrow-textarea.js"></script>-->
+<!--  &lt;!&ndash; multiple file upload plugin &ndash;&gt;-->
+<!--  <script src="/js/common/jquery.uploadify-3.1.min.js"></script>-->
+<!--  &lt;!&ndash; history.js for cross-browser state change on ajax &ndash;&gt;-->
+<!--  <script src="/js/common/jquery.history.js"></script>-->
+<!--  &lt;!&ndash; application script for Charisma demo &ndash;&gt;-->
+<!--  <script src="/js/common/charisma.js"></script>-->
+
+
+<!--  <script src="/js/common/ajaxfileupload.js"></script>-->
+<!--<script>-->
+<!--  $("#iframe").height($(document.body).height());-->
+<!--  var int=self.setInterval("clock()",1000 * 60 * 2);-->
+<!--  function clock()-->
+<!--  {-->
+<!--    jQuery.ajax({-->
+<!--      url: "/ajax_get_current_user.html",-->
+<!--      type: "post",-->
+<!--      async:true,-->
+<!--      contentType: "application/x-www-form-urlencoded; charset=utf-8",-->
+<!--      data: "id=1",-->
+<!--      dataType: "json",-->
+<!--      success: function(msg){-->
+<!--        if(!msg.isSuccess){-->
+<!--          location.reload();-->
+<!--        }-->
+<!--      },-->
+<!--      error: function(XMLHttpRequest, textStatus, errorThrown) {-->
+<!--      },-->
+<!--    });-->
+<!--  }-->
+
+<!--  function ajaxCommonImageUpload(fileInputId,imgId,formHiddenInputId,path,url) {-->
+<!--    $.ajaxFileUpload({-->
+<!--      url : '/mryx/my/do_upload_image.html?path=' + path+ '&url=' + $('#' + formHiddenInputId).val(),-->
+<!--      secureuri : false,-->
+<!--      fileElementId : fileInputId,-->
+<!--      contentType: "application/x-www-form-urlencoded; charset=utf-8",-->
+<!--      dataType : 'json',-->
+<!--      success: function(data){-->
+<!--        if(data.isSuccess){-->
+<!--          if(imgId != '' && null != imgId && imgId != undefined){-->
+<!--            $('#' + imgId).attr('src',data.obj);-->
+<!--            $('#' + imgId).css('display','block');-->
+<!--          }-->
+<!--          $('#' + formHiddenInputId).val(data.obj);-->
+<!--          showSuccessTip("上传成功",1000000);-->
+<!--          //alert('上传成功');-->
+<!--        }-->
+<!--        else{-->
+<!--          showErrorTip(data.errorMsg,2);-->
+<!--          $('#' + imgId).css('display','none');-->
+<!--        }-->
+<!--      },-->
+<!--      error: function(XMLHttpRequest, textStatus, errorThrown) {-->
+
+<!--      },-->
+<!--    })-->
+<!--    return false;-->
+<!--  }-->
+
+
+<!--  function ajaxCommonImageUploadSubmit(fileInputId,formHiddenInputId,submitFormId,path,url) {-->
+<!--    $.ajaxFileUpload({-->
+<!--      url : '/mryx/my/do_upload_image.html?path=' + path+ '&url=' + $('#' + formHiddenInputId).val(),-->
+<!--      secureuri : false,-->
+<!--      fileElementId : fileInputId,-->
+<!--      contentType: "application/x-www-form-urlencoded; charset=utf-8",-->
+<!--      dataType : 'json',-->
+<!--      success: function(data){-->
+<!--        if(data.isSuccess){-->
+<!--          $('#' + fileHiddenInputId).attr("value",data.obj);-->
+<!--          $("#" + submitFormId).submit();-->
+<!--        }-->
+<!--        else{-->
+<!--          showErrorTip(data.errorMsg,2);-->
+<!--          $('#' + fileHiddenInputId).css('display','none');-->
+<!--        }-->
+
+<!--      },-->
+<!--      error : function(data) {-->
+<!--      }-->
+<!--    })-->
+
+<!--    return false;-->
+
+<!--  }-->
+
+
+<!--  function ajaxCommonArticleUpload(fileInputId,img,fileHiddenInputId,path,url) {-->
+<!--    $.ajaxFileUpload({-->
+<!--      url : '/mryx/my/do_upload_article.html?path=' + path + '&url=' + $('#' + fileHiddenInputId).val(),-->
+<!--      secureuri : false,-->
+<!--      fileElementId : fileInputId,-->
+<!--      contentType: "application/x-www-form-urlencoded; charset=utf-8",-->
+<!--      dataType : 'json',-->
+<!--      success: function(data){-->
+<!--        if(data.isSuccess){-->
+<!--          $('#' + img).attr('href',data.obj);-->
+<!--          $('#' + img).css('display','block');-->
+<!--          $('#' + fileHiddenInputId).val(data.obj);-->
+<!--          showSuccessTip("上传成功",1000000);-->
+<!--          //alert('上传成功');-->
+<!--        }-->
+<!--        else{-->
+<!--          showErrorTip(data.errorMsg,3);-->
+<!--          $('#' + img).css('display','none');-->
+<!--        }-->
+
+<!--      },-->
+<!--      error : function(data) {-->
+<!--      }-->
+<!--    })-->
+
+<!--    return false;-->
+
+<!--  }-->
+
+<!--  String.prototype.replaceAll=function(s1,s2){return this.replace(new RegExp(s1,"gm"),s2)};-->
+
+
+
+<!--  var viewport = document.querySelector("meta[name=viewport]");-->
+<!--  var winWidths=$(window).width();-->
+<!--  var densityDpi=640/winWidths;-->
+<!--  densityDpi= densityDpi>1?300*640*densityDpi/640:densityDpi;-->
+<!--  if(isWeixin()){-->
+<!--    viewport.setAttribute('content', 'width=1280, target-densityDpi='+densityDpi);-->
+<!--  }else{-->
+<!--    viewport.setAttribute('content', 'width=1280, user-scalable=yes');-->
+<!--  }-->
+<!--  function isWeixin(){-->
+<!--    var ua = navigator.userAgent.toLowerCase();-->
+<!--    if(ua.match(/MicroMessenger/i)=="micromessenger") {-->
+<!--      return true;-->
+<!--    } else {-->
+<!--      return false;-->
+<!--    }-->
+<!--  }-->
+
+<!--</script>-->
+
+</body>
+
+
+</html>

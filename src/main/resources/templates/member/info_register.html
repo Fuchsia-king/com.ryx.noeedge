@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -46,250 +46,251 @@
 </head>
 
 <body class="resetStyle">
-  <div class="insside-header">
-    <div class="container">
-      <div class="head-middle">
-        <div class="head-l">
-          <div class="logo"><a href="/"><img src="/images/logo2.png"></a></div>
-          <div class="nav-main">
-            <div class="nav-list">
-              <div class="item">
-                <a class="syht" href="/">首页</a>
-              </div>
-              <div class="item active">
-                <a href="/curriculumList">全部课程</a>
-                <i>
-                  <img class="down-hide" src="/images/down.png">
-                  <img class="down-show" src="/images/down_active.png">
-                </i>
-                <div class="down-content">
-                  <div class="main">
-                    <div class="left">
-                      <ul class="max-navlist">
-                        <li class="active"><a class="pf" href="javacript:void(0);">融资租赁</a></li>
-                        <li><a class="pf" href="javacript:void(0);">汽车金融</a></li>
-                        <li><a class="pf" href="javacript:void(0);">供应链金融</a></li>
-                        <li><a class="pf" href="javacript:void(0);">证券基金</a></li>
-                        <li><a class="pf" href="javacript:void(0);">金融科技</a></li>
-                        <li><a class="pf" href="javacript:void(0);">金融小动画</a></li>
-                        <li><a class="pf" href="javacript:void(0);">金融基础</a></li>
-                      </ul>
-                    </div>
-                    <div class="right">
-                      <div class="menus-list" id="menus-list">
-                        <div class="item active">
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">中小微租赁</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">厂商租赁</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">医疗大健康租赁</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">高端制造租赁</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">政府平台租赁</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">飞机租赁</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">飞机租赁</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="item">
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">汽车金融</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">汽车金融</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">汽车金融</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">汽车金融</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">汽车金融</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                          <div class="screen">
-                            <div class="superclass">
-                              <a class="pfre" href="">汽车金融</a>
-                            </div>
-                            <div class="subclass">
-                              <div class="sub-item"><a href="">业务模式</a></div>
-                              <div class="sub-item"><a href="">产品设计</a></div>
-                              <div class="sub-item"><a href="">尽职调查</a></div>
-                              <div class="sub-item"><a href="">租后管理</a></div>
-                              <div class="sub-item"><a href="">不良资产处置</a></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <a href="/offlineList">线下课程</a>
-              </div>
-              <div class="item">
-                <a href="/topteacherList">专家阵容</a>
-              </div>
-              <div class="item ">
-                <a class="syht" href="#">企业服务</a>
-                <i>
-                  <img class="down-hide" src="/images/down.png">
-                  <img class="down-show" src="/images/down_active.png">
-                </i>
-                <div class="down-content">
-                  <ul class="list">
-                    <li><a href="/customPage">企业内训</a></li>
-                    <li><a href="/collegePage">企业商学院</a> </li>
-                    <li><a href="/enterprisePage">企业大学</a></li>
-                    <li><a href="/annualPage">企业年卡</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="item">
-                <a href="/advisoryList">资讯</a>
-              </div>
-              <div class="item">
-                <a href="/booksList">书籍</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="head-r">
-          <div class="search-icon">
-            <div class="search-input"><input type="text" placeholder=""></div>
-            <button type="submit"><img src="/images/icon_search.png"></button>
-          </div>
-          <div class="operation">
-            <span class="it"><a class="syht" href="#">登录</a></span>
-            <span class="it">I</span>
-            <span class="it"><a class="syht" href="#">注册</a></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="insside-header" th:include="comm/in-head :: comm_in_head"></div>
+<!--  <div class="insside-header">-->
+<!--    <div class="container">-->
+<!--      <div class="head-middle">-->
+<!--        <div class="head-l">-->
+<!--          <div class="logo"><a href="/"><img src="/images/logo2.png"></a></div>-->
+<!--          <div class="nav-main">-->
+<!--            <div class="nav-list">-->
+<!--              <div class="item">-->
+<!--                <a class="syht" href="/">首页</a>-->
+<!--              </div>-->
+<!--              <div class="item active">-->
+<!--                <a href="/curriculumList">全部课程</a>-->
+<!--                <i>-->
+<!--                  <img class="down-hide" src="/images/down.png">-->
+<!--                  <img class="down-show" src="/images/down_active.png">-->
+<!--                </i>-->
+<!--                <div class="down-content">-->
+<!--                  <div class="main">-->
+<!--                    <div class="left">-->
+<!--                      <ul class="max-navlist">-->
+<!--                        <li class="active"><a class="pf" href="javacript:void(0);">融资租赁</a></li>-->
+<!--                        <li><a class="pf" href="javacript:void(0);">汽车金融</a></li>-->
+<!--                        <li><a class="pf" href="javacript:void(0);">供应链金融</a></li>-->
+<!--                        <li><a class="pf" href="javacript:void(0);">证券基金</a></li>-->
+<!--                        <li><a class="pf" href="javacript:void(0);">金融科技</a></li>-->
+<!--                        <li><a class="pf" href="javacript:void(0);">金融小动画</a></li>-->
+<!--                        <li><a class="pf" href="javacript:void(0);">金融基础</a></li>-->
+<!--                      </ul>-->
+<!--                    </div>-->
+<!--                    <div class="right">-->
+<!--                      <div class="menus-list" id="menus-list">-->
+<!--                        <div class="item active">-->
+<!--                          <div class="screen">-->
+<!--                            <div class="superclass">-->
+<!--                              <a class="pfre" href="">中小微租赁</a>-->
+<!--                            </div>-->
+<!--                            <div class="subclass">-->
+<!--                              <div class="sub-item"><a href="">业务模式</a></div>-->
+<!--                              <div class="sub-item"><a href="">产品设计</a></div>-->
+<!--                              <div class="sub-item"><a href="">尽职调查</a></div>-->
+<!--                              <div class="sub-item"><a href="">租后管理</a></div>-->
+<!--                              <div class="sub-item"><a href="">不良资产处置</a></div>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                          <div class="screen">-->
+<!--                            <div class="superclass">-->
+<!--                              <a class="pfre" href="">厂商租赁</a>-->
+<!--                            </div>-->
+<!--                            <div class="subclass">-->
+<!--                              <div class="sub-item"><a href="">业务模式</a></div>-->
+<!--                              <div class="sub-item"><a href="">产品设计</a></div>-->
+<!--                              <div class="sub-item"><a href="">尽职调查</a></div>-->
+<!--                              <div class="sub-item"><a href="">租后管理</a></div>-->
+<!--                              <div class="sub-item"><a href="">不良资产处置</a></div>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                          <div class="screen">-->
+<!--                            <div class="superclass">-->
+<!--                              <a class="pfre" href="">医疗大健康租赁</a>-->
+<!--                            </div>-->
+<!--                            <div class="subclass">-->
+<!--                              <div class="sub-item"><a href="">业务模式</a></div>-->
+<!--                              <div class="sub-item"><a href="">产品设计</a></div>-->
+<!--                              <div class="sub-item"><a href="">尽职调查</a></div>-->
+<!--                              <div class="sub-item"><a href="">租后管理</a></div>-->
+<!--                              <div class="sub-item"><a href="">不良资产处置</a></div>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                          <div class="screen">-->
+<!--                            <div class="superclass">-->
+<!--                              <a class="pfre" href="">高端制造租赁</a>-->
+<!--                            </div>-->
+<!--                            <div class="subclass">-->
+<!--                              <div class="sub-item"><a href="">业务模式</a></div>-->
+<!--                              <div class="sub-item"><a href="">产品设计</a></div>-->
+<!--                              <div class="sub-item"><a href="">尽职调查</a></div>-->
+<!--                              <div class="sub-item"><a href="">租后管理</a></div>-->
+<!--                              <div class="sub-item"><a href="">不良资产处置</a></div>-->
+<!--                              <div class="sub-item"><a href="">业务模式</a></div>-->
+<!--                              <div class="sub-item"><a href="">业务模式</a></div>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                          <div class="screen">-->
+<!--                            <div class="superclass">-->
+<!--                              <a class="pfre" href="">政府平台租赁</a>-->
+<!--                            </div>-->
+<!--                            <div class="subclass">-->
+<!--                              <div class="sub-item"><a href="">业务模式</a></div>-->
+<!--                              <div class="sub-item"><a href="">产品设计</a></div>-->
+<!--                              <div class="sub-item"><a href="">尽职调查</a></div>-->
+<!--                              <div class="sub-item"><a href="">租后管理</a></div>-->
+<!--                              <div class="sub-item"><a href="">不良资产处置</a></div>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                          <div class="screen">-->
+<!--                            <div class="superclass">-->
+<!--                              <a class="pfre" href="">飞机租赁</a>-->
+<!--                            </div>-->
+<!--                            <div class="subclass">-->
+<!--                              <div class="sub-item"><a href="">业务模式</a></div>-->
+<!--                              <div class="sub-item"><a href="">产品设计</a></div>-->
+<!--                              <div class="sub-item"><a href="">尽职调查</a></div>-->
+<!--                              <div class="sub-item"><a href="">租后管理</a></div>-->
+<!--                              <div class="sub-item"><a href="">不良资产处置</a></div>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                          <div class="screen">-->
+<!--                            <div class="superclass">-->
+<!--                              <a class="pfre" href="">飞机租赁</a>-->
+<!--                            </div>-->
+<!--                            <div class="subclass">-->
+<!--                              <div class="sub-item"><a href="">业务模式</a></div>-->
+<!--                              <div class="sub-item"><a href="">产品设计</a></div>-->
+<!--                              <div class="sub-item"><a href="">尽职调查</a></div>-->
+<!--                              <div class="sub-item"><a href="">租后管理</a></div>-->
+<!--                              <div class="sub-item"><a href="">不良资产处置</a></div>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                        <div class="item">-->
+<!--                          <div class="screen">-->
+<!--                            <div class="superclass">-->
+<!--                              <a class="pfre" href="">汽车金融</a>-->
+<!--                            </div>-->
+<!--                            <div class="subclass">-->
+<!--                              <div class="sub-item"><a href="">业务模式</a></div>-->
+<!--                              <div class="sub-item"><a href="">产品设计</a></div>-->
+<!--                              <div class="sub-item"><a href="">尽职调查</a></div>-->
+<!--                              <div class="sub-item"><a href="">租后管理</a></div>-->
+<!--                              <div class="sub-item"><a href="">不良资产处置</a></div>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                          <div class="screen">-->
+<!--                            <div class="superclass">-->
+<!--                              <a class="pfre" href="">汽车金融</a>-->
+<!--                            </div>-->
+<!--                            <div class="subclass">-->
+<!--                              <div class="sub-item"><a href="">业务模式</a></div>-->
+<!--                              <div class="sub-item"><a href="">产品设计</a></div>-->
+<!--                              <div class="sub-item"><a href="">尽职调查</a></div>-->
+<!--                              <div class="sub-item"><a href="">租后管理</a></div>-->
+<!--                              <div class="sub-item"><a href="">不良资产处置</a></div>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                          <div class="screen">-->
+<!--                            <div class="superclass">-->
+<!--                              <a class="pfre" href="">汽车金融</a>-->
+<!--                            </div>-->
+<!--                            <div class="subclass">-->
+<!--                              <div class="sub-item"><a href="">业务模式</a></div>-->
+<!--                              <div class="sub-item"><a href="">产品设计</a></div>-->
+<!--                              <div class="sub-item"><a href="">尽职调查</a></div>-->
+<!--                              <div class="sub-item"><a href="">租后管理</a></div>-->
+<!--                              <div class="sub-item"><a href="">不良资产处置</a></div>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                          <div class="screen">-->
+<!--                            <div class="superclass">-->
+<!--                              <a class="pfre" href="">汽车金融</a>-->
+<!--                            </div>-->
+<!--                            <div class="subclass">-->
+<!--                              <div class="sub-item"><a href="">业务模式</a></div>-->
+<!--                              <div class="sub-item"><a href="">产品设计</a></div>-->
+<!--                              <div class="sub-item"><a href="">尽职调查</a></div>-->
+<!--                              <div class="sub-item"><a href="">租后管理</a></div>-->
+<!--                              <div class="sub-item"><a href="">不良资产处置</a></div>-->
+<!--                              <div class="sub-item"><a href="">业务模式</a></div>-->
+<!--                              <div class="sub-item"><a href="">业务模式</a></div>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                          <div class="screen">-->
+<!--                            <div class="superclass">-->
+<!--                              <a class="pfre" href="">汽车金融</a>-->
+<!--                            </div>-->
+<!--                            <div class="subclass">-->
+<!--                              <div class="sub-item"><a href="">业务模式</a></div>-->
+<!--                              <div class="sub-item"><a href="">产品设计</a></div>-->
+<!--                              <div class="sub-item"><a href="">尽职调查</a></div>-->
+<!--                              <div class="sub-item"><a href="">租后管理</a></div>-->
+<!--                              <div class="sub-item"><a href="">不良资产处置</a></div>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                          <div class="screen">-->
+<!--                            <div class="superclass">-->
+<!--                              <a class="pfre" href="">汽车金融</a>-->
+<!--                            </div>-->
+<!--                            <div class="subclass">-->
+<!--                              <div class="sub-item"><a href="">业务模式</a></div>-->
+<!--                              <div class="sub-item"><a href="">产品设计</a></div>-->
+<!--                              <div class="sub-item"><a href="">尽职调查</a></div>-->
+<!--                              <div class="sub-item"><a href="">租后管理</a></div>-->
+<!--                              <div class="sub-item"><a href="">不良资产处置</a></div>-->
+<!--                            </div>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="item">-->
+<!--                <a href="/offlineList">线下课程</a>-->
+<!--              </div>-->
+<!--              <div class="item">-->
+<!--                <a href="/topteacherList">专家阵容</a>-->
+<!--              </div>-->
+<!--              <div class="item ">-->
+<!--                <a class="syht" href="#">企业服务</a>-->
+<!--                <i>-->
+<!--                  <img class="down-hide" src="/images/down.png">-->
+<!--                  <img class="down-show" src="/images/down_active.png">-->
+<!--                </i>-->
+<!--                <div class="down-content">-->
+<!--                  <ul class="list">-->
+<!--                    <li><a href="/customPage">企业内训</a></li>-->
+<!--                    <li><a href="/collegePage">企业商学院</a> </li>-->
+<!--                    <li><a href="/enterprisePage">企业大学</a></li>-->
+<!--                    <li><a href="/annualPage">企业年卡</a></li>-->
+<!--                  </ul>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="item">-->
+<!--                <a href="/advisoryList">资讯</a>-->
+<!--              </div>-->
+<!--              <div class="item">-->
+<!--                <a href="/booksList">书籍</a>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="head-r">-->
+<!--          <div class="search-icon">-->
+<!--            <div class="search-input"><input type="text" placeholder=""></div>-->
+<!--            <button type="submit"><img src="/images/icon_search.png"></button>-->
+<!--          </div>-->
+<!--          <div class="operation">-->
+<!--            <span class="it"><a class="syht" href="#">登录</a></span>-->
+<!--            <span class="it">I</span>-->
+<!--            <span class="it"><a class="syht" href="#">注册</a></span>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
   <div class="insside-main">
     <div class="container">
       <ul class="crumbs-list">
@@ -340,123 +341,8 @@
     </div>
   </div>
 
-    <div class="footer">
-      <div class="footer-links">
-        <div class="container">
-          <div class="logo">
-            <a href="#"> <img src="/images/logo.png" alt="logo"></a>
-          </div>
-          <div class="skip-middle">
-            <div class="slide">
-              <div class="title Helvbold">关于我们</div>
-              <ul class="link-ul">
-                <li class="link"><a class="Helvbold" href="info_aboutus">融易学简介</a></a></li>
-                <li class="link"><a class="Helvbold" href="info_contactus">联系我们</a></a></li>
-                <li class="link"><a class="Helvbold" href="info_statement">免责声明</a></a></li>
-              </ul>
-            </div>
-            <div class="slide">
-              <div class="title Helvbold">帮助中心</div>
-              <ul class="link-ul">
-                <li class="link"><a class="Helvbold" href="info_register">如何注册</a></a></li>
-                <li class="link"><a class="Helvbold" href="info_choosecourse">如何选课</a></a></li>
-                <li class="link"><a class="Helvbold" href="info_opencourse">如何开课</a></li>
-                <li class="link"><a class="Helvbold" href="info_avai">课程有效期</a></li>
-              </ul>
-            </div>
-            <div class="slide">
-              <div class="title Helvbold">商务合作</div>
-              <ul class="link-ul">
-                <li class="link"><a class="Helvbold" href="info_cooperation">合作方式</a></a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="contact">
-            <div class="icon">
-              <a href="">
-                <img class="icon-hidden" src="/images/people.png">
-                <img class="icon-show" src="/images/people_active.png">
-              </a>
-              <a href="javacript:void(0);">
-                <img class="icon-hidden" src="/images/wx.png">
-                <img class="icon-show" src="/images/wx_active.png">
-                <div class="serve-code">
-                  <div class="pic">
-                    <img src="/images/app_img.png">
-                  </div>
-                  <div class="text">关注融易学服务号</div>
-                </div>
-              </a>
-              <a href="javacript:void(0);">
-                <img class="icon-hidden" src="/images/code.png">
-                <img class="icon-show" src="/images/code_active.png">
-                <div class="app-code">
-                  <div class="pic">
-                    <img src="/images/ewm.png">
-                  </div>
-                  <div class="text">扫码下载APP</div>
-                </div>
-              </a>
-            </div>
-            <div class="time">
-              <img src="/images/phone.png" alt="phone"><span class="text">周一至周五9:00—18:00</span>
-            </div>
-            <div class="phone"><a href="tel:0755-2532-0861">0755-2532-0861</a></div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="footer-info">
-        <div class="organization">
-          <div class="container">
-            <div class="swiper-container" id="swiper-organization">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
-                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
-                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
-                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
-                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
-                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
-                <div class="swiper-slide"><a href="#">机构名称机构名称</a></div>
-              </div>
-              <div class="swiper-button-prev"></div>
-              <div class="swiper-button-next"></div>
-            </div>
-          </div>
-        </div>
-        <div class="report">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="report-item">
-                  Copyright©2015-2018********
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="report-item">
-                  CP备：粤ICP备*********号
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="report-item">
-                  CP备：粤ICP备*********号
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-
-
-        </div>
-
-
-      </div>
-
-    </div>
+  <div class="footer" th:include="comm/footer :: comm_footer"></div>
+  <div style="display: none" id="login_regist1" th:include="comm/mylogin :: comm_mylogin"></div>
   <script src="/js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
   <script src="/js/bootstrap.min.js"></script>
   <script src="/js/swiper.min.js"></script>
@@ -464,6 +350,9 @@
   <script type="text/javascript" src="/js/public.js"></script>
   <script type="text/javascript" src="/js/inMain.js"></script>
   <!--end-->
+  <script src="/js/login_register.js"></script>
+  <script type="text/javascript" th:src="@{/js/jquery_form.js}"></script>
+  <script type="text/javascript" th:src="@{/js/jquery-cookie-1.4.1.min.js}"></script>
 </body>
 
 
