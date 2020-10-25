@@ -425,7 +425,6 @@ ins {
 .insside-header .container .head-middle .head-r .info-box .record-text a {
   color: #333;
   font-size: 16px;
-  font-family: 'SourceHanSansCN-Medium';
   transition: all 0.3s;
 }
 .insside-header .container .head-middle .head-r .info-box .record-text:hover a {
@@ -988,7 +987,6 @@ ins {
   border-radius: 13px;
   max-height: 25px;
   line-height: 25px;
-  height: 25px;
 }
 .insside-main .container .screen-box .tab-li .tabs-list .item:hover a {
   color: #f96400;
@@ -1995,11 +1993,9 @@ ins {
   display: flex;
   flex-wrap: wrap;
   margin-right: -44px;
-  padding-top: 10px;
-  padding-left: 10px;
 }
 .offline-main .container .common-middle .serve-main #serve-swiper .sponsor-list .item {
-  margin-right: 41px;
+  margin-right: 43px;
   margin-bottom: 35px;
   width: 163px;
   height: 59px;
@@ -2121,6 +2117,14 @@ ins {
   align-items: center;
   font-family: Helvetica;
 }
+.curriculum-details .container .buyvideo-main .flex-r .title-box .head-l .tit-text {
+  max-width: 433px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
 .curriculum-details .container .buyvideo-main .flex-r .title-box .head-l span {
   font-size: 14px;
   font-family: PingFang-Regular;
@@ -2128,6 +2132,7 @@ ins {
   display: inline-block;
   border-radius: 12px;
   margin-left: 9px;
+  min-width: 64px;
 }
 .curriculum-details .container .buyvideo-main .flex-r .title-box .head-l .green {
   color: #3cbe00;
@@ -2210,8 +2215,6 @@ ins {
   color: #666;
   margin-right: 20px;
   font-size: 14px;
-  display: flex;
-  align-items: center;
 }
 .curriculum-details .container .buyvideo-main .flex-r .time-box > div img {
   vertical-align: text-top;
@@ -3525,7 +3528,6 @@ ins {
 }
 .seriesList-main .container .cut-middle .carte-list .item.active {
   color: #fff;
-  margin-top: -1px;
   background-color: #f96400;
 }
 .seriesList-main .container .cut-middle .carte-list .item.active::after {
@@ -3585,7 +3587,6 @@ ins {
 }
 .seriesList-main .container .cut-middle .series-wrap .cut-list > .item .head-box .bg-text .bg-m {
   margin: 0 24px;
-  opacity: 0.3;
 }
 .seriesList-main .container .cut-middle .series-wrap .cut-list > .item .head-box .bg-text .bg-r {
   background: linear-gradient(to right, #c2c2c2, #fff);
@@ -4421,8 +4422,7 @@ ins {
 }
 .app-pages .app-banner {
   background-color: #f5f5f5;
-  padding-top: 90px;
-  height:100%
+  padding-top: 140px;
 }
 .app-pages .app-banner .wrap-banner {
   display: flex;
@@ -4531,7 +4531,6 @@ ins {
 }
 .app-pages .picture-wrap {
   background-color: #f0f2f5;
-  height:100%;
 }
 .app-pages .picture-wrap .container {
   width: 1170px;
@@ -4540,7 +4539,6 @@ ins {
   margin: 100px 0;
   position: relative;
   min-height: 635px;
-  margin-top: 150px;
 }
 .app-pages .picture-wrap .common-wrap .silder-l {
   text-align: left;
@@ -4574,7 +4572,7 @@ ins {
   padding-bottom: 60px;
 }
 .app-pages .scene-wrap .container {
-  /* padding: 100px 0; */
+  padding: 100px 0;
 }
 .app-pages .scene-wrap .common-wrap .silder-l {
   width: 550px;
@@ -4615,7 +4613,7 @@ ins {
 .app-pages .scene-wrap .common-wrap .silder-l .d1-2 {
   width: 315px;
   z-index: 3;
-  bottom: -20px;
+  bottom: -100px;
   right: -191px;
 }
 .app-pages .scene-wrap .common-wrap .silder-r {
@@ -4624,7 +4622,7 @@ ins {
 }
 .app-pages .study-wrap {
   background-color: #f0f2f5;
-  /* padding-top: 50px; */
+  padding-top: 50px;
 }
 .app-pages .study-wrap .container {
   padding-bottom: 200px;
@@ -4670,18 +4668,18 @@ ins {
 .app-pages .study-wrap .common-wrap .silder-r .d2-2 {
   width: 418px;
   z-index: 1;
-  bottom: -158px;
+  bottom: -211px;
   right: -213px;
 }
 .app-pages .sponsor-wrap {
   background-color: #f5f5f5;
-  padding-top: 40px;
+  padding-top: 80px;
 }
 .app-pages .sponsor-wrap .container {
   width: 1200px;
 }
 .app-pages .sponsor-wrap .financial-wrap {
-  margin-bottom: 50px;
+  margin-bottom: 100px;
 }
 .app-pages .sponsor-wrap .financial-wrap > div {
   color: #4d4d4d;
@@ -5126,9 +5124,7 @@ ins {
   color: #fff;
 }
 .college-pages .college-banner .banner-box > div img {
-  /* width: 355px; */
-  width: 400px;
-  padding-left: 42px;
+  width: 355px;
 }
 .college-pages .college-banner .banner-box .banner-tit {
   margin-top: 60px;
@@ -5147,10 +5143,8 @@ ins {
 .college-pages .college-banner .banner-box .venice-btn {
   color: #fff;
   width: 299px;
-  height: 70px;
-  line-height: 70px;
-  /* height: 77px;
-  line-height: 77px; */
+  height: 77px;
+  line-height: 77px;
   display: inline-block;
   background: linear-gradient(to right, #433dd2, #3519c2);
   border-radius: 40px;
@@ -5161,7 +5155,6 @@ ins {
 }
 .college-pages .college-banner .banner-box .venice-btn:hover {
   background: linear-gradient(to right, #433dd2, #1f04a7);
-  box-shadow: rgba(0,0,0,.2) 0 1px 5px 0px;
 }
 .college-pages .guild-wrap {
   margin-bottom: 20px;
@@ -5306,14 +5299,12 @@ ins {
   line-height: 80px;
   display: inline-block;
   border-radius: 40px;
-  /* background-color: #361bc3; */
-  background: linear-gradient(to right, #433dd2, #3519c2);
+  background-color: #361bc3;
   font-size: 35px;
   transition: all 0.3s;
 }
 .college-pages .advisory-wrap .advis:hover {
-  /* background-color: #261098; */
-  background: linear-gradient(to right, #433dd2, #1f04a7);
+  background-color: #261098;
 }
 .college-pages .issue-wrap {
   background: url(../images/college/issue_bg.jpg) no-repeat;
@@ -6024,8 +6015,4 @@ ins {
   font-size: 28px;
   margin-top: 20px;
   color: #999;
-}
-
-.swiper-pagination-bullet-active{
-  background: #f96400;
 }

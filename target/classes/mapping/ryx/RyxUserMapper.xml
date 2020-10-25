@@ -52,7 +52,9 @@
 	    weixin_union_id weixinUnionId,
 	    rfrom,
 	    orate,
-	    ispread
+	    ispread,
+	    company,
+	    position
 	</sql>
 
 	<sql id="where">
@@ -138,6 +140,14 @@
 			<if test="ispread != null">
 				<![CDATA[and ispread = #{ispread} ]]>
 			</if>
+
+			<if test="company != null">
+				<![CDATA[and company = #{company} ]]>
+			</if>
+
+			<if test="position != null">
+				<![CDATA[and position = #{position} ]]>
+			</if>
 			
 		</where>
 	</sql>
@@ -179,7 +189,9 @@
 		    icode,
 		    sid,
 		    rfrom,
-		    weixin_union_id
+		    weixin_union_id,
+		    company,
+		    position
     
        ) 
        values
@@ -219,8 +231,10 @@
 		    #{icode},
 		    #{sid},
 		    #{rfrom},
-		    #{weixinUnionId}
-       )        
+		    #{weixinUnionId},
+		    #{company},
+		    #{position }
+       )
        <selectKey keyProperty="iid" resultType="java.lang.Integer" order="AFTER">
 			select LAST_INSERT_ID() 
 		</selectKey>
@@ -573,6 +587,14 @@
 			
 			<if test="weixinUnionId != null">
 				<![CDATA[ weixin_union_id = #{weixinUnionId} ]]>,
+			</if>
+
+			<if test="company != null">
+				<![CDATA[ company = #{company} ]]>,
+			</if>
+
+			<if test="position != null">
+				<![CDATA[ position = #{position} ]]>,
 			</if>
 		 </set>
 		 

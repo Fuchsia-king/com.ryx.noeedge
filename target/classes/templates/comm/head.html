@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+   <footer th:fragment="comm_head">
+       <div class="container">
+               <div class="head">
+                   <div class="logo">
+                       <a href="">
+                           <img src="/images/logo2.png" alt="logo">
+                       </a>
+                   </div>
+                   <div class="search-main">
+                       <div class="head-search">
+                           <div class="search-box">
+                               <input type="text" style="width:0;height:0;float:left;visibility:hidden"/>
+                               <input type="password" style="width:0;height:0;float:left;visibility:hidden"/>
+                               <input type="text" class="input" placeholder="课程、直播、讲师、资讯" id="home-search" autocomplete="off">
+                               <div class="icon"><button type="submit" id="serarch_btn"></button></div>
+                           </div>
+                       </div>
+                       <div class="history-box" id="history-box">
+                           <div class="head-box">
+                               <div class="flex-l">历史搜索</div>
+                               <div class="flex-r"><img src="/images/icon_delete.png" id="flush_img"><i style="font-style: normal" id="del_history">清空</i></div>
+                           </div>
+                           <div class="history-list" id="history_list">
+                           </div>
+                       </div>
+                   </div>
+                   <div class="operation syht" id="logreg1">
+                       <span class="it"><a href="#" data-toggle="modal" data-target="#modal-middle" id="loginbut">登录</a></span>
+                       <span class="it">I</span>
+                       <span class="it"><a href="#" data-toggle="modal" data-target="#modal-middle" id="regbut">注册</a></span>
+                   </div>
+                   <div class="face-head" id="face-head1" style="display: none">
+                       <div class="img"><img src="/images/user/face_img.png" th:href="@{'/myCourses'}"></div>
+                       <div class="userInfo" id="userInfo">
+                           <div class="user-li"><a id="infoname" th:href="@{'/myCourses'}"></a></div>
+                           <div class="user-li"><a th:href="@{'/myOrder'}">订单中心</a></div>
+                           <div class="user-li"><a th:href="@{'/myBasicinfo'}">个人设置</a></div>
+                           <div class="user-li"><a href="/logout" id="logout1">退出登录</a></div>
+                           <div class="triangle"></div>
+                       </div>
+                   </div>
+                   <div class="record">
+                       <a class="syht" href="" data-toggle="modal" data-target="#modal-middle" id="leran_record"> 学习记录</a>
+                   </div>
+
+               </div>
+               <div class="nav-main">
+                   <div class="nav-list">
+                       <div class="item active">
+                           <a href="">首页</a>
+                       </div>
+                       <div class="item">
+                           <a href="/curriculumList" class="condition1">全部课程</a>
+                           <i>
+                               <img class="down-hide" src="/images/down.png">
+                               <img class="down-show" src="/images/down_active.png">
+                           </i>
+                           <div class="down-content">
+                               <div class="main">
+                                   <div class="left">
+                                       <ul class="max-navlist" >
+                                           <li th:each="ryxCategoryDTOMap:${map2}" th:class="${ryxCategoryDTOMapStat.index==0?'active':''}"><a class="pf condition1" th:href="@{'/curriculumList/?h='+${ryxCategoryDTOMap.key.id}}" href="javacript:void(0);" th:text="${ryxCategoryDTOMap.key.title}" >行业</a></li>
+                                       </ul>
+                                   </div>
+                                   <div class="right">
+                                       <div class="menus-list" id="menus-list" >
+                                           <!--融资租赁-->
+                                           <div th:each="submap1,stat1:${map2}" th:class="${stat1.index==0?'item active':'item'}">
+                                               <div class="screen" th:each="submap2,stat:${submap1.value}">
+                                                   <div class="superclass"><a class="pfre condition1" th:href="@{${'/curriculumList?h='+submap1.key.id+'&l='+submap2.key.id}}" th:text="${submap2.key.title+'领域'}">领域</a></div>
+                                                   <div class="subclass">
+                                                       <div class="sub-item condition1" th:unless="${#lists.isEmpty(submap2.value)}" th:each="skill:${submap2.value}"><a th:href="@{${'/curriculumList?h='+submap1.key.id+'&l='+submap2.key.id+'&j='+skill.id}}" th:text="${skill.title+'技能'}" th:unless="${ #strings.isEmpty(skill)}">技能</a></div>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="item">
+                           <a href="/offlineList">线下课程</a>
+                       </div>
+                       <div class="item">
+                           <a href="/topteacherList">专家阵容</a>
+                       </div>
+                       <div class="item">
+                           <a href="#">企业服务</a>
+                           <i>
+                               <img class="down-hide" src="/images/down.png">
+                               <img class="down-show" src="/images/down_active.png">
+                           </i>
+                           <div class="down-content">
+                               <ul class="list">
+                                   <li><a href="/customPage">企业内训</a></li>
+                                   <li><a href="/collegePage">企业商学院</a></li>
+                                   <li><a href="/enterprisePage">企业大学</a></li>
+                                   <li><a href="/annualPage">企业年卡</a></li>
+                               </ul>
+                           </div>
+                       </div>
+                       <div class="item">
+                           <a href="/advisoryList">资讯</a>
+                       </div>
+                       <div class="item">
+                           <a href="/booksList">书籍</a>
+                       </div>
+                   </div>
+                   <div class="download">
+                       <a class="syht" href="/appdownloadPage">下载APP</a>
+                       <div class="down-content">
+                           <div class="img">
+                               <img src="/images/ewm.png" alt="二维码">
+
+                           </div>
+                           <div class="appd">
+                               <div class="text sync">
+                                   下载融易学APP
+                               </div>
+                               <div class="btnDown">
+                                   <img src="/images/pg.png" alt="苹果图标">&thinsp;APP STORE
+                               </div>
+                               <div class="btnDown">
+                                   <img src="/images/az.png" alt="安卓图标">ANDROID
+                               </div>
+
+                           </div>
+                       </div>
+
+                   </div>
+               </div>
+           </div>
+   </footer>
+</head>
+</html>

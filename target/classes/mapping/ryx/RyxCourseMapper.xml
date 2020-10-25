@@ -222,8 +222,7 @@
 	    (c.study_count + c.id%40 + 20) applyCount
 	    
 	</sql>
-	
-	
+
 	<sql id="select3">
 		
 		c.id,
@@ -290,9 +289,7 @@
 	    t.status limitStatus	    
 	    	    
 	</sql>
-	
-	
-	
+
 	<sql id="select_offline">		
 		id,
 	    title,
@@ -452,9 +449,7 @@
 			
 		</where>
 	</sql>
-	
-	
-	
+
 	<sql id="where_living">
 	
 	    <where>
@@ -563,9 +558,7 @@
 			
 		</where>
 	</sql>
-	
-	
-	
+
 	<sql id="where_before_living">
 	
 	    <where>
@@ -667,7 +660,6 @@
 			
 		</where>
 	</sql>
-	
 	
 	<sql id="where_after_living">
 	
@@ -975,14 +967,7 @@
 			
 		</where>
 	</sql>
-	
-	
-	
-	
-	
-	
-	
-	
+
 	<sql id="orderby">	
 		<choose>			
 			<when test="orderBy == 'hits' or orderBy == 'tstart' ">
@@ -1263,6 +1248,10 @@
 		from ryx_course c where tid = #{tid}       
         <include refid="orderby"/> -->
     </select>
+
+	<select id="getAllCourseByTeacherId" resultType="RyxCourseDTO" parameterType="RyxCourseQuery">
+		select * from ryx_course c where tid = #{tid} order by tstart
+	</select>
    
    
    	<select id="getMyOfflineCourse" resultType="RyxCourseDTO" parameterType="RyxCourseQuery">         
